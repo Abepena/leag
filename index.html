@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leag.app | Professional Sports Management</title>
+    <meta name="description" content="The comprehensive tool to manage sport organizations big or small.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .leag-green { background-color: #1a4031; }
+        .leag-green-text { color: #1a4031; }
+        
+        /* Device Animations */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Circular Progress CSS */
+        .circular-chart {
+            display: block;
+            margin: 0 auto;
+            max-width: 80%;
+            max-height: 250px;
+        }
+        .circle-bg {
+            fill: none;
+            stroke: #eee;
+            stroke-width: 3.8;
+        }
+        .circle {
+            fill: none;
+            stroke-width: 2.8;
+            stroke-linecap: round;
+            animation: progress 1s ease-out forwards;
+        }
+        @keyframes progress {
+            0% { stroke-dasharray: 0 100; }
+        }
+        .percentage {
+            fill: #1a4031;
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 0.5em;
+            text-anchor: middle;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-[#1a4031]/95 backdrop-blur-md border-b border-green-900 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 20 H 40 V 35 H 55 V 50 H 70" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M20 50 H 55" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M20 80 H 40 V 65 H 55" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="20" cy="20" r="6" fill="white"/>
+                        <circle cx="20" cy="50" r="6" fill="white"/>
+                        <circle cx="20" cy="80" r="6" fill="white"/>
+                        <circle cx="78" cy="50" r="6" fill="white"/>
+                    </svg>
+                    <span class="text-3xl font-bold tracking-tighter text-white italic">LEAG</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-gray-200 hover:text-white font-medium transition">Features</a>
+                    <a href="#mobile" class="text-gray-200 hover:text-white font-medium transition">Mobile App</a>
+                    <a href="#contact" class="text-gray-200 hover:text-white font-medium transition">Contact</a>
+                    <a href="mailto:contact@leag.app" class="px-5 py-2.5 bg-white text-[#1a4031] rounded-lg font-semibold hover:bg-gray-100 transition shadow-lg">Get Started</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-white hover:text-gray-200 focus:outline-none">
+                        <i data-lucide="menu" class="w-8 h-8"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#1a4031] border-b border-green-800">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#features" class="block px-3 py-2 text-base font-medium text-white hover:bg-green-900 rounded-md">Features</a>
+                <a href="#mobile" class="block px-3 py-2 text-base font-medium text-white hover:bg-green-900 rounded-md">Mobile App</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium text-white hover:bg-green-900 rounded-md">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="inline-block py-1 px-3 rounded-full bg-green-100 text-[#1a4031] text-sm font-semibold mb-6 tracking-wide uppercase">The Future of Sports Management</span>
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold text-gray-900 tracking-tight mb-8">
+                    Manage your organization <span class="text-[#1a4031]">like a pro.</span>
+                </h1>
+                <p class="text-xl text-gray-600 mb-10 leading-relaxed">
+                    The all-in-one platform for leagues, tournaments, and teams. Streamline registration, scheduling, financials, and stats in one beautiful dashboard.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="mailto:contact@leag.app" class="px-8 py-4 bg-[#1a4031] text-white rounded-xl font-bold text-lg hover:bg-[#143326] transition shadow-xl shadow-green-900/20 flex items-center justify-center gap-2">
+                        Request Demo <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#features" class="px-8 py-4 bg-white text-gray-700 border-2 border-gray-200 rounded-xl font-bold text-lg hover:border-gray-300 hover:bg-gray-50 transition flex items-center justify-center">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+
+            <!-- Laptop Mockup (Using Actual Image) -->
+            <div class="relative mt-12 mx-auto max-w-5xl float-animation px-4">
+                <!-- IMPORTANT: Save your laptop screenshot as 'laptop-mockup.png' in the same folder -->
+                <!-- Removed the border container and fixed sizing -->
+                <div class="relative w-full">
+                     <!-- Fallback styled div in case image is missing -->
+                    <img src="laptop-mockup.png" alt="Leag.app Dashboard Interface" class="w-full h-auto block drop-shadow-2xl" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div class="hidden w-full aspect-video bg-gray-100 rounded-xl flex items-center justify-center text-gray-500 flex-col gap-4 border border-gray-200 shadow-xl">
+                        <i data-lucide="image" class="w-12 h-12 opacity-50"></i>
+                        <p>Place <strong>laptop-mockup.png</strong> in folder</p>
+                    </div>
+                </div>
+                <!-- Base Gradient Shadow -->
+                <div class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-[80%] h-16 bg-black/20 blur-3xl rounded-full -z-10"></div>
+            </div>
+        </div>
+        
+        <!-- Background Decor -->
+        <div class="absolute top-0 right-0 -z-10 opacity-30 transform translate-x-1/3 -translate-y-1/4">
+            <svg width="600" height="600" viewBox="0 0 100 100" fill="none">
+                <circle cx="50" cy="50" r="40" stroke="#1a4031" stroke-width="0.5"/>
+                <circle cx="50" cy="50" r="30" stroke="#1a4031" stroke-width="0.5"/>
+                <circle cx="50" cy="50" r="20" stroke="#1a4031" stroke-width="0.5"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section id="features" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl mb-4">Everything you need to run your league</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">From registration to the championship game, Leag handles the logistics so you can focus on the sport.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div class="p-6 bg-gray-50 rounded-2xl hover:bg-green-50 transition duration-300 border border-transparent hover:border-green-100">
+                    <div class="w-12 h-12 bg-[#1a4031] rounded-xl flex items-center justify-center mb-6 text-white shadow-lg shadow-green-900/10">
+                        <i data-lucide="layout" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Team Overview</h3>
+                    <p class="text-gray-600">Track all active teams, rosters, and eligibility in one centralized dashboard.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="p-6 bg-gray-50 rounded-2xl hover:bg-green-50 transition duration-300 border border-transparent hover:border-green-100">
+                    <div class="w-12 h-12 bg-[#1a4031] rounded-xl flex items-center justify-center mb-6 text-white shadow-lg shadow-green-900/10">
+                        <i data-lucide="calendar-check" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Smart Scheduling</h3>
+                    <p class="text-gray-600">Auto-generate balanced schedules and bracket tournaments with ease.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="p-6 bg-gray-50 rounded-2xl hover:bg-green-50 transition duration-300 border border-transparent hover:border-green-100">
+                    <div class="w-12 h-12 bg-[#1a4031] rounded-xl flex items-center justify-center mb-6 text-white shadow-lg shadow-green-900/10">
+                        <i data-lucide="wallet" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Financials</h3>
+                    <p class="text-gray-600">Collect league fees, track revenue, and manage expenses seamlessly.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="p-6 bg-gray-50 rounded-2xl hover:bg-green-50 transition duration-300 border border-transparent hover:border-green-100">
+                    <div class="w-12 h-12 bg-[#1a4031] rounded-xl flex items-center justify-center mb-6 text-white shadow-lg shadow-green-900/10">
+                        <i data-lucide="trending-up" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Live Stats</h3>
+                    <p class="text-gray-600">Real-time score updates, player statistics, and automated standings.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile App Teaser -->
+    <section id="mobile" class="py-24 bg-[#1a4031] relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-16">
+                <div class="lg:w-1/2 text-white flex flex-col items-center text-center">
+                    <div class="inline-block py-1 px-3 rounded-full bg-white/10 border border-white/20 text-white text-sm font-semibold mb-6">Coming Soon</div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">Your league in your pocket.</h2>
+                    <p class="text-lg text-gray-300 mb-8 leading-relaxed max-w-lg mx-auto">
+                        The Leag mobile app keeps admins, players, and fans connected. Get push notifications for game times, check live scores, and manage your team from anywhere.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 w-full justify-center">
+                        <button class="bg-black text-white px-6 py-3 rounded-xl flex items-center gap-3 hover:bg-gray-900 transition border border-gray-800 cursor-default justify-start sm:justify-center">
+                            <i data-lucide="apple" class="w-6 h-6"></i>
+                            <div class="text-left">
+                                <div class="text-[10px] uppercase font-semibold leading-none">Coming soon to</div>
+                                <div class="text-sm font-bold leading-none mt-1">App Store</div>
+                            </div>
+                        </button>
+                        <button class="bg-black text-white px-6 py-3 rounded-xl flex items-center gap-3 hover:bg-gray-900 transition border border-gray-800 cursor-default justify-start sm:justify-center">
+                            <i data-lucide="play" class="w-6 h-6 fill-current"></i>
+                            <div class="text-left">
+                                <div class="text-[10px] uppercase font-semibold leading-none">Coming soon to</div>
+                                <div class="text-sm font-bold leading-none mt-1">Google Play</div>
+                            </div>
+                        </button>
+                    </div>
+                    <p class="mt-4 text-sm text-gray-400">Be the first to know when we launch.</p>
+                </div>
+
+                <!-- Phone Mockup (CSS Constructed) -->
+                <div class="lg:w-1/2 flex justify-center">
+                    <div class="relative mx-auto border-gray-900 bg-gray-900 border-[14px] rounded-[2.5rem] h-[600px] w-[300px] shadow-2xl flex flex-col items-center">
+                        <div class="h-[32px] w-[3px] bg-gray-800 absolute -left-[17px] top-[72px] rounded-l-lg"></div>
+                        <div class="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[124px] rounded-l-lg"></div>
+                        <div class="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[178px] rounded-l-lg"></div>
+                        <div class="h-[64px] w-[3px] bg-gray-800 absolute -right-[17px] top-[142px] rounded-r-lg"></div>
+                        <div class="rounded-[2rem] overflow-hidden w-full h-full bg-white relative">
+                            <!-- Status Bar -->
+                            <div class="h-8 bg-[#1a4031] w-full flex justify-between items-center px-6 pt-2">
+                                <div class="w-12 h-3 bg-black/20 rounded-full mx-auto"></div>
+                            </div>
+                            
+                            <!-- App Header -->
+                            <div class="bg-[#1a4031] p-6 pb-12 rounded-b-[2rem] text-white">
+                                <div class="flex justify-between items-center mb-6">
+                                    <i data-lucide="menu" class="w-6 h-6"></i>
+                                    <div class="font-bold tracking-widest italic">LEAG</div>
+                                    <div class="w-8 h-8 rounded-full bg-white/20"></div>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-xs text-green-200 mb-1">Upcoming Match</p>
+                                    <h3 class="text-xl font-bold">Team A vs Team B</h3>
+                                    <p class="text-sm opacity-80 mt-1">Today, 4:00 PM</p>
+                                </div>
+                            </div>
+                            
+                            <!-- App Content -->
+                            <div class="px-4 -mt-6 relative z-10 space-y-4">
+                                <!-- Stats Card -->
+                                <div class="bg-white rounded-xl p-4 shadow-lg border border-gray-100">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <h4 class="font-bold text-gray-800 text-sm">Season Progress</h4>
+                                        <span class="text-xs text-green-600 font-bold">70%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-100 rounded-full h-2">
+                                        <div class="bg-[#1a4031] h-2 rounded-full" style="width: 70%"></div>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4 mt-4">
+                                        <div class="bg-gray-50 p-2 rounded-lg text-center">
+                                            <p class="text-[10px] text-gray-500 uppercase">Played</p>
+                                            <p class="font-bold text-gray-800">14</p>
+                                        </div>
+                                        <div class="bg-gray-50 p-2 rounded-lg text-center">
+                                            <p class="text-[10px] text-gray-500 uppercase">Remaining</p>
+                                            <p class="font-bold text-gray-800">6</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Quick Actions -->
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div class="bg-green-50 p-4 rounded-xl flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-green-100">
+                                        <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center text-[#1a4031]">
+                                            <i data-lucide="calendar" class="w-4 h-4"></i>
+                                        </div>
+                                        <span class="text-xs font-bold text-[#1a4031]">Schedule</span>
+                                    </div>
+                                    <div class="bg-green-50 p-4 rounded-xl flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-green-100">
+                                        <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center text-[#1a4031]">
+                                            <i data-lucide="users" class="w-4 h-4"></i>
+                                        </div>
+                                        <span class="text-xs font-bold text-[#1a4031]">Roster</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Recent -->
+                                <div>
+                                    <h4 class="font-bold text-gray-800 text-sm mb-2 px-1">Recent Activity</h4>
+                                    <div class="bg-white border border-gray-100 rounded-xl p-3 flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold">NP</div>
+                                        <div>
+                                            <p class="text-xs font-bold text-gray-800">New Player Added</p>
+                                            <p class="text-[10px] text-gray-500">John Doe joined Team Alpha</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- BG Pattern -->
+            <div class="absolute inset-0 opacity-10 pointer-events-none">
+                <div class="absolute top-0 left-0 w-full h-full" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 30px 30px;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="py-20 bg-gray-900 text-white">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">Ready to elevate your game?</h2>
+            <p class="text-gray-400 mb-10 text-lg">Join the waitlist or contact us today to set up a demo for your organization.</p>
+            
+            <div class="flex flex-col md:flex-row justify-center items-center w-full max-w-3xl mx-auto">
+                <!-- Email Item (Right aligned on desktop to push towards center) -->
+                <div class="flex-1 flex flex-col sm:flex-row justify-center md:justify-end items-center gap-3 sm:gap-4 w-full md:w-auto mb-8 md:mb-0">
+                    <div class="w-12 h-12 rounded-full bg-[#1a4031] flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="mail" class="w-6 h-6"></i>
+                    </div>
+                    <div class="text-center sm:text-left">
+                        <p class="text-sm text-gray-400">Email Us</p>
+                        <a href="mailto:contact@leag.app" class="font-semibold text-lg hover:text-green-400 transition">contact@leag.app</a>
+                    </div>
+                </div>
+                
+                <!-- Divider -->
+                <div class="h-px w-12 md:h-12 md:w-px bg-gray-700 hidden md:block mx-8 flex-shrink-0"></div>
+                
+                <!-- Phone Item (Left aligned on desktop to push towards center) -->
+                <div class="flex-1 flex flex-col sm:flex-row justify-center md:justify-start items-center gap-3 sm:gap-4 w-full md:w-auto">
+                    <div class="w-12 h-12 rounded-full bg-[#1a4031] flex items-center justify-center flex-shrink-0">
+                        <i data-lucide="phone" class="w-6 h-6"></i>
+                    </div>
+                    <div class="text-center sm:text-left">
+                        <p class="text-sm text-gray-400">Call Us</p>
+                        <a href="tel:9498366285" class="font-semibold text-lg hover:text-green-400 transition">949-836-6285</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-950 text-gray-500 py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                <!-- Simple Logo for Footer -->
+                <svg width="24" height="24" viewBox="0 0 100 100" fill="none">
+                    <path d="M20 20 H 40 V 35 H 55 V 50 H 70" stroke="#4ade80" stroke-width="8" stroke-linecap="round"/>
+                    <path d="M20 50 H 55" stroke="#4ade80" stroke-width="8" stroke-linecap="round"/>
+                    <path d="M20 80 H 40 V 65 H 55" stroke="#4ade80" stroke-width="8" stroke-linecap="round"/>
+                    <circle cx="20" cy="20" r="6" fill="#4ade80"/>
+                    <circle cx="20" cy="50" r="6" fill="#4ade80"/>
+                    <circle cx="20" cy="80" r="6" fill="#4ade80"/>
+                    <circle cx="78" cy="50" r="6" fill="#4ade80"/>
+                </svg>
+                <span class="text-xl font-bold text-white tracking-tight italic">LEAG</span>
+            </div>
+            
+            <div class="flex gap-6 text-sm">
+                <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition">Terms of Service</a>
+            </div>
+            
+            <div class="text-sm">
+                &copy; <span id="current-year"></span> Leag.app. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set dynamic year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                menu.classList.add('hidden'); // close mobile menu on click
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
