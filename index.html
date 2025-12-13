@@ -12,7 +12,34 @@
         body { font-family: 'Inter', sans-serif; }
         .leag-green { background-color: #1a4031; }
         .leag-green-text { color: #1a4031; }
-        
+
+        /* Textured Green Background */
+        .hero-textured {
+            background-color: #1e4d3d;
+            background-image:
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            background-blend-mode: overlay;
+            position: relative;
+        }
+        .hero-textured::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, rgba(30, 77, 61, 0.3) 0%, rgba(26, 64, 49, 0.8) 100%);
+            pointer-events: none;
+        }
+
+        /* 3D Text Effect */
+        .text-3d {
+            text-shadow:
+                0 1px 0 rgba(255,255,255,0.1),
+                0 2px 0 rgba(0,0,0,0.1),
+                0 3px 0 rgba(0,0,0,0.1),
+                0 4px 0 rgba(0,0,0,0.1),
+                0 5px 10px rgba(0,0,0,0.2),
+                0 10px 20px rgba(0,0,0,0.15);
+        }
+
         /* Device Animations */
         @keyframes float {
             0% { transform: translateY(0px); }
@@ -51,6 +78,15 @@
             font-size: 0.5em;
             text-anchor: middle;
         }
+
+        /* Nav Logo Styling */
+        .nav-logo-icon {
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
+        }
+        .nav-logo-text {
+            font-weight: 800;
+            letter-spacing: 0.05em;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-900 overflow-x-hidden">
@@ -60,17 +96,24 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20 20 H 40 V 35 H 55 V 50 H 70" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M20 50 H 55" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M20 80 H 40 V 65 H 55" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-                        <circle cx="20" cy="20" r="6" fill="white"/>
-                        <circle cx="20" cy="50" r="6" fill="white"/>
-                        <circle cx="20" cy="80" r="6" fill="white"/>
-                        <circle cx="78" cy="50" r="6" fill="white"/>
+                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <svg class="nav-logo-icon" width="44" height="44" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Connection lines -->
+                        <path d="M28 22 H 42 V 38 H 58 V 50 H 72" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M28 50 H 58" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M28 78 H 42 V 62 H 58" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                        <!-- Terminal nodes with subtle glow -->
+                        <circle cx="22" cy="22" r="8" fill="white"/>
+                        <circle cx="22" cy="50" r="8" fill="white"/>
+                        <circle cx="22" cy="78" r="8" fill="white"/>
+                        <circle cx="78" cy="50" r="8" fill="white"/>
+                        <!-- Inner dots for refined look -->
+                        <circle cx="22" cy="22" r="3" fill="#1a4031"/>
+                        <circle cx="22" cy="50" r="3" fill="#1a4031"/>
+                        <circle cx="22" cy="78" r="3" fill="#1a4031"/>
+                        <circle cx="78" cy="50" r="3" fill="#1a4031"/>
                     </svg>
-                    <span class="text-3xl font-bold tracking-tighter text-white italic">LEAG</span>
+                    <span class="nav-logo-text text-3xl text-white text-3d italic">LEAG</span>
                 </div>
                 
                 <!-- Desktop Menu -->
@@ -100,12 +143,38 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+    <!-- Logo Hero Banner -->
+    <section class="hero-textured pt-28 pb-16 lg:pt-36 lg:pb-20">
+        <div class="relative z-10 flex flex-col items-center justify-center px-4">
+            <!-- Large Logo Display -->
+            <div class="flex items-center gap-6 md:gap-8">
+                <svg class="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Connection lines -->
+                    <path d="M28 22 H 42 V 38 H 58 V 50 H 72" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M28 50 H 58" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M28 78 H 42 V 62 H 58" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <!-- Terminal nodes -->
+                    <circle cx="22" cy="22" r="7" fill="white"/>
+                    <circle cx="22" cy="50" r="7" fill="white"/>
+                    <circle cx="22" cy="78" r="7" fill="white"/>
+                    <circle cx="78" cy="50" r="7" fill="white"/>
+                    <!-- Inner accent dots -->
+                    <circle cx="22" cy="22" r="2.5" fill="#1e4d3d"/>
+                    <circle cx="22" cy="50" r="2.5" fill="#1e4d3d"/>
+                    <circle cx="22" cy="78" r="2.5" fill="#1e4d3d"/>
+                    <circle cx="78" cy="50" r="2.5" fill="#1e4d3d"/>
+                </svg>
+                <span class="text-6xl md:text-8xl lg:text-9xl font-extrabold text-white text-3d tracking-wider italic">LEAG</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Hero Section -->
+    <section class="relative py-16 lg:py-24 overflow-hidden bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <span class="inline-block py-1 px-3 rounded-full bg-green-100 text-[#1a4031] text-sm font-semibold mb-6 tracking-wide uppercase">The Future of Sports Management</span>
-                <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold text-gray-900 tracking-tight mb-8">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 tracking-tight mb-8">
                     Manage your organization <span class="text-[#1a4031]">like a pro.</span>
                 </h1>
                 <p class="text-xl text-gray-600 mb-10 leading-relaxed">
@@ -127,10 +196,10 @@
                 <!-- Removed the border container and fixed sizing -->
                 <div class="relative w-full">
                      <!-- Fallback styled div in case image is missing -->
-                    <img src="laptop-mockup.png" alt="Leag.app Dashboard Interface" class="w-full h-auto block drop-shadow-2xl" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <img src="laptop-mockup.jpg" alt="Leag.app Dashboard Interface" class="w-full h-auto block drop-shadow-2xl" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                     <div class="hidden w-full aspect-video bg-gray-100 rounded-xl flex items-center justify-center text-gray-500 flex-col gap-4 border border-gray-200 shadow-xl">
                         <i data-lucide="image" class="w-12 h-12 opacity-50"></i>
-                        <p>Place <strong>laptop-mockup.png</strong> in folder</p>
+                        <p>Place <strong>laptop-mockup.jpg</strong> in folder</p>
                     </div>
                 </div>
                 <!-- Base Gradient Shadow -->
@@ -208,14 +277,18 @@
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 w-full justify-center">
                         <button class="bg-black text-white px-6 py-3 rounded-xl flex items-center gap-3 hover:bg-gray-900 transition border border-gray-800 cursor-default justify-start sm:justify-center">
-                            <i data-lucide="apple" class="w-6 h-6"></i>
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                            </svg>
                             <div class="text-left">
                                 <div class="text-[10px] uppercase font-semibold leading-none">Coming soon to</div>
                                 <div class="text-sm font-bold leading-none mt-1">App Store</div>
                             </div>
                         </button>
                         <button class="bg-black text-white px-6 py-3 rounded-xl flex items-center gap-3 hover:bg-gray-900 transition border border-gray-800 cursor-default justify-start sm:justify-center">
-                            <i data-lucide="play" class="w-6 h-6 fill-current"></i>
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/>
+                            </svg>
                             <div class="text-left">
                                 <div class="text-[10px] uppercase font-semibold leading-none">Coming soon to</div>
                                 <div class="text-sm font-bold leading-none mt-1">Google Play</div>
@@ -234,12 +307,12 @@
                         <div class="h-[64px] w-[3px] bg-gray-800 absolute -right-[17px] top-[142px] rounded-r-lg"></div>
                         <div class="rounded-[2rem] overflow-hidden w-full h-full bg-white relative">
                             <!-- Status Bar -->
-                            <div class="h-8 bg-[#1a4031] w-full flex justify-between items-center px-6 pt-2">
+                            <div class="h-8 w-full flex justify-between items-center px-6 pt-2" style="background: linear-gradient(135deg, #234f3e 0%, #1a4031 100%);">
                                 <div class="w-12 h-3 bg-black/20 rounded-full mx-auto"></div>
                             </div>
-                            
+
                             <!-- App Header -->
-                            <div class="bg-[#1a4031] p-6 pb-12 rounded-b-[2rem] text-white">
+                            <div class="p-6 pb-12 rounded-b-[2rem] text-white" style="background: linear-gradient(135deg, #234f3e 0%, #1a4031 100%)">
                                 <div class="flex justify-between items-center mb-6">
                                     <i data-lucide="menu" class="w-6 h-6"></i>
                                     <div class="font-bold tracking-widest italic">LEAG</div>
