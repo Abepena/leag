@@ -67,6 +67,46 @@
             animation: float 6s ease-in-out infinite;
         }
 
+        /* Hero Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        .animation-delay-200 { animation-delay: 0.2s; opacity: 0; }
+        .animation-delay-400 { animation-delay: 0.4s; opacity: 0; }
+        .animation-delay-600 { animation-delay: 0.6s; opacity: 0; }
+
+        /* Hero Gradient Background */
+        .hero-gradient {
+            background: linear-gradient(135deg, #1a4031 0%, #2d5a47 50%, #1a4031 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(45, 90, 71, 0.4) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(45, 90, 71, 0.3) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
         /* Circular Progress CSS */
         .circular-chart {
             display: block;
@@ -159,53 +199,31 @@
         </div>
     </nav>
 
-    <!-- Logo Hero Banner -->
-    <section class="hero-textured pt-28 pb-16 lg:pt-36 lg:pb-20">
-        <div class="relative z-10 flex flex-col items-center justify-center px-4">
-            <!-- Large Logo Display -->
-            <div class="flex items-center gap-6 md:gap-8">
-                <svg class="w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Connection lines -->
-                    <path d="M28 22 H 42 V 38 H 58 V 50 H 72" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M28 50 H 58" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M28 78 H 42 V 62 H 58" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <!-- Terminal nodes -->
-                    <circle cx="22" cy="22" r="7" fill="white"/>
-                    <circle cx="22" cy="50" r="7" fill="white"/>
-                    <circle cx="22" cy="78" r="7" fill="white"/>
-                    <circle cx="78" cy="50" r="7" fill="white"/>
-                    <!-- Inner accent dots -->
-                    <circle cx="22" cy="22" r="2.5" fill="#1e4d3d"/>
-                    <circle cx="22" cy="50" r="2.5" fill="#1e4d3d"/>
-                    <circle cx="22" cy="78" r="2.5" fill="#1e4d3d"/>
-                    <circle cx="78" cy="50" r="2.5" fill="#1e4d3d"/>
-                </svg>
-                <span class="text-6xl md:text-8xl lg:text-9xl font-extrabold text-white text-3d tracking-wider italic">LEAG</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Content Hero Section -->
-    <section class="relative py-16 lg:py-24 overflow-hidden bg-gray-50">
+    <!-- Hero Section -->
+    <section class="hero-gradient pt-32 pb-20 lg:pt-40 lg:pb-28">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="inline-block py-1 px-3 rounded-full bg-green-100 text-[#1a4031] text-sm font-semibold mb-6 tracking-wide uppercase">The Future of Sports Management</span>
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 tracking-tight mb-8">
-                    Manage your organization <span class="text-[#1a4031]">like a pro.</span>
+            <div class="text-center max-w-3xl mx-auto">
+                <span class="inline-block py-1 px-3 rounded-full bg-white/10 border border-white/20 text-white text-sm font-semibold mb-6 tracking-wide uppercase animate-fade-in-up">The Future of Sports Management</span>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-8 animate-fade-in-up animation-delay-200">
+                    Manage your organization <span class="text-green-300">like a pro.</span>
                 </h1>
-                <p class="text-xl text-gray-600 mb-10 leading-relaxed">
+                <p class="text-xl text-gray-200 mb-10 leading-relaxed animate-fade-in-up animation-delay-400">
                     The all-in-one platform for leagues, tournaments, and teams. Streamline registration, scheduling, financials, and stats in one beautiful dashboard.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="mailto:contact@leag.app" class="px-8 py-4 bg-[#1a4031] text-white rounded-xl font-bold text-lg hover:bg-[#143326] transition shadow-xl shadow-green-900/20 flex items-center justify-center gap-2">
+                <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up animation-delay-600">
+                    <a href="mailto:contact@leag.app" class="px-8 py-4 bg-white text-[#1a4031] rounded-xl font-bold text-lg hover:bg-gray-100 transition shadow-xl shadow-black/20 flex items-center justify-center gap-2">
                         Request Demo <i data-lucide="arrow-right" class="w-5 h-5"></i>
                     </a>
-                    <a href="#features" class="px-8 py-4 bg-white text-gray-700 border-2 border-gray-200 rounded-xl font-bold text-lg hover:border-gray-300 hover:bg-gray-50 transition flex items-center justify-center">
+                    <a href="#features" class="px-8 py-4 bg-transparent text-white border-2 border-white/30 rounded-xl font-bold text-lg hover:bg-white/10 hover:border-white/50 transition flex items-center justify-center">
                         Learn More
                     </a>
                 </div>
             </div>
         </div>
+
+        <!-- Decorative Elements -->
+        <div class="absolute top-1/4 left-10 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-1/4 right-10 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
     </section>
 
     <!-- Mobile App Teaser -->
