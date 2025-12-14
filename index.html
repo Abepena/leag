@@ -92,6 +92,17 @@
         .animation-delay-400 { animation-delay: 0.4s; opacity: 0; }
         .animation-delay-600 { animation-delay: 0.6s; opacity: 0; }
 
+        /* Scroll Reveal Animation */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* Hero Gradient Background */
         .hero-gradient {
             background: linear-gradient(135deg, #1a4031 0%, #2d5a47 50%, #1a4031 100%);
@@ -153,24 +164,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <svg class="nav-logo-icon" width="44" height="44" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Connection lines -->
-                        <path d="M28 22 H 42 V 38 H 58 V 50 H 72" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M28 50 H 58" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M28 78 H 42 V 62 H 58" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-                        <!-- Terminal nodes with subtle glow -->
-                        <circle cx="22" cy="22" r="8" fill="white"/>
-                        <circle cx="22" cy="50" r="8" fill="white"/>
-                        <circle cx="22" cy="78" r="8" fill="white"/>
-                        <circle cx="78" cy="50" r="8" fill="white"/>
-                        <!-- Inner dots for refined look -->
-                        <circle cx="22" cy="22" r="3" fill="#1a4031"/>
-                        <circle cx="22" cy="50" r="3" fill="#1a4031"/>
-                        <circle cx="22" cy="78" r="3" fill="#1a4031"/>
-                        <circle cx="78" cy="50" r="3" fill="#1a4031"/>
-                    </svg>
-                    <span class="nav-logo-text text-3xl text-white text-3d italic">LEAG</span>
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <img src="leag-logo-shadow.svg" alt="LEAG" class="h-40">
                 </div>
                 
                 <!-- Desktop Menu -->
@@ -227,36 +222,36 @@
     </section>
 
     <!-- Mobile App Teaser -->
-    <section id="mobile" class="py-24 bg-[#1a4031] relative overflow-hidden">
+    <section id="mobile" class="py-24 bg-white relative overflow-hidden scroll-reveal">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="flex flex-col lg:flex-row items-center justify-between gap-16">
-                <div class="lg:w-1/2 text-white flex flex-col items-center text-center">
-                    <div class="inline-block py-1 px-3 rounded-full bg-white/10 border border-white/20 text-white text-sm font-semibold mb-6">Coming Soon</div>
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6">Your league in your pocket.</h2>
-                    <p class="text-lg text-gray-300 mb-8 leading-relaxed max-w-lg mx-auto">
+                <div class="lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left">
+                    <div class="inline-block py-1 px-3 rounded-full bg-green-100 text-[#1a4031] text-sm font-semibold mb-6">Coming Soon</div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Your league in your pocket.</h2>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed max-w-lg">
                         The Leag mobile app keeps admins, players, and fans connected. Get push notifications for game times, check live scores, and manage your team from anywhere.
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-4 w-full justify-center">
-                        <button class="bg-black text-white px-6 py-3 rounded-xl flex items-center gap-3 hover:bg-gray-900 transition border border-gray-800 cursor-default justify-start sm:justify-center">
+                    <div class="flex flex-col sm:flex-row gap-4 w-full justify-center lg:justify-start">
+                        <button class="bg-[#1a4031] text-white px-6 py-3 rounded-xl flex items-center gap-3 hover:bg-[#143326] transition cursor-default justify-start sm:justify-center">
                             <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
                             </svg>
                             <div class="text-left">
-                                <div class="text-[10px] uppercase font-semibold leading-none">Coming soon to</div>
+                                <div class="text-[10px] uppercase font-semibold leading-none opacity-80">Coming soon to</div>
                                 <div class="text-sm font-bold leading-none mt-1">App Store</div>
                             </div>
                         </button>
-                        <button class="bg-black text-white px-6 py-3 rounded-xl flex items-center gap-3 hover:bg-gray-900 transition border border-gray-800 cursor-default justify-start sm:justify-center">
+                        <button class="bg-[#1a4031] text-white px-6 py-3 rounded-xl flex items-center gap-3 hover:bg-[#143326] transition cursor-default justify-start sm:justify-center">
                             <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/>
                             </svg>
                             <div class="text-left">
-                                <div class="text-[10px] uppercase font-semibold leading-none">Coming soon to</div>
+                                <div class="text-[10px] uppercase font-semibold leading-none opacity-80">Coming soon to</div>
                                 <div class="text-sm font-bold leading-none mt-1">Google Play</div>
                             </div>
                         </button>
                     </div>
-                    <p class="mt-4 text-sm text-gray-400">Be the first to know when we launch.</p>
+                    <p class="mt-4 text-sm text-gray-500">Be the first to know when we launch.</p>
                 </div>
 
                 <!-- Phone Mockup (CSS Constructed) -->
@@ -360,45 +355,109 @@
                 </div>
             </div>
 
-            <!-- BG Pattern -->
-            <div class="absolute inset-0 opacity-10 pointer-events-none">
-                <div class="absolute top-0 left-0 w-full h-full" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 30px 30px;"></div>
-            </div>
         </div>
     </section>
 
     <!-- Laptop Section -->
-    <section class="relative py-16 lg:py-24 overflow-hidden bg-gray-50">
+    <section class="hero-gradient relative py-24 overflow-hidden scroll-reveal">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <!-- Laptop Mockup (Using Actual Image) -->
-            <div class="relative mt-12 mx-auto max-w-5xl float-animation px-4">
-                <!-- IMPORTANT: Save your laptop screenshot as 'laptop-mockup.png' in the same folder -->
-                <!-- Removed the border container and fixed sizing -->
-                <div class="relative w-full">
-                     <!-- Fallback styled div in case image is missing -->
-                    <img src="laptop-mockup.jpg" alt="Leag.app Dashboard Interface" class="w-full h-auto block drop-shadow-2xl" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-                    <div class="hidden w-full aspect-video bg-gray-100 rounded-xl flex items-center justify-center text-gray-500 flex-col gap-4 border border-gray-200 shadow-xl">
-                        <i data-lucide="image" class="w-12 h-12 opacity-50"></i>
-                        <p>Place <strong>laptop-mockup.jpg</strong> in folder</p>
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
+                <!-- Laptop Mockup (Left side on desktop) -->
+                <div class="lg:w-1/2 flex justify-center">
+                    <div class="relative float-animation">
+                        <img src="laptop-mockup.jpg" alt="Leag.app Dashboard Interface" class="w-full max-w-lg h-auto block drop-shadow-2xl rounded-lg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                        <div class="hidden w-full max-w-lg aspect-video bg-white/10 rounded-xl flex items-center justify-center text-white/50 flex-col gap-4 border border-white/20">
+                            <i data-lucide="image" class="w-12 h-12 opacity-50"></i>
+                            <p>Place <strong>laptop-mockup.jpg</strong> in folder</p>
+                        </div>
+                        <!-- Shadow under laptop -->
+                        <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-[80%] h-12 bg-black/30 blur-2xl rounded-full -z-10"></div>
                     </div>
                 </div>
-                <!-- Base Gradient Shadow -->
-                <div class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-[80%] h-16 bg-black/20 blur-3xl rounded-full -z-10"></div>
+
+                <!-- Text Content (Right side on desktop) -->
+                <div class="lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left">
+                    <div class="inline-block py-1 px-3 rounded-full bg-white/10 border border-white/20 text-white text-sm font-semibold mb-6">Powerful Dashboard</div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white">Command center for your league.</h2>
+                    <p class="text-lg text-gray-200 mb-8 leading-relaxed max-w-lg">
+                        Get a bird's eye view of your entire organization. Track teams, manage rosters, monitor finances, and generate reports — all from one intuitive dashboard.
+                    </p>
+                    <ul class="space-y-4 text-left">
+                        <li class="flex items-center gap-3 text-gray-200">
+                            <div class="w-6 h-6 rounded-full bg-green-400/20 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="check" class="w-4 h-4 text-green-300"></i>
+                            </div>
+                            <span>Real-time analytics and insights</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-200">
+                            <div class="w-6 h-6 rounded-full bg-green-400/20 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="check" class="w-4 h-4 text-green-300"></i>
+                            </div>
+                            <span>Automated scheduling and brackets</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-200">
+                            <div class="w-6 h-6 rounded-full bg-green-400/20 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="check" class="w-4 h-4 text-green-300"></i>
+                            </div>
+                            <span>Integrated payment processing</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-        
-        <!-- Background Decor -->
-        <div class="absolute top-0 right-0 -z-10 opacity-30 transform translate-x-1/3 -translate-y-1/4">
-            <svg width="600" height="600" viewBox="0 0 100 100" fill="none">
-                <circle cx="50" cy="50" r="40" stroke="#1a4031" stroke-width="0.5"/>
-                <circle cx="50" cy="50" r="30" stroke="#1a4031" stroke-width="0.5"/>
-                <circle cx="50" cy="50" r="20" stroke="#1a4031" stroke-width="0.5"/>
-            </svg>
+
+        <!-- Decorative Elements -->
+        <div class="absolute top-1/4 right-10 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-1/4 left-10 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
+    </section>
+
+    <!-- Custom Shop Section -->
+    <section class="py-24 bg-white relative overflow-hidden scroll-reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col lg:flex-row-reverse items-center justify-between gap-12 lg:gap-16">
+                <!-- Shop Mockup (Right side on desktop) -->
+                <div class="lg:w-1/2 flex justify-center">
+                    <div class="relative w-full">
+                        <img src="custom-shop.svg" alt="Custom Team Shop Interface" class="w-full h-auto block drop-shadow-xl rounded-lg">
+                        <!-- Shadow under mockup -->
+                        <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-[70%] h-10 bg-black/10 blur-2xl rounded-full -z-10"></div>
+                    </div>
+                </div>
+
+                <!-- Text Content (Left side on desktop) -->
+                <div class="lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left">
+                    <div class="inline-block py-1 px-3 rounded-full bg-green-100 text-[#1a4031] text-sm font-semibold mb-6">E-Commerce Built In</div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Your brand, your shop.</h2>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed max-w-lg">
+                        Open your own custom team store and sell branded gear and swag — all in your team's colors. From jerseys to hoodies, give fans and players a one-stop shop for official merchandise.
+                    </p>
+                    <ul class="space-y-4 text-left">
+                        <li class="flex items-center gap-3 text-gray-700">
+                            <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="check" class="w-4 h-4 text-[#1a4031]"></i>
+                            </div>
+                            <span>Custom team colors and branding</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-700">
+                            <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="check" class="w-4 h-4 text-[#1a4031]"></i>
+                            </div>
+                            <span>Jerseys, apparel, and accessories</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-700">
+                            <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="check" class="w-4 h-4 text-[#1a4031]"></i>
+                            </div>
+                            <span>Integrated checkout and fulfillment</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Features Grid -->
-    <section id="features" class="py-20 bg-white">
+    <section id="features" class="py-20 bg-white scroll-reveal">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl mb-4">Everything you need to run your league</h2>
@@ -533,6 +592,25 @@
                 });
             });
         });
+
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.scroll-reveal');
+
+        const revealOnScroll = () => {
+            revealElements.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if (elementTop < windowHeight - 100) {
+                    el.classList.add('revealed');
+                }
+            });
+        };
+
+        // Run on load and scroll
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+        revealOnScroll(); // Initial check
     </script>
 </body>
 </html>
