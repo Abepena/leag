@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <rect width="1200" height="630" fill="#1a4031"/>
 
-  <!-- Centered content group -->
+  <!-- Centered compact content -->
   <g transform="translate(600, 315)">
-    <!-- Bracket Icon - positioned left of center -->
-    <g transform="translate(-180, -80) scale(1.8)">
+    <!-- Bracket Icon -->
+    <g transform="translate(-200, -60) scale(1.4)">
       <path d="M28 22 H 42 V 38 H 58 V 50 H 72" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
       <path d="M28 50 H 58" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
       <path d="M28 78 H 42 V 62 H 58" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
@@ -18,7 +18,7 @@
       <circle cx="78" cy="50" r="3" fill="#1a4031"/>
     </g>
 
-    <!-- LEAG Text - positioned right of icon -->
-    <text x="20" y="45" font-family="Arial, sans-serif" font-size="120" font-weight="bold" font-style="italic" fill="white">LEAG</text>
+    <!-- LEAG Text - smaller and closer -->
+    <text x="-70" y="35" font-family="Arial, sans-serif" font-size="90" font-weight="bold" font-style="italic" fill="white">LEAG</text>
   </g>
 </svg>
