@@ -1,10 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <rect width="1200" height="630" fill="#1a4031"/>
 
-  <!-- Content shifted left to account for preview cropping -->
-  <g transform="translate(420, 315)">
+  <!-- Content positioned for iMessage preview (crops right ~40% of image) -->
+  <!-- Center of visible area is roughly x=350, y=315 -->
+  <g transform="translate(350, 315)">
     <!-- Bracket Icon -->
-    <g transform="translate(-140, -60) scale(1.4)">
+    <g transform="translate(-130, -60) scale(1.4)">
       <path d="M28 22 H 42 V 38 H 58 V 50 H 72" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
       <path d="M28 50 H 58" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
       <path d="M28 78 H 42 V 62 H 58" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
@@ -19,6 +20,6 @@
     </g>
 
     <!-- LEAG Text -->
-    <text x="-10" y="35" font-family="Arial, sans-serif" font-size="90" font-weight="bold" font-style="italic" fill="white">LEAG</text>
+    <text x="0" y="35" font-family="Arial, sans-serif" font-size="90" font-weight="bold" font-style="italic" fill="white">LEAG</text>
   </g>
 </svg>
