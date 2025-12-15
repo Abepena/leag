@@ -414,17 +414,8 @@
     <!-- Custom Shop Section -->
     <section class="py-24 bg-white relative overflow-hidden scroll-reveal">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="flex flex-col lg:flex-row-reverse items-center justify-between gap-12 lg:gap-16">
-                <!-- Shop Mockup (Right side on desktop) -->
-                <div class="lg:w-1/2 flex justify-center">
-                    <div class="relative w-full">
-                        <img src="custom-shop.svg" alt="Custom Team Shop Interface" class="w-full h-auto block drop-shadow-xl rounded-lg">
-                        <!-- Shadow under mockup -->
-                        <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-[70%] h-10 bg-black/10 blur-2xl rounded-full -z-10"></div>
-                    </div>
-                </div>
-
-                <!-- Text Content (Left side on desktop) -->
+            <div class="flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-16">
+                <!-- Text Content (Left side on desktop, bottom on mobile) -->
                 <div class="lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left">
                     <div class="inline-block py-1 px-3 rounded-full bg-green-100 text-[#1a4031] text-sm font-semibold mb-6">E-Commerce Built In</div>
                     <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Your brand, your shop.</h2>
@@ -452,6 +443,9 @@
                         </li>
                     </ul>
                 </div>
+
+                <!-- Shop Mockup (Right side on desktop, top on mobile) -->                
+                    <img src="shop.svg" alt="Custom Team Shop Interface" class="lg:w-1/2 w-full max-w-lg h-auto block drop-shadow-2xl rounded-lg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
             </div>
         </div>
     </section>
