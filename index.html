@@ -1,589 +1,2788 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leag.app | Professional Sports Management</title>
-    <meta name="description" content="The comprehensive tool to manage sport organizations big or small.">
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LEAG | Sports League Operations Platform</title>
+  <meta name="description" content="LEAG gives youth sports organizations public sites, registration, scheduling, payments, standings, commerce, and operating tools in one platform.">
+  <link rel="icon" type="image/svg+xml" href="brand/leag-icon.svg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://leag.app/">
+  <meta property="og:title" content="LEAG | Sports League Operations Platform">
+  <meta property="og:description" content="Public sites and operating tools for clubs, leagues, tournaments, clinics, and rec sports events.">
+  <meta property="og:image" content="https://leag.app/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LEAG | Sports League Operations Platform">
+  <meta name="twitter:description" content="Public sites and operating tools for clubs, leagues, tournaments, clinics, and rec sports events.">
+  <meta name="twitter:image" content="https://leag.app/og-image.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Geist:wght@300;400;500;600;700;800;900&amp;family=Instrument+Serif:ital@0;1&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0c1616;
+      --bg-2: #08100f;
+      --surface: #101918;
+      --surface-2: #141e1c;
+      --surface-3: #1b2523;
+      --ink: #f4f5f4;
+      --muted: rgba(244, 245, 244, 0.72);
+      --quiet: rgba(244, 245, 244, 0.48);
+      --faint: rgba(244, 245, 244, 0.16);
+      --line: rgba(244, 245, 244, 0.12);
+      --line-strong: rgba(244, 245, 244, 0.24);
+      --green: #62b77c;
+      --green-hi: #7dca96;
+      --green-soft: rgba(98, 183, 124, 0.14);
+      --gold: #c9a24b;
+      --paper: #f4efe6;
+      --paper-ink: #161311;
+      --red: #d83a48;
+      --blue: #5b8fb7;
+      --container: 1180px;
+      --radius: 8px;
+      --font-sans: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      --font-display: "Anton", "Geist", sans-serif;
+      --font-serif: "Instrument Serif", Georgia, serif;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.36);
+    }
 
-    <!-- Open Graph / Social Sharing -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://leag.app/">
-    <meta property="og:title" content="Leag.app | Professional Sports Management">
-    <meta property="og:description" content="The comprehensive tool to manage sport organizations big or small.">
-    <meta property="og:image" content="https://leag.app/og-image.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
+    * {
+      box-sizing: border-box;
+    }
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Leag.app | Professional Sports Management">
-    <meta name="twitter:description" content="The comprehensive tool to manage sport organizations big or small.">
-    <meta name="twitter:image" content="https://leag.app/og-image.png">
+    html {
+      scroll-behavior: smooth;
+    }
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        .leag-green { background-color: #1a4031; }
-        .leag-green-text { color: #1a4031; }
+    body {
+      margin: 0;
+      background:
+        linear-gradient(180deg, rgba(98, 183, 124, 0.05), transparent 420px),
+        var(--bg);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
 
-        /* Textured Green Background */
-        .hero-textured {
-            background-color: #1e4d3d;
-            background-image:
-                url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            background-blend-mode: overlay;
-            position: relative;
-        }
-        .hero-textured::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse at center, rgba(30, 77, 61, 0.3) 0%, rgba(26, 64, 49, 0.8) 100%);
-            pointer-events: none;
-        }
+    img,
+    svg,
+    canvas,
+    video {
+      max-width: 100%;
+      height: auto;
+    }
 
-        /* 3D Text Effect */
-        .text-3d {
-            text-shadow:
-                0 1px 0 rgba(255,255,255,0.1),
-                0 2px 0 rgba(0,0,0,0.1),
-                0 3px 0 rgba(0,0,0,0.1),
-                0 4px 0 rgba(0,0,0,0.1),
-                0 5px 10px rgba(0,0,0,0.2),
-                0 10px 20px rgba(0,0,0,0.15);
-        }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      opacity: 0.18;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.45'/%3E%3C/svg%3E");
+      mix-blend-mode: soft-light;
+    }
 
-        /* Device Animations */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-        .float-animation {
-            animation: float 6s ease-in-out infinite;
-        }
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      pointer-events: none;
+      background:
+        linear-gradient(115deg, transparent 0 31%, rgba(98, 183, 124, 0.06) 31% 32%, transparent 32% 100%),
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.018) 0 1px, transparent 1px 94px);
+    }
 
-        /* Hero Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .animate-fade-in-up {
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-        .animate-fade-in {
-            animation: fadeIn 1s ease-out forwards;
-        }
-        .animation-delay-200 { animation-delay: 0.2s; opacity: 0; }
-        .animation-delay-400 { animation-delay: 0.4s; opacity: 0; }
-        .animation-delay-600 { animation-delay: 0.6s; opacity: 0; }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-        /* Scroll Reveal Animation */
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .scroll-reveal.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
 
-        /* Hero Gradient Background */
-        .hero-gradient {
-            background: linear-gradient(135deg, #1a4031 0%, #2d5a47 50%, #1a4031 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        .hero-gradient::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 30% 20%, rgba(45, 90, 71, 0.4) 0%, transparent 50%),
-                        radial-gradient(circle at 70% 80%, rgba(45, 90, 71, 0.3) 0%, transparent 50%);
-            pointer-events: none;
-        }
+    :focus-visible {
+      outline: 2px solid var(--green-hi);
+      outline-offset: 3px;
+    }
 
-        /* Circular Progress CSS */
-        .circular-chart {
-            display: block;
-            margin: 0 auto;
-            max-width: 80%;
-            max-height: 250px;
-        }
-        .circle-bg {
-            fill: none;
-            stroke: #eee;
-            stroke-width: 3.8;
-        }
-        .circle {
-            fill: none;
-            stroke-width: 2.8;
-            stroke-linecap: round;
-            animation: progress 1s ease-out forwards;
-        }
-        @keyframes progress {
-            0% { stroke-dasharray: 0 100; }
-        }
-        .percentage {
-            fill: #1a4031;
-            font-family: sans-serif;
-            font-weight: bold;
-            font-size: 0.5em;
-            text-anchor: middle;
-        }
+    .skip-link {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 100;
+      transform: translateY(-140%);
+      background: var(--green);
+      color: var(--bg);
+      padding: 10px 14px;
+      border-radius: var(--radius);
+      font-weight: 700;
+    }
 
-        /* Nav Logo Styling */
-        .nav-logo-icon {
-            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2));
-        }
-        .nav-logo-text {
-            font-weight: 800;
-            letter-spacing: 0.05em;
-        }
-        /* Filter to convert white to neon green #4ade80 */
-        .filter-green {
-            filter: brightness(0) saturate(100%) invert(73%) sepia(52%) saturate(463%) hue-rotate(76deg) brightness(96%) contrast(92%);
-        }
-    </style>
-    
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .top-strip {
+      min-height: 36px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      background: rgba(8, 16, 15, 0.88);
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    .top-strip .container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .top-strip strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 2px;
+      background: var(--green);
+      box-shadow: 0 0 18px rgba(98, 183, 124, 0.64);
+      flex: 0 0 auto;
+    }
+
+    .strip-spacer {
+      flex: 1;
+    }
+
+    .strip-copy {
+      flex: 1 1 auto;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      border-bottom: 1px solid var(--line);
+      background: rgba(12, 22, 22, 0.82);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 17px;
+      min-width: 0;
+      flex: 0 0 auto;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: block;
+      flex: 0 0 auto;
+      border-radius: 8px;
+      max-width: none;
+    }
+
+    .brand-wordmark {
+      width: 101px;
+      height: 24px;
+      display: block;
+      flex: 0 0 auto;
+      background-image: url("brand/leag-wordmark-text.svg");
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: left center;
+      max-width: none;
+    }
+
+    .window-bar .brand-mark {
+      width: 30px;
+      height: 30px;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-links a {
+      transition: color 180ms ease, transform 180ms ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--ink);
+      transform: translateY(-1px);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .menu-button {
+      display: none;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--ink);
+      cursor: pointer;
+    }
+
+    .menu-button span {
+      display: block;
+      width: 16px;
+      height: 2px;
+      margin: 4px auto;
+      background: currentColor;
+      border-radius: 2px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 0 16px;
+      border-radius: var(--radius);
+      border: 1px solid transparent;
+      font-weight: 700;
+      font-size: 14px;
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease, color 180ms ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn:active {
+      transform: translateY(1px) scale(0.99);
+    }
+
+    .btn-primary {
+      background: var(--green);
+      color: var(--bg);
+    }
+
+    .btn-primary:hover {
+      background: var(--green-hi);
+    }
+
+    .btn-secondary {
+      border-color: var(--line-strong);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--ink);
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(98, 183, 124, 0.55);
+      background: rgba(98, 183, 124, 0.08);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 690px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(420px, 1.1fr);
+      gap: 42px;
+      align-items: center;
+      padding: 70px 0 46px;
+    }
+
+    .hero-grid > *,
+    .platform-layout > *,
+    .surface-board > *,
+    .ops-layout > *,
+    .market-grid > * {
+      min-width: 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--green-hi);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 2px;
+      background: currentColor;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    .hero h1 {
+      margin: 22px 0 20px;
+      font-size: 104px;
+      line-height: 0.92;
+      letter-spacing: 0;
+      font-weight: 900;
+      text-wrap: balance;
+    }
+
+    .hero h1 span {
+      display: block;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(244, 245, 244, 0.72);
+      text-shadow: none;
+    }
+
+    .hero-copy {
+      max-width: 570px;
+      color: var(--muted);
+      font-size: 20px;
+      line-height: 1.55;
+      text-wrap: pretty;
+    }
+
+    .hero .reveal {
+      opacity: 1;
+      transform: none;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .hero-note {
+      margin-top: 20px;
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 12px;
+    }
+
+    .hero-scene {
+      position: relative;
+      min-height: 550px;
+      perspective: 1400px;
+    }
+
+    .league-window {
+      position: absolute;
+      inset: 4px 0 0 8px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: rgba(16, 25, 24, 0.84);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transform: rotateX(2deg) rotateY(-8deg);
+      transform-origin: center;
+    }
+
+    .window-bar {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 16px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(8, 16, 15, 0.76);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--quiet);
+      overflow: hidden;
+    }
+
+    .window-bar strong {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: var(--ink);
+      font-family: var(--font-sans);
+      font-size: 14px;
+    }
+
+    .window-bar > span:not(.brand-mark) {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .window-tabs {
+      margin-left: auto;
+      display: flex;
+      gap: 18px;
+      color: var(--muted);
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .ticker {
+      display: flex;
+      align-items: center;
+      min-height: 34px;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background: #050908;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .ticker-label {
+      position: relative;
+      z-index: 2;
+      flex: 0 0 auto;
+      align-self: stretch;
+      display: grid;
+      place-items: center;
+      padding: 0 14px;
+      background: var(--red);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .ticker-viewport {
+      flex: 1 1 auto;
+      min-width: 0;
+      align-self: stretch;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .ticker-viewport::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 16px;
+      z-index: 1;
+      pointer-events: none;
+      background: linear-gradient(90deg, #050908, rgba(5, 9, 8, 0));
+    }
+
+    .ticker-track {
+      display: flex;
+      gap: 24px;
+      padding: 0 16px;
+      color: var(--quiet);
+      animation: ticker 26s linear infinite;
+      will-change: transform;
+    }
+
+    .ticker-track strong {
+      color: var(--ink);
+    }
+
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-42%); }
+    }
+
+    .score-hero {
+      padding: 30px 24px 24px;
+      border-bottom: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(216, 58, 72, 0.12), transparent 66%),
+        var(--surface);
+    }
+
+    .score-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    .live-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 9px;
+      border-radius: 4px;
+      background: var(--red);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .score-row {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 18px;
+      align-items: end;
+    }
+
+    .team-name {
+      font-family: var(--font-display);
+      font-size: 58px;
+      font-style: italic;
+      line-height: 0.9;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      text-shadow: 0 0 34px rgba(216, 58, 72, 0.22);
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .team-name.right {
+      color: var(--red);
+      text-shadow: 0 0 42px rgba(216, 58, 72, 0.34);
+    }
+
+    .team-caption {
+      margin-top: 10px;
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    .score-number {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 14px;
+      font-family: var(--font-display);
+      font-style: italic;
+      line-height: 0.8;
+    }
+
+    .score-number span {
+      font-size: 112px;
+    }
+
+    .score-number em {
+      color: var(--quiet);
+      font-style: normal;
+      font-size: 44px;
+    }
+
+    .inning-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+      margin-top: 24px;
+    }
+
+    .inning-grid span {
+      min-height: 28px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    .inning-grid .active {
+      background: var(--red);
+      color: #fff;
+      border-color: var(--red);
+      font-weight: 700;
+    }
+
+    .ops-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 0;
+      min-height: 220px;
+    }
+
+    .standings-panel,
+    .schedule-panel {
+      padding: 18px;
+    }
+
+    .standings-panel {
+      border-right: 1px solid var(--line);
+    }
+
+    .panel-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .panel-title span {
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .standings-row,
+    .schedule-row {
+      display: grid;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 0;
+      border-top: 1px solid var(--line);
+      font-size: 12px;
+    }
+
+    .standings-row {
+      grid-template-columns: 26px 1fr 42px 44px;
+    }
+
+    .schedule-row {
+      grid-template-columns: 44px 1fr auto;
+    }
+
+    .team-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .team-swatch {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      background: var(--green);
+      flex: 0 0 auto;
+      transform: skewX(-10deg);
+    }
+
+    .team-chip span:last-child {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .mono {
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .muted {
+      color: var(--quiet);
+    }
+
+    .section {
+      padding: 88px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: minmax(0, 0.82fr) minmax(260px, 0.48fr);
+      gap: 36px;
+      align-items: end;
+      margin-bottom: 34px;
+    }
+
+    .section-kicker {
+      margin-bottom: 12px;
+      color: var(--green-hi);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .section h2 {
+      margin-bottom: 0;
+      font-size: 52px;
+      line-height: 1.02;
+      font-weight: 850;
+      text-wrap: balance;
+    }
+
+    .section-header p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 17px;
+      text-wrap: pretty;
+    }
+
+    .proof-strip {
+      padding: 22px 0;
+      background: var(--paper);
+      color: var(--paper-ink);
+      border-bottom: 1px solid rgba(22, 19, 17, 0.16);
+    }
+
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(22, 19, 17, 0.16);
+      border: 1px solid rgba(22, 19, 17, 0.16);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .proof-item {
+      min-height: 96px;
+      padding: 18px;
+      background: var(--paper);
+    }
+
+    .proof-number {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 34px;
+      line-height: 1;
+    }
+
+    .proof-label {
+      margin-top: 8px;
+      color: rgba(22, 19, 17, 0.62);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .demo-layout {
+      display: grid;
+      grid-template-columns: minmax(300px, 0.72fr) minmax(0, 1.28fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .demo-controls,
+    .demo-stage {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(16, 25, 24, 0.78);
+      overflow: hidden;
+    }
+
+    .demo-controls {
+      padding: 20px;
+      display: grid;
+      gap: 18px;
+      align-content: start;
+    }
+
+    .demo-group {
+      display: grid;
+      gap: 10px;
+    }
+
+    .demo-group label,
+    .demo-label {
+      color: var(--green-hi);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .demo-choice-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .demo-chip {
+      min-height: 38px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--muted);
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 180ms ease, border-color 180ms ease, color 180ms ease, background 180ms ease;
+    }
+
+    .demo-chip:hover,
+    .demo-chip.is-active {
+      color: var(--ink);
+      border-color: rgba(98, 183, 124, 0.5);
+      background: var(--green-soft);
+    }
+
+    .demo-chip:active {
+      transform: translateY(1px) scale(0.99);
+    }
+
+    .demo-status {
+      min-height: 86px;
+      display: grid;
+      gap: 6px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .demo-status strong {
+      font-size: 15px;
+    }
+
+    .demo-status span {
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 12px;
+    }
+
+    .demo-stage-bar {
+      min-height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 0 18px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 12px;
+    }
+
+    .demo-stage-bar strong {
+      color: var(--ink);
+      font-family: var(--font-sans);
+      font-size: 15px;
+    }
+
+    .demo-output {
+      display: grid;
+      grid-template-columns: 1fr 0.86fr;
+      min-height: 360px;
+    }
+
+    .demo-public {
+      padding: 20px;
+      border-right: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(98, 183, 124, 0.08), transparent 58%),
+        rgba(8, 16, 15, 0.34);
+    }
+
+    .demo-public h3 {
+      margin: 16px 0 10px;
+      font-size: 38px;
+      line-height: 1;
+      text-wrap: balance;
+    }
+
+    .demo-public p {
+      margin-bottom: 18px;
+      color: var(--muted);
+    }
+
+    .demo-mini-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .demo-mini-list div {
+      display: grid;
+      grid-template-columns: 74px 1fr auto;
+      gap: 10px;
+      align-items: center;
+      min-height: 42px;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .demo-mini-list b {
+      color: var(--ink);
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    .demo-admin {
+      padding: 20px;
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .demo-metric-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--line);
+    }
+
+    .demo-metric-row div {
+      padding: 14px;
+      background: var(--surface);
+    }
+
+    .demo-metric-row strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 30px;
+      font-style: italic;
+      line-height: 1;
+    }
+
+    .demo-metric-row span {
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 10px;
+    }
+
+    .demo-task {
+      display: grid;
+      grid-template-columns: 24px 1fr auto;
+      gap: 10px;
+      align-items: center;
+      min-height: 42px;
+      padding: 0 10px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .demo-task:last-child {
+      border-bottom: 0;
+    }
+
+    .demo-check {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      background: var(--green);
+    }
+
+    .platform-layout {
+      display: grid;
+      grid-template-columns: minmax(360px, 0.95fr) minmax(0, 1.05fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .public-site-preview {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .tenant-hero {
+      min-height: 330px;
+      position: relative;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      background:
+        linear-gradient(180deg, transparent 0%, rgba(8, 16, 15, 0.86) 82%),
+        radial-gradient(circle at 82% 22%, rgba(255, 255, 255, 0.24) 0 2px, transparent 3px 100%),
+        radial-gradient(ellipse at 50% 115%, rgba(183, 116, 62, 0.56) 0 24%, rgba(30, 92, 54, 0.72) 25% 56%, rgba(8, 16, 15, 0.94) 57% 100%),
+        linear-gradient(135deg, transparent 0 47%, rgba(255, 255, 255, 0.2) 47.2% 47.8%, transparent 48% 100%),
+        linear-gradient(45deg, transparent 0 51%, rgba(255, 255, 255, 0.18) 51.2% 51.8%, transparent 52% 100%),
+        #14231e;
+    }
+
+    .tenant-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 78% 28%, rgba(255, 255, 255, 0.14), transparent 20%),
+        linear-gradient(90deg, rgba(216, 58, 72, 0.24), rgba(91, 143, 183, 0.16) 58%, transparent);
+      z-index: 0;
+    }
+
+    .tenant-hero::after {
+      content: "";
+      position: absolute;
+      right: 38px;
+      top: 34px;
+      width: 148px;
+      height: 148px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.26);
+      opacity: 0.46;
+      background:
+        linear-gradient(74deg, transparent 0 46%, rgba(216, 58, 72, 0.5) 47% 49%, transparent 50% 100%),
+        linear-gradient(106deg, transparent 0 46%, rgba(216, 58, 72, 0.5) 47% 49%, transparent 50% 100%);
+      transform: rotate(-14deg);
+      z-index: 0;
+    }
+
+    .tenant-hero > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .tenant-badge {
+      align-self: flex-start;
+      padding: 6px 9px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.86);
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    .tenant-title {
+      margin: 14px 0 6px;
+      font-size: 44px;
+      line-height: 1;
+      font-weight: 850;
+    }
+
+    .tenant-meta {
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 14px;
+    }
+
+    .tenant-nav {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border-top: 1px solid var(--line);
+      background: rgba(8, 16, 15, 0.58);
+    }
+
+    .tenant-nav span {
+      min-height: 42px;
+      display: grid;
+      place-items: center;
+      border-right: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .tenant-nav span:last-child {
+      border-right: 0;
+    }
+
+    .tenant-nav .active {
+      color: var(--ink);
+      background: var(--green-soft);
+    }
+
+    .workflow-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .workflow-item {
+      display: grid;
+      grid-template-columns: 68px 1fr;
+      gap: 18px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(16, 25, 24, 0.74);
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+    }
+
+    .workflow-item:hover {
+      transform: translateY(-2px);
+      border-color: rgba(98, 183, 124, 0.42);
+      background: rgba(20, 30, 28, 0.92);
+    }
+
+    .workflow-index {
+      color: var(--green-hi);
+      font-family: var(--font-display);
+      font-size: 42px;
+      font-style: italic;
+      line-height: 1;
+    }
+
+    .workflow-item h3 {
+      margin-bottom: 6px;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .workflow-item p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .surface-board {
+      display: grid;
+      grid-template-columns: 1fr 0.78fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .board-main,
+    .board-side,
+    .market-card,
+    .ops-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(16, 25, 24, 0.78);
+      overflow: hidden;
+    }
+
+    .board-head,
+    .ops-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 54px;
+      padding: 0 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .board-head h3,
+    .ops-head h3 {
+      margin: 0;
+      font-size: 15px;
+    }
+
+    .board-head span,
+    .ops-head span {
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .calendar-grid span {
+      min-height: 74px;
+      padding: 8px;
+      background: var(--surface);
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      position: relative;
+    }
+
+    .calendar-grid .has-game::after {
+      content: "";
+      position: absolute;
+      left: 8px;
+      bottom: 8px;
+      width: 22px;
+      height: 5px;
+      border-radius: 3px;
+      background: var(--green);
+    }
+
+    .calendar-grid .final::after {
+      background: var(--gold);
+    }
+
+    .calendar-grid .live {
+      background: rgba(216, 58, 72, 0.18);
+      color: var(--ink);
+    }
+
+    .calendar-grid .live::after {
+      background: var(--red);
+    }
+
+    .list-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .list-table th,
+    .list-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+    }
+
+    .list-table th {
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .list-table td:last-child,
+    .list-table th:last-child {
+      text-align: right;
+    }
+
+    .status-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 0 8px;
+      border-radius: 4px;
+      background: var(--green-soft);
+      color: var(--green-hi);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .status-tag.red {
+      background: rgba(216, 58, 72, 0.16);
+      color: #ff8a94;
+    }
+
+    .board-side {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .roster-list {
+      padding: 4px 16px 16px;
+    }
+
+    .roster-row {
+      display: grid;
+      grid-template-columns: 34px 1fr 48px;
+      gap: 10px;
+      align-items: center;
+      min-height: 48px;
+      border-bottom: 1px solid var(--line);
+      font-size: 13px;
+    }
+
+    .roster-row:last-child {
+      border-bottom: 0;
+    }
+
+    .player-num {
+      color: var(--green-hi);
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 23px;
+      line-height: 1;
+    }
+
+    .stat-stack {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      margin-top: auto;
+      background: var(--line);
+      border-top: 1px solid var(--line);
+    }
+
+    .stat-stack div {
+      padding: 16px 10px;
+      background: var(--surface-2);
+    }
+
+    .stat-stack strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-style: italic;
+      line-height: 1;
+    }
+
+    .stat-stack span {
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 10px;
+    }
+
+    .market-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr 1fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .market-card {
+      min-height: 320px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .market-card:nth-child(2) {
+      margin-top: 34px;
+    }
+
+    .market-card:nth-child(3) {
+      margin-top: 68px;
+    }
+
+    .market-label {
+      color: var(--green-hi);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .market-card h3 {
+      margin: 14px 0 10px;
+      font-size: 28px;
+      line-height: 1.05;
+    }
+
+    .market-card p {
+      color: var(--muted);
+      font-size: 15px;
+      text-wrap: pretty;
+    }
+
+    .market-list {
+      display: grid;
+      gap: 9px;
+      margin-top: auto;
+      padding-top: 18px;
+    }
+
+    .market-list span {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 38px;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .market-list b {
+      color: var(--ink);
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    .market-demo {
+      margin-top: auto;
+      padding-top: 18px;
+    }
+
+    .player-search {
+      display: grid;
+      gap: 9px;
+    }
+
+    .player-search-row {
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .player-search-row strong {
+      color: var(--ink);
+    }
+
+    .organizer-board {
+      display: grid;
+      gap: 10px;
+    }
+
+    .organizer-lane {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .organizer-lane header {
+      min-height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10px;
+      border-bottom: 1px solid var(--line);
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+    }
+
+    .organizer-lane div {
+      padding: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .venue-slots {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+
+    .venue-slots span {
+      min-height: 54px;
+      display: grid;
+      align-content: center;
+      gap: 3px;
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .venue-slots b {
+      color: var(--ink);
+      font-size: 12px;
+    }
+
+    .venue-slots .booked {
+      background: var(--green-soft);
+      border-color: rgba(98, 183, 124, 0.28);
+    }
+
+    .ops-layout {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 18px;
+    }
+
+    .ops-card {
+      min-height: 360px;
+    }
+
+    .pipeline {
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .pipeline-row {
+      display: grid;
+      grid-template-columns: 34px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      min-height: 54px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .pipeline-step {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      background: var(--green);
+      color: var(--bg);
+      font-weight: 900;
+      font-size: 13px;
+    }
+
+    .pipeline-row h4 {
+      margin: 0 0 2px;
+      font-size: 14px;
+    }
+
+    .pipeline-row p {
+      margin: 0;
+      color: var(--quiet);
+      font-size: 12px;
+    }
+
+    .money-board {
+      padding: 18px;
+    }
+
+    .money-total {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: end;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .money-total strong {
+      font-family: var(--font-display);
+      font-size: 70px;
+      font-style: italic;
+      line-height: 0.9;
+    }
+
+    .money-total span {
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    .bar-chart {
+      display: grid;
+      gap: 14px;
+      padding-top: 18px;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 120px 1fr 72px;
+      gap: 12px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .bar-track {
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--green);
+    }
+
+    .bar-fill.gold {
+      background: var(--gold);
+    }
+
+    .bar-fill.blue {
+      background: var(--blue);
+    }
+
+    .cta-section {
+      padding: 86px 0;
+      background: var(--paper);
+      color: var(--paper-ink);
+    }
+
+    .cta-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .cta-section h2 {
+      margin: 0 0 12px;
+      font-size: 58px;
+      line-height: 1;
+      font-weight: 900;
+      text-wrap: balance;
+    }
+
+    .cta-section p {
+      margin: 0;
+      max-width: 680px;
+      color: rgba(22, 19, 17, 0.68);
+      font-size: 18px;
+    }
+
+    .cta-actions {
+      display: grid;
+      gap: 10px;
+      min-width: 210px;
+    }
+
+    .cta-actions .btn-primary {
+      background: var(--paper-ink);
+      color: var(--paper);
+    }
+
+    .cta-actions .btn-secondary {
+      border-color: rgba(22, 19, 17, 0.22);
+      background: transparent;
+      color: var(--paper-ink);
+    }
+
+    .site-footer {
+      padding: 32px 0;
+      background: #070c0c;
+      color: var(--quiet);
+      font-size: 13px;
+    }
+
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a:hover {
+      color: var(--ink);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 600ms ease, transform 600ms ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @media (max-width: 1040px) {
+      .hero-grid,
+      .platform-layout,
+      .surface-board,
+      .ops-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero h1 {
+        font-size: 86px;
+      }
+
+      .hero-scene {
+        min-height: auto;
+      }
+
+      .league-window {
+        position: relative;
+        inset: 0;
+        transform: none;
+      }
+
+      .section-header {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .nav-actions .btn-secondary {
+        display: none;
+      }
+
+      .market-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .market-card,
+      .market-card:nth-child(2),
+      .market-card:nth-child(3) {
+        min-height: auto;
+        margin-top: 0;
+      }
+
+      .cta-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-actions {
+        max-width: 320px;
+      }
+    }
+
+    @media (max-width: 820px) {
+      .top-strip .strip-spacer,
+      .top-strip .optional {
+        display: none;
+      }
+
+      .nav {
+        min-height: 64px;
+      }
+
+      .nav-links {
+        position: absolute;
+        left: 20px;
+        right: 20px;
+        top: 64px;
+        display: none;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(12, 22, 22, 0.98);
+        box-shadow: var(--shadow);
+      }
+
+      .nav-links.is-open {
+        display: grid;
+        gap: 2px;
+      }
+
+      .nav-links a {
+        min-height: 42px;
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        border-radius: 6px;
+      }
+
+      .nav-links a:hover {
+        background: rgba(255, 255, 255, 0.05);
+        transform: none;
+      }
+
+      .menu-button {
+        display: block;
+      }
+
+      .nav-actions .btn {
+        display: none;
+      }
+
+      .hero-grid {
+        gap: 24px;
+        padding: 42px 0 32px;
+      }
+
+      .hero h1 {
+        font-size: 64px;
+      }
+
+      .hero-copy {
+        font-size: 17px;
+      }
+
+      .hero-scene {
+        min-height: auto;
+      }
+
+      .window-tabs,
+      .schedule-panel {
+        display: none;
+      }
+
+      .ops-grid {
+        display: none;
+      }
+
+      .standings-panel {
+        border-right: 0;
+      }
+
+      .score-hero {
+        padding: 20px 14px;
+      }
+
+      .score-meta {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .score-row {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .team-name {
+        font-size: 40px;
+        white-space: nowrap;
+      }
+
+      .team-name.right {
+        text-align: left;
+      }
+
+      .score-number {
+        justify-content: flex-start;
+      }
+
+      .score-number span {
+        font-size: 84px;
+      }
+
+      .inning-grid {
+        margin-top: 16px;
+      }
+
+      .proof-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .demo-layout,
+      .demo-output {
+        grid-template-columns: 1fr;
+      }
+
+      .demo-public {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .section {
+        padding: 64px 0;
+      }
+
+      .section h2,
+      .cta-section h2 {
+        font-size: 40px;
+      }
+
+      .tenant-title {
+        font-size: 34px;
+      }
+
+      .workflow-item {
+        grid-template-columns: 44px 1fr;
+        padding: 16px;
+      }
+
+      .workflow-index {
+        font-size: 34px;
+      }
+
+      .calendar-grid span {
+        min-height: 56px;
+      }
+
+      .bar-row {
+        grid-template-columns: 90px 1fr 58px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .container {
+        width: min(100% - 28px, var(--container));
+      }
+
+      .top-strip {
+        font-size: 10px;
+      }
+
+      .hero h1 {
+        font-size: 46px;
+      }
+
+      .hero h1 span {
+        max-width: 8ch;
+      }
+
+      .team-name {
+        font-size: 34px;
+      }
+
+      .score-number span {
+        font-size: 72px;
+      }
+
+      .hero-actions {
+        align-items: stretch;
+      }
+
+      .hero-actions .btn {
+        width: 100%;
+      }
+
+      .proof-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .demo-stage-bar {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 12px 14px;
+      }
+
+      .demo-mini-list div {
+        grid-template-columns: 1fr;
+        padding: 10px;
+      }
+
+      .demo-metric-row {
+        grid-template-columns: 1fr;
+      }
+
+      .tenant-nav {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .tenant-nav span {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .list-table th,
+      .list-table td {
+        padding: 10px 8px;
+        font-size: 12px;
+      }
+
+      .list-table th:nth-child(3),
+      .list-table td:nth-child(3) {
+        display: none;
+      }
+
+      .calendar-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .calendar-grid span:nth-child(n+21) {
+        display: none;
+      }
+
+      .money-total {
+        grid-template-columns: 1fr;
+      }
+
+      .money-total strong {
+        font-size: 54px;
+      }
+
+      .bar-row {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
+      .footer-grid {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
-<body class="bg-gray-50 text-gray-900 overflow-x-hidden">
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-[#1a4031]/95 backdrop-blur-md border-b border-green-900 shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
-                <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <img src="leag-logo-shadow.svg" alt="LEAG" class="h-40">
-                </div>
-                
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#features" class="text-gray-200 hover:text-white font-medium transition">Features</a>
-                    <a href="#mobile" class="text-gray-200 hover:text-white font-medium transition">Mobile App</a>
-                    <a href="#contact" class="text-gray-200 hover:text-white font-medium transition">Contact</a>
-                </div>
+  <div class="top-strip" role="banner">
+    <div class="container">
+      <span class="status-dot" aria-hidden="true"></span>
+      <strong>LEAG</strong>
+      <span>/</span>
+      <span class="strip-copy">public sites, registration, schedules, standings, commerce</span>
+      <span class="strip-spacer"></span>
+      <span class="optional">Built by Stryder Labs LLC</span>
+    </div>
+  </div>
 
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-white hover:text-gray-200 focus:outline-none">
-                        <i data-lucide="menu" class="w-8 h-8"></i>
-                    </button>
-                </div>
-            </div>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#" aria-label="LEAG home">
+        <img class="brand-mark" src="brand/leag-icon.svg" alt="" aria-hidden="true">
+        <span class="brand-wordmark" aria-hidden="true"></span>
+      </a>
+      <nav class="nav-links" id="site-nav" aria-label="Primary navigation">
+        <a href="#playground">Demo</a>
+        <a href="#platform">Platform</a>
+        <a href="#surfaces">Surfaces</a>
+        <a href="#marketplace">Marketplace</a>
+        <a href="#operations">Operations</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-secondary" href="#surfaces">Examples</a>
+        <a class="btn btn-primary" href="#playground">Try demos</a>
+        <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav" id="menu-button" aria-label="Open navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-copy-block reveal">
+          <div class="eyebrow">Sports operations platform</div>
+          <h1 id="hero-title">LEAG <span>runs the league.</span></h1>
+          <p class="hero-copy">
+            Public sites, event discovery, registration, scheduling, payments, standings, team pages, and commerce for youth sports organizations and rec sports operators.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#playground">Try demo features -></a>
+            <a class="btn btn-secondary" href="#surfaces">View product surfaces</a>
+          </div>
+          <p class="hero-note">No call required: click through a sample league flow directly on this page.</p>
         </div>
 
-        <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="hidden md:hidden bg-[#1a4031] border-b border-green-800">
-            <div class="px-4 pt-2 pb-6 space-y-2">
-                <a href="#features" class="block px-3 py-2 text-base font-medium text-white hover:bg-green-900 rounded-md">Features</a>
-                <a href="#mobile" class="block px-3 py-2 text-base font-medium text-white hover:bg-green-900 rounded-md">Mobile App</a>
-                <a href="#contact" class="block px-3 py-2 text-base font-medium text-white hover:bg-green-900 rounded-md">Contact</a>
+        <div class="hero-scene reveal" aria-label="Live league site preview">
+          <div class="league-window">
+            <div class="window-bar">
+              <img class="brand-mark" src="brand/leag-icon.svg" alt="" aria-hidden="true">
+              <strong>Miami County Softball</strong>
+              <span>Softball / 2026 spring</span>
+              <div class="window-tabs" aria-hidden="true">
+                <span>Home</span>
+                <span>Schedule</span>
+                <span>Table</span>
+                <span>Teams</span>
+              </div>
             </div>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero-gradient pt-32 pb-20 lg:pt-40 lg:pb-28">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center max-w-3xl mx-auto">
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight mb-8 animate-fade-in-up animation-delay-200">
-                    Manage your organization <span class="text-green-300">like a pro.</span>
-                </h1>
-                <span class="inline-block py-1 px-3 rounded-full bg-white/10 border border-white/20 text-white text-sm font-semibold mb-6 tracking-wide uppercase animate-fade-in-up">The Future of Sports Management</span>
-                <p class="text-xl text-gray-200 mb-10 leading-relaxed animate-fade-in-up animation-delay-400">
-                    The all-in-one platform for leagues, tournaments, and teams. Streamline registration, scheduling, financials, and stats in one beautiful dashboard.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up animation-delay-600">
-                    <a href="https://mail.google.com/mail/?view=cm&to=contact@leag.app&su=Demo%20Request" class="px-8 py-4 bg-white text-[#1a4031] rounded-xl font-bold text-lg hover:bg-gray-100 transition shadow-xl shadow-black/20 flex items-center justify-center gap-2">
-                        Request Demo <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                    </a>
-                    <a href="#features" class="px-8 py-4 bg-transparent text-white border-2 border-white/30 rounded-xl font-bold text-lg hover:bg-white/10 hover:border-white/50 transition flex items-center justify-center">
-                        Learn More
-                    </a>
+            <div class="ticker" aria-hidden="true">
+              <div class="ticker-label">LIVE</div>
+              <div class="ticker-viewport">
+                <div class="ticker-track">
+                  <span><strong>Firecrackers</strong> 5 - 3 Panthers T5</span>
+                  <span>FINAL SPARKS 8 - 6 PITCH</span>
+                  <span>NEXT MON 5:30 FIELD 1</span>
+                  <span>TRYOUTS 12U OPEN</span>
+                  <span><strong>Firecrackers</strong> 5 - 3 Panthers T5</span>
+                  <span>FINAL SPARKS 8 - 6 PITCH</span>
                 </div>
+              </div>
             </div>
+            <div class="score-hero">
+              <div class="score-meta">
+                <span class="live-pill">LIVE NOW</span>
+                <span>Field 1 / top 5 / runners on 1st and 3rd</span>
+              </div>
+              <div class="score-row">
+                <div>
+                  <div class="team-name">Panthers</div>
+                  <div class="team-caption">10-5 / away</div>
+                </div>
+                <div class="score-number" aria-label="Panthers 3, Firecrackers 5">
+                  <span>3</span><em>-</em><span>5</span>
+                </div>
+                <div>
+                  <div class="team-name right">Firecrackers</div>
+                  <div class="team-caption">12-3 / home</div>
+                </div>
+              </div>
+              <div class="inning-grid" aria-hidden="true">
+                <span>1</span><span>0</span><span>2</span><span>0</span><span class="active">T5</span><span></span><span></span>
+              </div>
+            </div>
+            <div class="ops-grid">
+              <div class="standings-panel">
+                <div class="panel-title">Standings <span>Updated live</span></div>
+                <div class="standings-row">
+                  <span class="mono">1</span>
+                  <span class="team-chip"><span class="team-swatch"></span><span>Firecrackers</span></span>
+                  <span class="mono">12-3</span>
+                  <span class="mono">.800</span>
+                </div>
+                <div class="standings-row">
+                  <span class="mono">2</span>
+                  <span class="team-chip"><span class="team-swatch" style="background:#c9a24b"></span><span>Sparks</span></span>
+                  <span class="mono">10-5</span>
+                  <span class="mono">.667</span>
+                </div>
+                <div class="standings-row">
+                  <span class="mono">3</span>
+                  <span class="team-chip"><span class="team-swatch" style="background:#5b8fb7"></span><span>Pitch Perfect</span></span>
+                  <span class="mono">8-7</span>
+                  <span class="mono">.533</span>
+                </div>
+              </div>
+              <div class="schedule-panel">
+                <div class="panel-title">Up next <span>Calendar sync</span></div>
+                <div class="schedule-row">
+                  <span class="mono">Jun 17</span>
+                  <span>Firecrackers vs Pitch Perfect</span>
+                  <span class="mono">5:30</span>
+                </div>
+                <div class="schedule-row">
+                  <span class="mono">Jun 19</span>
+                  <span>Sparks vs Panthers</span>
+                  <span class="mono">6:45</span>
+                </div>
+                <div class="schedule-row">
+                  <span class="mono">Jun 22</span>
+                  <span>Semifinal bracket opens</span>
+                  <span class="mono">TBD</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <!-- Decorative Elements -->
-        <div class="absolute top-1/4 left-10 w-64 h-64 bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
-        <div class="absolute bottom-1/4 right-10 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
+      </div>
     </section>
 
-    <!-- Mobile App Teaser -->
-    <section id="mobile" class="py-24 bg-white relative overflow-hidden scroll-reveal">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="flex flex-col lg:flex-row items-center justify-between gap-16">
-                <div class="lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left">
-                    <div class="inline-block py-1 px-3 rounded-full bg-green-100 text-[#1a4031] text-sm font-semibold mb-6">Coming Soon</div>
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Your league in your pocket.</h2>
-                    <p class="text-lg text-gray-600 mb-8 leading-relaxed max-w-lg">
-                        The Leag mobile app keeps admins, players, and fans connected. Get push notifications for game times, check live scores, and manage your team from anywhere.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4 w-full justify-center lg:justify-start">
-                        <button class="bg-[#1a4031] text-white px-6 py-3 rounded-xl flex items-center gap-3 hover:bg-[#143326] transition cursor-default justify-start sm:justify-center">
-                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-                            </svg>
-                            <div class="text-left">
-                                <div class="text-[10px] uppercase font-semibold leading-none opacity-80">Coming soon to</div>
-                                <div class="text-sm font-bold leading-none mt-1">App Store</div>
-                            </div>
-                        </button>
-                        <button class="bg-[#1a4031] text-white px-6 py-3 rounded-xl flex items-center gap-3 hover:bg-[#143326] transition cursor-default justify-start sm:justify-center">
-                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M3.609 1.814L13.792 12 3.61 22.186a.996.996 0 0 1-.61-.92V2.734a1 1 0 0 1 .609-.92zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-3.198l2.807 1.626a1 1 0 0 1 0 1.73l-2.808 1.626L15.206 12l2.492-2.491zM5.864 2.658L16.8 8.99l-2.302 2.302-8.634-8.634z"/>
-                            </svg>
-                            <div class="text-left">
-                                <div class="text-[10px] uppercase font-semibold leading-none opacity-80">Coming soon to</div>
-                                <div class="text-sm font-bold leading-none mt-1">Google Play</div>
-                            </div>
-                        </button>
-                    </div>
-                    <p class="mt-4 text-sm text-gray-500">Be the first to know when we launch.</p>
-                </div>
-
-                <!-- Phone Mockup (CSS Constructed) -->
-                <div class="lg:w-1/2 flex justify-center">
-                    <div class="relative mx-auto border-gray-900 bg-gray-900 border-[14px] rounded-[2.5rem] h-[600px] w-[300px] shadow-2xl flex flex-col items-center">
-                        <div class="h-[32px] w-[3px] bg-gray-800 absolute -left-[17px] top-[72px] rounded-l-lg"></div>
-                        <div class="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[124px] rounded-l-lg"></div>
-                        <div class="h-[46px] w-[3px] bg-gray-800 absolute -left-[17px] top-[178px] rounded-l-lg"></div>
-                        <div class="h-[64px] w-[3px] bg-gray-800 absolute -right-[17px] top-[142px] rounded-r-lg"></div>
-                        <div class="rounded-[2rem] overflow-hidden w-full h-full bg-white relative isolate">
-                            <!-- Green Header Background (covers dots) -->
-                            <div class="absolute top-0 left-0 right-0 h-48" style="background: linear-gradient(180deg, #2d5a47 0%, #1a4031 100%);"></div>
-
-                            <!-- Status Bar -->
-                            <div class="h-8 w-full flex justify-between items-center px-6 pt-2 relative z-10">
-                                <div class="w-12 h-3 bg-black/20 rounded-full mx-auto"></div>
-                            </div>
-
-                            <!-- App Header -->
-                            <div class="p-2 rounded-b-[2rem] text-white relative z-10">
-                                <div class="flex justify-between items-center">
-                                    <i data-lucide="menu" class="w-6 h-6"></i>
-                                    <img src="leag-logo-shadow.svg" alt="LEAG" class="h-20">
-                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User avatar" class="w-8 h-8 rounded-full object-cover border-2 border-white/30">
-                                </div>
-                                <div class="text-center">
-                                    <p class="text-xs text-green-200 mb-1">Upcoming Match</p>
-                                    <h3 class="text-xl font-bold">Team A vs Team B</h3>
-                                    <p class="text-sm opacity-80 mt-1">Today, 4:00 PM</p>
-                                </div>
-                            </div>
-
-                            <!-- App Content -->
-                            <div class="px-4 -mt-6 relative z-10 space-y-4">
-                                <!-- Stats Card -->
-                                <div class="bg-white rounded-xl p-4 shadow-lg border border-gray-100">
-                                    <div class="flex justify-between items-center mb-2">
-                                        <h4 class="font-bold text-gray-800 text-sm">Season Progress</h4>
-                                        <span class="text-xs text-green-600 font-bold">70%</span>
-                                    </div>
-                                    <div class="w-full bg-gray-100 rounded-full h-2">
-                                        <div class="bg-[#1a4031] h-2 rounded-full" style="width: 70%"></div>
-                                    </div>
-                                    <div class="grid grid-cols-2 gap-4 mt-4">
-                                        <div class="bg-gray-50 p-2 rounded-lg text-center">
-                                            <p class="text-[10px] text-gray-500 uppercase">Played</p>
-                                            <p class="font-bold text-gray-800">14</p>
-                                        </div>
-                                        <div class="bg-gray-50 p-2 rounded-lg text-center">
-                                            <p class="text-[10px] text-gray-500 uppercase">Remaining</p>
-                                            <p class="font-bold text-gray-800">6</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Quick Actions -->
-                                <div class="grid grid-cols-2 gap-3">
-                                    <div class="bg-green-50 p-4 rounded-xl flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-green-100">
-                                        <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center text-[#1a4031]">
-                                            <i data-lucide="calendar" class="w-4 h-4"></i>
-                                        </div>
-                                        <span class="text-xs font-bold text-[#1a4031]">Schedule</span>
-                                    </div>
-                                    <div class="bg-green-50 p-4 rounded-xl flex flex-col items-center justify-center gap-2 cursor-pointer hover:bg-green-100">
-                                        <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center text-[#1a4031]">
-                                            <i data-lucide="users" class="w-4 h-4"></i>
-                                        </div>
-                                        <span class="text-xs font-bold text-[#1a4031]">Roster</span>
-                                    </div>
-                                </div>
-
-                                <!-- Recent -->
-                                <div>
-                                    <h4 class="font-bold text-gray-800 text-sm mb-2 px-1">Recent Activity</h4>
-                                    <div class="bg-white border border-gray-100 rounded-xl p-3 flex items-center gap-3">
-                                        <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold">NP</div>
-                                        <div>
-                                            <p class="text-xs font-bold text-gray-800">New Player Added</p>
-                                            <p class="text-[10px] text-gray-500">John Doe joined Team Alpha</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+    <section class="proof-strip" aria-label="Demo-first product promises">
+      <div class="container proof-grid">
+        <div class="proof-item">
+          <div class="proof-number">Try first</div>
+          <div class="proof-label">Use working product examples before booking any conversation</div>
         </div>
+        <div class="proof-item">
+          <div class="proof-number">Live pages</div>
+          <div class="proof-label">Preview schedules, standings, rosters, news, and public org pages</div>
+        </div>
+        <div class="proof-item">
+          <div class="proof-number">Setup flow</div>
+          <div class="proof-label">Create a sample sport, teams, events, and registration path</div>
+        </div>
+        <div class="proof-item">
+          <div class="proof-number">Money rails</div>
+          <div class="proof-label">Show registration, shop, and payout concepts without exposing real payments</div>
+        </div>
+      </div>
     </section>
 
-    <!-- Laptop Section -->
-    <section class="hero-gradient relative py-24 overflow-hidden scroll-reveal">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
-                <!-- Laptop Mockup (Left side on desktop) -->
-                <div class="lg:w-1/2 flex justify-center">
-                    <div class="relative float-animation">
-                        <img src="laptop-mockup.jpg" alt="Leag.app Dashboard Interface" class="w-full max-w-lg h-auto block drop-shadow-2xl rounded-lg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-                        <div class="hidden w-full max-w-lg aspect-video bg-white/10 rounded-xl flex items-center justify-center text-white/50 flex-col gap-4 border border-white/20">
-                            <i data-lucide="image" class="w-12 h-12 opacity-50"></i>
-                            <p>Place <strong>laptop-mockup.jpg</strong> in folder</p>
-                        </div>
-                        <!-- Shadow under laptop -->
-                        <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 w-[80%] h-12 bg-black/30 blur-2xl rounded-full -z-10"></div>
-                    </div>
-                </div>
-
-                <!-- Text Content (Right side on desktop) -->
-                <div class="lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left">
-                    <div class="inline-block py-1 px-3 rounded-full bg-white/10 border border-white/20 text-white text-sm font-semibold mb-6">Powerful Dashboard</div>
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white">Command center for your league.</h2>
-                    <p class="text-lg text-gray-200 mb-8 leading-relaxed max-w-lg">
-                        Get a bird's eye view of your entire organization. Track teams, manage rosters, monitor finances, and generate reports — all from one intuitive dashboard.
-                    </p>
-                    <ul class="space-y-4 text-left">
-                        <li class="flex items-center gap-3 text-gray-200">
-                            <div class="w-6 h-6 rounded-full bg-green-400/20 flex items-center justify-center flex-shrink-0">
-                                <i data-lucide="check" class="w-4 h-4 text-green-300"></i>
-                            </div>
-                            <span>Real-time analytics and insights</span>
-                        </li>
-                        <li class="flex items-center gap-3 text-gray-200">
-                            <div class="w-6 h-6 rounded-full bg-green-400/20 flex items-center justify-center flex-shrink-0">
-                                <i data-lucide="check" class="w-4 h-4 text-green-300"></i>
-                            </div>
-                            <span>Automated scheduling and brackets</span>
-                        </li>
-                        <li class="flex items-center gap-3 text-gray-200">
-                            <div class="w-6 h-6 rounded-full bg-green-400/20 flex items-center justify-center flex-shrink-0">
-                                <i data-lucide="check" class="w-4 h-4 text-green-300"></i>
-                            </div>
-                            <span>Integrated payment processing</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+    <section class="section" id="playground" aria-labelledby="playground-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="section-kicker">Interactive demo</div>
+            <h2 id="playground-title">Test the building blocks before you talk to anyone.</h2>
+          </div>
+          <p>Pick a sport, change the league size, and publish a sample schedule. The preview updates like a lightweight product playground instead of a static sales page.</p>
         </div>
 
-        <!-- Decorative Elements -->
-        <div class="absolute top-1/4 right-10 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
-        <div class="absolute bottom-1/4 left-10 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
+        <div class="demo-layout reveal">
+          <aside class="demo-controls" aria-label="Demo controls">
+            <div class="demo-group">
+              <div class="demo-label">Sport template</div>
+              <div class="demo-choice-row">
+                <button class="demo-chip is-active" type="button" data-demo-sport="softball">Softball</button>
+                <button class="demo-chip" type="button" data-demo-sport="basketball">Basketball</button>
+                <button class="demo-chip" type="button" data-demo-sport="soccer">Soccer</button>
+              </div>
+            </div>
+            <div class="demo-group">
+              <div class="demo-label">League size</div>
+              <div class="demo-choice-row">
+                <button class="demo-chip" type="button" data-demo-teams="6">6 teams</button>
+                <button class="demo-chip is-active" type="button" data-demo-teams="8">8 teams</button>
+                <button class="demo-chip" type="button" data-demo-teams="12">12 teams</button>
+              </div>
+            </div>
+            <div class="demo-status" aria-live="polite">
+              <strong id="demo-status-title">Softball league loaded</strong>
+              <span id="demo-status-copy">Eight teams, two fields, registration open, schedule draft ready.</span>
+            </div>
+            <button class="btn btn-primary" type="button" id="demo-generate">Publish sample schedule</button>
+          </aside>
+
+          <article class="demo-stage" aria-label="Live demo preview">
+            <div class="demo-stage-bar">
+              <strong id="demo-org">Miami County Softball</strong>
+              <span id="demo-url">mcsl.leag.app/spring-2026</span>
+            </div>
+            <div class="demo-output">
+              <div class="demo-public">
+                <span class="status-tag" id="demo-status-tag">Registration open</span>
+                <h3 id="demo-headline">Spring softball season</h3>
+                <p id="demo-summary">A public league page with standings, upcoming games, roster links, and a registration path for families.</p>
+                <div class="demo-mini-list">
+                  <div><b>Next</b><span id="demo-next">Firecrackers vs Pitch Perfect</span><b>5:30</b></div>
+                  <div><b>Open</b><span id="demo-open">12U tryout registration</span><b>18 spots</b></div>
+                  <div><b>Due</b><span id="demo-due">Team store closes</span><b>Jun 28</b></div>
+                </div>
+              </div>
+              <div class="demo-admin">
+                <div class="demo-metric-row">
+                  <div><strong id="demo-team-count">8</strong><span>teams</span></div>
+                  <div><strong id="demo-game-count">28</strong><span>games</span></div>
+                  <div><strong id="demo-fee">$142</strong><span>avg fee</span></div>
+                </div>
+                <div>
+                  <div class="demo-task"><span class="demo-check"></span><span>Public page generated</span><span class="mono">done</span></div>
+                  <div class="demo-task"><span class="demo-check"></span><span id="demo-task-two">Schedule draft balanced by field</span><span class="mono">done</span></div>
+                  <div class="demo-task"><span class="demo-check"></span><span>Registration link attached</span><span class="mono">live</span></div>
+                  <div class="demo-task"><span class="demo-check"></span><span>Parent notifications queued</span><span class="mono">ready</span></div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <!-- Custom Shop Section -->
-    <section class="py-24 bg-white relative overflow-hidden scroll-reveal">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-16">
-                <!-- Text Content (Left side on desktop, bottom on mobile) -->
-                <div class="lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left">
-                    <div class="inline-block py-1 px-3 rounded-full bg-green-100 text-[#1a4031] text-sm font-semibold mb-6">E-Commerce Built In</div>
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Your brand, your shop.</h2>
-                    <p class="text-lg text-gray-600 mb-8 leading-relaxed max-w-lg">
-                        Open your own custom team store and sell branded gear and swag — all in your team's colors. From jerseys to hoodies, give fans and players a one-stop shop for official merchandise.
-                    </p>
-                    <ul class="space-y-4 text-left">
-                        <li class="flex items-center gap-3 text-gray-700">
-                            <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
-                                <i data-lucide="check" class="w-4 h-4 text-[#1a4031]"></i>
-                            </div>
-                            <span>Custom team colors and branding</span>
-                        </li>
-                        <li class="flex items-center gap-3 text-gray-700">
-                            <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
-                                <i data-lucide="check" class="w-4 h-4 text-[#1a4031]"></i>
-                            </div>
-                            <span>Jerseys, apparel, and accessories</span>
-                        </li>
-                        <li class="flex items-center gap-3 text-gray-700">
-                            <div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
-                                <i data-lucide="check" class="w-4 h-4 text-[#1a4031]"></i>
-                            </div>
-                            <span>Integrated checkout and fulfillment</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Shop Mockup (Right side on desktop, top on mobile) -->                
-                    <img src="shop.svg" alt="Custom Team Shop Interface" class="lg:w-1/2 w-full max-w-lg h-auto block drop-shadow-2xl rounded-lg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-            </div>
+    <section class="section" id="platform" aria-labelledby="platform-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="section-kicker">Public league sites</div>
+            <h2 id="platform-title">Each organization gets a site that already knows how the season works.</h2>
+          </div>
+          <p>LEAG starts with branded public pages for clubs and leagues, then connects the operational pieces behind them: teams, games, rosters, registration, payments, news, and shop inventory.</p>
         </div>
+
+        <div class="platform-layout">
+          <article class="public-site-preview reveal" aria-label="Tenant public site mockup">
+            <div class="window-bar">
+              <img class="brand-mark" src="brand/leag-icon.svg" alt="" aria-hidden="true">
+              <strong>Orlando Diamonds</strong>
+              <span>Powered by LEAG</span>
+            </div>
+            <div class="tenant-hero">
+              <span class="tenant-badge">Fastpitch / Orlando, FL</span>
+              <h3 class="tenant-title">Diamonds 16U open tryouts</h3>
+              <div class="tenant-meta">July 8 / South Orange Field 2 / registration required</div>
+            </div>
+            <div class="tenant-nav" aria-hidden="true">
+              <span class="active">Home</span>
+              <span>Teams</span>
+              <span>Schedule</span>
+              <span>News</span>
+              <span>About</span>
+            </div>
+          </article>
+
+          <div class="workflow-list">
+            <article class="workflow-item reveal">
+              <div class="workflow-index">01</div>
+              <div>
+                <h3>Publish the season</h3>
+                <p>Launch a branded home page with upcoming games, tryouts, standings, news, and team cards tied to structured league data.</p>
+              </div>
+            </article>
+            <article class="workflow-item reveal">
+              <div class="workflow-index">02</div>
+              <div>
+                <h3>Turn signups into rosters</h3>
+                <p>Collect registrations and fees, route players to teams, and keep families connected to the schedule without spreadsheet handoffs.</p>
+              </div>
+            </article>
+            <article class="workflow-item reveal">
+              <div class="workflow-index">03</div>
+              <div>
+                <h3>Keep the public record current</h3>
+                <p>Scores, standings, calendar updates, and team pages update from the same operating data the commissioner and coaches use.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Features Grid -->
-    <section id="features" class="py-20 bg-white scroll-reveal">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-gray-900 sm:text-4xl mb-4">Everything you need to run your league</h2>
-                <p class="text-lg text-gray-600 max-w-2xl mx-auto">From registration to the championship game, Leag handles the logistics so you can focus on the sport.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Feature 1 -->
-                <div class="p-6 bg-gray-50 rounded-2xl hover:bg-green-50 transition duration-300 border border-transparent hover:border-green-100 text-center">
-                    <div class="w-12 h-12 bg-[#1a4031] rounded-xl flex items-center justify-center mb-6 text-white shadow-lg shadow-green-900/10 mx-auto">
-                        <i data-lucide="layout" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Team Overview</h3>
-                    <p class="text-gray-600">Track all active teams, rosters, and eligibility in one centralized dashboard.</p>
-                </div>
-
-                <!-- Feature 2 -->
-                <div class="p-6 bg-gray-50 rounded-2xl hover:bg-green-50 transition duration-300 border border-transparent hover:border-green-100 text-center">
-                    <div class="w-12 h-12 bg-[#1a4031] rounded-xl flex items-center justify-center mb-6 text-white shadow-lg shadow-green-900/10 mx-auto">
-                        <i data-lucide="calendar-check" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Smart Scheduling</h3>
-                    <p class="text-gray-600">Auto-generate balanced schedules and bracket tournaments with ease.</p>
-                </div>
-
-                <!-- Feature 3 -->
-                <div class="p-6 bg-gray-50 rounded-2xl hover:bg-green-50 transition duration-300 border border-transparent hover:border-green-100 text-center">
-                    <div class="w-12 h-12 bg-[#1a4031] rounded-xl flex items-center justify-center mb-6 text-white shadow-lg shadow-green-900/10 mx-auto">
-                        <i data-lucide="wallet" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Financials</h3>
-                    <p class="text-gray-600">Collect league fees, track revenue, and manage expenses seamlessly.</p>
-                </div>
-
-                <!-- Feature 4 -->
-                <div class="p-6 bg-gray-50 rounded-2xl hover:bg-green-50 transition duration-300 border border-transparent hover:border-green-100 text-center">
-                    <div class="w-12 h-12 bg-[#1a4031] rounded-xl flex items-center justify-center mb-6 text-white shadow-lg shadow-green-900/10 mx-auto">
-                        <i data-lucide="trending-up" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Live Stats</h3>
-                    <p class="text-gray-600">Real-time score updates, player statistics, and automated standings.</p>
-                </div>
-            </div>
+    <section class="section" id="surfaces" aria-labelledby="surfaces-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="section-kicker">Product surfaces</div>
+            <h2 id="surfaces-title">Schedules, tables, rosters, and stats are first-class screens.</h2>
+          </div>
+          <p>The design bundle pushes LEAG toward sports-native interfaces: scorebug urgency where games are live, calm editorial pages for programs, and dense tools for the people running the season.</p>
         </div>
+
+        <div class="surface-board">
+          <article class="board-main reveal">
+            <div class="board-head">
+              <h3>June schedule</h3>
+              <span>Filter: 16U / home games</span>
+            </div>
+            <div class="calendar-grid" aria-hidden="true">
+              <span>1</span><span>2</span><span class="has-game">3</span><span>4</span><span class="final has-game">5</span><span>6</span><span>7</span>
+              <span class="has-game">8</span><span>9</span><span class="final has-game">10</span><span>11</span><span>12</span><span>13</span><span>14</span>
+              <span>15</span><span class="has-game">16</span><span class="live has-game">17</span><span>18</span><span class="has-game">19</span><span>20</span><span>21</span>
+              <span>22</span><span>23</span><span class="has-game">24</span><span>25</span><span>26</span><span>27</span><span>28</span>
+            </div>
+            <table class="list-table">
+              <thead>
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Matchup</th>
+                  <th scope="col">Venue</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="mono">Jun 17</td>
+                  <td>Firecrackers vs Pitch Perfect</td>
+                  <td>Field 1</td>
+                  <td><span class="status-tag red">Live</span></td>
+                </tr>
+                <tr>
+                  <td class="mono">Jun 19</td>
+                  <td>Sparks vs Pink Panthers</td>
+                  <td>Field 4</td>
+                  <td><span class="status-tag">Scheduled</span></td>
+                </tr>
+                <tr>
+                  <td class="mono">Jun 24</td>
+                  <td>Semifinal bracket</td>
+                  <td>Main complex</td>
+                  <td><span class="status-tag">Open</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+
+          <aside class="board-side reveal" aria-label="Featured roster">
+            <div class="board-head">
+              <h3>Featured roster</h3>
+              <span>Firecrackers</span>
+            </div>
+            <div class="roster-list">
+              <div class="roster-row">
+                <span class="player-num">04</span>
+                <span>Hadley Cross <span class="muted">/ P</span></span>
+                <span class="mono">.451</span>
+              </div>
+              <div class="roster-row">
+                <span class="player-num">11</span>
+                <span>Bree Walden <span class="muted">/ C</span></span>
+                <span class="mono">.398</span>
+              </div>
+              <div class="roster-row">
+                <span class="player-num">18</span>
+                <span>Elle Knox <span class="muted">/ SS</span></span>
+                <span class="mono">2.18</span>
+              </div>
+              <div class="roster-row">
+                <span class="player-num">27</span>
+                <span>Maya Ramos <span class="muted">/ OF</span></span>
+                <span class="mono">17</span>
+              </div>
+            </div>
+            <div class="stat-stack">
+              <div><strong>12</strong><span>wins</span></div>
+              <div><strong>47</strong><span>runs</span></div>
+              <div><strong>8</strong><span>games left</span></div>
+            </div>
+          </aside>
+        </div>
+      </div>
     </section>
 
-    <!-- CTA Section -->
-    <section id="contact" class="py-20 bg-gray-900 text-white">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold mb-6">Ready to elevate your game?</h2>
-            <p class="text-gray-400 mb-10 text-lg">Join the waitlist or contact us today to set up a demo for your organization.</p>
-            
-            <div class="flex flex-col md:flex-row justify-center items-center w-full max-w-3xl mx-auto">
-                <!-- Email Item (Right aligned on desktop to push towards center) -->
-                <div class="flex-1 flex flex-col sm:flex-row justify-center md:justify-end items-center gap-3 sm:gap-4 w-full md:w-auto mb-8 md:mb-0">
-                    <div class="w-12 h-12 rounded-full bg-[#1a4031] flex items-center justify-center flex-shrink-0">
-                        <i data-lucide="mail" class="w-6 h-6"></i>
-                    </div>
-                    <div class="text-center sm:text-left">
-                        <p class="text-sm text-gray-400">Email Us</p>
-                        <a href="https://mail.google.com/mail/?view=cm&to=contact@leag.app&su=Demo%20Request" class="font-semibold text-lg hover:text-green-400 transition">contact@leag.app</a>
-                    </div>
-                </div>
-                
-                <!-- Divider -->
-                <div class="h-px w-12 md:h-12 md:w-px bg-gray-700 hidden md:block mx-8 flex-shrink-0"></div>
-                
-                <!-- Phone Item (Left aligned on desktop to push towards center) -->
-                <div class="flex-1 flex flex-col sm:flex-row justify-center md:justify-start items-center gap-3 sm:gap-4 w-full md:w-auto">
-                    <div class="w-12 h-12 rounded-full bg-[#1a4031] flex items-center justify-center flex-shrink-0">
-                        <i data-lucide="phone" class="w-6 h-6"></i>
-                    </div>
-                    <div class="text-center sm:text-left">
-                        <p class="text-sm text-gray-400">Call Us</p>
-                        <a href="tel:4077774283" class="font-semibold text-lg hover:text-green-400 transition">407-777-4283</a>
-                    </div>
-                </div>
-            </div>
+    <section class="section" id="marketplace" aria-labelledby="marketplace-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="section-kicker">Marketplace-ready</div>
+            <h2 id="marketplace-title">The same rails can power public discovery for rec sports.</h2>
+          </div>
+          <p>The roadmap keeps premium organization sites intact while making room for a broader destination where players join, organizers run, and venues list availability.</p>
         </div>
+
+        <div class="market-grid">
+          <article class="market-card market-card-player reveal">
+            <div class="market-label">Players</div>
+            <h3>Find a game that fits tonight.</h3>
+            <p>Search by sport, location, level, age group, price, and start time. Pay in-app and get roster, venue, and schedule updates.</p>
+            <div class="market-demo player-search">
+              <div class="player-search-row"><span>Near Irvine</span><strong>6 mi</strong></div>
+              <div class="player-search-row"><span>Pickup basketball</span><strong>7:30 PM</strong></div>
+              <div class="player-search-row"><span>Adult soccer league</span><strong>3 spots</strong></div>
+            </div>
+          </article>
+
+          <article class="market-card market-card-organizer reveal">
+            <div class="market-label">Organizers</div>
+            <h3>Run leagues without rebuilding the admin stack.</h3>
+            <p>Create events, collect money, manage rosters, publish standings, message participants, and keep a reliable public page live.</p>
+            <div class="market-demo organizer-board">
+              <div class="organizer-lane">
+                <header><span>Intake</span><b>42 paid</b></header>
+                <div>Approve 12U registrations and route waitlist players.</div>
+              </div>
+              <div class="organizer-lane">
+                <header><span>Schedule</span><b>18 games</b></header>
+                <div>Resolve field conflicts before publishing to families.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="market-card market-card-venue reveal">
+            <div class="market-label">Venues</div>
+            <h3>Turn open slots into booked inventory.</h3>
+            <p>List available fields, courts, cages, and gym time, then connect bookings to schedules and payouts.</p>
+            <div class="market-demo venue-slots">
+              <span class="booked"><b>Field 1</b>5:30 booked</span>
+              <span><b>Field 2</b>6:45 open</span>
+              <span><b>Cage B</b>4:00 open</span>
+              <span><b>Gym A</b>7:15 hold</span>
+              <span class="booked"><b>Court 3</b>8:00 booked</span>
+              <span><b>Lights</b>permit ok</span>
+            </div>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-950 text-gray-500 py-12 border-t border-gray-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="flex gap-6 text-sm">
-                <a href="#" class="hover:text-white transition">Privacy Policy</a>
-                <a href="#" class="hover:text-white transition">Terms of Service</a>
-            </div>
-
-            <div class="text-sm flex items-center gap-1">
-                &copy; <span id="current-year"></span> <img src="leag-logo-shadow.svg" alt="LEAG" class="h-20 filter-green inline-block align-middle"> All rights reserved.
-            </div>
+    <section class="section" id="operations" aria-labelledby="operations-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="section-kicker">Back office</div>
+            <h2 id="operations-title">Commissioners get a control room, not another inbox.</h2>
+          </div>
+          <p>Behind every public site is a manager view for approvals, scheduling, payments, team setup, field assignments, and reporting.</p>
         </div>
-    </footer>
 
-    <script>
-        // Set dynamic year
-        document.getElementById('current-year').textContent = new Date().getFullYear();
+        <div class="ops-layout">
+          <article class="ops-card reveal">
+            <div class="ops-head">
+              <h3>Season pipeline</h3>
+              <span>Commissioner view</span>
+            </div>
+            <div class="pipeline">
+              <div class="pipeline-row">
+                <div class="pipeline-step">1</div>
+                <div>
+                  <h4>Open registration</h4>
+                  <p>Collect waivers, player data, and fees.</p>
+                </div>
+                <span class="status-tag">Live</span>
+              </div>
+              <div class="pipeline-row">
+                <div class="pipeline-step">2</div>
+                <div>
+                  <h4>Build teams</h4>
+                  <p>Approve players and assign coaches.</p>
+                </div>
+                <span class="status-tag">68%</span>
+              </div>
+              <div class="pipeline-row">
+                <div class="pipeline-step">3</div>
+                <div>
+                  <h4>Publish schedule</h4>
+                  <p>Lock fields, times, and notifications.</p>
+                </div>
+                <span class="status-tag">Next</span>
+              </div>
+              <div class="pipeline-row">
+                <div class="pipeline-step">4</div>
+                <div>
+                  <h4>Run the season</h4>
+                  <p>Scores, standings, payouts, and shop orders.</p>
+                </div>
+                <span class="status-tag">Queued</span>
+              </div>
+            </div>
+          </article>
 
-        // Initialize Lucide Icons
-        lucide.createIcons();
+          <article class="ops-card reveal">
+            <div class="ops-head">
+              <h3>Money and activity</h3>
+              <span>Last 30 days</span>
+            </div>
+            <div class="money-board">
+              <div class="money-total">
+                <div>
+                  <strong>$14.5k</strong>
+                  <span>gross transaction volume tracked for the organization</span>
+                </div>
+                <span class="status-tag">$2.9k payout ready</span>
+              </div>
+              <div class="bar-chart">
+                <div class="bar-row">
+                  <span>Registrations</span>
+                  <span class="bar-track"><span class="bar-fill" style="width:82%"></span></span>
+                  <span class="mono">$9,840</span>
+                </div>
+                <div class="bar-row">
+                  <span>Merchandise</span>
+                  <span class="bar-track"><span class="bar-fill gold" style="width:46%"></span></span>
+                  <span class="mono">$3,120</span>
+                </div>
+                <div class="bar-row">
+                  <span>Clinics</span>
+                  <span class="bar-track"><span class="bar-fill blue" style="width:34%"></span></span>
+                  <span class="mono">$1,540</span>
+                </div>
+                <div class="bar-row">
+                  <span>Open invoices</span>
+                  <span class="bar-track"><span class="bar-fill" style="width:18%"></span></span>
+                  <span class="mono">$860</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
 
-        // Mobile Menu Toggle
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
+    <section class="cta-section" id="contact" aria-labelledby="contact-title">
+      <div class="container cta-grid">
+        <div class="reveal">
+          <h2 id="contact-title">Try the product path first.</h2>
+          <p>Use the playground above, inspect the example league surfaces, then reach out with specific gaps or organization needs.</p>
+        </div>
+        <div class="cta-actions reveal">
+          <a class="btn btn-primary" href="#playground">Open demo playground</a>
+          <a class="btn btn-secondary" href="mailto:contact@leag.app?subject=LEAG%20question">Ask a question</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <a class="brand" href="#" aria-label="LEAG home">
+        <img class="brand-mark" src="brand/leag-icon.svg" alt="" aria-hidden="true">
+        <span class="brand-wordmark" aria-hidden="true"></span>
+      </a>
+      <div>Copyright <span id="current-year"></span> Stryder Labs LLC. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="mailto:contact@leag.app?subject=LEAG%20privacy">Privacy</a>
+        <a href="mailto:contact@leag.app?subject=LEAG%20terms">Terms</a>
+        <a href="mailto:contact@leag.app">contact@leag.app</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const year = document.getElementById("current-year");
+    if (year) {
+      year.textContent = new Date().getFullYear();
+    }
+
+    const menuButton = document.getElementById("menu-button");
+    const nav = document.getElementById("site-nav");
+
+    if (menuButton && nav) {
+      menuButton.addEventListener("click", () => {
+        const open = nav.classList.toggle("is-open");
+        menuButton.setAttribute("aria-expanded", String(open));
+        menuButton.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
+      });
+
+      nav.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          nav.classList.remove("is-open");
+          menuButton.setAttribute("aria-expanded", "false");
+          menuButton.setAttribute("aria-label", "Open navigation");
         });
-        
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                menu.classList.add('hidden'); // close mobile menu on click
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
+      });
+    }
+
+    const demoState = {
+      sport: "softball",
+      teams: 8,
+      generated: false
+    };
+
+    const demoCopy = {
+      softball: {
+        org: "Miami County Softball",
+        url: "mcsl.leag.app/spring-2026",
+        title: "Softball league loaded",
+        copy: "Eight teams, two fields, registration open, schedule draft ready.",
+        headline: "Spring softball season",
+        summary: "A public league page with standings, upcoming games, roster links, and a registration path for families.",
+        next: "Firecrackers vs Pitch Perfect",
+        open: "12U tryout registration",
+        due: "Team store closes",
+        fee: "$142",
+        task: "Schedule draft balanced by field"
+      },
+      basketball: {
+        org: "South County Hoops",
+        url: "southcounty.leag.app/winter",
+        title: "Basketball league loaded",
+        copy: "Gym slots, divisions, officials, and waitlists are ready to review.",
+        headline: "Winter basketball league",
+        summary: "A public league page with court schedules, team standings, clinic signups, and division pages.",
+        next: "Falcons vs Breakers",
+        open: "JV skills clinic",
+        due: "Officials assignments",
+        fee: "$118",
+        task: "Court schedule balanced by division"
+      },
+      soccer: {
+        org: "Coastal Rec Soccer",
+        url: "coastalrec.leag.app/fall",
+        title: "Soccer league loaded",
+        copy: "Age groups, field permits, coach notes, and registration rules are staged.",
+        headline: "Fall soccer signups",
+        summary: "A public league page with field maps, age-group registration, standings, and match updates.",
+        next: "Harbor United vs Mesa FC",
+        open: "U10 player registration",
+        due: "Field permits review",
+        fee: "$96",
+        task: "Pitch schedule balanced by age group"
+      }
+    };
+
+    const demoEls = {
+      org: document.getElementById("demo-org"),
+      url: document.getElementById("demo-url"),
+      statusTag: document.getElementById("demo-status-tag"),
+      statusTitle: document.getElementById("demo-status-title"),
+      statusCopy: document.getElementById("demo-status-copy"),
+      headline: document.getElementById("demo-headline"),
+      summary: document.getElementById("demo-summary"),
+      next: document.getElementById("demo-next"),
+      open: document.getElementById("demo-open"),
+      due: document.getElementById("demo-due"),
+      teamCount: document.getElementById("demo-team-count"),
+      gameCount: document.getElementById("demo-game-count"),
+      fee: document.getElementById("demo-fee"),
+      taskTwo: document.getElementById("demo-task-two")
+    };
+
+    const updateDemo = () => {
+      const copy = demoCopy[demoState.sport];
+      const games = Math.round((demoState.teams * (demoState.teams - 1)) / 2);
+      const statusPrefix = demoState.generated ? "Schedule published" : copy.title;
+      const statusDetail = demoState.generated
+        ? `${demoState.teams} teams, ${games} games, registration links, and notifications are live in the preview.`
+        : copy.copy.replace("Eight", String(demoState.teams));
+
+      demoEls.org.textContent = copy.org;
+      demoEls.url.textContent = copy.url;
+      demoEls.statusTag.textContent = demoState.generated ? "Schedule published" : "Registration open";
+      demoEls.statusTitle.textContent = statusPrefix;
+      demoEls.statusCopy.textContent = statusDetail;
+      demoEls.headline.textContent = copy.headline;
+      demoEls.summary.textContent = copy.summary;
+      demoEls.next.textContent = copy.next;
+      demoEls.open.textContent = copy.open;
+      demoEls.due.textContent = copy.due;
+      demoEls.teamCount.textContent = demoState.teams;
+      demoEls.gameCount.textContent = games;
+      demoEls.fee.textContent = copy.fee;
+      demoEls.taskTwo.textContent = demoState.generated ? "Published schedule balanced by facility" : copy.task;
+
+      document.querySelectorAll("[data-demo-sport]").forEach((button) => {
+        button.classList.toggle("is-active", button.dataset.demoSport === demoState.sport);
+      });
+      document.querySelectorAll("[data-demo-teams]").forEach((button) => {
+        button.classList.toggle("is-active", Number(button.dataset.demoTeams) === demoState.teams);
+      });
+    };
+
+    document.querySelectorAll("[data-demo-sport]").forEach((button) => {
+      button.addEventListener("click", () => {
+        demoState.sport = button.dataset.demoSport;
+        demoState.generated = false;
+        updateDemo();
+      });
+    });
+
+    document.querySelectorAll("[data-demo-teams]").forEach((button) => {
+      button.addEventListener("click", () => {
+        demoState.teams = Number(button.dataset.demoTeams);
+        demoState.generated = false;
+        updateDemo();
+      });
+    });
+
+    const demoGenerate = document.getElementById("demo-generate");
+    if (demoGenerate) {
+      demoGenerate.addEventListener("click", () => {
+        demoState.generated = true;
+        updateDemo();
+      });
+    }
+
+    if (demoEls.org) {
+      updateDemo();
+    }
+
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!prefersReduced && "IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
         });
+      }, { threshold: 0.14 });
 
-        // Scroll Reveal Animation
-        const revealElements = document.querySelectorAll('.scroll-reveal');
-
-        const revealOnScroll = () => {
-            revealElements.forEach(el => {
-                const elementTop = el.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-
-                if (elementTop < windowHeight - 100) {
-                    el.classList.add('revealed');
-                }
-            });
-        };
-
-        // Run on load and scroll
-        window.addEventListener('scroll', revealOnScroll);
-        window.addEventListener('load', revealOnScroll);
-        revealOnScroll(); // Initial check
-    </script>
+      document.querySelectorAll(".reveal").forEach((item) => observer.observe(item));
+    } else {
+      document.querySelectorAll(".reveal").forEach((item) => item.classList.add("is-visible"));
+    }
+  </script>
 </body>
 </html>
-
-
-
