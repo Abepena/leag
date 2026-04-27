@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LEAG | Sports League Operations Platform</title>
-  <meta name="description" content="LEAG gives youth sports organizations public sites, registration, scheduling, payments, standings, commerce, and operating tools in one platform.">
+  <title>LEAG | Try a Sample Youth Sports Season</title>
+  <meta name="description" content="LEAG helps youth sports organizers launch public pages, take signups, build teams, publish schedules, and keep families updated.">
   <link rel="icon" type="image/svg+xml" href="brand/leag-icon.svg">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://leag.app/">
-  <meta property="og:title" content="LEAG | Sports League Operations Platform">
-  <meta property="og:description" content="Public sites and operating tools for clubs, leagues, tournaments, clinics, and rec sports events.">
+  <meta property="og:title" content="LEAG | Try a Sample Youth Sports Season">
+  <meta property="og:description" content="Try sample demos for league sites, signups, teams, schedules, and family updates.">
   <meta property="og:image" content="https://leag.app/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="LEAG | Sports League Operations Platform">
-  <meta name="twitter:description" content="Public sites and operating tools for clubs, leagues, tournaments, clinics, and rec sports events.">
+  <meta name="twitter:title" content="LEAG | Try a Sample Youth Sports Season">
+  <meta name="twitter:description" content="Try sample demos for league sites, signups, teams, schedules, and family updates.">
   <meta name="twitter:image" content="https://leag.app/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -251,9 +251,9 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 28px;
+      gap: 18px;
       color: var(--muted);
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
     }
 
@@ -586,14 +586,14 @@
 
     .score-row {
       display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap: 18px;
+      grid-template-columns: minmax(160px, 0.95fr) minmax(108px, auto) minmax(205px, 1.1fr);
+      gap: 14px;
       align-items: end;
     }
 
     .team-name {
       font-family: var(--font-display);
-      font-size: 58px;
+      font-size: clamp(34px, 3.4vw, 44px);
       font-style: italic;
       line-height: 0.9;
       letter-spacing: 0;
@@ -605,6 +605,7 @@
 
     .team-name.right {
       color: var(--red);
+      font-size: clamp(30px, 2.8vw, 42px);
       text-shadow: 0 0 42px rgba(216, 58, 72, 0.34);
     }
 
@@ -626,7 +627,7 @@
     }
 
     .score-number span {
-      font-size: 112px;
+      font-size: clamp(70px, 6.5vw, 88px);
     }
 
     .score-number em {
@@ -817,6 +818,12 @@
       font-weight: 600;
     }
 
+    .demo-reset-note {
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
     .demo-layout {
       display: grid;
       grid-template-columns: minmax(300px, 0.72fr) minmax(0, 1.28fr);
@@ -844,13 +851,35 @@
       gap: 10px;
     }
 
+    .sample-field {
+      display: grid;
+      gap: 6px;
+    }
+
     .demo-group label,
-    .demo-label {
+    .demo-label,
+    .sample-field label {
       color: var(--green-hi);
       font-family: var(--font-mono);
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
+    }
+
+    .sample-input,
+    .sample-select {
+      width: 100%;
+      min-height: 42px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--ink);
+      font: inherit;
+    }
+
+    .sample-input::placeholder {
+      color: var(--quiet);
     }
 
     .demo-choice-row {
@@ -972,6 +1001,55 @@
       font-size: 11px;
     }
 
+    .demo-schedule {
+      display: none;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .demo-stage.is-published .demo-schedule {
+      display: grid;
+    }
+
+    .schedule-card,
+    .parent-row,
+    .field-card,
+    .player-card,
+    .registration-row,
+    .week-card {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .schedule-card {
+      display: grid;
+      grid-template-columns: 70px 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .schedule-card strong,
+    .field-card strong,
+    .player-card strong,
+    .registration-row strong,
+    .week-card strong {
+      color: var(--ink);
+    }
+
+    .schedule-card span:first-child,
+    .field-card span,
+    .player-card span,
+    .registration-row span,
+    .week-card span {
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
     .demo-admin {
       padding: 20px;
       display: grid;
@@ -1029,6 +1107,10 @@
       height: 16px;
       border-radius: 4px;
       background: var(--green);
+    }
+
+    .demo-check.pending {
+      background: rgba(255, 255, 255, 0.16);
     }
 
     .platform-layout {
@@ -1466,6 +1548,15 @@
       color: var(--ink);
     }
 
+    .player-search-row > div,
+    .registration-row > div:first-child,
+    .parent-row > div,
+    .week-card > div {
+      display: grid;
+      gap: 4px;
+      min-width: 0;
+    }
+
     .organizer-board {
       display: grid;
       gap: 10px;
@@ -1525,6 +1616,234 @@
     .venue-slots .booked {
       background: var(--green-soft);
       border-color: rgba(98, 183, 124, 0.28);
+    }
+
+    .market-controls {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .market-action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .tiny-btn {
+      min-height: 34px;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.035);
+      color: var(--ink);
+      font: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+    }
+
+    .tiny-btn:hover,
+    .tiny-btn.is-active {
+      border-color: rgba(98, 183, 124, 0.45);
+      background: var(--green-soft);
+    }
+
+    .tiny-btn:active {
+      transform: translateY(1px) scale(0.99);
+    }
+
+    .registration-list,
+    .player-pool,
+    .team-box,
+    .conflict-list,
+    .field-grid,
+    .week-list,
+    .parent-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .registration-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 10px;
+    }
+
+    .registration-actions,
+    .field-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .builder-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .player-card {
+      display: grid;
+      gap: 4px;
+      padding: 10px;
+      color: var(--muted);
+      cursor: grab;
+      font: inherit;
+      text-align: left;
+    }
+
+    .player-card:active {
+      cursor: grabbing;
+    }
+
+    .team-switcher {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .field-grid {
+      grid-template-columns: repeat(2, 1fr);
+      margin-top: 12px;
+    }
+
+    .field-card {
+      display: grid;
+      gap: 6px;
+      padding: 12px;
+      color: var(--muted);
+    }
+
+    .field-card.booked {
+      background: rgba(216, 58, 72, 0.12);
+      border-color: rgba(216, 58, 72, 0.3);
+    }
+
+    .field-card.open {
+      background: var(--green-soft);
+      border-color: rgba(98, 183, 124, 0.32);
+    }
+
+    .field-card.hold {
+      background: rgba(201, 162, 75, 0.12);
+      border-color: rgba(201, 162, 75, 0.34);
+    }
+
+    .ops-accordion-card {
+      grid-column: 1 / -1;
+    }
+
+    .accordion-list {
+      display: grid;
+    }
+
+    .accordion-item {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .accordion-item:last-child {
+      border-bottom: 0;
+    }
+
+    .accordion-trigger {
+      width: 100%;
+      min-height: 64px;
+      display: grid;
+      grid-template-columns: 34px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 18px;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      text-align: left;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .accordion-trigger h3 {
+      margin: 0 0 2px;
+      font-size: 16px;
+    }
+
+    .accordion-trigger p {
+      margin: 0;
+      color: var(--quiet);
+      font-size: 13px;
+    }
+
+    .accordion-panel {
+      display: none;
+      padding: 0 18px 18px 64px;
+    }
+
+    .accordion-item.is-open .accordion-panel {
+      display: block;
+    }
+
+    .mini-demo-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .check-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .check-list label {
+      display: grid;
+      grid-template-columns: 20px 1fr auto;
+      gap: 10px;
+      align-items: center;
+      min-height: 38px;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .progress-track {
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: var(--green);
+      border-radius: inherit;
+      transition: width 240ms ease;
+    }
+
+    .parent-row,
+    .week-card {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .week-card.cancelled {
+      background: rgba(216, 58, 72, 0.12);
+      border-color: rgba(216, 58, 72, 0.3);
     }
 
     .ops-layout {
@@ -1913,8 +2232,19 @@
       }
 
       .demo-layout,
-      .demo-output {
+      .demo-output,
+      .mini-demo-grid {
         grid-template-columns: 1fr;
+      }
+
+      .market-controls,
+      .builder-grid,
+      .field-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .accordion-panel {
+        padding-left: 18px;
       }
 
       .demo-public {
@@ -2001,6 +2331,13 @@
         padding: 10px;
       }
 
+      .schedule-card,
+      .registration-row,
+      .parent-row,
+      .week-card {
+        grid-template-columns: 1fr;
+      }
+
       .demo-metric-row {
         grid-template-columns: 1fr;
       }
@@ -2073,15 +2410,15 @@
         <span class="brand-wordmark" aria-hidden="true"></span>
       </a>
       <nav class="nav-links" id="site-nav" aria-label="Primary navigation">
-        <a href="#playground">Demo</a>
-        <a href="#platform">Platform</a>
-        <a href="#surfaces">Surfaces</a>
-        <a href="#marketplace">Marketplace</a>
-        <a href="#operations">Operations</a>
-        <a href="#contact">Contact</a>
+        <a href="#playground">Try it</a>
+        <a href="#platform">Launch site</a>
+        <a href="#take-signups" data-open-panel="registration">Take signups</a>
+        <a href="#build-teams" data-open-panel="teams">Build teams</a>
+        <a href="#publish-schedule" data-open-panel="publish">Publish schedule</a>
+        <a href="#marketplace">Find games</a>
       </nav>
       <div class="nav-actions">
-        <a class="btn btn-secondary" href="#surfaces">Examples</a>
+        <a class="btn btn-secondary" href="#surfaces">See pages</a>
         <a class="btn btn-primary" href="#playground">Try demos</a>
         <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav" id="menu-button" aria-label="Open navigation">
           <span></span>
@@ -2096,14 +2433,14 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="container hero-grid">
         <div class="hero-copy-block reveal">
-          <div class="eyebrow">Sports operations platform</div>
+          <div class="eyebrow">Try a sample season first</div>
           <h1 id="hero-title">LEAG <span>runs the league.</span></h1>
           <p class="hero-copy">
-            Public sites, event discovery, registration, scheduling, payments, standings, team pages, and commerce for youth sports organizations and rec sports operators.
+            Launch a public league site, take signups, build teams, publish the weekly schedule, and show families what changed.
           </p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#playground">Try demo features -></a>
-            <a class="btn btn-secondary" href="#surfaces">View product surfaces</a>
+            <a class="btn btn-primary" href="#playground">Try a sample season -></a>
+            <a class="btn btn-secondary" href="#platform">See a league site</a>
           </div>
           <p class="hero-note">No call required: click through a sample league flow directly on this page.</p>
         </div>
@@ -2202,23 +2539,23 @@
       </div>
     </section>
 
-    <section class="proof-strip" aria-label="Demo-first product promises">
+    <section class="proof-strip" aria-label="What the demos show">
       <div class="container proof-grid">
         <div class="proof-item">
-          <div class="proof-number">Try first</div>
-          <div class="proof-label">Use working product examples before booking any conversation</div>
+          <div class="proof-number">Create a sample season</div>
+          <div class="proof-label">Name the organization, choose the sport, and see a public page update.</div>
         </div>
         <div class="proof-item">
-          <div class="proof-number">Live pages</div>
-          <div class="proof-label">Preview schedules, standings, rosters, news, and public org pages</div>
+          <div class="proof-number">Approve registrations</div>
+          <div class="proof-label">Review sample players, mark them approved or on hold, and keep the list clear.</div>
         </div>
         <div class="proof-item">
-          <div class="proof-number">Setup flow</div>
-          <div class="proof-label">Create a sample sport, teams, events, and registration path</div>
+          <div class="proof-number">Build teams</div>
+          <div class="proof-label">Move tryout players into teams by hand or run a sample random draft.</div>
         </div>
         <div class="proof-item">
-          <div class="proof-number">Money rails</div>
-          <div class="proof-label">Show registration, shop, and payout concepts without exposing real payments</div>
+          <div class="proof-number">Publish a weekly schedule</div>
+          <div class="proof-label">Resolve conflicts, publish the week, and watch sample parent notifications send.</div>
         </div>
       </div>
     </section>
@@ -2228,13 +2565,26 @@
         <div class="section-header reveal">
           <div>
             <div class="section-kicker">Interactive demo</div>
-            <h2 id="playground-title">Test the building blocks before you talk to anyone.</h2>
+            <h2 id="playground-title">Build a sample season before you talk to anyone.</h2>
           </div>
-          <p>Pick a sport, change the league size, and publish a sample schedule. The preview updates like a lightweight product playground instead of a static sales page.</p>
+          <p>Use a few fake values, publish a sample week, and see what families would see. Nothing saves, exports, or sends outside this page.</p>
         </div>
 
         <div class="demo-layout reveal">
           <aside class="demo-controls" aria-label="Demo controls">
+            <p class="demo-reset-note">Demo data resets when you leave this page.</p>
+            <div class="sample-field">
+              <label for="demo-org-input">Sample organization</label>
+              <input class="sample-input" id="demo-org-input" type="text" maxlength="32" value="Miami County Softball">
+            </div>
+            <div class="sample-field">
+              <label for="demo-team-a-input">Sample team one</label>
+              <input class="sample-input" id="demo-team-a-input" type="text" maxlength="22" value="Firecrackers">
+            </div>
+            <div class="sample-field">
+              <label for="demo-team-b-input">Sample team two</label>
+              <input class="sample-input" id="demo-team-b-input" type="text" maxlength="22" value="Panthers">
+            </div>
             <div class="demo-group">
               <div class="demo-label">Sport template</div>
               <div class="demo-choice-row">
@@ -2258,7 +2608,7 @@
             <button class="btn btn-primary" type="button" id="demo-generate">Publish sample schedule</button>
           </aside>
 
-          <article class="demo-stage" aria-label="Live demo preview">
+          <article class="demo-stage" id="demo-stage" aria-label="Live demo preview">
             <div class="demo-stage-bar">
               <strong id="demo-org">Miami County Softball</strong>
               <span id="demo-url">mcsl.leag.app/spring-2026</span>
@@ -2273,6 +2623,7 @@
                   <div><b>Open</b><span id="demo-open">12U tryout registration</span><b>18 spots</b></div>
                   <div><b>Due</b><span id="demo-due">Team store closes</span><b>Jun 28</b></div>
                 </div>
+                <div class="demo-schedule" id="demo-schedule-list" aria-live="polite"></div>
               </div>
               <div class="demo-admin">
                 <div class="demo-metric-row">
@@ -2284,8 +2635,9 @@
                   <div class="demo-task"><span class="demo-check"></span><span>Public page generated</span><span class="mono">done</span></div>
                   <div class="demo-task"><span class="demo-check"></span><span id="demo-task-two">Schedule draft balanced by field</span><span class="mono">done</span></div>
                   <div class="demo-task"><span class="demo-check"></span><span>Registration link attached</span><span class="mono">live</span></div>
-                  <div class="demo-task"><span class="demo-check"></span><span>Parent notifications queued</span><span class="mono">ready</span></div>
+                  <div class="demo-task"><span class="demo-check pending" id="demo-notify-check"></span><span id="demo-notify-copy">Parent notifications queued</span><span class="mono" id="demo-notify-state">ready</span></div>
                 </div>
+                <div class="parent-list" id="demo-parent-list" aria-live="polite"></div>
               </div>
             </div>
           </article>
@@ -2298,9 +2650,9 @@
         <div class="section-header reveal">
           <div>
             <div class="section-kicker">Public league sites</div>
-            <h2 id="platform-title">Each organization gets a site that already knows how the season works.</h2>
+            <h2 id="platform-title">Launch a league site families can actually use.</h2>
           </div>
-          <p>LEAG starts with branded public pages for clubs and leagues, then connects the operational pieces behind them: teams, games, rosters, registration, payments, news, and shop inventory.</p>
+          <p>Start with the pages parents already look for: schedule, teams, standings, tryouts, news, and registration. The admin work behind those pages can grow from there.</p>
         </div>
 
         <div class="platform-layout">
@@ -2355,10 +2707,10 @@
       <div class="container">
         <div class="section-header reveal">
           <div>
-            <div class="section-kicker">Product surfaces</div>
-            <h2 id="surfaces-title">Schedules, tables, rosters, and stats are first-class screens.</h2>
+            <div class="section-kicker">Family-facing pages</div>
+            <h2 id="surfaces-title">Show families what is happening without another group text.</h2>
           </div>
-          <p>The design bundle pushes LEAG toward sports-native interfaces: scorebug urgency where games are live, calm editorial pages for programs, and dense tools for the people running the season.</p>
+          <p>Parents need the basics fast: where to go, who is playing, what changed, and whether registration is still open.</p>
         </div>
 
         <div class="surface-board">
@@ -2446,51 +2798,99 @@
       <div class="container">
         <div class="section-header reveal">
           <div>
-            <div class="section-kicker">Marketplace-ready</div>
-            <h2 id="marketplace-title">The same rails can power public discovery for rec sports.</h2>
+            <div class="section-kicker">Player and venue demos</div>
+            <h2 id="marketplace-title">Help people find a place to play.</h2>
           </div>
-          <p>The roadmap keeps premium organization sites intact while making room for a broader destination where players join, organizers run, and venues list availability.</p>
+          <p>The public side should feel concrete: players search for the right activity, organizers approve real people, and venues show exactly what is open.</p>
         </div>
 
         <div class="market-grid">
           <article class="market-card market-card-player reveal">
             <div class="market-label">Players</div>
-            <h3>Find a game that fits tonight.</h3>
-            <p>Search by sport, location, level, age group, price, and start time. Pay in-app and get roster, venue, and schedule updates.</p>
-            <div class="market-demo player-search">
-              <div class="player-search-row"><span>Near Irvine</span><strong>6 mi</strong></div>
-              <div class="player-search-row"><span>Pickup basketball</span><strong>7:30 PM</strong></div>
-              <div class="player-search-row"><span>Adult soccer league</span><strong>3 spots</strong></div>
+            <h3>Search, save, or join a sample waitlist.</h3>
+            <p>Try filters a player would understand. The buttons only change sample state here, with no payment or account creation.</p>
+            <div class="market-controls" aria-label="Player search controls">
+              <select class="sample-select" id="player-sport">
+                <option>Softball</option>
+                <option>Basketball</option>
+                <option>Soccer</option>
+              </select>
+              <select class="sample-select" id="player-location">
+                <option>Irvine</option>
+                <option>Orlando</option>
+                <option>Miami County</option>
+              </select>
+              <select class="sample-select" id="player-time">
+                <option>Tonight</option>
+                <option>This weekend</option>
+                <option>Next week</option>
+              </select>
+            </div>
+            <div class="market-demo player-search" id="player-results">
+              <div class="player-search-row"><span>Loading sample games</span><strong>demo</strong></div>
             </div>
           </article>
 
           <article class="market-card market-card-organizer reveal">
             <div class="market-label">Organizers</div>
-            <h3>Run leagues without rebuilding the admin stack.</h3>
-            <p>Create events, collect money, manage rosters, publish standings, message participants, and keep a reliable public page live.</p>
+            <h3>Approve players, draft teams, and clear conflicts.</h3>
+            <p>This is the admin work organizers actually do before a season goes public.</p>
             <div class="market-demo organizer-board">
               <div class="organizer-lane">
-                <header><span>Intake</span><b>42 paid</b></header>
-                <div>Approve 12U registrations and route waitlist players.</div>
+                <header><span>Registration queue</span><b id="registration-count">4 waiting</b></header>
+                <div class="registration-list" id="registration-list"></div>
               </div>
               <div class="organizer-lane">
-                <header><span>Schedule</span><b>18 games</b></header>
-                <div>Resolve field conflicts before publishing to families.</div>
+                <header><span>Tryout team builder</span><b id="team-builder-count">0 picked</b></header>
+                <div>
+                  <div class="team-switcher">
+                    <button class="tiny-btn is-active" type="button" data-team-switch="Firecrackers">Firecrackers</button>
+                    <button class="tiny-btn" type="button" data-team-switch="Panthers">Panthers</button>
+                    <button class="tiny-btn" type="button" id="random-draft">Random draft</button>
+                  </div>
+                  <div class="builder-grid">
+                    <div>
+                      <div class="demo-label">Player pool</div>
+                      <div class="player-pool" id="player-pool"></div>
+                    </div>
+                    <div>
+                      <div class="demo-label" id="active-team-label">Firecrackers</div>
+                      <div class="team-box" id="team-box"></div>
+                    </div>
+                  </div>
+                  <p class="demo-reset-note">Click or drag sample players. Drafts and random drafts will be supported in the real product.</p>
+                </div>
+              </div>
+              <div class="organizer-lane">
+                <header><span>Field conflicts</span><b id="conflict-state">2 conflicts</b></header>
+                <div>
+                  <div class="conflict-list" id="conflict-list"></div>
+                  <div class="market-action-row">
+                    <button class="tiny-btn" type="button" id="resolve-conflicts">Resolve conflicts</button>
+                  </div>
+                </div>
               </div>
             </div>
           </article>
 
           <article class="market-card market-card-venue reveal">
             <div class="market-label">Venues</div>
-            <h3>Turn open slots into booked inventory.</h3>
-            <p>List available fields, courts, cages, and gym time, then connect bookings to schedules and payouts.</p>
-            <div class="market-demo venue-slots">
-              <span class="booked"><b>Field 1</b>5:30 booked</span>
-              <span><b>Field 2</b>6:45 open</span>
-              <span><b>Cage B</b>4:00 open</span>
-              <span><b>Gym A</b>7:15 hold</span>
-              <span class="booked"><b>Court 3</b>8:00 booked</span>
-              <span><b>Lights</b>permit ok</span>
+            <h3>Pick a time and see what is really open.</h3>
+            <p>Availability changes by date and time, with booked, open, and hold states clearly separated.</p>
+            <div class="market-controls" aria-label="Venue slot controls">
+              <select class="sample-select" id="venue-date">
+                <option value="jun17">Jun 17</option>
+                <option value="jun18">Jun 18</option>
+                <option value="jun19">Jun 19</option>
+              </select>
+              <select class="sample-select" id="venue-time">
+                <option value="530">5:30 PM</option>
+                <option value="645">6:45 PM</option>
+                <option value="800">8:00 PM</option>
+              </select>
+            </div>
+            <div class="market-demo field-grid" id="venue-field-grid">
+              <div class="field-card"><strong>Loading fields</strong><span>demo</span></div>
             </div>
           </article>
         </div>
@@ -2501,89 +2901,116 @@
       <div class="container">
         <div class="section-header reveal">
           <div>
-            <div class="section-kicker">Back office</div>
-            <h2 id="operations-title">Commissioners get a control room, not another inbox.</h2>
+            <div class="section-kicker">Run the season from one place</div>
+            <h2 id="operations-title">Open signups, build teams, publish the week, and keep parents updated.</h2>
           </div>
-          <p>Behind every public site is a manager view for approvals, scheduling, payments, team setup, field assignments, and reporting.</p>
+          <p>Each step below is a small fake-data demo. It shows the workflow without saving information, sending messages, or charging anyone.</p>
         </div>
 
         <div class="ops-layout">
-          <article class="ops-card reveal">
+          <article class="ops-card ops-accordion-card reveal">
             <div class="ops-head">
-              <h3>Season pipeline</h3>
-              <span>Commissioner view</span>
+              <h3>Sample season workflow</h3>
+              <span>Demo data only</span>
             </div>
-            <div class="pipeline">
-              <div class="pipeline-row">
-                <div class="pipeline-step">1</div>
-                <div>
-                  <h4>Open registration</h4>
-                  <p>Collect waivers, player data, and fees.</p>
+            <div class="accordion-list">
+              <section class="accordion-item is-open" id="take-signups" data-panel="registration">
+                <button class="accordion-trigger" type="button" aria-expanded="true">
+                  <span class="pipeline-step">1</span>
+                  <span>
+                    <h3>Take signups</h3>
+                    <p>Collect waiver checks, sample player data, and fee status.</p>
+                  </span>
+                  <span class="status-tag" id="signup-status">2 of 3 ready</span>
+                </button>
+                <div class="accordion-panel">
+                  <div class="mini-demo-grid">
+                    <div class="check-list" id="signup-checks">
+                      <label><input type="checkbox" checked data-signup-check> Waiver signed <span class="mono">ready</span></label>
+                      <label><input type="checkbox" checked data-signup-check> Player data complete <span class="mono">ready</span></label>
+                      <label><input type="checkbox" data-signup-check> Sample fee marked paid <span class="mono">$142</span></label>
+                    </div>
+                    <div class="demo-status">
+                      <strong>Sample player card</strong>
+                      <span id="signup-player-card">Maya Ramos / 12U / guardian confirmed / fee pending</span>
+                    </div>
+                  </div>
                 </div>
-                <span class="status-tag">Live</span>
-              </div>
-              <div class="pipeline-row">
-                <div class="pipeline-step">2</div>
-                <div>
-                  <h4>Build teams</h4>
-                  <p>Approve players and assign coaches.</p>
-                </div>
-                <span class="status-tag">68%</span>
-              </div>
-              <div class="pipeline-row">
-                <div class="pipeline-step">3</div>
-                <div>
-                  <h4>Publish schedule</h4>
-                  <p>Lock fields, times, and notifications.</p>
-                </div>
-                <span class="status-tag">Next</span>
-              </div>
-              <div class="pipeline-row">
-                <div class="pipeline-step">4</div>
-                <div>
-                  <h4>Run the season</h4>
-                  <p>Scores, standings, payouts, and shop orders.</p>
-                </div>
-                <span class="status-tag">Queued</span>
-              </div>
-            </div>
-          </article>
+              </section>
 
-          <article class="ops-card reveal">
-            <div class="ops-head">
-              <h3>Money and activity</h3>
-              <span>Last 30 days</span>
-            </div>
-            <div class="money-board">
-              <div class="money-total">
-                <div>
-                  <strong>$14.5k</strong>
-                  <span>gross transaction volume tracked for the organization</span>
+              <section class="accordion-item" id="build-teams" data-panel="teams">
+                <button class="accordion-trigger" type="button" aria-expanded="false">
+                  <span class="pipeline-step">2</span>
+                  <span>
+                    <h3>Build teams</h3>
+                    <p>Move tryout players into a team or run a sample random draft.</p>
+                  </span>
+                  <span class="status-tag" id="ops-team-count">0 picked</span>
+                </button>
+                <div class="accordion-panel">
+                  <div class="team-switcher">
+                    <button class="tiny-btn is-active" type="button" data-ops-team="Firecrackers">Firecrackers</button>
+                    <button class="tiny-btn" type="button" data-ops-team="Panthers">Panthers</button>
+                    <button class="tiny-btn" type="button" id="ops-random-draft">Random draft</button>
+                  </div>
+                  <div class="builder-grid">
+                    <div>
+                      <div class="demo-label">Player pool</div>
+                      <div class="player-pool" id="ops-player-pool"></div>
+                    </div>
+                    <div>
+                      <div class="demo-label" id="ops-active-team-label">Firecrackers</div>
+                      <div class="team-box" id="ops-team-box"></div>
+                    </div>
+                  </div>
+                  <p class="demo-reset-note">Drag or click to move sample players. This does not save a roster.</p>
                 </div>
-                <span class="status-tag">$2.9k payout ready</span>
-              </div>
-              <div class="bar-chart">
-                <div class="bar-row">
-                  <span>Registrations</span>
-                  <span class="bar-track"><span class="bar-fill" style="width:82%"></span></span>
-                  <span class="mono">$9,840</span>
+              </section>
+
+              <section class="accordion-item" id="publish-schedule" data-panel="publish">
+                <button class="accordion-trigger" type="button" aria-expanded="false">
+                  <span class="pipeline-step">3</span>
+                  <span>
+                    <h3>Publish schedule</h3>
+                    <p>Send a sample week and watch parent notifications move in real time.</p>
+                  </span>
+                  <span class="status-tag" id="publish-status">draft</span>
+                </button>
+                <div class="accordion-panel">
+                  <div class="mini-demo-grid">
+                    <div>
+                      <button class="btn btn-primary" type="button" id="publish-week">Publish sample week</button>
+                      <div class="progress-track" style="margin-top:12px"><span class="progress-fill" id="publish-progress"></span></div>
+                      <div class="parent-list" id="publish-parent-list" style="margin-top:12px"></div>
+                    </div>
+                    <div class="week-list" id="weekly-schedule"></div>
+                  </div>
                 </div>
-                <div class="bar-row">
-                  <span>Merchandise</span>
-                  <span class="bar-track"><span class="bar-fill gold" style="width:46%"></span></span>
-                  <span class="mono">$3,120</span>
+              </section>
+
+              <section class="accordion-item" data-panel="run">
+                <button class="accordion-trigger" type="button" aria-expanded="false">
+                  <span class="pipeline-step">4</span>
+                  <span>
+                    <h3>Run the season</h3>
+                    <p>Record a sample score and see standings move.</p>
+                  </span>
+                  <span class="status-tag" id="score-status">live</span>
+                </button>
+                <div class="accordion-panel">
+                  <div class="mini-demo-grid">
+                    <div class="demo-status">
+                      <strong id="live-scoreline">Firecrackers 5, Panthers 3</strong>
+                      <span>Top 5 / Field 1 / runners on 1st and 3rd</span>
+                      <div class="market-action-row">
+                        <button class="tiny-btn" type="button" id="add-run">Add Firecrackers run</button>
+                        <button class="tiny-btn" type="button" id="finalize-game">Mark final</button>
+                      </div>
+                    </div>
+                    <div class="week-list" id="standings-demo"></div>
+                  </div>
                 </div>
-                <div class="bar-row">
-                  <span>Clinics</span>
-                  <span class="bar-track"><span class="bar-fill blue" style="width:34%"></span></span>
-                  <span class="mono">$1,540</span>
-                </div>
-                <div class="bar-row">
-                  <span>Open invoices</span>
-                  <span class="bar-track"><span class="bar-fill" style="width:18%"></span></span>
-                  <span class="mono">$860</span>
-                </div>
-              </div>
+              </section>
             </div>
           </article>
         </div>
@@ -2593,8 +3020,8 @@
     <section class="cta-section" id="contact" aria-labelledby="contact-title">
       <div class="container cta-grid">
         <div class="reveal">
-          <h2 id="contact-title">Try the product path first.</h2>
-          <p>Use the playground above, inspect the example league surfaces, then reach out with specific gaps or organization needs.</p>
+          <h2 id="contact-title">Try the season path first.</h2>
+          <p>Use the playground above, inspect the sample league pages, then reach out with specific gaps or organization needs.</p>
         </div>
         <div class="cta-actions reveal">
           <a class="btn btn-primary" href="#playground">Open demo playground</a>
@@ -2644,6 +3071,42 @@
       });
     }
 
+    const makeEl = (tag, className, text) => {
+      const node = document.createElement(tag);
+      if (className) {
+        node.className = className;
+      }
+      if (text !== undefined) {
+        node.textContent = text;
+      }
+      return node;
+    };
+
+    const cleanSampleText = (value, fallback, maxLength = 32) => {
+      const cleaned = String(value || "")
+        .replace(/[<>]/g, "")
+        .replace(/\s+/g, " ")
+        .trim()
+        .slice(0, maxLength);
+      return cleaned || fallback;
+    };
+
+    const toSlug = (value) => {
+      const slug = String(value || "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "")
+        .slice(0, 24);
+      return slug || "sample-season";
+    };
+
+    const optionLabel = (select) => {
+      if (!select) {
+        return "";
+      }
+      return select.selectedOptions[0] ? select.selectedOptions[0].textContent : select.value;
+    };
+
     const demoState = {
       sport: "softball",
       teams: 8,
@@ -2653,46 +3116,59 @@
     const demoCopy = {
       softball: {
         org: "Miami County Softball",
-        url: "mcsl.leag.app/spring-2026",
-        title: "Softball league loaded",
-        copy: "Eight teams, two fields, registration open, schedule draft ready.",
+        teamA: "Firecrackers",
+        teamB: "Panthers",
+        title: "Softball season loaded",
+        draftCopy: "teams, two fields, registration open, schedule draft ready.",
         headline: "Spring softball season",
-        summary: "A public league page with standings, upcoming games, roster links, and a registration path for families.",
-        next: "Firecrackers vs Pitch Perfect",
+        summary: "A public softball page with standings, upcoming games, roster links, and a signup path families can understand.",
+        nextOpponent: "Pitch Perfect",
         open: "12U tryout registration",
         due: "Team store closes",
         fee: "$142",
-        task: "Schedule draft balanced by field"
+        task: "Schedule draft balanced by field",
+        field: "Field"
       },
       basketball: {
         org: "South County Hoops",
-        url: "southcounty.leag.app/winter",
-        title: "Basketball league loaded",
-        copy: "Gym slots, divisions, officials, and waitlists are ready to review.",
+        teamA: "Falcons",
+        teamB: "Breakers",
+        title: "Basketball season loaded",
+        draftCopy: "teams, gym slots, divisions, and waitlists ready to review.",
         headline: "Winter basketball league",
-        summary: "A public league page with court schedules, team standings, clinic signups, and division pages.",
-        next: "Falcons vs Breakers",
+        summary: "A public basketball page with court schedules, division standings, clinic signups, and team pages.",
+        nextOpponent: "Rim Runners",
         open: "JV skills clinic",
         due: "Officials assignments",
         fee: "$118",
-        task: "Court schedule balanced by division"
+        task: "Court schedule balanced by division",
+        field: "Court"
       },
       soccer: {
         org: "Coastal Rec Soccer",
-        url: "coastalrec.leag.app/fall",
-        title: "Soccer league loaded",
-        copy: "Age groups, field permits, coach notes, and registration rules are staged.",
+        teamA: "Harbor United",
+        teamB: "Mesa FC",
+        title: "Soccer season loaded",
+        draftCopy: "teams, field permits, coach notes, and signup rules staged.",
         headline: "Fall soccer signups",
-        summary: "A public league page with field maps, age-group registration, standings, and match updates.",
-        next: "Harbor United vs Mesa FC",
+        summary: "A public soccer page with field maps, age-group registration, standings, and match updates.",
+        nextOpponent: "Northside",
         open: "U10 player registration",
         due: "Field permits review",
         fee: "$96",
-        task: "Pitch schedule balanced by age group"
+        task: "Pitch schedule balanced by age group",
+        field: "Pitch"
       }
     };
 
+    const demoInputs = {
+      org: document.getElementById("demo-org-input"),
+      teamA: document.getElementById("demo-team-a-input"),
+      teamB: document.getElementById("demo-team-b-input")
+    };
+
     const demoEls = {
+      stage: document.getElementById("demo-stage"),
       org: document.getElementById("demo-org"),
       url: document.getElementById("demo-url"),
       statusTag: document.getElementById("demo-status-tag"),
@@ -2706,31 +3182,114 @@
       teamCount: document.getElementById("demo-team-count"),
       gameCount: document.getElementById("demo-game-count"),
       fee: document.getElementById("demo-fee"),
-      taskTwo: document.getElementById("demo-task-two")
+      taskTwo: document.getElementById("demo-task-two"),
+      schedule: document.getElementById("demo-schedule-list"),
+      parentList: document.getElementById("demo-parent-list"),
+      notifyCheck: document.getElementById("demo-notify-check"),
+      notifyCopy: document.getElementById("demo-notify-copy"),
+      notifyState: document.getElementById("demo-notify-state")
+    };
+
+    const getDemoNames = () => {
+      const copy = demoCopy[demoState.sport];
+      return {
+        org: cleanSampleText(demoInputs.org ? demoInputs.org.value : "", copy.org, 32),
+        teamA: cleanSampleText(demoInputs.teamA ? demoInputs.teamA.value : "", copy.teamA, 22),
+        teamB: cleanSampleText(demoInputs.teamB ? demoInputs.teamB.value : "", copy.teamB, 22)
+      };
+    };
+
+    const renderParentRows = (container, rows) => {
+      if (!container) {
+        return;
+      }
+      container.replaceChildren();
+      rows.forEach((rowData) => {
+        const row = makeEl("div", "parent-row");
+        const text = makeEl("div");
+        text.append(
+          makeEl("strong", "", rowData.name),
+          makeEl("span", "", rowData.message)
+        );
+        row.append(text, makeEl("b", "mono", rowData.state));
+        container.append(row);
+      });
+    };
+
+    const getDemoSchedule = (copy, names) => ([
+      { day: "Mon", title: `${names.teamA} vs ${copy.nextOpponent}`, meta: `${copy.field} 1 / 5:30 PM` },
+      { day: "Wed", title: `${names.teamB} practice`, meta: `${copy.field} 2 / 6:45 PM` },
+      { day: "Sat", title: copy.open, meta: `${copy.field} 1 / 10:00 AM` }
+    ]);
+
+    const renderDemoSchedule = (copy, names) => {
+      if (!demoEls.schedule || !demoEls.parentList) {
+        return;
+      }
+
+      demoEls.schedule.replaceChildren();
+      demoEls.parentList.replaceChildren();
+      if (demoEls.stage) {
+        demoEls.stage.classList.toggle("is-published", demoState.generated);
+      }
+      if (demoEls.notifyCheck) {
+        demoEls.notifyCheck.classList.toggle("pending", !demoState.generated);
+      }
+      if (demoEls.notifyCopy) {
+        demoEls.notifyCopy.textContent = demoState.generated ? "Sample parent notifications sent" : "Parent notifications queued";
+      }
+      if (demoEls.notifyState) {
+        demoEls.notifyState.textContent = demoState.generated ? "sent" : "ready";
+      }
+
+      if (!demoState.generated) {
+        return;
+      }
+
+      getDemoSchedule(copy, names).forEach((item) => {
+        const card = makeEl("div", "schedule-card");
+        card.append(
+          makeEl("strong", "", item.day),
+          makeEl("span", "", item.title),
+          makeEl("b", "mono", item.meta)
+        );
+        demoEls.schedule.append(card);
+      });
+
+      renderParentRows(demoEls.parentList, [
+        { name: "Maya guardian", message: "Sample schedule sent", state: "sent" },
+        { name: "Leo guardian", message: "Sample schedule sent", state: "sent" },
+        { name: "Ari guardian", message: "Sample schedule sent", state: "sent" }
+      ]);
     };
 
     const updateDemo = () => {
+      if (!demoEls.org) {
+        return;
+      }
       const copy = demoCopy[demoState.sport];
+      const names = getDemoNames();
       const games = Math.round((demoState.teams * (demoState.teams - 1)) / 2);
-      const statusPrefix = demoState.generated ? "Schedule published" : copy.title;
+      const statusPrefix = demoState.generated ? "Sample week published" : copy.title;
       const statusDetail = demoState.generated
-        ? `${demoState.teams} teams, ${games} games, registration links, and notifications are live in the preview.`
-        : copy.copy.replace("Eight", String(demoState.teams));
+        ? `${demoState.teams} teams, ${games} sample games, signup links, and parent notices are visible in the preview.`
+        : `${demoState.teams} ${copy.draftCopy}`;
 
-      demoEls.org.textContent = copy.org;
-      demoEls.url.textContent = copy.url;
+      demoEls.org.textContent = names.org;
+      demoEls.url.textContent = `${toSlug(names.org)}.leag.app/sample`;
       demoEls.statusTag.textContent = demoState.generated ? "Schedule published" : "Registration open";
       demoEls.statusTitle.textContent = statusPrefix;
       demoEls.statusCopy.textContent = statusDetail;
       demoEls.headline.textContent = copy.headline;
       demoEls.summary.textContent = copy.summary;
-      demoEls.next.textContent = copy.next;
+      demoEls.next.textContent = `${names.teamA} vs ${copy.nextOpponent}`;
       demoEls.open.textContent = copy.open;
       demoEls.due.textContent = copy.due;
       demoEls.teamCount.textContent = demoState.teams;
       demoEls.gameCount.textContent = games;
       demoEls.fee.textContent = copy.fee;
       demoEls.taskTwo.textContent = demoState.generated ? "Published schedule balanced by facility" : copy.task;
+      renderDemoSchedule(copy, names);
 
       document.querySelectorAll("[data-demo-sport]").forEach((button) => {
         button.classList.toggle("is-active", button.dataset.demoSport === demoState.sport);
@@ -2739,6 +3298,15 @@
         button.classList.toggle("is-active", Number(button.dataset.demoTeams) === demoState.teams);
       });
     };
+
+    Object.values(demoInputs).forEach((input) => {
+      if (input) {
+        input.addEventListener("input", () => {
+          demoState.generated = false;
+          updateDemo();
+        });
+      }
+    });
 
     document.querySelectorAll("[data-demo-sport]").forEach((button) => {
       button.addEventListener("click", () => {
@@ -2764,9 +3332,538 @@
       });
     }
 
-    if (demoEls.org) {
-      updateDemo();
+    const playerResults = {
+      Softball: [
+        { title: "12U open tryout", detail: "4 sample spots / South Orange Field", action: "Join sample waitlist", done: "Joined sample waitlist" },
+        { title: "Fastpitch pickup night", detail: "Intermediate / helmets provided", action: "Save", done: "Saved" },
+        { title: "Pitching clinic", detail: "Coach-led / no payment collected", action: "Add to sample checkout", done: "Added to sample checkout" }
+      ],
+      Basketball: [
+        { title: "Adult 3v3 run", detail: "Indoor court / 2 sample spots", action: "Save", done: "Saved" },
+        { title: "JV skills session", detail: "Ball-handling and shooting", action: "Join sample waitlist", done: "Joined sample waitlist" },
+        { title: "Saturday pickup", detail: "Balanced teams / no account needed here", action: "Add to sample checkout", done: "Added to sample checkout" }
+      ],
+      Soccer: [
+        { title: "U10 rec match", detail: "Coed / parent coach needed", action: "Save", done: "Saved" },
+        { title: "Adult seven-a-side", detail: "Turf field / 3 sample spots", action: "Join sample waitlist", done: "Joined sample waitlist" },
+        { title: "Goalkeeper clinic", detail: "Small group / no payment collected", action: "Add to sample checkout", done: "Added to sample checkout" }
+      ]
+    };
+
+    const renderPlayerResults = () => {
+      const container = document.getElementById("player-results");
+      const sport = optionLabel(document.getElementById("player-sport")) || "Softball";
+      const location = optionLabel(document.getElementById("player-location")) || "Irvine";
+      const time = optionLabel(document.getElementById("player-time")) || "Tonight";
+      if (!container) {
+        return;
+      }
+      container.replaceChildren();
+      playerResults[sport].forEach((result) => {
+        const row = makeEl("div", "player-search-row");
+        const body = makeEl("div");
+        body.append(
+          makeEl("strong", "", result.title),
+          makeEl("span", "", `${location} / ${time} / ${result.detail}`)
+        );
+        const button = makeEl("button", "tiny-btn", result.action);
+        button.type = "button";
+        button.addEventListener("click", () => {
+          const active = button.classList.toggle("is-active");
+          button.textContent = active ? result.done : result.action;
+        });
+        row.append(body, button);
+        container.append(row);
+      });
+    };
+
+    ["player-sport", "player-location", "player-time"].forEach((id) => {
+      const select = document.getElementById(id);
+      if (select) {
+        select.addEventListener("change", renderPlayerResults);
+      }
+    });
+
+    const registrants = [
+      { name: "Maya Ramos", meta: "12U shortstop / waiver signed", status: "waiting" },
+      { name: "Nico Chen", meta: "12U catcher / fee pending", status: "waiting" },
+      { name: "Ari Brooks", meta: "10U pitcher / guardian confirmed", status: "waiting" },
+      { name: "Sam Rivera", meta: "14U utility / needs age review", status: "waiting" }
+    ];
+
+    const renderRegistrations = () => {
+      const container = document.getElementById("registration-list");
+      const count = document.getElementById("registration-count");
+      if (!container || !count) {
+        return;
+      }
+      container.replaceChildren();
+      const waiting = registrants.filter((player) => player.status === "waiting").length;
+      count.textContent = waiting ? `${waiting} waiting` : "queue clear";
+      registrants.forEach((player, index) => {
+        const row = makeEl("div", "registration-row");
+        const body = makeEl("div");
+        body.append(
+          makeEl("strong", "", player.name),
+          makeEl("span", "", `${player.meta} / ${player.status}`)
+        );
+        const actions = makeEl("div", "registration-actions");
+        const approve = makeEl("button", "tiny-btn", "Approve");
+        approve.type = "button";
+        approve.classList.toggle("is-active", player.status === "approved");
+        approve.addEventListener("click", () => {
+          registrants[index].status = "approved";
+          renderRegistrations();
+        });
+        const hold = makeEl("button", "tiny-btn", "Hold");
+        hold.type = "button";
+        hold.classList.toggle("is-active", player.status === "hold");
+        hold.addEventListener("click", () => {
+          registrants[index].status = "hold";
+          renderRegistrations();
+        });
+        actions.append(approve, hold);
+        row.append(body, actions);
+        container.append(row);
+      });
+    };
+
+    const draftPlayers = [
+      { name: "Maya Ramos", meta: "SS / speed" },
+      { name: "Nico Chen", meta: "C / arm" },
+      { name: "Ari Brooks", meta: "P / command" },
+      { name: "Sam Rivera", meta: "UTIL / contact" },
+      { name: "Jules Kim", meta: "OF / range" },
+      { name: "Tali Moore", meta: "1B / power" }
+    ];
+    const draftTeams = ["Firecrackers", "Panthers"];
+    const teamBuilderState = {
+      active: {
+        market: "Firecrackers",
+        ops: "Firecrackers"
+      },
+      assignments: Object.fromEntries(draftPlayers.map((player) => [player.name, null]))
+    };
+
+    const setBuilderButtonState = (scope, activeTeam) => {
+      const selector = scope === "ops" ? "[data-ops-team]" : "[data-team-switch]";
+      document.querySelectorAll(selector).forEach((button) => {
+        const team = scope === "ops" ? button.dataset.opsTeam : button.dataset.teamSwitch;
+        button.classList.toggle("is-active", team === activeTeam);
+      });
+    };
+
+    const createPlayerCard = (player, onClick) => {
+      const card = makeEl("button", "player-card");
+      card.type = "button";
+      card.draggable = true;
+      card.append(makeEl("strong", "", player.name), makeEl("span", "", player.meta));
+      card.addEventListener("click", () => onClick(player.name));
+      card.addEventListener("dragstart", (event) => {
+        event.dataTransfer.setData("text/plain", player.name);
+      });
+      return card;
+    };
+
+    const wireDropZone = (zone, onDrop) => {
+      zone.ondragover = (event) => {
+        event.preventDefault();
+      };
+      zone.ondrop = (event) => {
+        event.preventDefault();
+        const name = event.dataTransfer.getData("text/plain");
+        if (name) {
+          onDrop(name);
+        }
+      };
+    };
+
+    const renderTeamBuilder = (scope) => {
+      const prefix = scope === "ops" ? "ops-" : "";
+      const pool = document.getElementById(`${prefix}player-pool`);
+      const teamBox = document.getElementById(`${prefix}team-box`);
+      const label = document.getElementById(`${prefix}active-team-label`);
+      const activeTeam = teamBuilderState.active[scope];
+      if (!pool || !teamBox) {
+        return;
+      }
+
+      pool.replaceChildren();
+      teamBox.replaceChildren();
+      if (label) {
+        label.textContent = activeTeam;
+      }
+      setBuilderButtonState(scope, activeTeam);
+
+      const unassigned = draftPlayers.filter((player) => !teamBuilderState.assignments[player.name]);
+      const selected = draftPlayers.filter((player) => teamBuilderState.assignments[player.name] === activeTeam);
+
+      unassigned.forEach((player) => {
+        pool.append(createPlayerCard(player, (name) => {
+          teamBuilderState.assignments[name] = activeTeam;
+          renderAllTeamBuilders();
+        }));
+      });
+
+      selected.forEach((player) => {
+        teamBox.append(createPlayerCard(player, (name) => {
+          teamBuilderState.assignments[name] = null;
+          renderAllTeamBuilders();
+        }));
+      });
+
+      if (!unassigned.length) {
+        pool.append(makeEl("div", "player-card", "No unassigned sample players"));
+      }
+      if (!selected.length) {
+        teamBox.append(makeEl("div", "player-card", "No players selected yet"));
+      }
+
+      wireDropZone(pool, (name) => {
+        teamBuilderState.assignments[name] = null;
+        renderAllTeamBuilders();
+      });
+      wireDropZone(teamBox, (name) => {
+        teamBuilderState.assignments[name] = activeTeam;
+        renderAllTeamBuilders();
+      });
+    };
+
+    const renderAllTeamBuilders = () => {
+      renderTeamBuilder("market");
+      renderTeamBuilder("ops");
+      const picked = Object.values(teamBuilderState.assignments).filter(Boolean).length;
+      const marketCount = document.getElementById("team-builder-count");
+      const opsCount = document.getElementById("ops-team-count");
+      if (marketCount) {
+        marketCount.textContent = `${picked} picked`;
+      }
+      if (opsCount) {
+        const opsActive = teamBuilderState.active.ops;
+        const opsPicked = Object.values(teamBuilderState.assignments).filter((team) => team === opsActive).length;
+        opsCount.textContent = `${opsPicked} on ${opsActive}`;
+      }
+    };
+
+    document.querySelectorAll("[data-team-switch]").forEach((button) => {
+      button.addEventListener("click", () => {
+        teamBuilderState.active.market = button.dataset.teamSwitch;
+        renderAllTeamBuilders();
+      });
+    });
+
+    document.querySelectorAll("[data-ops-team]").forEach((button) => {
+      button.addEventListener("click", () => {
+        teamBuilderState.active.ops = button.dataset.opsTeam;
+        renderAllTeamBuilders();
+      });
+    });
+
+    const runRandomDraft = () => {
+      draftPlayers.forEach((player, index) => {
+        teamBuilderState.assignments[player.name] = draftTeams[index % draftTeams.length];
+      });
+      renderAllTeamBuilders();
+    };
+
+    const randomDraft = document.getElementById("random-draft");
+    if (randomDraft) {
+      randomDraft.addEventListener("click", runRandomDraft);
     }
+    const opsRandomDraft = document.getElementById("ops-random-draft");
+    if (opsRandomDraft) {
+      opsRandomDraft.addEventListener("click", runRandomDraft);
+    }
+
+    const conflictItems = [
+      { title: "Field 1 double-booked", meta: "12U tryout and 14U practice both at Mon 5:30" },
+      { title: "Coach overlap", meta: "Coach Lee assigned to Diamond 2 and bullpen at Wed 6:45" }
+    ];
+    let conflictsResolved = false;
+
+    const renderConflicts = () => {
+      const container = document.getElementById("conflict-list");
+      const state = document.getElementById("conflict-state");
+      const button = document.getElementById("resolve-conflicts");
+      if (!container || !state) {
+        return;
+      }
+      container.replaceChildren();
+      state.textContent = conflictsResolved ? "resolved" : "2 conflicts";
+      if (button) {
+        button.textContent = conflictsResolved ? "Conflicts resolved" : "Resolve conflicts";
+        button.classList.toggle("is-active", conflictsResolved);
+      }
+      conflictItems.forEach((item) => {
+        const card = makeEl("div", conflictsResolved ? "field-card open" : "field-card booked");
+        card.append(
+          makeEl("strong", "", conflictsResolved ? "Resolved" : item.title),
+          makeEl("span", "", conflictsResolved ? `${item.meta} / moved to open slot` : item.meta),
+          makeEl("b", "mono", conflictsResolved ? "clear" : "needs action")
+        );
+        container.append(card);
+      });
+    };
+
+    const resolveConflicts = document.getElementById("resolve-conflicts");
+    if (resolveConflicts) {
+      resolveConflicts.addEventListener("click", () => {
+        conflictsResolved = true;
+        renderConflicts();
+      });
+    }
+
+    const venueFields = ["Diamond 1", "Diamond 2", "Bullpen Cage", "Turf Field"];
+    const statusCycle = ["booked", "open", "hold", "open"];
+    const venueStatusCopy = {
+      booked: "Booked by sample league",
+      open: "Open for request",
+      hold: "Held for organizer review"
+    };
+
+    const renderVenueFields = () => {
+      const container = document.getElementById("venue-field-grid");
+      const date = document.getElementById("venue-date");
+      const time = document.getElementById("venue-time");
+      if (!container || !date || !time) {
+        return;
+      }
+      const seed = date.selectedIndex * 2 + time.selectedIndex;
+      container.replaceChildren();
+      venueFields.forEach((field, index) => {
+        const status = statusCycle[(seed + index) % statusCycle.length];
+        const card = makeEl("div", `field-card ${status}`);
+        card.append(
+          makeEl("strong", "", field),
+          makeEl("span", "", `${optionLabel(date)} / ${optionLabel(time)}`),
+          makeEl("b", "mono", status),
+          makeEl("span", "", venueStatusCopy[status])
+        );
+        container.append(card);
+      });
+    };
+
+    ["venue-date", "venue-time"].forEach((id) => {
+      const select = document.getElementById(id);
+      if (select) {
+        select.addEventListener("change", renderVenueFields);
+      }
+    });
+
+    const setOpenAccordion = (item) => {
+      if (!item) {
+        return;
+      }
+      document.querySelectorAll(".accordion-item").forEach((accordionItem) => {
+        const open = accordionItem === item;
+        accordionItem.classList.toggle("is-open", open);
+        const trigger = accordionItem.querySelector(".accordion-trigger");
+        if (trigger) {
+          trigger.setAttribute("aria-expanded", String(open));
+        }
+      });
+    };
+
+    document.querySelectorAll(".accordion-trigger").forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        setOpenAccordion(trigger.closest(".accordion-item"));
+      });
+    });
+
+    document.querySelectorAll("[data-open-panel]").forEach((link) => {
+      link.addEventListener("click", () => {
+        const item = document.querySelector(`[data-panel="${link.dataset.openPanel}"]`);
+        setOpenAccordion(item);
+      });
+    });
+
+    const updateSignupDemo = () => {
+      const checks = Array.from(document.querySelectorAll("[data-signup-check]"));
+      const ready = checks.filter((check) => check.checked).length;
+      const status = document.getElementById("signup-status");
+      const card = document.getElementById("signup-player-card");
+      if (status) {
+        status.textContent = `${ready} of ${checks.length} ready`;
+      }
+      if (card) {
+        const feeState = checks[2] && checks[2].checked ? "fee paid" : "fee pending";
+        card.textContent = `Maya Ramos / 12U / guardian confirmed / ${feeState}`;
+      }
+    };
+
+    document.querySelectorAll("[data-signup-check]").forEach((check) => {
+      check.addEventListener("change", updateSignupDemo);
+    });
+
+    const publishParents = ["Maya guardian", "Nico guardian", "Ari guardian", "Sam guardian"];
+    const weeklyScheduleState = {
+      visible: false,
+      cancelledPractice: false
+    };
+    let publishTimer = null;
+
+    const renderWeeklySchedule = () => {
+      const container = document.getElementById("weekly-schedule");
+      if (!container) {
+        return;
+      }
+      container.replaceChildren();
+      if (!weeklyScheduleState.visible) {
+        container.append(makeEl("div", "week-card", "Publish the sample week to reveal schedule cards."));
+        return;
+      }
+
+      const items = [
+        { title: "Mon game", meta: "Firecrackers vs Panthers / Field 1 / 5:30 PM", state: "published" },
+        { title: "Tue practice", meta: "Panthers practice / Field 2 / 6:45 PM", state: weeklyScheduleState.cancelledPractice ? "cancelled" : "published", cancellable: true },
+        { title: "Thu game", meta: "Sparks vs Pitch Perfect / Field 1 / 6:45 PM", state: "published" }
+      ];
+
+      items.forEach((item) => {
+        const card = makeEl("div", weeklyScheduleState.cancelledPractice && item.cancellable ? "week-card cancelled" : "week-card");
+        const body = makeEl("div");
+        body.append(makeEl("strong", "", item.title), makeEl("span", "", item.meta));
+        if (item.cancellable && !weeklyScheduleState.cancelledPractice) {
+          const cancel = makeEl("button", "tiny-btn", "Cancel practice");
+          cancel.type = "button";
+          cancel.dataset.cancelPractice = "true";
+          card.append(body, cancel);
+        } else {
+          card.append(body, makeEl("b", "mono", item.state));
+        }
+        container.append(card);
+      });
+    };
+
+    const setPublishProgress = (value) => {
+      const progress = document.getElementById("publish-progress");
+      if (progress) {
+        progress.style.width = `${value}%`;
+      }
+    };
+
+    const runParentNotificationSequence = (message, doneStatus, onDone) => {
+      const status = document.getElementById("publish-status");
+      let sent = 0;
+      clearInterval(publishTimer);
+      setPublishProgress(0);
+      if (status) {
+        status.textContent = "notifying";
+      }
+      renderParentRows(document.getElementById("publish-parent-list"), publishParents.map((name) => ({
+        name,
+        message,
+        state: "queued"
+      })));
+
+      publishTimer = window.setInterval(() => {
+        sent += 1;
+        setPublishProgress(Math.round((sent / publishParents.length) * 100));
+        renderParentRows(document.getElementById("publish-parent-list"), publishParents.map((name, index) => ({
+          name,
+          message,
+          state: index < sent ? doneStatus : "queued"
+        })));
+        if (sent >= publishParents.length) {
+          clearInterval(publishTimer);
+          publishTimer = null;
+          if (status) {
+            status.textContent = doneStatus === "sent" ? "published" : "parents notified";
+          }
+          if (onDone) {
+            onDone();
+          }
+        }
+      }, 280);
+    };
+
+    const publishWeek = document.getElementById("publish-week");
+    if (publishWeek) {
+      publishWeek.addEventListener("click", () => {
+        weeklyScheduleState.visible = true;
+        weeklyScheduleState.cancelledPractice = false;
+        setOpenAccordion(document.querySelector('[data-panel="publish"]'));
+        renderWeeklySchedule();
+        runParentNotificationSequence("Sample week schedule", "sent");
+      });
+    }
+
+    const weeklySchedule = document.getElementById("weekly-schedule");
+    if (weeklySchedule) {
+      weeklySchedule.addEventListener("click", (event) => {
+        if (!(event.target instanceof HTMLElement) || !event.target.dataset.cancelPractice) {
+          return;
+        }
+        weeklyScheduleState.cancelledPractice = true;
+        renderWeeklySchedule();
+        runParentNotificationSequence("Tuesday practice cancelled", "updated", () => {
+          const status = document.getElementById("publish-status");
+          if (status) {
+            status.textContent = "practice cancelled";
+          }
+        });
+      });
+    }
+
+    const scoreState = {
+      fire: 5,
+      panthers: 3,
+      final: false
+    };
+
+    const renderScoreDemo = () => {
+      const scoreline = document.getElementById("live-scoreline");
+      const status = document.getElementById("score-status");
+      const standings = document.getElementById("standings-demo");
+      if (scoreline) {
+        scoreline.textContent = `Firecrackers ${scoreState.fire}, Panthers ${scoreState.panthers}`;
+      }
+      if (status) {
+        status.textContent = scoreState.final ? "final" : "live";
+      }
+      if (standings) {
+        standings.replaceChildren();
+        [
+          { team: "Firecrackers", record: scoreState.final ? "13-3 / .813" : "12-3 / .800" },
+          { team: "Sparks", record: "10-5 / .667" },
+          { team: "Panthers", record: scoreState.final ? "10-6 / .625" : "10-5 / .667" }
+        ].forEach((rowData, index) => {
+          const row = makeEl("div", "week-card");
+          row.append(
+            makeEl("strong", "", `${index + 1}. ${rowData.team}`),
+            makeEl("b", "mono", rowData.record)
+          );
+          standings.append(row);
+        });
+      }
+    };
+
+    const addRun = document.getElementById("add-run");
+    if (addRun) {
+      addRun.addEventListener("click", () => {
+        scoreState.fire += 1;
+        scoreState.final = false;
+        renderScoreDemo();
+      });
+    }
+
+    const finalizeGame = document.getElementById("finalize-game");
+    if (finalizeGame) {
+      finalizeGame.addEventListener("click", () => {
+        scoreState.final = true;
+        renderScoreDemo();
+      });
+    }
+
+    updateDemo();
+    renderPlayerResults();
+    renderRegistrations();
+    renderAllTeamBuilders();
+    renderConflicts();
+    renderVenueFields();
+    updateSignupDemo();
+    renderWeeklySchedule();
+    renderScoreDemo();
 
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!prefersReduced && "IntersectionObserver" in window) {
