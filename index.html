@@ -2239,7 +2239,6 @@
 
     .board-main,
     .board-side,
-    .market-card,
     .ops-card {
       border: 1px solid var(--line);
       border-radius: var(--radius);
@@ -2460,248 +2459,704 @@
       font-size: 10px;
     }
 
-    .market-accordion {
-      display: grid;
-      gap: 12px;
+    .market-hud {
+      --demo-primary: #3667B5;
+      --demo-accent: #70ECF0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(8, 16, 15, 0.7);
+      overflow: hidden;
     }
 
-    .market-card {
-      min-height: auto;
-      padding: 0;
-      display: block;
-    }
-
-    .market-label {
-      color: var(--green-hi);
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    .market-trigger {
-      width: 100%;
-      min-height: 116px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 18px;
-      align-items: center;
-      padding: 22px;
-      border: 0;
-      background: transparent;
-      color: inherit;
-      text-align: left;
-      font: inherit;
-      cursor: pointer;
-    }
-
-    .market-trigger strong {
-      display: block;
-      margin-top: 10px;
-      font-size: 30px;
-      line-height: 1.05;
-      text-wrap: balance;
-    }
-
-    .market-trigger em {
-      display: block;
-      max-width: 58ch;
-      margin-top: 10px;
-      color: var(--muted);
-      font-style: normal;
-      font-size: 15px;
-    }
-
-    .market-trigger b {
-      color: var(--green-hi);
-      font-family: var(--font-mono);
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    .market-panel {
-      display: none;
-      gap: 18px;
-      padding: 0 22px 22px;
-      border-top: 1px solid var(--line);
-    }
-
-    .market-card.is-open .market-panel {
-      display: grid;
-    }
-
-    .market-panel.two-column {
-      grid-template-columns: minmax(280px, 0.44fr) minmax(0, 0.56fr);
-      align-items: start;
-    }
-
-    .market-panel.organizer-panel {
-      grid-template-columns: 1fr;
-      align-items: start;
-    }
-
-    .market-panel-copy {
-      color: var(--muted);
-      font-size: 15px;
-      max-width: 56ch;
-    }
-
-    .market-card-player .market-panel-copy {
-      max-width: 48ch;
-      margin-top: 22px;
-    }
-
-    .organizer-panel > .market-panel-copy {
-      max-width: 78ch;
-      margin-bottom: 2px;
-    }
-
-    .market-list {
-      display: grid;
-      gap: 9px;
-      margin-top: auto;
-      padding-top: 18px;
-    }
-
-    .market-list span {
+    .market-hud-head {
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: space-between;
-      gap: 12px;
-      min-height: 38px;
-      padding: 0 10px;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      color: var(--muted);
-      font-size: 13px;
+      gap: 16px;
+      padding: 18px 22px 14px;
+      border-bottom: 1px solid var(--line);
     }
 
-    .market-list b {
-      color: var(--ink);
-      font-family: var(--font-mono);
-      font-size: 11px;
-    }
-
-    .market-demo {
-      padding-top: 0;
-    }
-
-    .player-search {
-      display: grid;
-      gap: 9px;
-    }
-
-    .player-search-row {
-      min-height: 76px;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      align-items: center;
-      gap: 18px;
-      padding: 14px 16px;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      background: rgba(255, 255, 255, 0.03);
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .player-search-row strong {
-      color: var(--ink);
-    }
-
-    .player-search-row > div,
-    .registration-row > div:first-child,
-    .parent-row > div,
-    .week-card > div {
-      display: grid;
-      gap: 4px;
+    .market-hud-title {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
       min-width: 0;
     }
 
-    .organizer-board {
-      display: grid;
-      gap: 10px;
-    }
-
-    .organizer-panel .organizer-board {
-      grid-template-columns: minmax(300px, 0.9fr) minmax(0, 1.1fr);
-    }
-
-    .organizer-panel .organizer-lane:nth-child(3) {
-      grid-column: 1 / -1;
-    }
-
-    .organizer-lane {
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      overflow: hidden;
-      background: rgba(255, 255, 255, 0.03);
-    }
-
-    .organizer-lane header {
-      min-height: 32px;
+    .market-hud-tabs {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 10px;
+      gap: 0;
+      padding: 0 22px;
       border-bottom: 1px solid var(--line);
+      overflow-x: auto;
+    }
+
+    .market-hud-tab {
+      position: relative;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 10px;
+      padding: 14px 0 12px;
+      margin-right: 26px;
+      border: 0;
+      background: transparent;
       color: var(--quiet);
+      font: inherit;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: color 120ms ease, border-color 120ms ease;
+    }
+
+    .market-hud-tab em {
       font-family: var(--font-mono);
       font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      font-style: normal;
+      color: var(--quiet);
+    }
+
+    .market-hud-tab span {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-style: italic;
+      font-weight: 800;
       text-transform: uppercase;
+      letter-spacing: 0.01em;
     }
 
-    .organizer-lane > div {
-      padding: 10px;
-      color: var(--muted);
-      font-size: 13px;
+    .market-hud-tab:hover {
+      color: var(--ink);
     }
 
-    .venue-slots {
+    .market-hud-tab.is-active {
+      color: var(--ink);
+      border-bottom-color: var(--demo-primary);
+    }
+
+    .market-hud-tab.is-active em {
+      color: var(--demo-accent);
+    }
+
+    .market-hud-body {
+      padding: 18px 22px 22px;
+    }
+
+    .market-hud-panel {
+      display: none;
+    }
+
+    .market-hud-panel.is-active {
+      display: block;
+    }
+
+    .market-hud-controls {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 220px));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .market-hud-controls label {
+      display: grid;
       gap: 6px;
     }
 
-    .venue-slots span {
-      min-height: 54px;
-      display: grid;
-      align-content: center;
-      gap: 3px;
-      padding: 8px;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      color: var(--muted);
+    .market-hud-controls label > span {
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .market-hud-note {
+      margin: 10px 0 0;
+      color: var(--quiet);
       font-family: var(--font-mono);
       font-size: 10px;
-      background: rgba(255, 255, 255, 0.03);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
-    .venue-slots b {
-      color: var(--ink);
-      font-size: 12px;
-    }
-
-    .venue-slots .booked {
-      background: var(--green-soft);
-      border-color: rgba(98, 183, 124, 0.28);
-    }
-
-    .market-controls {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-top: 16px;
-    }
-
-    .market-action-row {
+    .market-hud-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
       margin-top: 10px;
     }
 
+    /* Player game cards */
+    .market-hud-games {
+      display: grid;
+      gap: 8px;
+    }
+
+    .market-hud-game {
+      display: grid;
+      grid-template-columns: 44px minmax(0, 1fr) auto auto;
+      gap: 14px;
+      align-items: center;
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(8, 16, 15, 0.6);
+    }
+
+    .market-hud-game-mark {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 6px;
+      background: color-mix(in srgb, var(--demo-primary) 22%, transparent);
+      color: var(--ink);
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-style: italic;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .market-hud-game-body {
+      display: grid;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .market-hud-game-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-style: italic;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+      line-height: 1.05;
+    }
+
+    .market-hud-game-meta {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--quiet);
+      text-transform: uppercase;
+    }
+
+    .market-hud-game-spots {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+      min-width: 56px;
+    }
+
+    .market-hud-game-spots b {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-style: italic;
+      font-weight: 800;
+      color: var(--demo-primary);
+      line-height: 1;
+    }
+
+    .market-hud-game-spots em {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      font-style: normal;
+      color: var(--quiet);
+      text-transform: uppercase;
+    }
+
+    .market-hud-cta {
+      min-height: 36px;
+      padding: 0 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: 4px;
+      background: transparent;
+      color: var(--ink);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 180ms ease, border-color 180ms ease, color 180ms ease;
+    }
+
+    .market-hud-cta:hover {
+      border-color: var(--demo-primary);
+      color: var(--demo-primary);
+    }
+
+    .market-hud-cta.is-active {
+      background: color-mix(in srgb, var(--demo-accent) 16%, transparent);
+      border-color: var(--demo-accent);
+      color: var(--demo-accent);
+    }
+
+    /* Organizer board */
+    .market-hud-board {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.15fr);
+      gap: 12px;
+    }
+
+    .market-hud-lane {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(8, 16, 15, 0.55);
+      overflow: hidden;
+    }
+
+    .market-hud-lane-wide {
+      grid-column: 1 / -1;
+    }
+
+    .market-hud-lane > header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--line);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--quiet);
+    }
+
+    .market-hud-lane > header b {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: var(--demo-primary);
+    }
+
+    .market-hud-lane-body {
+      padding: 12px 14px 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .market-hud-row {
+      display: grid;
+      grid-template-columns: 32px minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(8, 16, 15, 0.55);
+    }
+
+    .market-hud-row-mark {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border-radius: 4px;
+      background: color-mix(in srgb, var(--demo-primary) 22%, transparent);
+      color: var(--ink);
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-style: italic;
+      font-weight: 800;
+    }
+
+    .market-hud-row-body {
+      display: grid;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .market-hud-row-name {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-style: italic;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+    }
+
+    .market-hud-row-meta {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--quiet);
+    }
+
+    .market-hud-row-actions {
+      display: inline-flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .market-hud-status {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--line-strong);
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .market-hud-status.is-waiting {
+      border-color: color-mix(in srgb, var(--demo-accent) 50%, transparent);
+      background: color-mix(in srgb, var(--demo-accent) 14%, transparent);
+      color: color-mix(in srgb, var(--demo-accent) 70%, var(--ink));
+    }
+
+    .market-hud-status.is-approved {
+      border-color: color-mix(in srgb, var(--demo-primary) 60%, transparent);
+      background: color-mix(in srgb, var(--demo-primary) 24%, transparent);
+      color: var(--ink);
+    }
+
+    .market-hud-status.is-hold {
+      border-color: rgba(216, 58, 72, 0.42);
+      background: rgba(216, 58, 72, 0.14);
+      color: #ff8a94;
+    }
+
+    /* Chip buttons (team switcher, draft, resolve) */
+    .hud-chip {
+      min-height: 30px;
+      padding: 0 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: 4px;
+      background: transparent;
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: color 120ms ease, border-color 120ms ease, background 120ms ease;
+    }
+
+    .hud-chip:hover {
+      color: var(--ink);
+      border-color: var(--ink);
+    }
+
+    .hud-chip.is-active {
+      color: var(--demo-accent);
+      border-color: var(--demo-accent);
+      background: color-mix(in srgb, var(--demo-accent) 14%, transparent);
+    }
+
+    .hud-chip.is-primary {
+      color: var(--demo-primary);
+      border-color: color-mix(in srgb, var(--demo-primary) 70%, transparent);
+    }
+
+    .hud-chip.is-primary:hover {
+      background: color-mix(in srgb, var(--demo-primary) 16%, transparent);
+    }
+
+    .team-switcher {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .hud-lane-cap {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--quiet);
+      margin-bottom: 6px;
+    }
+
+    /* Player pool / draft team box (shared with #operations) */
+    .builder-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .player-pool,
+    .team-box {
+      display: grid;
+      grid-auto-rows: min-content;
+      gap: 6px;
+      align-content: start;
+      min-height: 200px;
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(5, 9, 8, 0.4);
+    }
+
+    .team-box {
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--demo-primary) 12%, transparent), transparent 70%),
+        rgba(5, 9, 8, 0.55);
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--demo-primary) 18%, transparent);
+    }
+
+    .team-box.is-empty {
+      border-style: dashed;
+      border-color: color-mix(in srgb, var(--demo-accent) 45%, transparent);
+    }
+
+    .player-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 30px minmax(0, 1fr);
+      gap: 10px;
+      align-items: center;
+      min-height: 50px;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(8, 16, 15, 0.7);
+      cursor: grab;
+      text-align: left;
+      font: inherit;
+      color: var(--ink);
+      transition: border-color 120ms ease, transform 120ms ease;
+    }
+
+    .player-card:hover {
+      border-color: color-mix(in srgb, var(--demo-accent) 50%, transparent);
+    }
+
+    .player-card:active {
+      cursor: grabbing;
+      transform: translateY(1px) scale(0.995);
+    }
+
+    .player-card::before {
+      content: attr(data-num);
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 4px;
+      background: color-mix(in srgb, var(--demo-primary) 26%, transparent);
+      color: var(--ink);
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-style: italic;
+      font-weight: 800;
+    }
+
+    .player-card-body {
+      display: grid;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .player-card strong {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-style: italic;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+    }
+
+    .player-card span {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--quiet);
+    }
+
+    .drop-hint {
+      display: grid;
+      place-items: center;
+      min-height: 110px;
+      padding: 14px;
+      border: 1px dashed color-mix(in srgb, var(--demo-accent) 36%, transparent);
+      border-radius: 6px;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    /* Conflict rows */
+    .conflict-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .market-hud-conflict {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: center;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(8, 16, 15, 0.55);
+    }
+
+    .market-hud-conflict.is-clear {
+      border-color: color-mix(in srgb, var(--demo-accent) 45%, transparent);
+      background: color-mix(in srgb, var(--demo-accent) 8%, transparent);
+    }
+
+    .market-hud-conflict-body {
+      display: grid;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .market-hud-conflict-title {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-style: italic;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+    }
+
+    .market-hud-conflict-meta {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--quiet);
+    }
+
+    /* Venue scoreboard tiles */
+    .market-hud-fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .market-hud-field {
+      position: relative;
+      display: grid;
+      gap: 10px;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(8, 16, 15, 0.6);
+      overflow: hidden;
+    }
+
+    .market-hud-field-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .market-hud-field-name {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-style: italic;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+    }
+
+    .market-hud-field-time {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-style: italic;
+      font-weight: 800;
+      color: var(--demo-primary);
+      line-height: 1;
+    }
+
+    .market-hud-field-meta {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--quiet);
+    }
+
+    .market-hud-field-status {
+      display: inline-flex;
+      justify-self: start;
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--line-strong);
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .market-hud-field.is-booked {
+      border-color: rgba(216, 58, 72, 0.32);
+    }
+    .market-hud-field.is-booked .market-hud-field-status {
+      border-color: rgba(216, 58, 72, 0.42);
+      background: rgba(216, 58, 72, 0.16);
+      color: #ff8a94;
+    }
+    .market-hud-field.is-booked .market-hud-field-time {
+      color: #ff8a94;
+    }
+
+    .market-hud-field.is-open {
+      border-color: color-mix(in srgb, var(--demo-accent) 42%, transparent);
+    }
+    .market-hud-field.is-open .market-hud-field-status {
+      border-color: color-mix(in srgb, var(--demo-accent) 55%, transparent);
+      background: color-mix(in srgb, var(--demo-accent) 16%, transparent);
+      color: color-mix(in srgb, var(--demo-accent) 75%, var(--ink));
+    }
+    .market-hud-field.is-open .market-hud-field-time {
+      color: var(--demo-accent);
+    }
+
+    .market-hud-field.is-hold {
+      border-color: rgba(201, 162, 75, 0.34);
+    }
+    .market-hud-field.is-hold .market-hud-field-status {
+      border-color: rgba(201, 162, 75, 0.42);
+      background: rgba(201, 162, 75, 0.16);
+      color: #efc36c;
+    }
+    .market-hud-field.is-hold .market-hud-field-time {
+      color: #efc36c;
+    }
+
+    /* Legacy tiny-btn kept for #operations */
     .tiny-btn {
       min-height: 34px;
       padding: 0 10px;
@@ -2727,57 +3182,10 @@
     }
 
     .registration-list,
-    .player-pool,
-    .team-box,
-    .conflict-list,
-    .field-grid,
     .week-list,
     .parent-list {
       display: grid;
       gap: 8px;
-    }
-
-    .player-pool,
-    .team-box {
-      align-content: start;
-      grid-auto-rows: min-content;
-      min-height: 180px;
-      padding: 10px;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      background: rgba(5, 9, 8, 0.32);
-    }
-
-    .team-box {
-      background:
-        linear-gradient(180deg, rgba(98, 183, 124, 0.08), rgba(5, 9, 8, 0.24)),
-        rgba(5, 9, 8, 0.52);
-      box-shadow: inset 0 0 0 1px rgba(98, 183, 124, 0.1);
-    }
-
-    .team-box.is-empty {
-      border-style: dashed;
-      border-color: rgba(98, 183, 124, 0.42);
-    }
-
-    .drop-hint {
-      display: grid;
-      place-items: center;
-      min-height: 108px;
-      padding: 18px;
-      border: 1px dashed rgba(98, 183, 124, 0.34);
-      border-radius: 6px;
-      color: var(--muted);
-      text-align: center;
-      font-size: 13px;
-    }
-
-    .registration-row {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 10px;
-      align-items: center;
-      padding: 10px;
     }
 
     .registration-actions,
@@ -2785,63 +3193,6 @@
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-    }
-
-    .builder-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .player-card {
-      min-height: 72px;
-      display: grid;
-      align-content: center;
-      gap: 4px;
-      padding: 10px;
-      color: var(--muted);
-      cursor: grab;
-      font: inherit;
-      text-align: left;
-    }
-
-    .player-card:active {
-      cursor: grabbing;
-    }
-
-    .team-switcher {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
-    .field-grid {
-      grid-template-columns: repeat(2, 1fr);
-      margin-top: 12px;
-    }
-
-    .field-card {
-      display: grid;
-      gap: 6px;
-      padding: 12px;
-      color: var(--muted);
-    }
-
-    .field-card.booked {
-      background: rgba(216, 58, 72, 0.12);
-      border-color: rgba(216, 58, 72, 0.3);
-    }
-
-    .field-card.open {
-      background: var(--green-soft);
-      border-color: rgba(98, 183, 124, 0.32);
-    }
-
-    .field-card.hold {
-      background: rgba(201, 162, 75, 0.12);
-      border-color: rgba(201, 162, 75, 0.34);
     }
 
     .sample-player-card {
@@ -3575,23 +3926,38 @@
 
       .demo-layout,
       .mini-demo-grid,
-      .market-panel.two-column,
-      .market-panel.organizer-panel,
-      .organizer-panel .organizer-board {
+      .market-hud-board {
         grid-template-columns: 1fr;
       }
 
-      .market-controls,
+      .market-hud-lane-wide {
+        grid-column: auto;
+      }
+
+      .market-hud-controls,
       .builder-grid,
-      .field-grid,
+      .market-hud-fields,
       .sample-player-grid,
       .score-controls-grid {
         grid-template-columns: 1fr;
       }
 
-      .market-trigger {
-        grid-template-columns: 1fr;
-        min-height: auto;
+      .market-hud-game {
+        grid-template-columns: 36px minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        gap: 10px;
+      }
+
+      .market-hud-game-spots {
+        grid-row: 1;
+        grid-column: 2;
+        flex-direction: row;
+        align-items: baseline;
+        gap: 6px;
+      }
+
+      .market-hud-cta {
+        grid-column: 1 / -1;
       }
 
       .scoreline-grid {
@@ -3680,10 +4046,15 @@
         padding: 12px 14px;
       }
 
-      .registration-row,
+      .market-hud-row,
       .parent-row,
       .week-card {
-        grid-template-columns: 1fr;
+        grid-template-columns: 32px minmax(0, 1fr);
+      }
+
+      .market-hud-row .market-hud-row-actions {
+        grid-column: 2;
+        flex-wrap: wrap;
       }
 
       .game-row {
@@ -4053,129 +4424,129 @@
       <div class="container">
         <div class="section-header reveal">
           <div>
-            <div class="section-kicker">Player and venue demos</div>
+            <div class="section-kicker">Public-facing surfaces</div>
             <h2 id="marketplace-title">Help people find a place to play.</h2>
           </div>
-          <p>The public side should feel concrete: players search for the right activity, organizers approve real people, and venues show exactly what is open.</p>
+          <p>The public side should feel concrete: players search the way fans actually search, organizers approve real people, and venues show exactly what is open.</p>
         </div>
 
-        <div class="market-accordion" id="market-demo-accordion">
-          <article class="market-card market-card-player reveal is-open" data-market-panel="players">
-            <button class="market-trigger" type="button" aria-expanded="true">
-              <span>
-                <span class="market-label">Players</span>
-                <strong>Search, save, or join a waitlist.</strong>
-                <em>Try filters a player would understand. Buttons only update this page, with no payment or account creation.</em>
-              </span>
-              <b>Open demo</b>
+        <div class="market-hud reveal" id="market-hud">
+          <header class="market-hud-head">
+            <div class="market-hud-title">
+              <span class="hud-kicker" id="market-hud-kicker">Players</span>
+              <h3 class="hud-h2" id="market-hud-h2">Search, save, or join a waitlist.</h3>
+            </div>
+            <span class="hud-hint">Demo only · resets on reload</span>
+          </header>
+
+          <nav class="market-hud-tabs" role="tablist" aria-label="Marketplace surfaces">
+            <button class="market-hud-tab is-active" data-market-tab="players" type="button" role="tab" aria-selected="true">
+              <em>01</em><span>Players</span>
             </button>
-            <div class="market-panel two-column">
-              <div>
-                <div class="market-controls" aria-label="Player search controls">
+            <button class="market-hud-tab" data-market-tab="organizers" type="button" role="tab" aria-selected="false">
+              <em>02</em><span>Organizers</span>
+            </button>
+            <button class="market-hud-tab" data-market-tab="venues" type="button" role="tab" aria-selected="false">
+              <em>03</em><span>Venues</span>
+            </button>
+          </nav>
+
+          <div class="market-hud-body">
+            <div class="market-hud-panel is-active" data-market-panel="players" role="tabpanel">
+              <div class="market-hud-controls" aria-label="Player search controls">
+                <label>
+                  <span>Sport</span>
                   <select class="sample-select" id="player-sport">
                     <option>Softball</option>
                     <option>Basketball</option>
                     <option>Soccer</option>
                   </select>
+                </label>
+                <label>
+                  <span>Area</span>
                   <select class="sample-select" id="player-location">
                     <option>Bayside</option>
                     <option>Lakeside</option>
                     <option>Westport</option>
                   </select>
+                </label>
+                <label>
+                  <span>When</span>
                   <select class="sample-select" id="player-time">
                     <option>Tonight</option>
                     <option>This weekend</option>
                     <option>Next week</option>
                   </select>
-                </div>
-                <p class="market-panel-copy">Demo data resets when you leave this page. Checkout stops at a preview screen.</p>
+                </label>
               </div>
-              <div class="market-demo player-search" id="player-results">
-                <div class="player-search-row"><span>Loading games</span><strong>demo</strong></div>
-              </div>
+              <div class="market-hud-games" id="player-results"></div>
+              <p class="market-hud-note">Buttons update this page only. No payment or account creation.</p>
             </div>
-          </article>
 
-          <article class="market-card market-card-organizer reveal" data-market-panel="organizers">
-            <button class="market-trigger" type="button" aria-expanded="false">
-              <span>
-                <span class="market-label">Organizers</span>
-                <strong>Approve players, draft teams, and clear conflicts.</strong>
-                <em>This is the admin work organizers actually do before a season goes public.</em>
-              </span>
-              <b>Open demo</b>
-            </button>
-            <div class="market-panel organizer-panel">
-              <div class="market-panel-copy">Use the queue to approve or hold players, then move tryout players into teams or run a random draft.</div>
-              <div class="market-demo organizer-board">
-                <div class="organizer-lane">
-                  <header><span>Registration queue</span><b id="registration-count">4 waiting</b></header>
-                  <div class="registration-list" id="registration-list"></div>
+            <div class="market-hud-panel" data-market-panel="organizers" role="tabpanel">
+              <div class="market-hud-board">
+                <div class="market-hud-lane">
+                  <header><span>Lane 01 · Registration queue</span><b id="registration-count">4 waiting</b></header>
+                  <div class="market-hud-lane-body">
+                    <div class="registration-list" id="registration-list"></div>
+                  </div>
                 </div>
-                <div class="organizer-lane">
-                  <header><span>Tryout team builder</span><b id="team-builder-count">0 picked</b></header>
-                  <div>
+                <div class="market-hud-lane">
+                  <header><span>Lane 02 · Tryout draft board</span><b id="team-builder-count">0 picked</b></header>
+                  <div class="market-hud-lane-body">
                     <div class="team-switcher">
-                      <button class="tiny-btn is-active" type="button" data-team-switch="Riptide">Riptide</button>
-                      <button class="tiny-btn" type="button" data-team-switch="Hammerheads">Hammerheads</button>
-                      <button class="tiny-btn" type="button" id="random-draft">Random draft</button>
+                      <button class="hud-chip is-active" type="button" data-team-switch="Riptide">Riptide</button>
+                      <button class="hud-chip" type="button" data-team-switch="Hammerheads">Hammerheads</button>
+                      <button class="hud-chip is-primary" type="button" id="random-draft">Random draft</button>
                     </div>
                     <div class="builder-grid">
                       <div>
-                        <div class="demo-label">Player pool</div>
+                        <div class="hud-lane-cap">Player pool</div>
                         <div class="player-pool" id="player-pool"></div>
                       </div>
                       <div>
-                        <div class="demo-label" id="active-team-label">Riptide</div>
+                        <div class="hud-lane-cap" id="active-team-label">Riptide</div>
                         <div class="team-box" id="team-box"></div>
                       </div>
                     </div>
-                    <p class="demo-reset-note">Drag or click to move players. Drafts and random drafts will be supported in the real product.</p>
+                    <p class="market-hud-note">Drag or click to move players between pool and team.</p>
                   </div>
                 </div>
-                <div class="organizer-lane">
-                  <header><span>Field conflicts</span><b id="conflict-state">2 conflicts</b></header>
-                  <div>
+                <div class="market-hud-lane market-hud-lane-wide">
+                  <header><span>Lane 03 · Schedule conflicts</span><b id="conflict-state">2 conflicts</b></header>
+                  <div class="market-hud-lane-body">
                     <div class="conflict-list" id="conflict-list"></div>
-                    <div class="market-action-row">
-                      <button class="tiny-btn" type="button" id="resolve-conflicts">Resolve conflicts</button>
+                    <div class="market-hud-actions">
+                      <button class="hud-chip is-primary" type="button" id="resolve-conflicts">Resolve conflicts</button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </article>
 
-          <article class="market-card market-card-venue reveal" data-market-panel="venues">
-            <button class="market-trigger" type="button" aria-expanded="false">
-              <span>
-                <span class="market-label">Venues</span>
-                <strong>Pick a time and see what is really open.</strong>
-                <em>Availability changes by date and time, with booked, open, and hold states clearly separated.</em>
-              </span>
-              <b>Open demo</b>
-            </button>
-            <div class="market-panel two-column">
-              <div>
-                <div class="market-controls" aria-label="Venue slot controls">
+            <div class="market-hud-panel" data-market-panel="venues" role="tabpanel">
+              <div class="market-hud-controls" aria-label="Venue slot controls">
+                <label>
+                  <span>Date</span>
                   <select class="sample-select" id="venue-date">
                     <option value="jun17">Jun 17</option>
                     <option value="jun18">Jun 18</option>
                     <option value="jun19">Jun 19</option>
                   </select>
+                </label>
+                <label>
+                  <span>Slot</span>
                   <select class="sample-select" id="venue-time">
                     <option value="530">5:30 PM</option>
                     <option value="645">6:45 PM</option>
                     <option value="800">8:00 PM</option>
                   </select>
-                </div>
-                <p class="market-panel-copy">This is deterministic fake availability so the state feels responsive without listing real inventory.</p>
+                </label>
               </div>
-              <div class="market-demo field-grid" id="venue-field-grid">
-                <div class="field-card"><strong>Loading fields</strong><span>demo</span></div>
-              </div>
+              <div class="market-hud-fields" id="venue-field-grid"></div>
+              <p class="market-hud-note">Deterministic fake availability — feels responsive without listing real inventory.</p>
             </div>
-          </article>
+          </div>
         </div>
       </div>
     </section>
@@ -5282,48 +5653,54 @@
       });
     });
 
-    document.querySelectorAll(".market-trigger").forEach((trigger) => {
-      trigger.addEventListener("click", () => {
-        document.querySelectorAll(".market-card").forEach((card) => {
-          const open = card.contains(trigger);
-          card.classList.toggle("is-open", open);
-          const cardTrigger = card.querySelector(".market-trigger");
-          if (cardTrigger) {
-            cardTrigger.setAttribute("aria-expanded", String(open));
-            const marker = cardTrigger.querySelector("b");
-            if (marker) {
-              marker.textContent = open ? "Showing" : "Open demo";
-            }
-          }
+    const marketHudCopy = {
+      players: { kicker: "Players", h2: "Search, save, or join a waitlist." },
+      organizers: { kicker: "Organizers", h2: "Approve players, draft teams, clear conflicts." },
+      venues: { kicker: "Venues", h2: "Pick a time, see what is really open." }
+    };
+
+    const setMarketHudHead = (key) => {
+      const kickerEl = document.getElementById("market-hud-kicker");
+      const h2El = document.getElementById("market-hud-h2");
+      const copy = marketHudCopy[key];
+      if (kickerEl && h2El && copy) {
+        kickerEl.textContent = copy.kicker;
+        h2El.textContent = copy.h2;
+      }
+    };
+
+    document.querySelectorAll(".market-hud-tab").forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const target = tab.dataset.marketTab;
+        document.querySelectorAll(".market-hud-tab").forEach((t) => {
+          const active = t === tab;
+          t.classList.toggle("is-active", active);
+          t.setAttribute("aria-selected", String(active));
         });
+        document.querySelectorAll(".market-hud-panel").forEach((panel) => {
+          panel.classList.toggle("is-active", panel.dataset.marketPanel === target);
+        });
+        setMarketHudHead(target);
       });
     });
-    document.querySelectorAll(".market-card").forEach((card) => {
-      const trigger = card.querySelector(".market-trigger");
-      const marker = trigger ? trigger.querySelector("b") : null;
-      if (trigger) {
-        trigger.setAttribute("aria-expanded", String(card.classList.contains("is-open")));
-      }
-      if (marker) {
-        marker.textContent = card.classList.contains("is-open") ? "Showing" : "Open demo";
-      }
-    });
+
+    const sportMark = { Softball: "SB", Basketball: "BB", Soccer: "SC" };
 
     const playerResults = {
       Softball: [
-        { title: "12U open tryout", detail: "4 spots / Bayside Field 2", action: "Join waitlist", done: "Joined waitlist" },
-        { title: "Fastpitch pickup night", detail: "Intermediate / helmets provided", action: "Save", done: "Saved" },
-        { title: "Pitching clinic", detail: "Coach-led / no payment collected", action: "Add to checkout", done: "Added to checkout" }
+        { title: "12U open tryout", meta: "Bayside Field 2 · Tryout", spots: 4, action: "Join waitlist", done: "Joined" },
+        { title: "Fastpitch pickup night", meta: "Helmets provided · Intermediate", spots: 6, action: "Save", done: "Saved" },
+        { title: "Pitching clinic", meta: "Coach-led · 60 min", spots: 8, action: "Add to checkout", done: "Added" }
       ],
       Basketball: [
-        { title: "Adult 3v3 run", detail: "Indoor court / 2 spots", action: "Save", done: "Saved" },
-        { title: "JV skills session", detail: "Ball-handling and shooting", action: "Join waitlist", done: "Joined waitlist" },
-        { title: "Saturday pickup", detail: "Balanced teams / no account needed here", action: "Add to checkout", done: "Added to checkout" }
+        { title: "Adult 3v3 run", meta: "Indoor court · Drop-in", spots: 2, action: "Save", done: "Saved" },
+        { title: "JV skills session", meta: "Ball-handling · Shooting", spots: 5, action: "Join waitlist", done: "Joined" },
+        { title: "Saturday pickup", meta: "Balanced teams · No account needed", spots: 9, action: "Add to checkout", done: "Added" }
       ],
       Soccer: [
-        { title: "U10 rec match", detail: "Coed / parent coach needed", action: "Save", done: "Saved" },
-        { title: "Adult seven-a-side", detail: "Turf field / 3 spots", action: "Join waitlist", done: "Joined waitlist" },
-        { title: "Goalkeeper clinic", detail: "Small group / no payment collected", action: "Add to checkout", done: "Added to checkout" }
+        { title: "U10 rec match", meta: "Coed · Parent coach needed", spots: 3, action: "Save", done: "Saved" },
+        { title: "Adult seven-a-side", meta: "Turf field · 60 min", spots: 3, action: "Join waitlist", done: "Joined" },
+        { title: "Goalkeeper clinic", meta: "Small group · Coach-led", spots: 4, action: "Add to checkout", done: "Added" }
       ]
     };
 
@@ -5337,20 +5714,23 @@
       }
       container.replaceChildren();
       playerResults[sport].forEach((result) => {
-        const row = makeEl("div", "player-search-row");
-        const body = makeEl("div");
+        const card = makeEl("article", "market-hud-game");
+        const mark = makeEl("div", "market-hud-game-mark", sportMark[sport] || "LG");
+        const body = makeEl("div", "market-hud-game-body");
         body.append(
-          makeEl("strong", "", result.title),
-          makeEl("span", "", `${location} / ${time} / ${result.detail}`)
+          makeEl("div", "market-hud-game-title", result.title),
+          makeEl("div", "market-hud-game-meta", `${location} · ${time} · ${result.meta}`)
         );
-        const button = makeEl("button", "tiny-btn", result.action);
-        button.type = "button";
-        button.addEventListener("click", () => {
-          const active = button.classList.toggle("is-active");
-          button.textContent = active ? result.done : result.action;
+        const spots = makeEl("div", "market-hud-game-spots");
+        spots.append(makeEl("b", "", String(result.spots)), makeEl("em", "", "spots"));
+        const cta = makeEl("button", "market-hud-cta", result.action);
+        cta.type = "button";
+        cta.addEventListener("click", () => {
+          const active = cta.classList.toggle("is-active");
+          cta.textContent = active ? result.done : result.action;
         });
-        row.append(body, button);
-        container.append(row);
+        card.append(mark, body, spots, cta);
+        container.append(card);
       });
     };
 
@@ -5362,11 +5742,13 @@
     });
 
     const registrants = [
-      { name: "Maya Ramos", meta: "12U shortstop / waiver signed", status: "waiting" },
-      { name: "Nico Chen", meta: "12U catcher / fee pending", status: "waiting" },
-      { name: "Ari Brooks", meta: "10U pitcher / guardian confirmed", status: "waiting" },
-      { name: "Sam Rivera", meta: "14U utility / needs age review", status: "waiting" }
+      { name: "Maya Ramos", initials: "MR", meta: "12U shortstop · waiver signed", status: "waiting" },
+      { name: "Nico Chen", initials: "NC", meta: "12U catcher · fee pending", status: "waiting" },
+      { name: "Ari Brooks", initials: "AB", meta: "10U pitcher · guardian confirmed", status: "waiting" },
+      { name: "Sam Rivera", initials: "SR", meta: "14U utility · needs age review", status: "waiting" }
     ];
+
+    const statusLabel = { waiting: "Waiting", approved: "Approved", hold: "Hold" };
 
     const renderRegistrations = () => {
       const container = document.getElementById("registration-list");
@@ -5378,40 +5760,42 @@
       const waiting = registrants.filter((player) => player.status === "waiting").length;
       count.textContent = waiting ? `${waiting} waiting` : "queue clear";
       registrants.forEach((player, index) => {
-        const row = makeEl("div", "registration-row");
-        const body = makeEl("div");
+        const row = makeEl("div", "market-hud-row");
+        const mark = makeEl("div", "market-hud-row-mark", player.initials);
+        const body = makeEl("div", "market-hud-row-body");
         body.append(
-          makeEl("strong", "", player.name),
-          makeEl("span", "", `${player.meta} / ${player.status}`)
+          makeEl("div", "market-hud-row-name", player.name),
+          makeEl("div", "market-hud-row-meta", player.meta)
         );
-        const actions = makeEl("div", "registration-actions");
-        const approve = makeEl("button", "tiny-btn", "Approve");
+        const actions = makeEl("div", "market-hud-row-actions");
+        actions.append(makeEl("span", `market-hud-status is-${player.status}`, statusLabel[player.status]));
+        const approve = makeEl("button", "hud-chip", "Approve");
         approve.type = "button";
-        approve.classList.toggle("is-active", player.status === "approved");
+        if (player.status === "approved") approve.classList.add("is-active");
         approve.addEventListener("click", () => {
           registrants[index].status = "approved";
           renderRegistrations();
         });
-        const hold = makeEl("button", "tiny-btn", "Hold");
+        const hold = makeEl("button", "hud-chip", "Hold");
         hold.type = "button";
-        hold.classList.toggle("is-active", player.status === "hold");
+        if (player.status === "hold") hold.classList.add("is-active");
         hold.addEventListener("click", () => {
           registrants[index].status = "hold";
           renderRegistrations();
         });
         actions.append(approve, hold);
-        row.append(body, actions);
+        row.append(mark, body, actions);
         container.append(row);
       });
     };
 
     const draftPlayers = [
-      { name: "Maya Ramos", meta: "SS / speed" },
-      { name: "Nico Chen", meta: "C / arm" },
-      { name: "Ari Brooks", meta: "P / command" },
-      { name: "Sam Rivera", meta: "UTIL / contact" },
-      { name: "Jules Kim", meta: "OF / range" },
-      { name: "Tali Moore", meta: "1B / power" }
+      { name: "Maya Ramos", meta: "SS · speed", num: "7" },
+      { name: "Nico Chen", meta: "C · arm", num: "12" },
+      { name: "Ari Brooks", meta: "P · command", num: "23" },
+      { name: "Sam Rivera", meta: "UTIL · contact", num: "9" },
+      { name: "Jules Kim", meta: "OF · range", num: "4" },
+      { name: "Tali Moore", meta: "1B · power", num: "14" }
     ];
     const draftTeams = ["Riptide", "Hammerheads"];
     const teamBuilderState = {
@@ -5434,7 +5818,10 @@
       const card = makeEl("button", "player-card");
       card.type = "button";
       card.draggable = true;
-      card.append(makeEl("strong", "", player.name), makeEl("span", "", player.meta));
+      card.dataset.num = player.num || "·";
+      const body = makeEl("div", "player-card-body");
+      body.append(makeEl("strong", "", player.name), makeEl("span", "", player.meta));
+      card.append(body);
       card.addEventListener("click", () => onClick(player.name));
       card.addEventListener("dragstart", (event) => {
         event.dataTransfer.setData("text/plain", player.name);
@@ -5570,19 +5957,25 @@
         return;
       }
       container.replaceChildren();
-      state.textContent = conflictsResolved ? "resolved" : "2 conflicts";
+      state.textContent = conflictsResolved ? "cleared" : "2 conflicts";
       if (button) {
-        button.textContent = conflictsResolved ? "Conflicts resolved" : "Resolve conflicts";
+        button.textContent = conflictsResolved ? "Conflicts cleared" : "Resolve conflicts";
         button.classList.toggle("is-active", conflictsResolved);
       }
       conflictItems.forEach((item) => {
-        const card = makeEl("div", conflictsResolved ? "field-card open" : "field-card booked");
-        card.append(
-          makeEl("strong", "", conflictsResolved ? "Resolved" : item.title),
-          makeEl("span", "", conflictsResolved ? `${item.meta} / moved to open slot` : item.meta),
-          makeEl("b", "mono", conflictsResolved ? "clear" : "needs action")
+        const row = makeEl("div", conflictsResolved ? "market-hud-conflict is-clear" : "market-hud-conflict");
+        const body = makeEl("div", "market-hud-conflict-body");
+        body.append(
+          makeEl("div", "market-hud-conflict-title", conflictsResolved ? "Resolved" : item.title),
+          makeEl("div", "market-hud-conflict-meta", conflictsResolved ? `${item.meta} · moved to open slot` : item.meta)
         );
-        container.append(card);
+        const status = makeEl(
+          "span",
+          `market-hud-status ${conflictsResolved ? "is-approved" : "is-hold"}`,
+          conflictsResolved ? "Cleared" : "Action needed"
+        );
+        row.append(body, status);
+        container.append(row);
       });
     };
 
@@ -5594,12 +5987,17 @@
       });
     }
 
-    const venueFields = ["Diamond 1", "Diamond 2", "Bullpen Cage", "Turf Field"];
+    const venueFields = [
+      { name: "Diamond 1", surface: "Clay infield · Lights" },
+      { name: "Diamond 2", surface: "Clay infield · No lights" },
+      { name: "Bullpen Cage", surface: "Indoor · 60 min slot" },
+      { name: "Turf Field", surface: "Turf · Dual-use lined" }
+    ];
     const statusCycle = ["booked", "open", "hold", "open"];
-    const venueStatusCopy = {
-      booked: "Booked by league",
-      open: "Open for request",
-      hold: "Held for organizer review"
+    const venueStatusLabel = {
+      booked: "Booked",
+      open: "Open",
+      hold: "Hold"
     };
 
     const renderVenueFields = () => {
@@ -5613,13 +6011,15 @@
       container.replaceChildren();
       venueFields.forEach((field, index) => {
         const status = statusCycle[(seed + index) % statusCycle.length];
-        const card = makeEl("div", `field-card ${status}`);
-        card.append(
-          makeEl("strong", "", field),
-          makeEl("span", "", `${optionLabel(date)} / ${optionLabel(time)}`),
-          makeEl("b", "mono", status),
-          makeEl("span", "", venueStatusCopy[status])
+        const card = makeEl("div", `market-hud-field is-${status}`);
+        const head = makeEl("div", "market-hud-field-head");
+        head.append(
+          makeEl("div", "market-hud-field-name", field.name),
+          makeEl("div", "market-hud-field-time", optionLabel(time))
         );
+        const meta = makeEl("div", "market-hud-field-meta", `${optionLabel(date)} · ${field.surface}`);
+        const statusChip = makeEl("span", "market-hud-field-status", venueStatusLabel[status]);
+        card.append(head, meta, statusChip);
         container.append(card);
       });
     };
