@@ -93,11 +93,11 @@
       border-bottom: 1px solid var(--line);
     }
     .nav {
+      min-height: 72px;
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 24px;
-      padding-top: 14px;
-      padding-bottom: 14px;
     }
     .brand {
       display: flex;
@@ -119,17 +119,52 @@
     }
     .nav-links {
       display: flex;
-      gap: 24px;
-      flex: 1 1 auto;
-      font-size: 14px;
+      align-items: center;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
     }
-    .nav-links a { color: var(--muted); }
-    .nav-links a:hover { color: var(--ink); }
-    .nav-links a[aria-current="page"] { color: var(--green-hi); }
-    .nav-actions { display: flex; gap: 10px; flex: 0 0 auto; }
-    @media (max-width: 820px) {
-      .nav-links { display: none; }
-      .nav-actions { margin-left: auto; }
+    .nav-links a {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      text-decoration: underline;
+      text-decoration-color: transparent;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 6px;
+      transition: color 180ms ease, text-decoration-color 180ms ease;
+    }
+    .nav-links a:hover {
+      color: var(--ink);
+      text-decoration-color: var(--green);
+    }
+    .nav-links a[aria-current="page"] {
+      color: var(--ink);
+      text-decoration-color: var(--green);
+    }
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .menu-button {
+      display: none;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--ink);
+      cursor: pointer;
+    }
+    .menu-button span {
+      display: block;
+      width: 16px;
+      height: 2px;
+      margin: 4px auto;
+      background: currentColor;
+      border-radius: 2px;
     }
 
     .btn {
@@ -137,14 +172,17 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 10px 16px;
-      border-radius: 999px;
-      font-size: 14px;
-      font-weight: 600;
-      transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+      min-height: 42px;
+      padding: 0 16px;
+      border-radius: var(--radius);
       border: 1px solid transparent;
+      font-weight: 700;
+      font-size: 14px;
+      transition: transform 180ms ease, background 180ms ease, border-color 180ms ease, color 180ms ease;
       cursor: pointer;
+      white-space: nowrap;
     }
+    .btn:hover { transform: translateY(-1px); }
     .btn-primary { background: var(--green); color: #0c1616; }
     .btn-primary:hover { background: var(--green-hi); color: #0c1616; }
     .btn-secondary {
@@ -154,10 +192,39 @@
     }
     .btn-secondary:hover { background: var(--surface-2); color: var(--ink); }
 
+    @media (max-width: 820px) {
+      .nav { min-height: 64px; }
+      .nav-links {
+        position: absolute;
+        left: 20px;
+        right: 20px;
+        top: 64px;
+        display: none;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(12, 22, 22, 0.98);
+        box-shadow: 0 24px 80px rgba(0, 0, 0, 0.36);
+      }
+      .nav-links.is-open { display: grid; gap: 2px; }
+      .nav-links a {
+        min-height: 42px;
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        border-radius: 6px;
+      }
+      .nav-links a:hover {
+        background: rgba(255, 255, 255, 0.05);
+        transform: none;
+      }
+      .menu-button { display: block; }
+      .nav-actions .btn { display: none; }
+    }
+
     /* === hero === */
     .pricing-hero {
       padding: 96px 0 56px;
-      text-align: center;
     }
     .pricing-hero .eyebrow {
       display: inline-flex;
@@ -193,27 +260,106 @@
       font-style: italic;
     }
     .pricing-hero p {
-      margin: 0 auto;
+      margin: 0;
       max-width: 640px;
       color: var(--muted);
       font-size: 18px;
+    }
+    .pricing-hero p.founding-note {
+      margin-top: 18px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--green-hi);
     }
 
     /* === tier grid === */
     .tier-grid {
       display: grid;
-      gap: 14px;
-      grid-template-columns: repeat(5, 1fr);
-      padding-bottom: 40px;
+      gap: 16px;
+      grid-template-columns: repeat(4, 1fr);
+      padding-bottom: 24px;
     }
-    @media (max-width: 1180px) {
-      .tier-grid { grid-template-columns: repeat(3, 1fr); }
-    }
-    @media (max-width: 820px) {
+    @media (max-width: 980px) {
       .tier-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 540px) {
       .tier-grid { grid-template-columns: 1fr; }
+    }
+
+    /* === federation strip === */
+    .federation-strip {
+      margin: 16px 0 56px;
+      padding: 28px 32px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.4fr) auto;
+      gap: 28px;
+      align-items: center;
+    }
+    @media (max-width: 980px) {
+      .federation-strip {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+    }
+    .federation-strip .fed-headline h2 {
+      margin: 0 0 6px;
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+    .federation-strip .fed-headline p {
+      margin: 0;
+      color: var(--quiet);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .federation-strip .fed-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 18px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+    .federation-strip .fed-features li {
+      position: relative;
+      padding-left: 18px;
+    }
+    .federation-strip .fed-features li::before {
+      content: "\2713";
+      position: absolute;
+      left: 0;
+      color: var(--green-hi);
+      font-weight: 700;
+    }
+    .federation-strip .fed-cta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      text-align: right;
+    }
+    @media (max-width: 980px) {
+      .federation-strip .fed-cta { align-items: stretch; text-align: left; }
+    }
+    .federation-strip .fed-price {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .federation-strip .fed-price small {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--quiet);
     }
     .tier {
       position: relative;
@@ -244,33 +390,39 @@
     }
     .tier h2 {
       margin: 0 0 4px;
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 700;
+      letter-spacing: -0.01em;
     }
     .tier .price {
-      font-size: 36px;
+      font-size: 38px;
       font-weight: 900;
       margin: 8px 0 4px;
       line-height: 1;
+      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
     }
     .tier .price span {
       font-size: 14px;
       font-weight: 500;
       color: var(--quiet);
+      letter-spacing: 0;
     }
-    .tier .price.custom { font-size: 24px; }
+    .tier .price.custom { font-size: 26px; letter-spacing: -0.01em; }
     .tier .rate {
-      font-size: 13px;
+      font-size: 14px;
       color: var(--muted);
+      line-height: 1.5;
       margin: 0 0 18px;
-      min-height: 36px;
+      min-height: 40px;
     }
-    .tier .rate small { display: block; color: var(--quiet); font-size: 11px; }
+    .tier .rate small { display: block; color: var(--quiet); font-size: 12px; }
     .tier .tagline {
-      font-size: 13px;
+      font-size: 14px;
       color: var(--quiet);
+      line-height: 1.5;
       margin: 0 0 18px;
-      min-height: 36px;
+      min-height: 40px;
     }
     .tier ul {
       list-style: none;
@@ -278,6 +430,7 @@
       margin: 0 0 22px;
       flex: 1 1 auto;
       font-size: 14px;
+      line-height: 1.5;
       color: var(--muted);
     }
     .tier ul li {
@@ -323,9 +476,11 @@
       font-size: 13px;
     }
     .matrix th, .matrix td {
-      padding: 12px 14px;
+      padding: 14px 14px;
       text-align: center;
       border-bottom: 1px solid var(--line);
+      font-size: 14px;
+      line-height: 1.4;
     }
     .matrix th:first-child, .matrix td:first-child {
       text-align: left;
@@ -338,11 +493,11 @@
       font-weight: 700;
       font-size: 12px;
       text-transform: uppercase;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
     }
     .matrix .yes { color: var(--green-hi); font-weight: 700; }
     .matrix .no { color: var(--quiet); }
-    .matrix .note { color: var(--muted); font-size: 12px; }
+    .matrix .note { color: var(--muted); font-size: 13px; }
 
     /* === FAQ === */
     .faq {
@@ -364,7 +519,8 @@
     details summary {
       cursor: pointer;
       font-weight: 600;
-      font-size: 16px;
+      font-size: 17px;
+      letter-spacing: -0.005em;
       list-style: none;
       display: flex;
       justify-content: space-between;
@@ -374,14 +530,21 @@
       content: "+";
       font-family: var(--font-mono);
       color: var(--green-hi);
-      font-size: 20px;
+      font-size: 22px;
+      flex: 0 0 auto;
+      margin-left: 16px;
     }
     details[open] summary::after { content: "−"; }
     details p {
       margin: 12px 0 0;
       color: var(--muted);
-      font-size: 14px;
-      max-width: 640px;
+      font-size: 15px;
+      line-height: 1.6;
+      max-width: 65ch;
+    }
+    .faq-cta {
+      margin-top: 14px;
+      display: inline-flex;
     }
 
     /* === CTA strip === */
@@ -424,33 +587,28 @@
 </head>
 <body>
 
-  <div class="top-strip" role="banner">
-    <div class="container">
-      <span class="status-dot" aria-hidden="true"></span>
-      <strong>LEAG</strong>
-      <span>/</span>
-      <span>public sites, registration, schedules, standings, commerce</span>
-      <span class="strip-spacer"></span>
-      <span>Built by Stryder Labs LLC</span>
-    </div>
-  </div>
-
   <header class="site-header">
     <div class="container nav">
       <a class="brand" href="index.html" aria-label="LEAG home">
         <img class="brand-mark" src="brand/bracket-white-on-transparent.svg" alt="" aria-hidden="true">
         <span class="brand-wordmark" aria-hidden="true"></span>
       </a>
-      <nav class="nav-links" aria-label="Primary navigation">
-        <a href="index.html#playground">Demo</a>
-        <a href="index.html#surfaces">Calendar</a>
-        <a href="index.html#platform">Site</a>
-        <a href="index.html#take-signups">Signups</a>
-        <a href="index.html#marketplace">Marketplace</a>
+      <nav class="nav-links" id="site-nav" aria-label="Primary navigation">
+        <a href="index.html#registrations">Registrations</a>
+        <a href="index.html#teams">Teams</a>
+        <a href="index.html#schedules">Schedules</a>
+        <a href="index.html#scores">Scores</a>
+        <a href="index.html#standings">Standings</a>
+        <a href="index.html#notifications">Notifications</a>
         <a href="pricing.html" aria-current="page">Pricing</a>
       </nav>
       <div class="nav-actions">
-        <a class="btn btn-primary" href="https://mail.google.com/mail/?view=cm&amp;to=contact@leag.app&amp;su=LEAG%20pricing%20inquiry" target="_blank" rel="noopener">Talk to us</a>
+        <button class="btn btn-primary" type="button" aria-disabled="true" tabindex="-1">Join waitlist</button>
+        <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav" id="menu-button" aria-label="Open navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </div>
   </header>
@@ -460,7 +618,8 @@
       <div class="container">
         <div class="eyebrow">Pricing</div>
         <h1>Built for how <span class="green">rec sports</span> actually run.</h1>
-        <p>Start free with Pickup. Move up when you're running real programs. Pay-as-you-go on transactions; the monthly subscription unlocks tools, not transaction discounts.</p>
+        <p>Free to start. Pay-as-you-go on transactions. Subscriptions unlock tools and lower rates.</p>
+        <p class="founding-note">Founding tenants lock in these rates and unlock features as they ship throughout 2026.</p>
       </div>
     </section>
 
@@ -474,7 +633,7 @@
           <ul>
             <li>Booking + checkout</li>
             <li>Marketplace listing on play.leag.app/find</li>
-            <li>$1,000/mo GMV cap</li>
+            <li>$1,000/mo in payments processed (cap)</li>
             <li>Community Discord support</li>
           </ul>
           <a class="cta" href="https://play.leag.app/account/sign-up">Start with Pickup</a>
@@ -519,28 +678,33 @@
             <li>Unlimited staff seats</li>
             <li>Advanced reporting + dashboards</li>
             <li>Background-check integration (at cost)</li>
-            <li>API access + bulk export</li>
+            <li>Developer API access + bulk data export</li>
             <li>Priority support</li>
             <li>3 promoted-event placements/mo</li>
           </ul>
           <a class="cta" href="https://play.leag.app/account/sign-up">Start with League</a>
         </article>
 
-        <article class="tier">
-          <h2>Federation</h2>
-          <p class="price custom">Custom</p>
-          <p class="rate">For multi-org governing bodies<br><small>contact sales for pricing</small></p>
-          <ul>
-            <li>Everything in League</li>
-            <li>Background-check integration (included)</li>
-            <li>Dedicated CSM + SLA</li>
-            <li>Unlimited promoted-event placements</li>
-            <li>Multi-org / multi-region orchestration</li>
-          </ul>
-          <a class="cta" href="https://mail.google.com/mail/?view=cm&amp;to=contact@leag.app&amp;su=LEAG%20Federation%20tier%20inquiry" target="_blank" rel="noopener">Talk to sales</a>
-        </article>
-
       </div>
+
+      <section class="federation-strip" aria-labelledby="federation-heading">
+        <div class="fed-headline">
+          <h2 id="federation-heading">Federation</h2>
+          <p>For multi-org governing bodies and federations.</p>
+        </div>
+        <ul class="fed-features">
+          <li>Everything in League</li>
+          <li>Multi-org / multi-region orchestration</li>
+          <li>Dedicated account manager + uptime guarantee</li>
+          <li>Background-check integration (included)</li>
+          <li>Unlimited promoted-event placements</li>
+          <li>Volume-based pricing on payments processed</li>
+        </ul>
+        <div class="fed-cta">
+          <span class="fed-price">Custom pricing<small>every federation is different</small></span>
+          <a class="btn btn-primary" href="https://mail.google.com/mail/?view=cm&amp;to=contact@leag.app&amp;su=LEAG%20Federation%20tier%20inquiry" target="_blank" rel="noopener">Talk to sales &rarr;</a>
+        </div>
+      </section>
     </section>
 
     <section class="capabilities">
@@ -569,8 +733,8 @@
               <tr><td>Multi-staff seats</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="note">3</td><td class="note">unlimited</td><td class="yes">&#10003;</td></tr>
               <tr><td>Multi-event dashboards + reporting</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="note">basic</td><td class="note">advanced</td><td class="yes">&#10003;</td></tr>
               <tr><td>Background-check integration</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="note">at cost</td><td class="note">included</td></tr>
-              <tr><td>API access + bulk export</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
-              <tr><td>Support</td><td class="note">Discord</td><td class="note">Discord</td><td class="note">email</td><td class="note">priority</td><td class="note">CSM + SLA</td></tr>
+              <tr><td>Developer API access + bulk data export</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+              <tr><td>Support</td><td class="note">Discord</td><td class="note">Discord</td><td class="note">email</td><td class="note">priority</td><td class="note">account manager</td></tr>
               <tr><td>Marketplace surfacing on play.leag.app/find</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
             </tbody>
           </table>
@@ -599,24 +763,18 @@
             <p>Same transaction rate (5% + $0.50). The Club $20/mo bump pays for org-grade tools: custom domain, roster management, member/parent directory, broadcast email, and multi-staff seats. Switch to Club when you start running recurring rosters or add a coaching partner.</p>
           </details>
           <details>
-            <summary>What counts toward Pickup's $1,000/mo GMV cap?</summary>
+            <summary>What counts toward Pickup's $1,000/mo payment cap?</summary>
             <p>Total payments processed through your LEAG checkout in a calendar month. Once you cross the cap, you'll be prompted to upgrade to Coach to keep taking signups.</p>
           </details>
           <details>
             <summary>How does Federation pricing work?</summary>
-            <p>Federation is custom because multi-org governing bodies have distinct needs (regional orchestration, dedicated CSM, SLA tiers, volume-based overrides). Talk to us about your federation and we'll quote a rate that fits.</p>
+            <p>Federation is custom because multi-org governing bodies have distinct needs: running multiple regions, a dedicated account manager, uptime guarantees, and volume-based pricing on payments processed. Talk to us about your federation and we'll quote a rate that fits.</p>
+            <button class="btn btn-primary faq-cta" type="button" data-copy-email="contact@leag.app" aria-live="polite">Copy contact@leag.app</button>
           </details>
         </div>
       </div>
     </section>
 
-    <section class="cta-strip">
-      <div class="container">
-        <h3>Running a federation or multi-org body?</h3>
-        <p>Federation pricing is custom because every governing body looks different. Tell us about your structure and we'll quote a rate.</p>
-        <a class="btn btn-primary" href="https://mail.google.com/mail/?view=cm&amp;to=contact@leag.app&amp;su=LEAG%20Federation%20tier%20inquiry" target="_blank" rel="noopener">Email contact@leag.app</a>
-      </div>
-    </section>
   </main>
 
   <footer class="site-footer">
@@ -637,6 +795,46 @@
   <script>
     const year = document.getElementById("current-year");
     if (year) year.textContent = new Date().getFullYear();
+
+    document.querySelectorAll("[data-copy-email]").forEach((btn) => {
+      const email = btn.getAttribute("data-copy-email");
+      const original = btn.textContent;
+      btn.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(email);
+        } catch (err) {
+          const ta = document.createElement("textarea");
+          ta.value = email;
+          ta.setAttribute("readonly", "");
+          ta.style.position = "absolute";
+          ta.style.left = "-9999px";
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand("copy"); } catch (_) {}
+          document.body.removeChild(ta);
+        }
+        btn.textContent = "Copied " + email;
+        clearTimeout(btn._copyTimer);
+        btn._copyTimer = setTimeout(() => { btn.textContent = original; }, 1800);
+      });
+    });
+
+    const menuButton = document.getElementById("menu-button");
+    const nav = document.getElementById("site-nav");
+    if (menuButton && nav) {
+      menuButton.addEventListener("click", () => {
+        const open = nav.classList.toggle("is-open");
+        menuButton.setAttribute("aria-expanded", String(open));
+        menuButton.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
+      });
+      nav.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          nav.classList.remove("is-open");
+          menuButton.setAttribute("aria-expanded", "false");
+          menuButton.setAttribute("aria-label", "Open navigation");
+        });
+      });
+    }
   </script>
 </body>
 </html>
