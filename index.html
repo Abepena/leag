@@ -3,20 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LEAG | Try a Youth Sports Season Flow</title>
-  <meta name="description" content="LEAG helps youth sports organizers launch public pages, take signups, build teams, publish schedules, and keep families updated.">
-  <link rel="icon" type="image/svg+xml" href="brand/leag-icon-green.svg">
+  <title>LEAG | Run the Season From One Place</title>
+  <meta name="description" content="Run the season from one place: registration, teams, schedules, scores, standings, and parent updates.">
+  <link rel="icon" type="image/svg+xml" href="brand/bracket-green-on-black.svg">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://leag.app/">
-  <meta property="og:title" content="LEAG | Try a Youth Sports Season Flow">
-  <meta property="og:description" content="Try demos for league sites, signups, teams, schedules, and family updates.">
-  <meta property="og:image" content="https://leag.app/og-image.png">
+  <meta property="og:title" content="LEAG | Run the Season From One Place">
+  <meta property="og:description" content="Registration, teams, schedules, scores, standings, and parent updates — one place.">
+  <meta property="og:image" content="https://leag.app/brand/leag-wordmark-text-green.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="LEAG | Try a Youth Sports Season Flow">
-  <meta name="twitter:description" content="Try demos for league sites, signups, teams, schedules, and family updates.">
-  <meta name="twitter:image" content="https://leag.app/og-image.png">
+  <meta name="twitter:title" content="LEAG | Run the Season From One Place">
+  <meta name="twitter:description" content="Registration, teams, schedules, scores, standings, and parent updates — one place.">
+  <meta name="twitter:image" content="https://leag.app/brand/leag-wordmark-text-green.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Geist:wght@300;400;500;600;700;800;900&amp;family=Instrument+Serif:ital@0;1&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
@@ -212,8 +212,8 @@
     }
 
     .brand-mark {
-      width: 38px;
-      height: 38px;
+      width: 48px;
+      height: 48px;
       display: block;
       flex: 0 0 auto;
       border-radius: 8px;
@@ -225,7 +225,7 @@
       height: 24px;
       display: block;
       flex: 0 0 auto;
-      background-image: url("brand/leag-wordmark-text.svg");
+      background-image: url("brand/leag-wordmark-text-white.svg");
       background-repeat: no-repeat;
       background-size: contain;
       background-position: left center;
@@ -237,7 +237,7 @@
       width: 3.6em;
       height: 0.78em;
       vertical-align: -0.06em;
-      background-image: url("brand/leag-wordmark-text.svg");
+      background-image: url("brand/leag-wordmark-text-white.svg");
       background-repeat: no-repeat;
       background-size: contain;
       background-position: left center;
@@ -270,12 +270,18 @@
     }
 
     .nav-links a {
-      transition: color 180ms ease, transform 180ms ease;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      text-decoration: underline;
+      text-decoration-color: transparent;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 6px;
+      transition: color 180ms ease, text-decoration-color 180ms ease;
     }
 
     .nav-links a:hover {
       color: var(--ink);
-      transform: translateY(-1px);
+      text-decoration-color: var(--green);
     }
 
     .nav-actions {
@@ -415,12 +421,27 @@
       text-shadow: none;
     }
 
+    .hero h1 span.hero-wordmark {
+      display: inline-block;
+      color: inherit;
+      -webkit-text-stroke: 0;
+    }
+
     .hero-copy {
       max-width: 570px;
-      color: var(--muted);
-      font-size: 20px;
-      line-height: 1.55;
+      color: var(--ink);
+      font-size: 26px;
+      font-weight: 500;
+      line-height: 1.4;
       text-wrap: pretty;
+    }
+
+    .hero-copy .green-underline {
+      color: var(--green-hi);
+      text-decoration: underline;
+      text-decoration-color: var(--green-hi);
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
     }
 
     .hero .reveal {
@@ -4107,17 +4128,17 @@
   <header class="site-header">
     <div class="container nav">
       <a class="brand" href="#" aria-label="LEAG home">
-        <img class="brand-mark" src="brand/leag-icon.svg" alt="" aria-hidden="true">
+        <img class="brand-mark" src="brand/bracket-white-on-transparent.svg" alt="" aria-hidden="true">
         <span class="brand-wordmark" aria-hidden="true"></span>
       </a>
       <nav class="nav-links" id="site-nav" aria-label="Primary navigation">
-        <a href="#playground">Demo</a>
-        <a href="#surfaces">Calendar</a>
-        <a href="#platform">Site</a>
-        <a href="#take-signups" data-open-panel="registration">Signups</a>
-        <a href="#build-teams" data-open-panel="teams">Teams</a>
-        <a href="#publish-schedule" data-open-panel="publish">Schedule</a>
-        <a href="#marketplace">Marketplace</a>
+        <a href="#registrations">Registrations</a>
+        <a href="#teams">Teams</a>
+        <a href="#schedules">Schedules</a>
+        <a href="#scores">Scores</a>
+        <a href="#standings">Standings</a>
+        <a href="#notifications">Notifications</a>
+        <a href="pricing.html">Pricing</a>
       </nav>
       <div class="nav-actions">
         <a class="btn btn-secondary" href="#surfaces">See pages</a>
@@ -4135,10 +4156,9 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="container hero-grid">
         <div class="hero-copy-block reveal">
-          <div class="eyebrow">For youth sports leagues</div>
           <h1 id="hero-title"><span class="brand-wordmark hero-wordmark" aria-label="LEAG" role="img"></span> <span>runs your league.</span></h1>
           <p class="hero-copy">
-            Site, signups, rosters, schedule, scores, and parent updates. One place. Full season.
+            The whole season, <span class="green-underline">one place.</span>
           </p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="https://mail.google.com/mail/?view=cm&amp;to=contact@leag.app&amp;su=LEAG%20demo%20request" target="_blank" rel="noopener">Book a demo</a>
@@ -4814,7 +4834,7 @@
   <footer class="site-footer">
     <div class="container footer-grid">
       <a class="brand" href="#" aria-label="LEAG home">
-        <img class="brand-mark" src="brand/leag-icon-green.svg" alt="" aria-hidden="true">
+        <img class="brand-mark" src="brand/bracket-white-on-transparent.svg" alt="" aria-hidden="true">
         <span class="brand-wordmark" aria-hidden="true"></span>
       </a>
       <div>Copyright <span id="current-year"></span> Stryder Labs LLC. All rights reserved.</div>
@@ -4822,6 +4842,7 @@
         <a href="mailto:contact@leag.app?subject=LEAG%20privacy">Privacy</a>
         <a href="mailto:contact@leag.app?subject=LEAG%20terms">Terms</a>
         <a href="mailto:contact@leag.app">contact@leag.app</a>
+        <a href="tel:4077774283">407-777-4283</a>
       </div>
     </div>
   </footer>

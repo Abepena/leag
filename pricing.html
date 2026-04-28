@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LEAG | Pricing</title>
+  <meta name="description" content="Free Pickup, $19 Coach, $39 Club, $149 League. Federation custom — built for how rec sports actually run.">
+  <link rel="icon" type="image/svg+xml" href="brand/bracket-green-on-black.svg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://leag.app/pricing">
+  <meta property="og:title" content="LEAG | Pricing">
+  <meta property="og:description" content="Free Pickup, $19 Coach, $39 Club, $149 League. Federation custom — built for how rec sports actually run.">
+  <meta property="og:image" content="https://leag.app/brand/leag-wordmark-text-green.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LEAG | Pricing">
+  <meta name="twitter:description" content="Free Pickup, $19 Coach, $39 Club, $149 League. Federation custom — built for how rec sports actually run.">
+  <meta name="twitter:image" content="https://leag.app/brand/leag-wordmark-text-green.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Geist:wght@300;400;500;600;700;800;900&amp;family=Instrument+Serif:ital@0;1&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0c1616;
+      --bg-2: #08100f;
+      --surface: #101918;
+      --surface-2: #141e1c;
+      --surface-3: #1b2523;
+      --ink: #f4f5f4;
+      --muted: rgba(244, 245, 244, 0.72);
+      --quiet: rgba(244, 245, 244, 0.48);
+      --faint: rgba(244, 245, 244, 0.16);
+      --line: rgba(244, 245, 244, 0.12);
+      --line-strong: rgba(244, 245, 244, 0.24);
+      --green: #62b77c;
+      --green-hi: #7dca96;
+      --green-soft: rgba(98, 183, 124, 0.14);
+      --container: 1240px;
+      --radius: 8px;
+      --font-sans: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+      --font-display: "Anton", "Geist", sans-serif;
+      --font-serif: "Instrument Serif", Georgia, serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 86px; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: var(--green-hi); text-decoration: none; }
+    a:hover { color: var(--green); }
+    .container { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+
+    /* === top strip === */
+    .top-strip {
+      border-bottom: 1px solid var(--line);
+      background: var(--bg-2);
+      font-size: 12px;
+      color: var(--quiet);
+    }
+    .top-strip .container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+    .top-strip strong { color: var(--green-hi); font-weight: 700; }
+    .status-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 3px rgba(98, 183, 124, 0.18);
+    }
+    .strip-spacer { flex: 1 1 auto; }
+
+    /* === header === */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(8, 16, 15, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding-top: 14px;
+      padding-bottom: 14px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+    }
+    .brand:hover { color: var(--ink); }
+    .brand-mark { width: 48px; height: 48px; display: block; border-radius: 8px; }
+    .brand-wordmark {
+      width: 101px;
+      height: 24px;
+      display: block;
+      flex: 0 0 auto;
+      background-image: url("brand/leag-wordmark-text-white.svg");
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: left center;
+    }
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      flex: 1 1 auto;
+      font-size: 14px;
+    }
+    .nav-links a { color: var(--muted); }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a[aria-current="page"] { color: var(--green-hi); }
+    .nav-actions { display: flex; gap: 10px; flex: 0 0 auto; }
+    @media (max-width: 820px) {
+      .nav-links { display: none; }
+      .nav-actions { margin-left: auto; }
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+    .btn-primary { background: var(--green); color: #0c1616; }
+    .btn-primary:hover { background: var(--green-hi); color: #0c1616; }
+    .btn-secondary {
+      background: transparent;
+      border-color: var(--line-strong);
+      color: var(--ink);
+    }
+    .btn-secondary:hover { background: var(--surface-2); color: var(--ink); }
+
+    /* === hero === */
+    .pricing-hero {
+      padding: 96px 0 56px;
+      text-align: center;
+    }
+    .pricing-hero .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--green-hi);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .pricing-hero .eyebrow::before {
+      content: "";
+      width: 28px; height: 2px;
+      background: currentColor;
+    }
+    .pricing-hero h1 {
+      margin: 22px 0 12px;
+      font-size: 64px;
+      line-height: 0.96;
+      font-weight: 900;
+      text-wrap: balance;
+    }
+    @media (max-width: 820px) {
+      .pricing-hero h1 { font-size: 44px; }
+      .pricing-hero { padding: 56px 0 32px; }
+    }
+    @media (max-width: 540px) {
+      .pricing-hero h1 { font-size: 34px; }
+    }
+    .pricing-hero h1 .green {
+      color: var(--green-hi);
+      font-style: italic;
+    }
+    .pricing-hero p {
+      margin: 0 auto;
+      max-width: 640px;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    /* === tier grid === */
+    .tier-grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(5, 1fr);
+      padding-bottom: 40px;
+    }
+    @media (max-width: 1180px) {
+      .tier-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 820px) {
+      .tier-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 540px) {
+      .tier-grid { grid-template-columns: 1fr; }
+    }
+    .tier {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 24px 20px 22px;
+      display: flex;
+      flex-direction: column;
+    }
+    .tier.featured {
+      border-color: var(--green);
+      box-shadow: 0 0 0 1px var(--green-soft), 0 24px 60px rgba(98, 183, 124, 0.08);
+    }
+    .tier .badge {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--green);
+      color: #0c1616;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+    .tier h2 {
+      margin: 0 0 4px;
+      font-size: 22px;
+      font-weight: 700;
+    }
+    .tier .price {
+      font-size: 36px;
+      font-weight: 900;
+      margin: 8px 0 4px;
+      line-height: 1;
+    }
+    .tier .price span {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--quiet);
+    }
+    .tier .price.custom { font-size: 24px; }
+    .tier .rate {
+      font-size: 13px;
+      color: var(--muted);
+      margin: 0 0 18px;
+      min-height: 36px;
+    }
+    .tier .rate small { display: block; color: var(--quiet); font-size: 11px; }
+    .tier .tagline {
+      font-size: 13px;
+      color: var(--quiet);
+      margin: 0 0 18px;
+      min-height: 36px;
+    }
+    .tier ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 22px;
+      flex: 1 1 auto;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .tier ul li {
+      padding: 6px 0;
+      border-top: 1px solid var(--line);
+    }
+    .tier ul li:first-child { border-top: 0; }
+    .tier .cta {
+      display: block;
+      text-align: center;
+      padding: 11px 16px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      background: transparent;
+      border: 1px solid var(--line-strong);
+      color: var(--ink);
+    }
+    .tier .cta:hover { background: var(--surface-2); }
+    .tier.featured .cta {
+      background: var(--green);
+      border-color: var(--green);
+      color: #0c1616;
+    }
+    .tier.featured .cta:hover { background: var(--green-hi); border-color: var(--green-hi); }
+
+    /* === capability matrix === */
+    .capabilities {
+      padding: 56px 0;
+      border-top: 1px solid var(--line);
+    }
+    .capabilities h2 {
+      font-size: 28px;
+      font-weight: 800;
+      text-align: center;
+      margin: 0 0 32px;
+    }
+    .matrix-wrap { overflow-x: auto; }
+    .matrix {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 720px;
+      font-size: 13px;
+    }
+    .matrix th, .matrix td {
+      padding: 12px 14px;
+      text-align: center;
+      border-bottom: 1px solid var(--line);
+    }
+    .matrix th:first-child, .matrix td:first-child {
+      text-align: left;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .matrix thead th {
+      background: var(--surface-2);
+      color: var(--ink);
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .matrix .yes { color: var(--green-hi); font-weight: 700; }
+    .matrix .no { color: var(--quiet); }
+    .matrix .note { color: var(--muted); font-size: 12px; }
+
+    /* === FAQ === */
+    .faq {
+      padding: 56px 0 96px;
+      border-top: 1px solid var(--line);
+    }
+    .faq h2 {
+      font-size: 28px;
+      font-weight: 800;
+      text-align: center;
+      margin: 0 0 32px;
+    }
+    .faq-list { max-width: 760px; margin: 0 auto; }
+    details {
+      border-top: 1px solid var(--line);
+      padding: 18px 0;
+    }
+    details:last-child { border-bottom: 1px solid var(--line); }
+    details summary {
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 16px;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    details summary::after {
+      content: "+";
+      font-family: var(--font-mono);
+      color: var(--green-hi);
+      font-size: 20px;
+    }
+    details[open] summary::after { content: "−"; }
+    details p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      max-width: 640px;
+    }
+
+    /* === CTA strip === */
+    .cta-strip {
+      border-top: 1px solid var(--line);
+      padding: 56px 0;
+      text-align: center;
+      background: var(--bg-2);
+    }
+    .cta-strip h3 {
+      margin: 0 0 12px;
+      font-size: 26px;
+      font-weight: 800;
+    }
+    .cta-strip p {
+      margin: 0 auto 22px;
+      max-width: 560px;
+      color: var(--muted);
+    }
+
+    /* === footer === */
+    .site-footer {
+      border-top: 1px solid var(--line);
+      padding: 28px 0;
+      background: var(--bg-2);
+    }
+    .footer-grid {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 18px;
+      font-size: 13px;
+      color: var(--quiet);
+    }
+    .footer-grid > div { flex: 1 1 auto; }
+    .footer-links { display: flex; gap: 18px; }
+    .footer-links a { color: var(--muted); }
+    .footer-links a:hover { color: var(--ink); }
+  </style>
+</head>
+<body>
+
+  <div class="top-strip" role="banner">
+    <div class="container">
+      <span class="status-dot" aria-hidden="true"></span>
+      <strong>LEAG</strong>
+      <span>/</span>
+      <span>public sites, registration, schedules, standings, commerce</span>
+      <span class="strip-spacer"></span>
+      <span>Built by Stryder Labs LLC</span>
+    </div>
+  </div>
+
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="index.html" aria-label="LEAG home">
+        <img class="brand-mark" src="brand/bracket-white-on-transparent.svg" alt="" aria-hidden="true">
+        <span class="brand-wordmark" aria-hidden="true"></span>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="index.html#playground">Demo</a>
+        <a href="index.html#surfaces">Calendar</a>
+        <a href="index.html#platform">Site</a>
+        <a href="index.html#take-signups">Signups</a>
+        <a href="index.html#marketplace">Marketplace</a>
+        <a href="pricing.html" aria-current="page">Pricing</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-primary" href="https://mail.google.com/mail/?view=cm&amp;to=contact@leag.app&amp;su=LEAG%20pricing%20inquiry" target="_blank" rel="noopener">Talk to us</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="pricing-hero">
+      <div class="container">
+        <div class="eyebrow">Pricing</div>
+        <h1>Built for how <span class="green">rec sports</span> actually run.</h1>
+        <p>Start free with Pickup. Move up when you're running real programs. Pay-as-you-go on transactions; the monthly subscription unlocks tools, not transaction discounts.</p>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="tier-grid">
+
+        <article class="tier">
+          <h2>Pickup</h2>
+          <p class="price">Free</p>
+          <p class="rate">8% + $0.50<br><small>per transaction</small></p>
+          <ul>
+            <li>Booking + checkout</li>
+            <li>Marketplace listing on play.leag.app/find</li>
+            <li>$1,000/mo GMV cap</li>
+            <li>Community Discord support</li>
+          </ul>
+          <a class="cta" href="https://play.leag.app/account/sign-up">Start with Pickup</a>
+        </article>
+
+        <article class="tier">
+          <h2>Coach</h2>
+          <p class="price">$19<span>/mo</span></p>
+          <p class="rate">5% + $0.50<br><small>per transaction</small></p>
+          <ul>
+            <li>Everything in Pickup</li>
+            <li>Waivers e-sign</li>
+            <li>1-person calendar / availability</li>
+            <li>Community Discord support</li>
+          </ul>
+          <a class="cta" href="https://play.leag.app/account/sign-up">Start with Coach</a>
+        </article>
+
+        <article class="tier featured">
+          <span class="badge">Most popular</span>
+          <h2>Club</h2>
+          <p class="price">$39<span>/mo</span></p>
+          <p class="rate">5% + $0.50<br><small>per transaction</small></p>
+          <ul>
+            <li>Everything in Coach</li>
+            <li>Custom domain (yourbrand.com)</li>
+            <li>Roster management</li>
+            <li>Member / parent directory</li>
+            <li>Broadcast email tool</li>
+            <li>3 staff seats</li>
+            <li>Email support</li>
+          </ul>
+          <a class="cta" href="https://play.leag.app/account/sign-up">Start with Club</a>
+        </article>
+
+        <article class="tier">
+          <h2>League</h2>
+          <p class="price">$149<span>/mo</span></p>
+          <p class="rate">4% + $0.50<br><small>per transaction</small></p>
+          <ul>
+            <li>Everything in Club</li>
+            <li>Unlimited staff seats</li>
+            <li>Advanced reporting + dashboards</li>
+            <li>Background-check integration (at cost)</li>
+            <li>API access + bulk export</li>
+            <li>Priority support</li>
+            <li>3 promoted-event placements/mo</li>
+          </ul>
+          <a class="cta" href="https://play.leag.app/account/sign-up">Start with League</a>
+        </article>
+
+        <article class="tier">
+          <h2>Federation</h2>
+          <p class="price custom">Custom</p>
+          <p class="rate">For multi-org governing bodies<br><small>contact sales for pricing</small></p>
+          <ul>
+            <li>Everything in League</li>
+            <li>Background-check integration (included)</li>
+            <li>Dedicated CSM + SLA</li>
+            <li>Unlimited promoted-event placements</li>
+            <li>Multi-org / multi-region orchestration</li>
+          </ul>
+          <a class="cta" href="https://mail.google.com/mail/?view=cm&amp;to=contact@leag.app&amp;su=LEAG%20Federation%20tier%20inquiry" target="_blank" rel="noopener">Talk to sales</a>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="capabilities">
+      <div class="container">
+        <h2>What's in each tier</h2>
+        <div class="matrix-wrap">
+          <table class="matrix">
+            <thead>
+              <tr>
+                <th>Capability</th>
+                <th>Pickup</th>
+                <th>Coach</th>
+                <th>Club</th>
+                <th>League</th>
+                <th>Federation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Booking + checkout</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+              <tr><td>Waivers e-sign</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+              <tr><td>Custom domain (yourbrand.com)</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+              <tr><td>Calendar / availability</td><td class="no">&mdash;</td><td class="note">1-person</td><td class="note">multi-staff</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+              <tr><td>Roster management</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+              <tr><td>Member / parent directory</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+              <tr><td>Broadcast email tool</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+              <tr><td>Multi-staff seats</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="note">3</td><td class="note">unlimited</td><td class="yes">&#10003;</td></tr>
+              <tr><td>Multi-event dashboards + reporting</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="note">basic</td><td class="note">advanced</td><td class="yes">&#10003;</td></tr>
+              <tr><td>Background-check integration</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="note">at cost</td><td class="note">included</td></tr>
+              <tr><td>API access + bulk export</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+              <tr><td>Support</td><td class="note">Discord</td><td class="note">Discord</td><td class="note">email</td><td class="note">priority</td><td class="note">CSM + SLA</td></tr>
+              <tr><td>Marketplace surfacing on play.leag.app/find</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq">
+      <div class="container">
+        <h2>Frequently asked</h2>
+        <div class="faq-list">
+          <details>
+            <summary>How are transaction fees collected?</summary>
+            <p>The transaction fee comes out of the customer's payment via your connected Stripe account. You receive your sticker price minus 2.9% + $0.30 (Stripe processing) minus your tier's LEAG share. To pass the fee to the customer instead of absorbing it, flip the toggle in your billing settings.</p>
+          </details>
+          <details>
+            <summary>Can I switch tiers mid-month?</summary>
+            <p>Yes. Upgrades take effect immediately with prorated billing. Downgrades take effect at the end of your current billing period.</p>
+          </details>
+          <details>
+            <summary>Can I cancel anytime?</summary>
+            <p>Yes. You'll keep your current tier's features through the end of the billing period, then drop to the free Pickup tier. If you got auto-renewed and want to cancel + refund, you have a 7-day window to do that yourself from your billing dashboard.</p>
+          </details>
+          <details>
+            <summary>What's the difference between Coach and Club?</summary>
+            <p>Same transaction rate (5% + $0.50). The Club $20/mo bump pays for org-grade tools: custom domain, roster management, member/parent directory, broadcast email, and multi-staff seats. Switch to Club when you start running recurring rosters or add a coaching partner.</p>
+          </details>
+          <details>
+            <summary>What counts toward Pickup's $1,000/mo GMV cap?</summary>
+            <p>Total payments processed through your LEAG checkout in a calendar month. Once you cross the cap, you'll be prompted to upgrade to Coach to keep taking signups.</p>
+          </details>
+          <details>
+            <summary>How does Federation pricing work?</summary>
+            <p>Federation is custom because multi-org governing bodies have distinct needs (regional orchestration, dedicated CSM, SLA tiers, volume-based overrides). Talk to us about your federation and we'll quote a rate that fits.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-strip">
+      <div class="container">
+        <h3>Running a federation or multi-org body?</h3>
+        <p>Federation pricing is custom because every governing body looks different. Tell us about your structure and we'll quote a rate.</p>
+        <a class="btn btn-primary" href="https://mail.google.com/mail/?view=cm&amp;to=contact@leag.app&amp;su=LEAG%20Federation%20tier%20inquiry" target="_blank" rel="noopener">Email contact@leag.app</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <a class="brand" href="index.html" aria-label="LEAG home">
+        <img class="brand-mark" src="brand/bracket-white-on-transparent.svg" alt="" aria-hidden="true">
+        <span class="brand-wordmark" aria-hidden="true"></span>
+      </a>
+      <div>Copyright <span id="current-year"></span> Stryder Labs LLC. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="mailto:contact@leag.app?subject=LEAG%20privacy">Privacy</a>
+        <a href="mailto:contact@leag.app?subject=LEAG%20terms">Terms</a>
+        <a href="mailto:contact@leag.app">contact@leag.app</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const year = document.getElementById("current-year");
+    if (year) year.textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
