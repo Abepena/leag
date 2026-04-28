@@ -3,19 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LEAG | Try a Sample Youth Sports Season</title>
+  <title>LEAG | Try a Youth Sports Season Flow</title>
   <meta name="description" content="LEAG helps youth sports organizers launch public pages, take signups, build teams, publish schedules, and keep families updated.">
-  <link rel="icon" type="image/svg+xml" href="brand/leag-icon.svg">
+  <link rel="icon" type="image/svg+xml" href="brand/leag-icon-green.svg">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://leag.app/">
-  <meta property="og:title" content="LEAG | Try a Sample Youth Sports Season">
-  <meta property="og:description" content="Try sample demos for league sites, signups, teams, schedules, and family updates.">
+  <meta property="og:title" content="LEAG | Try a Youth Sports Season Flow">
+  <meta property="og:description" content="Try demos for league sites, signups, teams, schedules, and family updates.">
   <meta property="og:image" content="https://leag.app/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="LEAG | Try a Sample Youth Sports Season">
-  <meta name="twitter:description" content="Try sample demos for league sites, signups, teams, schedules, and family updates.">
+  <meta name="twitter:title" content="LEAG | Try a Youth Sports Season Flow">
+  <meta name="twitter:description" content="Try demos for league sites, signups, teams, schedules, and family updates.">
   <meta name="twitter:image" content="https://leag.app/og-image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -230,6 +230,17 @@
       background-size: contain;
       background-position: left center;
       max-width: none;
+    }
+
+    .hero-wordmark {
+      display: inline-block;
+      width: 3.6em;
+      height: 0.78em;
+      vertical-align: -0.06em;
+      background-image: url("brand/leag-wordmark-text.svg");
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: left center;
     }
 
     .window-bar .brand-mark {
@@ -585,28 +596,73 @@
       font-weight: 700;
     }
 
+    .score-meta-detail {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .diamond {
+      width: 36px;
+      height: 36px;
+      flex: 0 0 auto;
+    }
+
     .score-row {
       display: grid;
-      grid-template-columns: minmax(160px, 0.95fr) minmax(108px, auto) minmax(205px, 1.1fr);
-      gap: 14px;
+      grid-template-columns: minmax(0, 1.2fr) minmax(120px, auto) minmax(0, 1.2fr);
+      gap: 18px;
       align-items: end;
+    }
+
+    .score-side {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .score-side > div {
+      min-width: 0;
+      width: 100%;
+    }
+
+    .score-side-right {
+      align-items: flex-end;
+    }
+
+    .team-icon {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      flex: 0 0 auto;
+      border-radius: 10px;
+      filter: drop-shadow(0 0 18px rgba(216, 58, 72, 0.28));
     }
 
     .team-name {
       font-family: var(--font-display);
-      font-size: clamp(34px, 3.4vw, 44px);
+      font-size: clamp(20px, 2.1vw, 28px);
       font-style: italic;
-      line-height: 0.9;
+      line-height: 0.95;
       letter-spacing: 0;
       text-transform: uppercase;
       text-shadow: 0 0 34px rgba(216, 58, 72, 0.22);
       max-width: 100%;
+      white-space: nowrap;
       overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .team-name.right {
+      text-align: right;
+      padding-right: 8px;
+    }
+
+    .team-name.batting {
       color: var(--red);
-      font-size: clamp(30px, 2.8vw, 42px);
       text-shadow: 0 0 42px rgba(216, 58, 72, 0.34);
     }
 
@@ -617,11 +673,16 @@
       font-size: 11px;
     }
 
+    .team-name.right + .team-caption {
+      text-align: right;
+      padding-right: 8px;
+    }
+
     .score-number {
       display: flex;
-      align-items: baseline;
+      align-items: center;
       justify-content: center;
-      gap: 14px;
+      gap: 16px;
       font-family: var(--font-display);
       font-style: italic;
       line-height: 0.8;
@@ -629,23 +690,86 @@
 
     .score-number span {
       font-size: clamp(70px, 6.5vw, 88px);
+      line-height: 1;
     }
 
     .score-number em {
+      align-self: center;
+      width: 18px;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--quiet);
+      font-size: 0;
+      color: transparent;
+    }
+
+    .inning-grid-caption {
+      margin-top: 22px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
       color: var(--quiet);
-      font-style: normal;
-      font-size: 44px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
-    .inning-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
+    .inning-grid-caption b {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .linescore {
+      display: flex;
+      flex-direction: column;
       gap: 4px;
-      margin-top: 24px;
     }
 
-    .inning-grid span {
-      min-height: 28px;
+    .linescore-row {
+      display: grid;
+      grid-template-columns: minmax(96px, 0.85fr) repeat(7, 1fr) 32px;
+      gap: 4px;
+      align-items: center;
+    }
+
+    .linescore-team {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: var(--quiet);
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .linescore-team.home {
+      color: var(--red);
+    }
+
+    .linescore .inning-num {
+      padding: 2px 0;
+      display: grid;
+      place-items: center;
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+    }
+
+    .linescore .inning-num.inning-active {
+      background: var(--red);
+      color: #fff;
+      border-radius: 4px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 3px 0;
+    }
+
+    .linescore .inning-run {
+      min-height: 26px;
       display: grid;
       place-items: center;
       border: 1px solid var(--line);
@@ -655,16 +779,28 @@
       font-size: 11px;
     }
 
-    .inning-grid .active {
+    .linescore .inning-run.active {
       background: var(--red);
       color: #fff;
       border-color: var(--red);
       font-weight: 700;
     }
 
+    .linescore .total {
+      border-left: 1px solid var(--line-strong);
+      padding-left: 4px;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .linescore .inning-num.total {
+      border-left: 0;
+      padding-left: 0;
+    }
+
     .ops-grid {
       display: grid;
-      grid-template-columns: 1.25fr 0.75fr;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
       gap: 0;
       min-height: 220px;
     }
@@ -710,7 +846,13 @@
     }
 
     .schedule-row {
-      grid-template-columns: 44px 1fr auto;
+      grid-template-columns: 44px minmax(0, 1fr) auto;
+    }
+
+    .schedule-row > span:nth-child(2) {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .team-chip {
@@ -829,7 +971,7 @@
       display: grid;
       grid-template-columns: minmax(300px, 0.72fr) minmax(0, 1.28fr);
       gap: 18px;
-      align-items: stretch;
+      align-items: start;
     }
 
     .demo-controls,
@@ -838,6 +980,11 @@
       border-radius: var(--radius);
       background: rgba(16, 25, 24, 0.78);
       overflow: hidden;
+    }
+
+    .demo-stage {
+      --demo-primary: #3667B5;
+      --demo-accent: #70ECF0;
     }
 
     .demo-controls {
@@ -881,6 +1028,43 @@
 
     .sample-input::placeholder {
       color: var(--quiet);
+    }
+
+    .theme-color-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .theme-color-row input[type="color"] {
+      width: 44px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: transparent;
+      padding: 0;
+      cursor: pointer;
+      flex: 0 0 auto;
+    }
+
+    .theme-color-row input[type="color"]::-webkit-color-swatch-wrapper {
+      padding: 2px;
+    }
+
+    .theme-color-row input[type="color"]::-webkit-color-swatch {
+      border-radius: 4px;
+      border: 0;
+    }
+
+    .theme-hex-input {
+      flex: 1 1 auto;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .demo-reset-btn {
+      width: 100%;
     }
 
     .demo-choice-row {
@@ -952,166 +1136,945 @@
       font-size: 15px;
     }
 
-    .demo-output {
-      display: grid;
-      grid-template-columns: 1fr 0.86fr;
+    .demo-pub {
+      display: flex;
+      flex-direction: column;
       min-height: 360px;
-    }
-
-    .demo-public {
-      padding: 20px;
-      border-right: 1px solid var(--line);
       background:
-        linear-gradient(180deg, rgba(98, 183, 124, 0.08), transparent 58%),
-        rgba(8, 16, 15, 0.34);
+        radial-gradient(120% 80% at 0% 0%, color-mix(in srgb, var(--demo-primary) 22%, transparent), transparent 55%),
+        rgba(8, 16, 15, 0.42);
     }
 
-    .demo-public h3 {
-      margin: 16px 0 10px;
-      font-size: 38px;
-      line-height: 1;
+    .demo-stage:not(.is-published) .demo-pub-subbar,
+    .demo-stage:not(.is-published) .demo-pub-hero,
+    .demo-stage:not(.is-published) .demo-next-strip,
+    .demo-stage:not(.is-published) .demo-pub-tabs {
+      display: none;
+    }
+
+    .demo-pub-subbar {
+      display: grid;
+      grid-template-columns: 36px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(8, 16, 15, 0.6);
+    }
+
+    .demo-pub-mark {
+      width: 36px;
+      height: 36px;
+      display: block;
+      flex: 0 0 auto;
+      object-fit: contain;
+      border-radius: 6px;
+      background: transparent;
+    }
+
+    .demo-stage .team-display {
+      text-shadow: 0 0 60px color-mix(in srgb, var(--demo-primary) 40%, transparent);
+    }
+
+    .demo-stage .demo-pub-record strong {
+      color: var(--demo-primary);
+    }
+
+    .demo-stage .last5-box.win {
+      background: var(--demo-primary);
+    }
+
+    .demo-stage .demo-next-strip {
+      background: color-mix(in srgb, var(--demo-primary) 8%, transparent);
+    }
+
+    .demo-stage .demo-next-kicker {
+      color: var(--demo-primary);
+    }
+
+    .demo-stage .demo-next-cta {
+      background: var(--demo-primary);
+    }
+
+    .demo-stage .demo-pub-tabs button.active {
+      color: var(--demo-primary);
+      border-bottom-color: var(--demo-primary);
+    }
+
+    .demo-stage .g-result.win strong,
+    .demo-stage .g-result.win small {
+      color: var(--demo-primary);
+    }
+
+    .demo-stage .record-pill.star {
+      border-color: var(--demo-primary);
+      background: color-mix(in srgb, var(--demo-primary) 16%, transparent);
+      color: var(--demo-primary);
+    }
+
+    .demo-stage .status-tag {
+      background: color-mix(in srgb, var(--demo-accent) 22%, transparent);
+      color: var(--demo-accent);
+      border-color: var(--demo-accent);
+    }
+
+    .demo-stage .g-result.upcoming strong {
+      color: var(--demo-accent);
+    }
+
+    .demo-stage .record-cap {
+      color: color-mix(in srgb, var(--demo-accent) 80%, var(--quiet));
+    }
+
+    .demo-stage .g-date b {
+      color: color-mix(in srgb, var(--demo-accent) 75%, var(--quiet));
+    }
+
+    .demo-stage .g-mark {
+      border: 1px solid color-mix(in srgb, var(--demo-accent) 30%, transparent);
+      color: color-mix(in srgb, var(--demo-accent) 60%, var(--ink));
+    }
+
+    .demo-pub-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      min-width: 0;
+    }
+
+    .demo-pub-meta strong {
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 800;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .demo-pub-meta span {
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.05em;
+    }
+
+    .demo-pub-hero {
+      padding: 22px 22px 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .demo-pub-chips {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .record-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border: 1px solid var(--line-strong);
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--ink);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .record-pill.star {
+      border-color: var(--red);
+      background: rgba(216, 58, 72, 0.16);
+      color: var(--red);
+    }
+
+    .team-display {
+      margin: 0 0 14px;
+      font-family: var(--font-display);
+      font-size: clamp(48px, 5.4vw, 76px);
+      font-style: italic;
+      line-height: 0.92;
+      letter-spacing: 0.005em;
+      color: var(--ink);
+      text-shadow: 0 0 60px rgba(216, 58, 72, 0.35);
       text-wrap: balance;
     }
 
-    .demo-public p {
-      margin-bottom: 18px;
-      color: var(--muted);
+    .demo-pub-stat-row {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      align-items: flex-end;
     }
 
-    .demo-mini-list {
-      display: grid;
-      gap: 8px;
+    .demo-pub-record {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
 
-    .demo-mini-list div {
-      display: grid;
-      grid-template-columns: 74px 1fr auto;
-      gap: 10px;
-      align-items: center;
-      min-height: 42px;
-      padding: 0 10px;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .demo-mini-list b {
-      color: var(--ink);
+    .record-cap {
+      color: var(--quiet);
       font-family: var(--font-mono);
-      font-size: 11px;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
-    .demo-schedule {
-      display: none;
-      gap: 8px;
-      margin-top: 16px;
+    .demo-pub-record strong {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-style: italic;
+      line-height: 0.95;
+      color: var(--red);
     }
 
-    .demo-stage.is-published .demo-schedule {
+    .demo-pub-last5 {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .last5-row {
+      display: flex;
+      gap: 4px;
+    }
+
+    .last5-box {
+      width: 22px;
+      height: 22px;
       display: grid;
+      place-items: center;
+      border-radius: 3px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
     }
 
-    .schedule-card,
-    .parent-row,
-    .field-card,
-    .player-card,
-    .registration-row,
-    .week-card {
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      background: rgba(255, 255, 255, 0.035);
+    .last5-box.win {
+      background: var(--red);
+      color: #fff;
     }
 
-    .schedule-card {
+    .last5-box.loss {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--quiet);
+    }
+
+    .demo-next-strip {
       display: grid;
-      grid-template-columns: 70px 1fr auto;
-      gap: 10px;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
       align-items: center;
-      padding: 10px;
-      color: var(--muted);
-      font-size: 13px;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(216, 58, 72, 0.06);
     }
 
-    .schedule-card strong,
-    .field-card strong,
-    .player-card strong,
-    .registration-row strong,
-    .week-card strong {
+    .demo-next-strip > div {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .demo-next-kicker {
+      color: var(--red);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .demo-next-strip strong {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-style: italic;
       color: var(--ink);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .schedule-card span:first-child,
-    .field-card span,
-    .player-card span,
-    .registration-row span,
-    .week-card span {
+    .demo-next-strip > div > span:last-child {
       color: var(--quiet);
       font-family: var(--font-mono);
       font-size: 11px;
     }
 
-    .demo-admin {
-      padding: 20px;
-      display: grid;
-      gap: 14px;
-      align-content: start;
+    .demo-next-cta {
+      padding: 8px 14px;
+      border-radius: 4px;
+      background: var(--red);
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
     }
 
-    .demo-metric-row {
+    .demo-pub-tabs {
+      display: flex;
+      gap: 22px;
+      padding: 0 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .demo-pub-tabs button {
+      padding: 12px 0;
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 0;
+      border-bottom: 2px solid transparent;
+      background: transparent;
+      cursor: pointer;
+      transition: color 120ms ease;
+    }
+
+    .demo-pub-tabs button:hover {
+      color: var(--ink);
+    }
+
+    .demo-pub-tabs button.active {
+      color: var(--red);
+      border-bottom-color: var(--red);
+    }
+
+    .demo-pub-list {
+      display: flex;
+      flex-direction: column;
+      padding: 6px 0;
+    }
+
+    .demo-pub-empty {
+      padding: 32px 18px;
+      color: var(--quiet);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .demo-pub-empty b {
+      color: var(--ink);
+    }
+
+    .demo-pub-banner {
+      margin: 12px 18px 4px;
+      padding: 10px 14px;
+      border: 1px dashed var(--line-strong);
+      border-radius: 6px;
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.04em;
+    }
+
+    .demo-pub-banner strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .demo-pub-banner b {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .team-list {
+      display: flex;
+      flex-direction: column;
+      padding: 6px 0;
+    }
+
+    .team-row {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
+      grid-template-columns: 36px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .team-row:last-child {
+      border-bottom: 0;
+    }
+
+    .team-row-mark {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+
+    span.team-row-mark {
+      display: grid;
+      place-items: center;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--ink);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
+    .team-row-name {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-style: italic;
+      color: var(--ink);
+      letter-spacing: 0.005em;
+    }
+
+    .team-row-tag {
+      padding: 3px 8px;
+      border: 1px solid var(--line-strong);
+      border-radius: 4px;
+      color: var(--ink);
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .demo-stage .team-row-tag {
+      border-color: color-mix(in srgb, var(--demo-accent) 50%, transparent);
+      background: color-mix(in srgb, var(--demo-accent) 14%, transparent);
+      color: color-mix(in srgb, var(--demo-accent) 70%, var(--ink));
+    }
+
+    .hud-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 18px 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hud-head-title {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .hud-kicker {
+      color: var(--demo-primary);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .hud-h2 {
+      position: relative;
+      margin: 0;
+      padding-bottom: 6px;
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-style: italic;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--ink);
+      letter-spacing: 0.005em;
+      text-transform: uppercase;
+    }
+
+    .hud-h2::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 36px;
+      height: 2px;
+      background: var(--demo-accent);
+    }
+
+    .hud-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .hud-hint::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--demo-accent);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--demo-accent) 18%, transparent);
+    }
+
+    .roster-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      padding: 14px 18px 18px;
+    }
+
+    .roster-card {
+      position: relative;
       overflow: hidden;
+      min-height: 116px;
+      padding: 14px 14px 12px;
       border: 1px solid var(--line);
       border-radius: 6px;
-      background: var(--line);
+      background: rgba(8, 16, 15, 0.6);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
     }
 
-    .demo-metric-row div {
-      padding: 14px;
-      background: var(--surface);
+    .roster-card-watermark {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-family: var(--font-display);
+      font-size: 64px;
+      font-style: italic;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: 0.02em;
+      color: color-mix(in srgb, var(--demo-primary) 24%, transparent);
+      pointer-events: none;
+      user-select: none;
     }
 
-    .demo-metric-row strong {
+    .roster-card-num {
+      position: absolute;
+      top: 0;
+      right: 0;
+      min-width: 34px;
+      padding: 4px 9px 5px 14px;
+      background: var(--demo-primary);
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-style: italic;
+      font-weight: 800;
+      line-height: 1;
+      text-align: center;
+      clip-path: polygon(20% 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .roster-card-captain {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 7px;
+      border-radius: 3px;
+      background: rgba(8, 16, 15, 0.85);
+      color: var(--ink);
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .roster-card-captain::before {
+      content: "★";
+      color: var(--demo-accent);
+      font-size: 10px;
+      line-height: 1;
+    }
+
+    .roster-card-foot {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 8px;
+    }
+
+    .roster-card-name {
       display: block;
       font-family: var(--font-display);
+      font-size: 14px;
+      font-style: italic;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.05;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .roster-card-meta {
+      margin-top: 4px;
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .roster-card-avg {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-style: italic;
+      font-weight: 800;
+      color: var(--demo-primary);
+      line-height: 1;
+    }
+
+    .roster-card-avg.muted {
+      color: var(--quiet);
+    }
+
+    .kpi-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      padding: 14px 18px 4px;
+    }
+
+    .kpi-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+      padding: 14px 14px 12px;
+      min-height: 88px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(8, 16, 15, 0.6);
+    }
+
+    .kpi-card.is-hot {
+      background: var(--demo-primary);
+      border-color: var(--demo-primary);
+    }
+
+    .kpi-card.is-hot .kpi-cap,
+    .kpi-card.is-hot .kpi-val {
+      color: #fff;
+    }
+
+    .kpi-card.is-accent {
+      background: var(--demo-accent);
+      border-color: var(--demo-accent);
+    }
+
+    .kpi-card.is-accent .kpi-cap,
+    .kpi-card.is-accent .kpi-val {
+      color: #0c1616;
+    }
+
+    .kpi-val {
+      font-family: var(--font-display);
       font-size: 30px;
+      font-style: italic;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--ink);
+    }
+
+    .kpi-val.muted {
+      color: var(--quiet);
+    }
+
+    .kpi-cap {
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .stats-table {
+      margin: 12px 18px 18px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .stats-table-row {
+      display: grid;
+      grid-template-columns: 32px 1fr 32px 56px 36px 36px 44px;
+      gap: 8px;
+      align-items: center;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .stats-table-row:last-child {
+      border-bottom: 0;
+    }
+
+    .stats-table-row.is-head {
+      background: rgba(0, 0, 0, 0.22);
+      color: var(--demo-primary);
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .stats-table-row.is-head > span {
+      color: var(--demo-primary);
+    }
+
+    .stats-table-row.is-head > span:nth-child(2) {
+      text-align: left;
+    }
+
+    .stats-table-row > span {
+      min-width: 0;
+    }
+
+    .stats-table-num {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-style: italic;
+      font-weight: 800;
+      color: var(--demo-primary);
+    }
+
+    .stats-table-name {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--ink);
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .stats-table-name .star {
+      color: var(--demo-accent);
+      font-size: 11px;
+      line-height: 1;
+    }
+
+    .stats-table-pos {
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .stats-table-val {
+      text-align: right;
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-style: italic;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .stats-table-val.muted {
+      color: var(--quiet);
+    }
+
+    .stats-table-int {
+      text-align: right;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .stats-table-int.muted {
+      color: var(--quiet);
+    }
+
+    .stats-empty {
+      margin: 12px 18px 18px;
+      padding: 18px;
+      border: 1px dashed var(--line);
+      border-radius: 6px;
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    @media (max-width: 720px) {
+      .roster-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .kpi-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stats-table-row {
+        grid-template-columns: 26px 1fr 30px 48px 28px 28px 38px;
+        gap: 6px;
+        padding: 9px 10px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .hud-h2 {
+        font-size: 22px;
+      }
+
+      .roster-card-watermark {
+        font-size: 52px;
+      }
+    }
+
+    .game-row {
+      display: grid;
+      grid-template-columns: 56px 36px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .game-row:last-child {
+      border-bottom: 0;
+    }
+
+    .g-date {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      color: var(--quiet);
+    }
+
+    .g-date b {
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+    }
+
+    .g-date span {
+      color: var(--ink);
+      font-family: var(--font-display);
+      font-size: 22px;
       font-style: italic;
       line-height: 1;
     }
 
-    .demo-metric-row span {
+    .g-mark {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--ink);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
+    .g-mark-img,
+    .r-mark-img {
+      display: block;
+      background: transparent;
+      border: 0;
+      object-fit: contain;
+      padding: 0;
+    }
+
+    .demo-stage .g-mark-img,
+    .demo-stage .r-mark-img {
+      border: 0;
+      background: transparent;
+    }
+
+    .g-vs {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .g-vs strong {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-style: italic;
+      color: var(--ink);
+      letter-spacing: 0.005em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .g-vs small {
       color: var(--quiet);
       font-family: var(--font-mono);
       font-size: 10px;
     }
 
-    .demo-task {
-      display: grid;
-      grid-template-columns: 24px 1fr auto;
-      gap: 10px;
-      align-items: center;
-      min-height: 42px;
-      padding: 0 10px;
-      border-bottom: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 13px;
+    .g-result {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+      font-family: var(--font-display);
+      font-style: italic;
     }
 
-    .demo-task:last-child {
-      border-bottom: 0;
+    .g-result strong {
+      font-size: 18px;
+      line-height: 1;
     }
 
-    .demo-check {
-      width: 16px;
-      height: 16px;
-      border-radius: 4px;
-      background: var(--green);
+    .g-result.win strong {
+      color: var(--red);
     }
 
-    .demo-check.pending {
-      background: rgba(255, 255, 255, 0.16);
+    .g-result.loss strong {
+      color: var(--quiet);
+    }
+
+    .g-result.upcoming strong {
+      color: var(--green);
+      font-size: 11px;
+      font-family: var(--font-mono);
+      font-style: normal;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .g-result small {
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.08em;
+    }
+
+    .g-result.win small {
+      color: var(--red);
     }
 
     .platform-layout {
@@ -2209,6 +3172,43 @@
       min-height: 360px;
     }
 
+    .ops-handoff {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    .ops-handoff > div {
+      flex: 1 1 320px;
+      min-width: 0;
+    }
+
+    .ops-handoff strong {
+      display: block;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .ops-handoff p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .ops-handoff .btn {
+      flex: 0 0 auto;
+    }
+
     .pipeline {
       padding: 18px;
       display: grid;
@@ -2565,7 +3565,7 @@
         font-size: 84px;
       }
 
-      .inning-grid {
+      .inning-grid-caption {
         margin-top: 16px;
       }
 
@@ -2574,7 +3574,6 @@
       }
 
       .demo-layout,
-      .demo-output,
       .mini-demo-grid,
       .market-panel.two-column,
       .market-panel.organizer-panel,
@@ -2605,11 +3604,6 @@
 
       .accordion-panel {
         padding-left: 18px;
-      }
-
-      .demo-public {
-        border-right: 0;
-        border-bottom: 1px solid var(--line);
       }
 
       .section {
@@ -2686,20 +3680,24 @@
         padding: 12px 14px;
       }
 
-      .demo-mini-list div {
-        grid-template-columns: 1fr;
-        padding: 10px;
-      }
-
-      .schedule-card,
       .registration-row,
       .parent-row,
       .week-card {
         grid-template-columns: 1fr;
       }
 
-      .demo-metric-row {
-        grid-template-columns: 1fr;
+      .game-row {
+        grid-template-columns: 50px 32px 1fr auto;
+        gap: 10px;
+        padding: 10px 14px;
+      }
+
+      .team-display {
+        font-size: 44px;
+      }
+
+      .demo-pub-stat-row {
+        gap: 16px;
       }
 
       .tenant-nav {
@@ -2793,23 +3791,23 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="container hero-grid">
         <div class="hero-copy-block reveal">
-          <div class="eyebrow">Try the season flow first</div>
-          <h1 id="hero-title">LEAG <span>runs the league.</span></h1>
+          <div class="eyebrow">For youth-sports commissioners</div>
+          <h1 id="hero-title"><span class="brand-wordmark hero-wordmark" aria-label="LEAG" role="img"></span> <span>runs your league.</span></h1>
           <p class="hero-copy">
-            Launch a public league site, take signups, build teams, publish the weekly schedule, and show families what changed.
+            Public site, signups, rosters, weekly schedule, scores, and parent updates. One place for the whole season.
           </p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#playground">Try the flow -></a>
-            <a class="btn btn-secondary" href="#platform">See a league site</a>
+            <a class="btn btn-primary" href="https://mail.google.com/mail/?view=cm&amp;to=contact@leag.app&amp;su=LEAG%20demo%20request" target="_blank" rel="noopener">Book a demo</a>
+            <a class="btn btn-secondary" href="#playground">Try a sample season</a>
           </div>
-          <p class="hero-note">No call required: click through the league flow directly on this page.</p>
+          <p class="hero-note">Or click through a sample season below first. No signup, no signin.</p>
         </div>
 
         <div class="hero-scene reveal" aria-label="Live league site preview">
           <div class="league-window">
             <div class="window-bar">
               <img class="brand-mark" src="brand/leag-icon.svg" alt="" aria-hidden="true">
-              <strong>Miami County Softball</strong>
+              <strong>Bayside County Sports</strong>
               <span>Softball / 2026 spring</span>
               <div class="window-tabs" aria-hidden="true">
                 <span>Home</span>
@@ -2822,35 +3820,67 @@
               <div class="ticker-label">LIVE</div>
               <div class="ticker-viewport">
                 <div class="ticker-track">
-                  <span><strong>Firecrackers</strong> 5 - 3 Panthers T5</span>
-                  <span>FINAL SPARKS 8 - 6 PITCH</span>
+                  <span><strong>Stingrays</strong> 5 - 3 Hammerheads T5</span>
+                  <span>FINAL GULLS 8 - 6 MARLINS</span>
                   <span>NEXT MON 5:30 FIELD 1</span>
                   <span>TRYOUTS 12U OPEN</span>
-                  <span><strong>Firecrackers</strong> 5 - 3 Panthers T5</span>
-                  <span>FINAL SPARKS 8 - 6 PITCH</span>
+                  <span><strong>Stingrays</strong> 5 - 3 Hammerheads T5</span>
+                  <span>FINAL GULLS 8 - 6 MARLINS</span>
                 </div>
               </div>
             </div>
             <div class="score-hero">
               <div class="score-meta">
                 <span class="live-pill">LIVE NOW</span>
-                <span>Field 1 / top 5 / runners on 1st and 3rd</span>
+                <div class="score-meta-detail">
+                  <span>Field 1 / top 5</span>
+                  <svg class="diamond" viewBox="0 0 44 44" aria-label="Runners on 1st and 3rd, no outs in 2nd" role="img">
+                    <polygon points="22,5 39,22 22,39 5,22" fill="none" stroke="rgba(244,245,244,0.32)" stroke-width="1.2"/>
+                    <rect x="18" y="1" width="8" height="8" rx="1.4" fill="none" stroke="rgba(244,245,244,0.55)" stroke-width="1.2"/>
+                    <rect x="35" y="18" width="8" height="8" rx="1.4" fill="var(--red)"/>
+                    <rect x="18" y="35" width="8" height="8" rx="1.4" fill="rgba(244,245,244,0.18)" stroke="rgba(244,245,244,0.55)" stroke-width="1"/>
+                    <rect x="1" y="18" width="8" height="8" rx="1.4" fill="var(--red)"/>
+                  </svg>
+                </div>
               </div>
               <div class="score-row">
-                <div>
-                  <div class="team-name">Panthers</div>
-                  <div class="team-caption">10-5 / away</div>
+                <div class="score-side">
+                  <img class="team-icon" src="brand/hammerheads-icon.png" alt="" aria-hidden="true">
+                  <div>
+                    <div class="team-name batting">Hammerheads</div>
+                    <div class="team-caption">10-5 / away / batting</div>
+                  </div>
                 </div>
-                <div class="score-number" aria-label="Panthers 3, Firecrackers 5">
+                <div class="score-number" aria-label="Hammerheads 3, Stingrays 5">
                   <span>3</span><em>-</em><span>5</span>
                 </div>
-                <div>
-                  <div class="team-name right">Firecrackers</div>
-                  <div class="team-caption">12-3 / home</div>
+                <div class="score-side score-side-right">
+                  <img class="team-icon" src="brand/stingrays-icon.png" alt="" aria-hidden="true">
+                  <div>
+                    <div class="team-name right">Stingrays</div>
+                    <div class="team-caption">12-3 / home</div>
+                  </div>
                 </div>
               </div>
-              <div class="inning-grid" aria-hidden="true">
-                <span>1</span><span>0</span><span>2</span><span>0</span><span class="active">T5</span><span></span><span></span>
+              <div class="inning-grid-caption" aria-hidden="true">
+                <span>Box score</span><b>Top of 5</b>
+              </div>
+              <div class="linescore" role="table" aria-label="Linescore through the 5th inning">
+                <div class="linescore-row" role="row">
+                  <span class="linescore-team" role="rowheader"></span>
+                  <span class="inning-num" role="columnheader">1</span><span class="inning-num">2</span><span class="inning-num">3</span><span class="inning-num">4</span><span class="inning-num inning-active">T5</span><span class="inning-num">6</span><span class="inning-num">7</span>
+                  <span class="inning-num total">R</span>
+                </div>
+                <div class="linescore-row" role="row">
+                  <span class="linescore-team" role="rowheader">Hammerheads</span>
+                  <span class="inning-run">1</span><span class="inning-run">0</span><span class="inning-run">1</span><span class="inning-run">1</span><span class="inning-run">0</span><span class="inning-run"></span><span class="inning-run"></span>
+                  <span class="inning-run total">3</span>
+                </div>
+                <div class="linescore-row" role="row">
+                  <span class="linescore-team home" role="rowheader">Stingrays</span>
+                  <span class="inning-run">0</span><span class="inning-run">2</span><span class="inning-run">0</span><span class="inning-run">3</span><span class="inning-run"></span><span class="inning-run"></span><span class="inning-run"></span>
+                  <span class="inning-run total">5</span>
+                </div>
               </div>
             </div>
             <div class="ops-grid">
@@ -2858,19 +3888,19 @@
                 <div class="panel-title">Standings <span>Updated live</span></div>
                 <div class="standings-row">
                   <span class="mono">1</span>
-                  <span class="team-chip"><span class="team-swatch"></span><span>Firecrackers</span></span>
+                  <span class="team-chip"><span class="team-swatch"></span><span>Stingrays</span></span>
                   <span class="mono">12-3</span>
                   <span class="mono">.800</span>
                 </div>
                 <div class="standings-row">
                   <span class="mono">2</span>
-                  <span class="team-chip"><span class="team-swatch" style="background:#c9a24b"></span><span>Sparks</span></span>
+                  <span class="team-chip"><span class="team-swatch" style="background:#c9a24b"></span><span>Gulls</span></span>
                   <span class="mono">10-5</span>
                   <span class="mono">.667</span>
                 </div>
                 <div class="standings-row">
                   <span class="mono">3</span>
-                  <span class="team-chip"><span class="team-swatch" style="background:#5b8fb7"></span><span>Pitch Perfect</span></span>
+                  <span class="team-chip"><span class="team-swatch" style="background:#5b8fb7"></span><span>Marlins</span></span>
                   <span class="mono">8-7</span>
                   <span class="mono">.533</span>
                 </div>
@@ -2879,12 +3909,12 @@
                 <div class="panel-title">Up next <span>Calendar sync</span></div>
                 <div class="schedule-row">
                   <span class="mono">Jun 17</span>
-                  <span>Firecrackers vs Pitch Perfect</span>
+                  <span>Stingrays vs Marlins</span>
                   <span class="mono">5:30</span>
                 </div>
                 <div class="schedule-row">
                   <span class="mono">Jun 19</span>
-                  <span>Sparks vs Panthers</span>
+                  <span>Gulls vs Hammerheads</span>
                   <span class="mono">6:45</span>
                 </div>
                 <div class="schedule-row">
@@ -2925,79 +3955,224 @@
         <div class="section-header reveal">
           <div>
             <div class="section-kicker">Interactive demo</div>
-            <h2 id="playground-title">Build a season before you talk to anyone.</h2>
+            <h2 id="playground-title">Try a sample season.</h2>
           </div>
-          <p>Use a few fake values, publish a week, and see what families would see. Nothing saves, exports, or sends outside this page.</p>
         </div>
 
         <div class="demo-layout reveal">
-          <aside class="demo-controls" aria-label="Demo controls">
-            <p class="demo-reset-note">Demo data resets when you leave this page.</p>
+          <aside class="demo-controls" aria-label="Tenant theme controls">
+            <p class="demo-reset-note">Type a name, pick your colors, switch sports. Page updates live.</p>
             <div class="sample-field">
               <label for="demo-org-input">Organization</label>
-              <input class="sample-input" id="demo-org-input" type="text" maxlength="32" value="Miami County Softball">
-            </div>
-            <div class="sample-field">
-              <label for="demo-team-a-input">Team one</label>
-              <input class="sample-input" id="demo-team-a-input" type="text" maxlength="22" value="Firecrackers">
-            </div>
-            <div class="sample-field">
-              <label for="demo-team-b-input">Team two</label>
-              <input class="sample-input" id="demo-team-b-input" type="text" maxlength="22" value="Panthers">
+              <input class="sample-input" id="demo-org-input" type="text" maxlength="32" value="Bayside County Sports">
             </div>
             <div class="demo-group">
-              <div class="demo-label">Sport template</div>
+              <div class="demo-label">Sport</div>
               <div class="demo-choice-row">
                 <button class="demo-chip is-active" type="button" data-demo-sport="softball">Softball</button>
                 <button class="demo-chip" type="button" data-demo-sport="basketball">Basketball</button>
                 <button class="demo-chip" type="button" data-demo-sport="soccer">Soccer</button>
               </div>
             </div>
-            <div class="demo-group">
-              <div class="demo-label">League size</div>
-              <div class="demo-choice-row">
-                <button class="demo-chip" type="button" data-demo-teams="6">6 teams</button>
-                <button class="demo-chip is-active" type="button" data-demo-teams="8">8 teams</button>
-                <button class="demo-chip" type="button" data-demo-teams="12">12 teams</button>
+            <div class="sample-field">
+              <label for="demo-primary-hex">Primary color</label>
+              <div class="theme-color-row">
+                <input type="color" id="demo-primary-input" value="#3667B5" aria-label="Primary color picker">
+                <input class="sample-input theme-hex-input" id="demo-primary-hex" type="text" maxlength="7" value="#3667B5" pattern="^#[0-9A-Fa-f]{6}$" aria-label="Primary color hex">
               </div>
             </div>
-            <div class="demo-status" aria-live="polite">
-              <strong id="demo-status-title">Softball league loaded</strong>
-              <span id="demo-status-copy">Eight teams, two fields, registration open, schedule draft ready.</span>
+            <div class="sample-field">
+              <label for="demo-accent-hex">Accent color</label>
+              <div class="theme-color-row">
+                <input type="color" id="demo-accent-input" value="#70ECF0" aria-label="Accent color picker">
+                <input class="sample-input theme-hex-input" id="demo-accent-hex" type="text" maxlength="7" value="#70ECF0" pattern="^#[0-9A-Fa-f]{6}$" aria-label="Accent color hex">
+              </div>
             </div>
+            <button class="btn btn-secondary demo-reset-btn" type="button" id="demo-reset" hidden>Reset to defaults</button>
             <button class="btn btn-primary" type="button" id="demo-generate">Publish schedule</button>
           </aside>
 
           <article class="demo-stage" id="demo-stage" aria-label="Live demo preview">
             <div class="demo-stage-bar">
-              <strong id="demo-org">Miami County Softball</strong>
-              <span id="demo-url">mcsl.leag.app/spring-2026</span>
+              <strong id="demo-org">Bayside County Sports</strong>
+              <span id="demo-url">bayside-county-sports.leag.app/preview</span>
             </div>
-            <div class="demo-output">
-              <div class="demo-public">
-                <span class="status-tag" id="demo-status-tag">Registration open</span>
-                <h3 id="demo-headline">Spring softball season</h3>
-                <p id="demo-summary">A public league page with standings, upcoming games, roster links, and a registration path for families.</p>
-                <div class="demo-mini-list">
-                  <div><b>Next</b><span id="demo-next">Firecrackers vs Pitch Perfect</span><b>5:30</b></div>
-                  <div><b>Open</b><span id="demo-open">12U tryout registration</span><b>18 spots</b></div>
-                  <div><b>Due</b><span id="demo-due">Team store closes</span><b>Jun 28</b></div>
-                </div>
-                <div class="demo-schedule" id="demo-schedule-list" aria-live="polite"></div>
+            <div class="demo-pub">
+              <div class="demo-pub-subbar">
+                <img class="demo-pub-mark" id="demo-team-mark" src="brand/bayside-diamonds-icon.png" alt="" aria-hidden="true">
+                <span class="demo-pub-meta">
+                  <strong id="demo-team-headline">Diamonds</strong>
+                  <span id="demo-pub-season">Softball / 2026 spring</span>
+                </span>
+                <span class="status-tag" id="demo-status-tag">Sample team page</span>
               </div>
-              <div class="demo-admin">
-                <div class="demo-metric-row">
-                  <div><strong id="demo-team-count">8</strong><span>teams</span></div>
-                  <div><strong id="demo-game-count">28</strong><span>games</span></div>
-                  <div><strong id="demo-fee">$142</strong><span>avg fee</span></div>
+
+              <div class="demo-pub-hero">
+                <div class="demo-pub-chips" id="demo-chips">
+                  <span class="record-pill star" id="demo-rank-pill">#1</span>
+                  <span class="record-pill streak" id="demo-streak-pill">W4</span>
                 </div>
+                <h3 class="team-display" id="demo-team-display">DIAMONDS</h3>
+                <div class="demo-pub-stat-row">
+                  <div class="demo-pub-record">
+                    <span class="record-cap">Record</span>
+                    <strong id="demo-record">12-3</strong>
+                  </div>
+                  <div class="demo-pub-last5" id="demo-last5-wrap">
+                    <span class="record-cap">Last 5</span>
+                    <span class="last5-row" id="demo-last5"></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="demo-next-strip">
                 <div>
-                  <div class="demo-task"><span class="demo-check"></span><span>Public page generated</span><span class="mono">done</span></div>
-                  <div class="demo-task"><span class="demo-check"></span><span id="demo-task-two">Schedule draft balanced by field</span><span class="mono">done</span></div>
-                  <div class="demo-task"><span class="demo-check"></span><span>Registration link attached</span><span class="mono">live</span></div>
-                  <div class="demo-task"><span class="demo-check pending" id="demo-notify-check"></span><span id="demo-notify-copy">Parent notifications queued</span><span class="mono" id="demo-notify-state">ready</span></div>
+                  <span class="demo-next-kicker">Next game</span>
+                  <strong id="demo-next">Diamonds vs Marlins</strong>
+                  <span id="demo-next-meta">Mon 5:30 PM / Field 1</span>
                 </div>
-                <div class="parent-list" id="demo-parent-list" aria-live="polite"></div>
+                <span class="demo-next-cta">Add to calendar</span>
+              </div>
+
+              <div class="demo-pub-tabs" role="tablist">
+                <button type="button" class="active" data-demo-tab="schedule" role="tab" aria-selected="true">Schedule</button>
+                <button type="button" data-demo-tab="roster" role="tab" aria-selected="false">Roster</button>
+                <button type="button" data-demo-tab="stats" role="tab" aria-selected="false">Stats</button>
+              </div>
+
+              <div class="demo-pub-list" id="demo-schedule-list" aria-live="polite">
+                <div class="demo-pub-empty">Click <b>Publish schedule</b> to fill the season.</div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="marketplace" aria-labelledby="marketplace-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="section-kicker">Player and venue demos</div>
+            <h2 id="marketplace-title">Help people find a place to play.</h2>
+          </div>
+          <p>The public side should feel concrete: players search for the right activity, organizers approve real people, and venues show exactly what is open.</p>
+        </div>
+
+        <div class="market-accordion" id="market-demo-accordion">
+          <article class="market-card market-card-player reveal is-open" data-market-panel="players">
+            <button class="market-trigger" type="button" aria-expanded="true">
+              <span>
+                <span class="market-label">Players</span>
+                <strong>Search, save, or join a waitlist.</strong>
+                <em>Try filters a player would understand. Buttons only update this page, with no payment or account creation.</em>
+              </span>
+              <b>Open demo</b>
+            </button>
+            <div class="market-panel two-column">
+              <div>
+                <div class="market-controls" aria-label="Player search controls">
+                  <select class="sample-select" id="player-sport">
+                    <option>Softball</option>
+                    <option>Basketball</option>
+                    <option>Soccer</option>
+                  </select>
+                  <select class="sample-select" id="player-location">
+                    <option>Bayside</option>
+                    <option>Lakeside</option>
+                    <option>Westport</option>
+                  </select>
+                  <select class="sample-select" id="player-time">
+                    <option>Tonight</option>
+                    <option>This weekend</option>
+                    <option>Next week</option>
+                  </select>
+                </div>
+                <p class="market-panel-copy">Demo data resets when you leave this page. Checkout stops at a preview screen.</p>
+              </div>
+              <div class="market-demo player-search" id="player-results">
+                <div class="player-search-row"><span>Loading games</span><strong>demo</strong></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="market-card market-card-organizer reveal" data-market-panel="organizers">
+            <button class="market-trigger" type="button" aria-expanded="false">
+              <span>
+                <span class="market-label">Organizers</span>
+                <strong>Approve players, draft teams, and clear conflicts.</strong>
+                <em>This is the admin work organizers actually do before a season goes public.</em>
+              </span>
+              <b>Open demo</b>
+            </button>
+            <div class="market-panel organizer-panel">
+              <div class="market-panel-copy">Use the queue to approve or hold players, then move tryout players into teams or run a random draft.</div>
+              <div class="market-demo organizer-board">
+                <div class="organizer-lane">
+                  <header><span>Registration queue</span><b id="registration-count">4 waiting</b></header>
+                  <div class="registration-list" id="registration-list"></div>
+                </div>
+                <div class="organizer-lane">
+                  <header><span>Tryout team builder</span><b id="team-builder-count">0 picked</b></header>
+                  <div>
+                    <div class="team-switcher">
+                      <button class="tiny-btn is-active" type="button" data-team-switch="Riptide">Riptide</button>
+                      <button class="tiny-btn" type="button" data-team-switch="Hammerheads">Hammerheads</button>
+                      <button class="tiny-btn" type="button" id="random-draft">Random draft</button>
+                    </div>
+                    <div class="builder-grid">
+                      <div>
+                        <div class="demo-label">Player pool</div>
+                        <div class="player-pool" id="player-pool"></div>
+                      </div>
+                      <div>
+                        <div class="demo-label" id="active-team-label">Riptide</div>
+                        <div class="team-box" id="team-box"></div>
+                      </div>
+                    </div>
+                    <p class="demo-reset-note">Drag or click to move players. Drafts and random drafts will be supported in the real product.</p>
+                  </div>
+                </div>
+                <div class="organizer-lane">
+                  <header><span>Field conflicts</span><b id="conflict-state">2 conflicts</b></header>
+                  <div>
+                    <div class="conflict-list" id="conflict-list"></div>
+                    <div class="market-action-row">
+                      <button class="tiny-btn" type="button" id="resolve-conflicts">Resolve conflicts</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="market-card market-card-venue reveal" data-market-panel="venues">
+            <button class="market-trigger" type="button" aria-expanded="false">
+              <span>
+                <span class="market-label">Venues</span>
+                <strong>Pick a time and see what is really open.</strong>
+                <em>Availability changes by date and time, with booked, open, and hold states clearly separated.</em>
+              </span>
+              <b>Open demo</b>
+            </button>
+            <div class="market-panel two-column">
+              <div>
+                <div class="market-controls" aria-label="Venue slot controls">
+                  <select class="sample-select" id="venue-date">
+                    <option value="jun17">Jun 17</option>
+                    <option value="jun18">Jun 18</option>
+                    <option value="jun19">Jun 19</option>
+                  </select>
+                  <select class="sample-select" id="venue-time">
+                    <option value="530">5:30 PM</option>
+                    <option value="645">6:45 PM</option>
+                    <option value="800">8:00 PM</option>
+                  </select>
+                </div>
+                <p class="market-panel-copy">This is deterministic fake availability so the state feels responsive without listing real inventory.</p>
+              </div>
+              <div class="market-demo field-grid" id="venue-field-grid">
+                <div class="field-card"><strong>Loading fields</strong><span>demo</span></div>
               </div>
             </div>
           </article>
@@ -3019,13 +4194,13 @@
           <article class="public-site-preview reveal" aria-label="Tenant public site mockup">
             <div class="window-bar">
               <img class="brand-mark" src="brand/leag-icon.svg" alt="" aria-hidden="true">
-              <strong>Orlando Diamonds</strong>
+              <strong>Bayside Diamonds</strong>
               <span>Powered by LEAG</span>
             </div>
             <div class="tenant-hero">
-              <span class="tenant-badge">Fastpitch / Orlando, FL</span>
+              <span class="tenant-badge">Fastpitch / Bayside, FL</span>
               <h3 class="tenant-title">Diamonds 16U open tryouts</h3>
-              <div class="tenant-meta">July 8 / South Orange Field 2 / registration required</div>
+              <div class="tenant-meta">July 8 / Bayside Field 2 / registration required</div>
             </div>
             <div class="tenant-nav" aria-hidden="true">
               <span class="active">Home</span>
@@ -3105,7 +4280,7 @@
             </div>
             <div class="family-detail">
               <div class="family-detail-card">
-                <strong id="surface-detail-matchup">Firecrackers vs Pitch Perfect</strong>
+                <strong id="surface-detail-matchup">Riptide vs Marlins</strong>
                 <span id="surface-detail-meta">Field 1 / 5:30 PM / live now</span>
                 <p id="surface-detail-note">Families see the game status, venue, arrival note, and any change without scrolling through a roster.</p>
               </div>
@@ -3117,137 +4292,6 @@
               <div><strong id="surface-stat-three">2</strong><span>alerts</span></div>
             </div>
           </aside>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="marketplace" aria-labelledby="marketplace-title">
-      <div class="container">
-        <div class="section-header reveal">
-          <div>
-            <div class="section-kicker">Player and venue demos</div>
-            <h2 id="marketplace-title">Help people find a place to play.</h2>
-          </div>
-          <p>The public side should feel concrete: players search for the right activity, organizers approve real people, and venues show exactly what is open.</p>
-        </div>
-
-        <div class="market-accordion" id="market-demo-accordion">
-          <article class="market-card market-card-player reveal is-open" data-market-panel="players">
-            <button class="market-trigger" type="button" aria-expanded="true">
-              <span>
-                <span class="market-label">Players</span>
-                <strong>Search, save, or join a waitlist.</strong>
-                <em>Try filters a player would understand. Buttons only update this page, with no payment or account creation.</em>
-              </span>
-              <b>Open demo</b>
-            </button>
-            <div class="market-panel two-column">
-              <div>
-                <div class="market-controls" aria-label="Player search controls">
-                  <select class="sample-select" id="player-sport">
-                    <option>Softball</option>
-                    <option>Basketball</option>
-                    <option>Soccer</option>
-                  </select>
-                  <select class="sample-select" id="player-location">
-                    <option>Irvine</option>
-                    <option>Orlando</option>
-                    <option>Miami County</option>
-                  </select>
-                  <select class="sample-select" id="player-time">
-                    <option>Tonight</option>
-                    <option>This weekend</option>
-                    <option>Next week</option>
-                  </select>
-                </div>
-                <p class="market-panel-copy">Demo data resets when you leave this page. Checkout stops at a preview screen.</p>
-              </div>
-              <div class="market-demo player-search" id="player-results">
-                <div class="player-search-row"><span>Loading games</span><strong>demo</strong></div>
-              </div>
-            </div>
-          </article>
-
-          <article class="market-card market-card-organizer reveal" data-market-panel="organizers">
-            <button class="market-trigger" type="button" aria-expanded="false">
-              <span>
-                <span class="market-label">Organizers</span>
-                <strong>Approve players, draft teams, and clear conflicts.</strong>
-                <em>This is the admin work organizers actually do before a season goes public.</em>
-              </span>
-              <b>Open demo</b>
-            </button>
-            <div class="market-panel organizer-panel">
-              <div class="market-panel-copy">Use the queue to approve or hold players, then move tryout players into teams or run a random draft.</div>
-              <div class="market-demo organizer-board">
-                <div class="organizer-lane">
-                  <header><span>Registration queue</span><b id="registration-count">4 waiting</b></header>
-                  <div class="registration-list" id="registration-list"></div>
-                </div>
-                <div class="organizer-lane">
-                  <header><span>Tryout team builder</span><b id="team-builder-count">0 picked</b></header>
-                  <div>
-                    <div class="team-switcher">
-                      <button class="tiny-btn is-active" type="button" data-team-switch="Firecrackers">Firecrackers</button>
-                      <button class="tiny-btn" type="button" data-team-switch="Panthers">Panthers</button>
-                      <button class="tiny-btn" type="button" id="random-draft">Random draft</button>
-                    </div>
-                    <div class="builder-grid">
-                      <div>
-                        <div class="demo-label">Player pool</div>
-                        <div class="player-pool" id="player-pool"></div>
-                      </div>
-                      <div>
-                        <div class="demo-label" id="active-team-label">Firecrackers</div>
-                        <div class="team-box" id="team-box"></div>
-                      </div>
-                    </div>
-                    <p class="demo-reset-note">Drag or click to move players. Drafts and random drafts will be supported in the real product.</p>
-                  </div>
-                </div>
-                <div class="organizer-lane">
-                  <header><span>Field conflicts</span><b id="conflict-state">2 conflicts</b></header>
-                  <div>
-                    <div class="conflict-list" id="conflict-list"></div>
-                    <div class="market-action-row">
-                      <button class="tiny-btn" type="button" id="resolve-conflicts">Resolve conflicts</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <article class="market-card market-card-venue reveal" data-market-panel="venues">
-            <button class="market-trigger" type="button" aria-expanded="false">
-              <span>
-                <span class="market-label">Venues</span>
-                <strong>Pick a time and see what is really open.</strong>
-                <em>Availability changes by date and time, with booked, open, and hold states clearly separated.</em>
-              </span>
-              <b>Open demo</b>
-            </button>
-            <div class="market-panel two-column">
-              <div>
-                <div class="market-controls" aria-label="Venue slot controls">
-                  <select class="sample-select" id="venue-date">
-                    <option value="jun17">Jun 17</option>
-                    <option value="jun18">Jun 18</option>
-                    <option value="jun19">Jun 19</option>
-                  </select>
-                  <select class="sample-select" id="venue-time">
-                    <option value="530">5:30 PM</option>
-                    <option value="645">6:45 PM</option>
-                    <option value="800">8:00 PM</option>
-                  </select>
-                </div>
-                <p class="market-panel-copy">This is deterministic fake availability so the state feels responsive without listing real inventory.</p>
-              </div>
-              <div class="market-demo field-grid" id="venue-field-grid">
-                <div class="field-card"><strong>Loading fields</strong><span>demo</span></div>
-              </div>
-            </div>
-          </article>
         </div>
       </div>
     </section>
@@ -3315,8 +4359,8 @@
                 </button>
                 <div class="accordion-panel">
                   <div class="team-switcher">
-                    <button class="tiny-btn is-active" type="button" data-ops-team="Firecrackers">Firecrackers</button>
-                    <button class="tiny-btn" type="button" data-ops-team="Panthers">Panthers</button>
+                    <button class="tiny-btn is-active" type="button" data-ops-team="Riptide">Riptide</button>
+                    <button class="tiny-btn" type="button" data-ops-team="Hammerheads">Hammerheads</button>
                     <button class="tiny-btn" type="button" id="ops-random-draft">Random draft</button>
                   </div>
                   <div class="builder-grid">
@@ -3325,7 +4369,7 @@
                       <div class="player-pool" id="ops-player-pool"></div>
                     </div>
                     <div>
-                      <div class="demo-label" id="ops-active-team-label">Firecrackers</div>
+                      <div class="demo-label" id="ops-active-team-label">Riptide</div>
                       <div class="team-box" id="ops-team-box"></div>
                     </div>
                   </div>
@@ -3372,16 +4416,16 @@
                     <div class="scoreboard-demo">
                       <div class="scoreline-grid">
                         <div class="score-team" id="score-team-fire">
-                          <b>Firecrackers</b>
+                          <b>Riptide</b>
                           <strong id="score-fire">5</strong>
                         </div>
                         <div class="score-divider">-</div>
                         <div class="score-team" id="score-team-panthers">
-                          <b>Panthers</b>
+                          <b>Hammerheads</b>
                           <strong id="score-panthers">3</strong>
                         </div>
                       </div>
-                      <div class="score-meta-line" id="score-meta-line">Top 5 / Field 1 / Firecrackers batting</div>
+                      <div class="score-meta-line" id="score-meta-line">Top 5 / Field 1 / Riptide batting</div>
                       <div class="score-count-grid">
                         <div><span>Balls</span><strong id="score-balls">0</strong></div>
                         <div><span>Strikes</span><strong id="score-strikes">0</strong></div>
@@ -3391,10 +4435,10 @@
                         <div class="score-control-group">
                           <b>Score</b>
                           <div class="score-button-row">
-                            <button class="tiny-btn" type="button" data-score-action="fire-up">+ Firecrackers</button>
-                            <button class="tiny-btn" type="button" data-score-action="fire-down">- Firecrackers</button>
-                            <button class="tiny-btn" type="button" data-score-action="panthers-up">+ Panthers</button>
-                            <button class="tiny-btn" type="button" data-score-action="panthers-down">- Panthers</button>
+                            <button class="tiny-btn" type="button" data-score-action="fire-up">+ Riptide</button>
+                            <button class="tiny-btn" type="button" data-score-action="fire-down">- Riptide</button>
+                            <button class="tiny-btn" type="button" data-score-action="panthers-up">+ Hammerheads</button>
+                            <button class="tiny-btn" type="button" data-score-action="panthers-down">- Hammerheads</button>
                           </div>
                         </div>
                         <div class="score-control-group">
@@ -3417,6 +4461,14 @@
             </div>
           </article>
         </div>
+
+        <aside class="ops-handoff reveal" aria-label="Get LEAG for your league">
+          <div>
+            <strong>Want this for your league?</strong>
+            <p>Send your league name, sport, and approximate roster size. We will set up a working sample for your league and walk you through it on a call.</p>
+          </div>
+          <a class="btn btn-primary" href="https://mail.google.com/mail/?view=cm&amp;to=contact@leag.app&amp;su=LEAG%20demo%20request" target="_blank" rel="noopener">Email contact@leag.app</a>
+        </aside>
       </div>
     </section>
 
@@ -3425,7 +4477,7 @@
   <footer class="site-footer">
     <div class="container footer-grid">
       <a class="brand" href="#" aria-label="LEAG home">
-        <img class="brand-mark" src="brand/leag-icon.svg" alt="" aria-hidden="true">
+        <img class="brand-mark" src="brand/leag-icon-green.svg" alt="" aria-hidden="true">
         <span class="brand-wordmark" aria-hidden="true"></span>
       </a>
       <div>Copyright <span id="current-year"></span> Stryder Labs LLC. All rights reserved.</div>
@@ -3498,97 +4550,195 @@
       return select.selectedOptions[0] ? select.selectedOptions[0].textContent : select.value;
     };
 
+    const demoDefaults = {
+      org: "Bayside County Sports",
+      primary: "#3667B5",
+      accent: "#70ECF0"
+    };
+
     const demoState = {
       sport: "softball",
-      teams: 8,
-      generated: false
+      tab: "schedule",
+      generated: false,
+      primary: demoDefaults.primary,
+      accent: demoDefaults.accent
     };
 
     const demoCopy = {
       softball: {
-        org: "Miami County Softball",
-        teamA: "Firecrackers",
-        teamB: "Panthers",
-        title: "Softball season loaded",
-        draftCopy: "teams, two fields, registration open, schedule draft ready.",
-        headline: "Spring softball season",
-        summary: "A public softball page with standings, upcoming games, roster links, and a signup path families can understand.",
-        nextOpponent: "Pitch Perfect",
-        open: "12U tryout registration",
-        due: "Team store closes",
-        fee: "$142",
-        task: "Schedule draft balanced by field",
-        field: "Field"
+        team: "Diamonds", field: "Field", nextOpponent: "Marlins",
+        icon: "brand/bayside-diamonds-icon.png", season: "Softball / 2026 spring",
+        started: true, opener: "MAR 04",
+        record: "12-3", last5: ["W","W","L","W","W"], rank: "#1", streak: "W4"
       },
       basketball: {
-        org: "South County Hoops",
-        teamA: "Falcons",
-        teamB: "Breakers",
-        title: "Basketball season loaded",
-        draftCopy: "teams, gym slots, divisions, and waitlists ready to review.",
-        headline: "Winter basketball league",
-        summary: "A public basketball page with court schedules, division standings, clinic signups, and team pages.",
-        nextOpponent: "Rim Runners",
-        open: "JV skills clinic",
-        due: "Officials assignments",
-        fee: "$118",
-        task: "Court schedule balanced by division",
-        field: "Court"
+        team: "Breakers", field: "Court", nextOpponent: "Tide",
+        icon: "brand/bayside-breakers-icon.png", season: "Basketball / 2026 winter",
+        started: false, opener: "NOV 14",
+        record: "0-0", last5: [], rank: "Preseason", streak: "Tipoff Nov 14"
       },
       soccer: {
-        org: "Coastal Rec Soccer",
-        teamA: "Harbor United",
-        teamB: "Mesa FC",
-        title: "Soccer season loaded",
-        draftCopy: "teams, field permits, coach notes, and signup rules staged.",
-        headline: "Fall soccer signups",
-        summary: "A public soccer page with field maps, age-group registration, standings, and match updates.",
-        nextOpponent: "Northside",
-        open: "U10 player registration",
-        due: "Field permits review",
-        fee: "$96",
-        task: "Pitch schedule balanced by age group",
-        field: "Pitch"
+        team: "Nets", field: "Pitch", nextOpponent: "Stingrays",
+        icon: "brand/bayside-nets-icon.png", season: "Soccer / 2026 fall",
+        started: false, opener: "AUG 22",
+        record: "0-0", last5: [], rank: "Preseason", streak: "Kickoff Aug 22"
       }
+    };
+
+    const rosterData = {
+      softball: [
+        { num: "1",  name: "Hadley Cross",   pos: "P",    cls: "Sr", captain: true, avg: ".451" },
+        { num: "3",  name: "Bree Walden",    pos: "C",    cls: "Jr", avg: ".402" },
+        { num: "7",  name: "Sage Foster",    pos: "SS",   cls: "Sr", captain: true, avg: ".388" },
+        { num: "9",  name: "Kinley Brooks",  pos: "1B",   cls: "So", avg: ".351" },
+        { num: "11", name: "Marlee Quinn",   pos: "2B",   cls: "Jr", avg: ".342" },
+        { num: "14", name: "Reese Tatum",    pos: "3B",   cls: "Sr", avg: ".376" },
+        { num: "17", name: "Wren Halliday",  pos: "OF",   cls: "Jr", avg: ".412" },
+        { num: "21", name: "Avery Pike",     pos: "OF",   cls: "So", avg: ".298" },
+        { num: "24", name: "Harlow Vance",   pos: "OF",   cls: "Jr", avg: ".331" },
+        { num: "27", name: "Ember Knox",     pos: "P",    cls: "Jr", avg: ".276" },
+        { num: "32", name: "Juno Reid",      pos: "UTIL", cls: "So", avg: ".301" },
+        { num: "44", name: "Sloane Beck",    pos: "DP",   cls: "Sr", avg: ".367" }
+      ],
+      basketball: [
+        { num: "3",  name: "Hadley Cross",   pos: "PG",   cls: "Sr", captain: true },
+        { num: "5",  name: "Bree Walden",    pos: "SG",   cls: "Jr" },
+        { num: "7",  name: "Sage Foster",    pos: "SF",   cls: "Sr", captain: true },
+        { num: "9",  name: "Kinley Brooks",  pos: "PF",   cls: "So" },
+        { num: "11", name: "Marlee Quinn",   pos: "C",    cls: "Jr" },
+        { num: "14", name: "Reese Tatum",    pos: "G",    cls: "Sr" },
+        { num: "17", name: "Wren Halliday",  pos: "G",    cls: "Jr" },
+        { num: "21", name: "Avery Pike",     pos: "F",    cls: "So" },
+        { num: "24", name: "Harlow Vance",   pos: "F",    cls: "Jr" },
+        { num: "27", name: "Ember Knox",     pos: "C",    cls: "Jr" },
+        { num: "32", name: "Juno Reid",      pos: "G",    cls: "So" },
+        { num: "44", name: "Sloane Beck",    pos: "F",    cls: "Sr" }
+      ],
+      soccer: [
+        { num: "1",  name: "Hadley Cross",   pos: "GK",   cls: "Sr", captain: true },
+        { num: "2",  name: "Bree Walden",    pos: "DEF",  cls: "Jr" },
+        { num: "4",  name: "Sage Foster",    pos: "DEF",  cls: "Sr", captain: true },
+        { num: "5",  name: "Kinley Brooks",  pos: "DEF",  cls: "So" },
+        { num: "6",  name: "Marlee Quinn",   pos: "MID",  cls: "Jr" },
+        { num: "8",  name: "Reese Tatum",    pos: "MID",  cls: "Sr" },
+        { num: "10", name: "Wren Halliday",  pos: "MID",  cls: "Jr" },
+        { num: "11", name: "Avery Pike",     pos: "FWD",  cls: "So" },
+        { num: "14", name: "Harlow Vance",   pos: "FWD",  cls: "Jr" },
+        { num: "17", name: "Ember Knox",     pos: "FWD",  cls: "Jr" },
+        { num: "21", name: "Juno Reid",      pos: "MID",  cls: "So" },
+        { num: "24", name: "Sloane Beck",    pos: "DEF",  cls: "Sr" }
+      ]
+    };
+
+    const statsData = {
+      softball: {
+        kicker: "2026 season",
+        title: "The numbers",
+        hint: "Through 15 games",
+        kpi: [
+          { cap: "Team avg", val: ".356", hot: true },
+          { cap: "Runs / G", val: "9.5" },
+          { cap: "Team ERA", val: "1.94", accent: true },
+          { cap: "Fielding", val: ".968" }
+        ],
+        cols: ["AVG", "HR", "RBI", "ERA"],
+        rows: [
+          { num: "1",  name: "Hadley Cross",  pos: "P",    captain: true, avg: ".451", a: "7", b: "31", c: "1.62" },
+          { num: "3",  name: "Bree Walden",   pos: "C",                    avg: ".402", a: "5", b: "28", c: "—" },
+          { num: "7",  name: "Sage Foster",   pos: "SS",   captain: true, avg: ".388", a: "4", b: "22", c: "—" },
+          { num: "9",  name: "Kinley Brooks", pos: "1B",                   avg: ".351", a: "6", b: "24", c: "—" },
+          { num: "11", name: "Marlee Quinn",  pos: "2B",                   avg: ".342", a: "1", b: "15", c: "—" },
+          { num: "14", name: "Reese Tatum",   pos: "3B",                   avg: ".376", a: "3", b: "19", c: "—" },
+          { num: "17", name: "Wren Halliday", pos: "OF",                   avg: ".412", a: "2", b: "17", c: "—" },
+          { num: "21", name: "Avery Pike",    pos: "OF",                   avg: ".298", a: "0", b: "11", c: "—" },
+          { num: "24", name: "Harlow Vance",  pos: "OF",                   avg: ".331", a: "2", b: "14", c: "—" },
+          { num: "27", name: "Ember Knox",    pos: "P",                    avg: ".276", a: "1", b: "8",  c: "2.18" },
+          { num: "32", name: "Juno Reid",     pos: "UTIL",                 avg: ".301", a: "1", b: "10", c: "—" },
+          { num: "44", name: "Sloane Beck",   pos: "DP",                   avg: ".367", a: "4", b: "21", c: "—" }
+        ]
+      },
+      basketball: {
+        kicker: "2026 season",
+        title: "The numbers",
+        hint: "Tipoff Nov 14",
+        kpi: [
+          { cap: "Record",  val: "0-0",    muted: true },
+          { cap: "Roster",  val: "12" },
+          { cap: "PPG",     val: "—",      muted: true },
+          { cap: "Tipoff",  val: "Nov 14", muted: true }
+        ],
+        cols: ["PPG", "RPG", "APG", "FG%"],
+        rows: [],
+        empty: "Stats unlock once the season starts."
+      },
+      soccer: {
+        kicker: "2026 season",
+        title: "The numbers",
+        hint: "Kickoff Aug 22",
+        kpi: [
+          { cap: "Record",  val: "0-0",    muted: true },
+          { cap: "Roster",  val: "12" },
+          { cap: "GPG",     val: "—",      muted: true },
+          { cap: "Kickoff", val: "Aug 22", muted: true }
+        ],
+        cols: ["G", "A", "SH", "%"],
+        rows: [],
+        empty: "Stats unlock once the season starts."
+      }
+    };
+
+    const initialsOf = (name) => {
+      const parts = String(name || "").trim().split(/\s+/);
+      const first = parts[0] || "";
+      const last = parts.length > 1 ? parts[parts.length - 1] : "";
+      return ((first[0] || "") + (last[0] || "")).toUpperCase();
     };
 
     const demoInputs = {
       org: document.getElementById("demo-org-input"),
-      teamA: document.getElementById("demo-team-a-input"),
-      teamB: document.getElementById("demo-team-b-input")
+      primary: document.getElementById("demo-primary-input"),
+      primaryHex: document.getElementById("demo-primary-hex"),
+      accent: document.getElementById("demo-accent-input"),
+      accentHex: document.getElementById("demo-accent-hex")
     };
+
+    const resetBtn = document.getElementById("demo-reset");
 
     const demoEls = {
       stage: document.getElementById("demo-stage"),
       org: document.getElementById("demo-org"),
       url: document.getElementById("demo-url"),
       statusTag: document.getElementById("demo-status-tag"),
-      statusTitle: document.getElementById("demo-status-title"),
-      statusCopy: document.getElementById("demo-status-copy"),
-      headline: document.getElementById("demo-headline"),
-      summary: document.getElementById("demo-summary"),
+      teamMark: document.getElementById("demo-team-mark"),
+      teamHeadline: document.getElementById("demo-team-headline"),
+      season: document.getElementById("demo-pub-season"),
+      teamDisplay: document.getElementById("demo-team-display"),
+      record: document.getElementById("demo-record"),
+      rankPill: document.getElementById("demo-rank-pill"),
+      streakPill: document.getElementById("demo-streak-pill"),
+      last5Wrap: document.getElementById("demo-last5-wrap"),
+      last5: document.getElementById("demo-last5"),
       next: document.getElementById("demo-next"),
-      open: document.getElementById("demo-open"),
-      due: document.getElementById("demo-due"),
-      teamCount: document.getElementById("demo-team-count"),
-      gameCount: document.getElementById("demo-game-count"),
-      fee: document.getElementById("demo-fee"),
-      taskTwo: document.getElementById("demo-task-two"),
-      schedule: document.getElementById("demo-schedule-list"),
-      parentList: document.getElementById("demo-parent-list"),
-      notifyCheck: document.getElementById("demo-notify-check"),
-      notifyCopy: document.getElementById("demo-notify-copy"),
-      notifyState: document.getElementById("demo-notify-state")
+      nextMeta: document.getElementById("demo-next-meta"),
+      schedule: document.getElementById("demo-schedule-list")
     };
 
-    const getDemoNames = () => {
-      const copy = demoCopy[demoState.sport];
-      return {
-        org: cleanSampleText(demoInputs.org ? demoInputs.org.value : "", copy.org, 32),
-        teamA: cleanSampleText(demoInputs.teamA ? demoInputs.teamA.value : "", copy.teamA, 22),
-        teamB: cleanSampleText(demoInputs.teamB ? demoInputs.teamB.value : "", copy.teamB, 22)
-      };
+    const getTeamMark = (name) => {
+      const letters = String(name || "").replace(/[^A-Za-z]/g, "").toUpperCase();
+      return letters.slice(0, 3) || "TM";
     };
+
+    const opponentIcons = {
+      Marlins: "brand/marlins-icon.png",
+      Hammerheads: "brand/hammerheads-icon.png",
+      Comets: "brand/comets-icon.png",
+      Tide: "brand/tide-icon.png",
+      Stingrays: "brand/stingrays-icon.png"
+    };
+
+    const teamIconFor = (name) => opponentIcons[name] || null;
+
+    const getDemoOrg = () => cleanSampleText(demoInputs.org ? demoInputs.org.value : "", demoDefaults.org, 32);
 
     const renderParentRows = (container, rows) => {
       if (!container) {
@@ -3607,51 +4757,240 @@
       });
     };
 
-    const getDemoSchedule = (copy, names) => ([
-      { day: "Mon", title: `${names.teamA} vs ${copy.nextOpponent}`, meta: `${copy.field} 1 / 5:30 PM` },
-      { day: "Wed", title: `${names.teamB} practice`, meta: `${copy.field} 2 / 6:45 PM` },
-      { day: "Sat", title: copy.open, meta: "Online form / closes 10:00 AM" }
-    ]);
+    const getDemoSchedule = (copy) => {
+      const opp1 = copy.nextOpponent;
+      const opp2 = "Hammerheads";
+      const opp3 = "Comets";
+      if (!copy.started) {
+        return [
+          { date: { day: "MON", num: "04" }, opp: opp1, meta: `${copy.field} 1 / 5:30 PM`, state: "scheduled", result: { label: "OPENER" } },
+          { date: { day: "WED", num: "06" }, opp: opp2, meta: `${copy.field} 2 / 6:45 PM`, state: "scheduled", result: { label: "—" } },
+          { date: { day: "MON", num: "11" }, opp: opp3, meta: `${copy.field} 1 / 5:30 PM`, state: "scheduled", result: { label: "—" } },
+          { date: { day: "WED", num: "13" }, opp: opp2, meta: `${copy.field} 4 / 5:30 PM`, state: "scheduled", result: { label: "—" } },
+          { date: { day: "THU", num: "14" }, opp: opp1, meta: `${copy.field} 1 / 5:30 PM`, state: "scheduled", result: { label: "—" } },
+          { date: { day: "MON", num: "18" }, opp: opp2, meta: `${copy.field} 4 / 5:30 PM`, state: "scheduled", result: { label: "—" } }
+        ].map((g) => Object.assign(g, { mark: getTeamMark(g.opp) }));
+      }
+      return [
+        { date: { day: "MON", num: "04" }, opp: opp1, mark: getTeamMark(opp1), meta: `${copy.field} 1 / 5:30 PM`, state: "final", result: { score: "8-4", flag: "W" } },
+        { date: { day: "WED", num: "06" }, opp: opp2, mark: getTeamMark(opp2), meta: `${copy.field} 2 / 6:45 PM`, state: "final", result: { score: "11-6", flag: "W" } },
+        { date: { day: "MON", num: "11" }, opp: opp3, mark: getTeamMark(opp3), meta: `${copy.field} 1 / 5:30 PM`, state: "final", result: { score: "5-7", flag: "L" } },
+        { date: { day: "WED", num: "13" }, opp: opp2, mark: getTeamMark(opp2), meta: `${copy.field} 4 / 5:30 PM`, state: "final", result: { score: "14-2", flag: "W" } },
+        { date: { day: "THU", num: "14" }, opp: opp1, mark: getTeamMark(opp1), meta: `${copy.field} 1 / 5:30 PM`, state: "upnext", result: { label: "UP NEXT" } },
+        { date: { day: "MON", num: "18" }, opp: opp2, mark: getTeamMark(opp2), meta: `${copy.field} 4 / 5:30 PM`, state: "scheduled", result: { label: "—" } }
+      ];
+    };
 
-    const renderDemoSchedule = (copy, names) => {
-      if (!demoEls.schedule || !demoEls.parentList) {
+    const renderScheduleTab = (copy) => {
+      if (!copy.started) {
+        const banner = makeEl("div", "demo-pub-banner");
+        banner.append(
+          makeEl("strong", "", `Season opens ${copy.opener}.`),
+          document.createTextNode(" Preseason schedule below.")
+        );
+        demoEls.schedule.append(banner);
+      }
+      getDemoSchedule(copy).forEach((g) => {
+        const row = makeEl("div", "game-row");
+        const date = makeEl("span", "g-date");
+        date.append(makeEl("b", "", g.date.day), makeEl("span", "", g.date.num));
+        const iconSrc = teamIconFor(g.opp);
+        let mark;
+        if (iconSrc) {
+          mark = document.createElement("img");
+          mark.className = "g-mark g-mark-img";
+          mark.src = iconSrc;
+          mark.alt = "";
+          mark.setAttribute("aria-hidden", "true");
+        } else {
+          mark = makeEl("span", "g-mark", g.mark);
+        }
+        const vs = makeEl("span", "g-vs");
+        vs.append(makeEl("strong", "", `vs ${g.opp}`), makeEl("small", "", g.meta));
+        const resultClass = g.state === "final"
+          ? (g.result.flag === "W" ? "win" : "loss")
+          : g.state;
+        const result = makeEl("span", `g-result ${resultClass}`);
+        if (g.state === "final") {
+          result.append(makeEl("strong", "", g.result.score), makeEl("small", "", g.result.flag));
+        } else {
+          result.append(makeEl("strong", "", g.result.label));
+        }
+        row.append(date, mark, vs, result);
+        demoEls.schedule.append(row);
+      });
+    };
+
+    const renderHudHead = (kicker, title, hint) => {
+      const head = makeEl("div", "hud-head");
+      const titleWrap = makeEl("div", "hud-head-title");
+      titleWrap.append(
+        makeEl("span", "hud-kicker", kicker),
+        makeEl("h3", "hud-h2", title)
+      );
+      head.append(titleWrap);
+      if (hint) {
+        head.append(makeEl("span", "hud-hint", hint));
+      }
+      return head;
+    };
+
+    const renderRosterTab = (copy) => {
+      const list = rosterData[demoState.sport] || [];
+      const kicker = `${list.length} players · 2026`;
+      demoEls.schedule.append(renderHudHead(kicker, "The roster", "Tap a player"));
+
+      const grid = makeEl("div", "roster-grid");
+      list.forEach((p) => {
+        const card = makeEl("div", "roster-card");
+        card.append(makeEl("span", "roster-card-watermark", initialsOf(p.name)));
+        if (p.captain) {
+          card.append(makeEl("span", "roster-card-captain", "Captain"));
+        }
+        card.append(makeEl("span", "roster-card-num", p.num));
+
+        const foot = makeEl("div", "roster-card-foot");
+        const left = makeEl("div");
+        left.append(
+          makeEl("span", "roster-card-name", p.name),
+          makeEl("span", "roster-card-meta", `${p.pos} · ${p.cls}`)
+        );
+        const avgClass = p.avg ? "roster-card-avg" : "roster-card-avg muted";
+        const avg = makeEl("span", avgClass, p.avg || "—");
+        foot.append(left, avg);
+        card.append(foot);
+        grid.append(card);
+      });
+      demoEls.schedule.append(grid);
+    };
+
+    const renderStatsTab = () => {
+      const data = statsData[demoState.sport];
+      if (!data) {
+        return;
+      }
+      demoEls.schedule.append(renderHudHead(data.kicker, data.title, data.hint));
+
+      const strip = makeEl("div", "kpi-strip");
+      data.kpi.forEach((k) => {
+        const variant = k.accent ? " is-accent" : (k.hot ? " is-hot" : "");
+        const card = makeEl("div", `kpi-card${variant}`);
+        card.append(
+          makeEl("span", `kpi-val${k.muted ? " muted" : ""}`, k.val),
+          makeEl("span", "kpi-cap", k.cap)
+        );
+        strip.append(card);
+      });
+      demoEls.schedule.append(strip);
+
+      if (!data.rows.length) {
+        demoEls.schedule.append(makeEl("div", "stats-empty", data.empty || "—"));
+        return;
+      }
+
+      const table = makeEl("div", "stats-table");
+      const head = makeEl("div", "stats-table-row is-head");
+      head.append(
+        makeEl("span", "", "#"),
+        makeEl("span", "", "Player"),
+        makeEl("span", "", "Pos"),
+        makeEl("span", "", data.cols[0]),
+        makeEl("span", "", data.cols[1]),
+        makeEl("span", "", data.cols[2]),
+        makeEl("span", "", data.cols[3])
+      );
+      table.append(head);
+
+      data.rows.forEach((r) => {
+        const row = makeEl("div", "stats-table-row");
+        const name = makeEl("span", "stats-table-name");
+        name.append(document.createTextNode(r.name));
+        if (r.captain) {
+          name.append(makeEl("span", "star", " ★"));
+        }
+        const eraMuted = r.c === "—";
+        row.append(
+          makeEl("span", "stats-table-num", r.num),
+          name,
+          makeEl("span", "stats-table-pos", r.pos),
+          makeEl("span", "stats-table-val", r.avg),
+          makeEl("span", "stats-table-int", r.a),
+          makeEl("span", "stats-table-int", r.b),
+          makeEl("span", `stats-table-val${eraMuted ? " muted" : ""}`, r.c)
+        );
+        table.append(row);
+      });
+      demoEls.schedule.append(table);
+    };
+
+    const renderTeamsListEmptyState = (copy) => {
+      const banner = makeEl("div", "demo-pub-banner");
+      banner.append(
+        makeEl("strong", "", "Teams in league."),
+        document.createTextNode(" Click "),
+        makeEl("b", "", "Publish schedule"),
+        document.createTextNode(" to draft games.")
+      );
+      demoEls.schedule.append(banner);
+
+      const teams = [
+        { name: copy.team, src: copy.icon, tag: "demo" },
+        { name: copy.nextOpponent, src: opponentIcons[copy.nextOpponent] || null },
+        { name: "Hammerheads", src: opponentIcons.Hammerheads },
+        { name: "Comets", src: opponentIcons.Comets }
+      ];
+
+      const list = makeEl("div", "team-list");
+      teams.forEach((t) => {
+        const row = makeEl("div", "team-row");
+        if (t.src) {
+          const img = document.createElement("img");
+          img.className = "team-row-mark";
+          img.src = t.src;
+          img.alt = "";
+          img.setAttribute("aria-hidden", "true");
+          row.append(img);
+        } else {
+          row.append(makeEl("span", "team-row-mark", getTeamMark(t.name)));
+        }
+        row.append(makeEl("span", "team-row-name", t.name));
+        if (t.tag) row.append(makeEl("span", "team-row-tag", t.tag));
+        list.append(row);
+      });
+      demoEls.schedule.append(list);
+    };
+
+    const renderDemoSchedule = (copy) => {
+      if (!demoEls.schedule) {
         return;
       }
 
       demoEls.schedule.replaceChildren();
-      demoEls.parentList.replaceChildren();
       if (demoEls.stage) {
         demoEls.stage.classList.toggle("is-published", demoState.generated);
       }
-      if (demoEls.notifyCheck) {
-        demoEls.notifyCheck.classList.toggle("pending", !demoState.generated);
-      }
-      if (demoEls.notifyCopy) {
-        demoEls.notifyCopy.textContent = demoState.generated ? "Parent notifications sent" : "Parent notifications queued";
-      }
-      if (demoEls.notifyState) {
-        demoEls.notifyState.textContent = demoState.generated ? "sent" : "ready";
+      if (demoEls.statusTag) {
+        if (!demoState.generated) {
+          demoEls.statusTag.textContent = "Sample team page";
+        } else {
+          demoEls.statusTag.textContent = copy.started ? "Schedule published" : "Preseason scheduled";
+        }
       }
 
+      document.querySelectorAll("[data-demo-tab]").forEach((btn) => {
+        const isActive = btn.dataset.demoTab === demoState.tab;
+        btn.classList.toggle("active", isActive);
+        btn.setAttribute("aria-selected", isActive ? "true" : "false");
+      });
+
       if (!demoState.generated) {
+        renderTeamsListEmptyState(copy);
         return;
       }
 
-      getDemoSchedule(copy, names).forEach((item) => {
-        const card = makeEl("div", "schedule-card");
-        card.append(
-          makeEl("strong", "", item.day),
-          makeEl("span", "", item.title),
-          makeEl("b", "mono", item.meta)
-        );
-        demoEls.schedule.append(card);
-      });
-
-      renderParentRows(demoEls.parentList, [
-        { name: "Maya guardian", message: "Schedule sent", state: "sent" },
-        { name: "Leo guardian", message: "Schedule sent", state: "sent" },
-        { name: "Ari guardian", message: "Schedule sent", state: "sent" }
-      ]);
+      if (demoState.tab === "roster") renderRosterTab(copy);
+      else if (demoState.tab === "stats") renderStatsTab();
+      else renderScheduleTab(copy);
     };
 
     const updateDemo = () => {
@@ -3659,42 +4998,96 @@
         return;
       }
       const copy = demoCopy[demoState.sport];
-      const names = getDemoNames();
-      const games = Math.round((demoState.teams * (demoState.teams - 1)) / 2);
-      const statusPrefix = demoState.generated ? "Week published" : copy.title;
-      const statusDetail = demoState.generated
-        ? `${demoState.teams} teams, ${games} games, signup links, and parent notices are visible in the preview.`
-        : `${demoState.teams} ${copy.draftCopy}`;
+      const org = getDemoOrg();
 
-      demoEls.org.textContent = names.org;
-      demoEls.url.textContent = `${toSlug(names.org)}.leag.app/preview`;
-      demoEls.statusTag.textContent = demoState.generated ? "Schedule published" : "Registration open";
-      demoEls.statusTitle.textContent = statusPrefix;
-      demoEls.statusCopy.textContent = statusDetail;
-      demoEls.headline.textContent = copy.headline;
-      demoEls.summary.textContent = copy.summary;
-      demoEls.next.textContent = `${names.teamA} vs ${copy.nextOpponent}`;
-      demoEls.open.textContent = copy.open;
-      demoEls.due.textContent = copy.due;
-      demoEls.teamCount.textContent = demoState.teams;
-      demoEls.gameCount.textContent = games;
-      demoEls.fee.textContent = copy.fee;
-      demoEls.taskTwo.textContent = demoState.generated ? "Published schedule balanced by facility" : copy.task;
-      renderDemoSchedule(copy, names);
+      demoEls.org.textContent = org;
+      demoEls.url.textContent = `${toSlug(org)}.leag.app/preview`;
+      if (demoEls.teamMark) {
+        demoEls.teamMark.setAttribute("src", copy.icon);
+        demoEls.teamMark.setAttribute("alt", `${copy.team} icon`);
+      }
+      if (demoEls.teamHeadline) demoEls.teamHeadline.textContent = copy.team;
+      if (demoEls.season) demoEls.season.textContent = copy.season;
+      if (demoEls.teamDisplay) demoEls.teamDisplay.textContent = copy.team.toUpperCase();
+      if (demoEls.record) demoEls.record.textContent = copy.record;
+      if (demoEls.rankPill) demoEls.rankPill.textContent = copy.rank;
+      if (demoEls.streakPill) demoEls.streakPill.textContent = copy.streak;
+      if (demoEls.last5) {
+        demoEls.last5.replaceChildren();
+        if (copy.last5.length) {
+          copy.last5.forEach((r) => {
+            demoEls.last5.append(makeEl("span", `last5-box ${r === "W" ? "win" : "loss"}`, r));
+          });
+        } else {
+          for (let i = 0; i < 5; i += 1) {
+            demoEls.last5.append(makeEl("span", "last5-box loss", "—"));
+          }
+        }
+      }
+      if (demoEls.next) demoEls.next.textContent = `${copy.team} vs ${copy.nextOpponent}`;
+      if (demoEls.nextMeta) {
+        demoEls.nextMeta.textContent = copy.started
+          ? `Mon 5:30 PM / ${copy.field} 1`
+          : `Opener ${copy.opener} / ${copy.field} 1`;
+      }
+      if (demoEls.stage) {
+        demoEls.stage.style.setProperty("--demo-primary", demoState.primary);
+        demoEls.stage.style.setProperty("--demo-accent", demoState.accent);
+      }
+
+      renderDemoSchedule(copy);
 
       document.querySelectorAll("[data-demo-sport]").forEach((button) => {
         button.classList.toggle("is-active", button.dataset.demoSport === demoState.sport);
       });
-      document.querySelectorAll("[data-demo-teams]").forEach((button) => {
-        button.classList.toggle("is-active", Number(button.dataset.demoTeams) === demoState.teams);
-      });
     };
 
-    Object.values(demoInputs).forEach((input) => {
+    const isValidHex = (v) => /^#[0-9A-Fa-f]{6}$/.test(v);
+    const normalizeHex = (v) => {
+      const trimmed = String(v || "").trim();
+      const withHash = trimmed.startsWith("#") ? trimmed : `#${trimmed}`;
+      return withHash.toUpperCase();
+    };
+
+    const refreshResetVisibility = () => {
+      const orgVal = demoInputs.org ? demoInputs.org.value : demoDefaults.org;
+      const dirty =
+        orgVal !== demoDefaults.org ||
+        demoState.primary.toUpperCase() !== demoDefaults.primary.toUpperCase() ||
+        demoState.accent.toUpperCase() !== demoDefaults.accent.toUpperCase();
+      if (resetBtn) resetBtn.hidden = !dirty;
+    };
+
+    const setThemeColor = (key, hex) => {
+      const normalized = normalizeHex(hex);
+      if (!isValidHex(normalized)) return;
+      demoState[key] = normalized;
+      if (demoEls.stage) demoEls.stage.style.setProperty(`--demo-${key}`, normalized);
+      const swatch = key === "primary" ? demoInputs.primary : demoInputs.accent;
+      const text = key === "primary" ? demoInputs.primaryHex : demoInputs.accentHex;
+      if (swatch && swatch.value.toLowerCase() !== normalized.toLowerCase()) swatch.value = normalized;
+      if (text && text.value.toUpperCase() !== normalized) text.value = normalized;
+      refreshResetVisibility();
+    };
+
+    if (demoInputs.org) {
+      demoInputs.org.addEventListener("input", () => {
+        updateDemo();
+        refreshResetVisibility();
+      });
+    }
+
+    [["primary", demoInputs.primary], ["accent", demoInputs.accent]].forEach(([key, input]) => {
       if (input) {
-        input.addEventListener("input", () => {
-          demoState.generated = false;
-          updateDemo();
+        input.addEventListener("input", (e) => setThemeColor(key, e.target.value));
+      }
+    });
+
+    [["primary", demoInputs.primaryHex], ["accent", demoInputs.accentHex]].forEach(([key, input]) => {
+      if (input) {
+        input.addEventListener("input", (e) => {
+          const candidate = normalizeHex(e.target.value);
+          if (isValidHex(candidate)) setThemeColor(key, candidate);
         });
       }
     });
@@ -3702,18 +5095,25 @@
     document.querySelectorAll("[data-demo-sport]").forEach((button) => {
       button.addEventListener("click", () => {
         demoState.sport = button.dataset.demoSport;
-        demoState.generated = false;
         updateDemo();
       });
     });
 
-    document.querySelectorAll("[data-demo-teams]").forEach((button) => {
+    document.querySelectorAll("[data-demo-tab]").forEach((button) => {
       button.addEventListener("click", () => {
-        demoState.teams = Number(button.dataset.demoTeams);
-        demoState.generated = false;
+        demoState.tab = button.dataset.demoTab;
         updateDemo();
       });
     });
+
+    if (resetBtn) {
+      resetBtn.addEventListener("click", () => {
+        if (demoInputs.org) demoInputs.org.value = demoDefaults.org;
+        setThemeColor("primary", demoDefaults.primary);
+        setThemeColor("accent", demoDefaults.accent);
+        updateDemo();
+      });
+    }
 
     const demoGenerate = document.getElementById("demo-generate");
     if (demoGenerate) {
@@ -3727,7 +5127,7 @@
       {
         day: 3,
         date: "Jun 3",
-        title: "Firecrackers practice",
+        title: "Riptide practice",
         venue: "Field 2",
         time: "6:00 PM",
         status: "Scheduled",
@@ -3738,7 +5138,7 @@
       {
         day: 5,
         date: "Jun 5",
-        title: "Pitch Perfect 4, Firecrackers 2",
+        title: "Marlins 4, Riptide 2",
         venue: "Field 1",
         time: "Final",
         status: "Final",
@@ -3760,7 +5160,7 @@
       {
         day: 10,
         date: "Jun 10",
-        title: "Panthers 5, Sparks 4",
+        title: "Hammerheads 5, Gulls 4",
         venue: "Field 3",
         time: "Final",
         status: "Final",
@@ -3771,7 +5171,7 @@
       {
         day: 16,
         date: "Jun 16",
-        title: "Firecrackers practice",
+        title: "Riptide practice",
         venue: "Field 2",
         time: "6:45 PM",
         status: "Scheduled",
@@ -3782,7 +5182,7 @@
       {
         day: 17,
         date: "Jun 17",
-        title: "Firecrackers vs Pitch Perfect",
+        title: "Riptide vs Marlins",
         venue: "Field 1",
         time: "5:30 PM",
         status: "Live",
@@ -3793,7 +5193,7 @@
       {
         day: 19,
         date: "Jun 19",
-        title: "Sparks vs Panthers",
+        title: "Gulls vs Hammerheads",
         venue: "Field 4",
         time: "6:45 PM",
         status: "Scheduled",
@@ -3911,7 +5311,7 @@
 
     const playerResults = {
       Softball: [
-        { title: "12U open tryout", detail: "4 spots / South Orange Field", action: "Join waitlist", done: "Joined waitlist" },
+        { title: "12U open tryout", detail: "4 spots / Bayside Field 2", action: "Join waitlist", done: "Joined waitlist" },
         { title: "Fastpitch pickup night", detail: "Intermediate / helmets provided", action: "Save", done: "Saved" },
         { title: "Pitching clinic", detail: "Coach-led / no payment collected", action: "Add to checkout", done: "Added to checkout" }
       ],
@@ -3930,7 +5330,7 @@
     const renderPlayerResults = () => {
       const container = document.getElementById("player-results");
       const sport = optionLabel(document.getElementById("player-sport")) || "Softball";
-      const location = optionLabel(document.getElementById("player-location")) || "Irvine";
+      const location = optionLabel(document.getElementById("player-location")) || "Bayside";
       const time = optionLabel(document.getElementById("player-time")) || "Tonight";
       if (!container) {
         return;
@@ -4013,11 +5413,11 @@
       { name: "Jules Kim", meta: "OF / range" },
       { name: "Tali Moore", meta: "1B / power" }
     ];
-    const draftTeams = ["Firecrackers", "Panthers"];
+    const draftTeams = ["Riptide", "Hammerheads"];
     const teamBuilderState = {
       active: {
-        market: "Firecrackers",
-        ops: "Firecrackers"
+        market: "Riptide",
+        ops: "Riptide"
       },
       assignments: Object.fromEntries(draftPlayers.map((player) => [player.name, null]))
     };
@@ -4158,7 +5558,7 @@
 
     const conflictItems = [
       { title: "Field 1 double-booked", meta: "12U tryout and 14U practice both at Mon 5:30" },
-      { title: "Coach overlap", meta: "Coach Lee assigned to Diamond 2 and bullpen at Wed 6:45" }
+      { title: "Coach overlap", meta: "Coach Ortega assigned to Diamond 2 and bullpen at Wed 6:45" }
     ];
     let conflictsResolved = false;
 
@@ -4333,9 +5733,9 @@
       }
 
       const items = [
-        { title: "Mon game", meta: "Firecrackers vs Panthers / Field 1 / 5:30 PM", state: "published" },
-        { title: "Tue practice", meta: "Panthers practice / Field 2 / 6:45 PM", state: weeklyScheduleState.cancelledPractice ? "cancelled" : "published", cancellable: true },
-        { title: "Thu game", meta: "Sparks vs Pitch Perfect / Field 1 / 6:45 PM", state: "published" }
+        { title: "Mon game", meta: "Riptide vs Hammerheads / Field 1 / 5:30 PM", state: "published" },
+        { title: "Tue practice", meta: "Hammerheads practice / Field 2 / 6:45 PM", state: weeklyScheduleState.cancelledPractice ? "cancelled" : "published", cancellable: true },
+        { title: "Thu game", meta: "Gulls vs Marlins / Field 1 / 6:45 PM", state: "published" }
       ];
 
       items.forEach((item) => {
@@ -4463,7 +5863,7 @@
       const status = document.getElementById("score-status");
       const standings = document.getElementById("standings-demo");
       const halfLabel = scoreState.half === "top" ? "Top" : "Bottom";
-      const battingTeam = scoreState.half === "top" ? "Firecrackers" : "Panthers";
+      const battingTeam = scoreState.half === "top" ? "Riptide" : "Hammerheads";
       const panthersWon = scoreState.final && scoreState.panthers > scoreState.fire;
 
       if (fireScore) {
@@ -4480,7 +5880,7 @@
       }
       if (meta) {
         meta.textContent = scoreState.final
-          ? `Final / ${scoreState.fire > scoreState.panthers ? "Firecrackers" : "Panthers"} win`
+          ? `Final / ${scoreState.fire > scoreState.panthers ? "Riptide" : "Hammerheads"} win`
           : `${halfLabel} ${scoreState.inning} / Field 1 / ${battingTeam} batting`;
       }
       if (balls) {
@@ -4499,14 +5899,14 @@
         standings.replaceChildren();
         const rows = panthersWon
           ? [
-            { team: "Firecrackers", record: "12-4 / .750" },
-            { team: "Panthers", record: "11-5 / .688", moveUp: true },
-            { team: "Sparks", record: "10-5 / .667" }
+            { team: "Riptide", record: "12-4 / .750" },
+            { team: "Hammerheads", record: "11-5 / .688", moveUp: true },
+            { team: "Gulls", record: "10-5 / .667" }
           ]
           : [
-            { team: "Firecrackers", record: scoreState.final ? "13-3 / .813" : "12-3 / .800" },
-            { team: "Sparks", record: "10-5 / .667" },
-            { team: "Panthers", record: scoreState.final ? "10-6 / .625" : "10-5 / .667" }
+            { team: "Riptide", record: scoreState.final ? "13-3 / .813" : "12-3 / .800" },
+            { team: "Gulls", record: "10-5 / .667" },
+            { team: "Hammerheads", record: scoreState.final ? "10-6 / .625" : "10-5 / .667" }
           ];
 
         rows.forEach((rowData, index) => {
