@@ -892,11 +892,19 @@
     }
 
     .section-header {
-      display: grid;
-      grid-template-columns: minmax(0, 0.82fr) minmax(260px, 0.48fr);
-      gap: 36px;
-      align-items: end;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-width: 760px;
       margin-bottom: 34px;
+    }
+
+    .section-header > div {
+      display: contents;
+    }
+
+    .section-header p {
+      max-width: 640px;
     }
 
     .section-kicker {
@@ -2460,8 +2468,6 @@
     }
 
     .market-hud {
-      --demo-primary: #3667B5;
-      --demo-accent: #70ECF0;
       border: 1px solid var(--line);
       border-radius: var(--radius);
       background: rgba(8, 16, 15, 0.7);
@@ -2663,6 +2669,10 @@
       font-weight: 800;
       color: var(--demo-primary);
       line-height: 1;
+    }
+
+    .market-hud-game.is-soldout .market-hud-game-spots b {
+      color: var(--quiet);
     }
 
     .market-hud-game-spots em {
@@ -3523,43 +3533,6 @@
       min-height: 360px;
     }
 
-    .ops-handoff {
-      margin-top: 28px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 18px;
-      align-items: center;
-      justify-content: space-between;
-      padding: 22px 24px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--surface);
-    }
-
-    .ops-handoff > div {
-      flex: 1 1 320px;
-      min-width: 0;
-    }
-
-    .ops-handoff strong {
-      display: block;
-      font-size: 16px;
-      font-weight: 800;
-      color: var(--ink);
-      margin-bottom: 4px;
-    }
-
-    .ops-handoff p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .ops-handoff .btn {
-      flex: 0 0 auto;
-    }
-
     .pipeline {
       padding: 18px;
       display: grid;
@@ -3788,8 +3761,7 @@
       }
 
       .section-header {
-        grid-template-columns: 1fr;
-        gap: 16px;
+        gap: 12px;
       }
 
       .nav-actions .btn-secondary {
@@ -4139,12 +4111,13 @@
         <span class="brand-wordmark" aria-hidden="true"></span>
       </a>
       <nav class="nav-links" id="site-nav" aria-label="Primary navigation">
-        <a href="#playground">Try it</a>
-        <a href="#platform">Launch site</a>
-        <a href="#take-signups" data-open-panel="registration">Take signups</a>
-        <a href="#build-teams" data-open-panel="teams">Build teams</a>
-        <a href="#publish-schedule" data-open-panel="publish">Publish schedule</a>
-        <a href="#marketplace">Find games</a>
+        <a href="#playground">Demo</a>
+        <a href="#surfaces">Calendar</a>
+        <a href="#platform">Site</a>
+        <a href="#take-signups" data-open-panel="registration">Signups</a>
+        <a href="#build-teams" data-open-panel="teams">Teams</a>
+        <a href="#publish-schedule" data-open-panel="publish">Schedule</a>
+        <a href="#marketplace">Marketplace</a>
       </nav>
       <div class="nav-actions">
         <a class="btn btn-secondary" href="#surfaces">See pages</a>
@@ -4162,10 +4135,10 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="container hero-grid">
         <div class="hero-copy-block reveal">
-          <div class="eyebrow">For youth-sports commissioners</div>
+          <div class="eyebrow">For youth sports leagues</div>
           <h1 id="hero-title"><span class="brand-wordmark hero-wordmark" aria-label="LEAG" role="img"></span> <span>runs your league.</span></h1>
           <p class="hero-copy">
-            Public site, signups, rosters, weekly schedule, scores, and parent updates. One place for the whole season.
+            Site, signups, rosters, schedule, scores, and parent updates. One place. Full season.
           </p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="https://mail.google.com/mail/?view=cm&amp;to=contact@leag.app&amp;su=LEAG%20demo%20request" target="_blank" rel="noopener">Book a demo</a>
@@ -4325,7 +4298,7 @@
       <div class="container">
         <div class="section-header reveal">
           <div>
-            <div class="section-kicker">Interactive demo</div>
+            <div class="section-kicker">Demo</div>
             <h2 id="playground-title">Try a sample season.</h2>
           </div>
         </div>
@@ -4420,210 +4393,21 @@
       </div>
     </section>
 
-    <section class="section" id="marketplace" aria-labelledby="marketplace-title">
-      <div class="container">
-        <div class="section-header reveal">
-          <div>
-            <div class="section-kicker">Public-facing surfaces</div>
-            <h2 id="marketplace-title">Help people find a place to play.</h2>
-          </div>
-          <p>The public side should feel concrete: players search the way fans actually search, organizers approve real people, and venues show exactly what is open.</p>
-        </div>
-
-        <div class="market-hud reveal" id="market-hud">
-          <header class="market-hud-head">
-            <div class="market-hud-title">
-              <span class="hud-kicker" id="market-hud-kicker">Players</span>
-              <h3 class="hud-h2" id="market-hud-h2">Search, save, or join a waitlist.</h3>
-            </div>
-            <span class="hud-hint">Demo only · resets on reload</span>
-          </header>
-
-          <nav class="market-hud-tabs" role="tablist" aria-label="Marketplace surfaces">
-            <button class="market-hud-tab is-active" data-market-tab="players" type="button" role="tab" aria-selected="true">
-              <em>01</em><span>Players</span>
-            </button>
-            <button class="market-hud-tab" data-market-tab="organizers" type="button" role="tab" aria-selected="false">
-              <em>02</em><span>Organizers</span>
-            </button>
-            <button class="market-hud-tab" data-market-tab="venues" type="button" role="tab" aria-selected="false">
-              <em>03</em><span>Venues</span>
-            </button>
-          </nav>
-
-          <div class="market-hud-body">
-            <div class="market-hud-panel is-active" data-market-panel="players" role="tabpanel">
-              <div class="market-hud-controls" aria-label="Player search controls">
-                <label>
-                  <span>Sport</span>
-                  <select class="sample-select" id="player-sport">
-                    <option>Softball</option>
-                    <option>Basketball</option>
-                    <option>Soccer</option>
-                  </select>
-                </label>
-                <label>
-                  <span>Area</span>
-                  <select class="sample-select" id="player-location">
-                    <option>Bayside</option>
-                    <option>Lakeside</option>
-                    <option>Westport</option>
-                  </select>
-                </label>
-                <label>
-                  <span>When</span>
-                  <select class="sample-select" id="player-time">
-                    <option>Tonight</option>
-                    <option>This weekend</option>
-                    <option>Next week</option>
-                  </select>
-                </label>
-              </div>
-              <div class="market-hud-games" id="player-results"></div>
-              <p class="market-hud-note">Buttons update this page only. No payment or account creation.</p>
-            </div>
-
-            <div class="market-hud-panel" data-market-panel="organizers" role="tabpanel">
-              <div class="market-hud-board">
-                <div class="market-hud-lane">
-                  <header><span>Lane 01 · Registration queue</span><b id="registration-count">4 waiting</b></header>
-                  <div class="market-hud-lane-body">
-                    <div class="registration-list" id="registration-list"></div>
-                  </div>
-                </div>
-                <div class="market-hud-lane">
-                  <header><span>Lane 02 · Tryout draft board</span><b id="team-builder-count">0 picked</b></header>
-                  <div class="market-hud-lane-body">
-                    <div class="team-switcher">
-                      <button class="hud-chip is-active" type="button" data-team-switch="Riptide">Riptide</button>
-                      <button class="hud-chip" type="button" data-team-switch="Hammerheads">Hammerheads</button>
-                      <button class="hud-chip is-primary" type="button" id="random-draft">Random draft</button>
-                    </div>
-                    <div class="builder-grid">
-                      <div>
-                        <div class="hud-lane-cap">Player pool</div>
-                        <div class="player-pool" id="player-pool"></div>
-                      </div>
-                      <div>
-                        <div class="hud-lane-cap" id="active-team-label">Riptide</div>
-                        <div class="team-box" id="team-box"></div>
-                      </div>
-                    </div>
-                    <p class="market-hud-note">Drag or click to move players between pool and team.</p>
-                  </div>
-                </div>
-                <div class="market-hud-lane market-hud-lane-wide">
-                  <header><span>Lane 03 · Schedule conflicts</span><b id="conflict-state">2 conflicts</b></header>
-                  <div class="market-hud-lane-body">
-                    <div class="conflict-list" id="conflict-list"></div>
-                    <div class="market-hud-actions">
-                      <button class="hud-chip is-primary" type="button" id="resolve-conflicts">Resolve conflicts</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="market-hud-panel" data-market-panel="venues" role="tabpanel">
-              <div class="market-hud-controls" aria-label="Venue slot controls">
-                <label>
-                  <span>Date</span>
-                  <select class="sample-select" id="venue-date">
-                    <option value="jun17">Jun 17</option>
-                    <option value="jun18">Jun 18</option>
-                    <option value="jun19">Jun 19</option>
-                  </select>
-                </label>
-                <label>
-                  <span>Slot</span>
-                  <select class="sample-select" id="venue-time">
-                    <option value="530">5:30 PM</option>
-                    <option value="645">6:45 PM</option>
-                    <option value="800">8:00 PM</option>
-                  </select>
-                </label>
-              </div>
-              <div class="market-hud-fields" id="venue-field-grid"></div>
-              <p class="market-hud-note">Deterministic fake availability — feels responsive without listing real inventory.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="platform" aria-labelledby="platform-title">
-      <div class="container">
-        <div class="section-header reveal">
-          <div>
-            <div class="section-kicker">Public league sites</div>
-            <h2 id="platform-title">Launch a league site families can actually use.</h2>
-          </div>
-          <p>Start with the pages parents already look for: schedule, teams, standings, tryouts, news, and registration. The admin work behind those pages can grow from there.</p>
-        </div>
-
-        <div class="platform-layout">
-          <article class="public-site-preview reveal" aria-label="Tenant public site mockup">
-            <div class="window-bar">
-              <img class="brand-mark" src="brand/leag-icon.svg" alt="" aria-hidden="true">
-              <strong>Bayside Diamonds</strong>
-              <span>Powered by LEAG</span>
-            </div>
-            <div class="tenant-hero">
-              <span class="tenant-badge">Fastpitch / Bayside, FL</span>
-              <h3 class="tenant-title">Diamonds 16U open tryouts</h3>
-              <div class="tenant-meta">July 8 / Bayside Field 2 / registration required</div>
-            </div>
-            <div class="tenant-nav" aria-hidden="true">
-              <span class="active">Home</span>
-              <span>Teams</span>
-              <span>Schedule</span>
-              <span>News</span>
-              <span>About</span>
-            </div>
-          </article>
-
-          <div class="workflow-list">
-            <article class="workflow-item reveal">
-              <div class="workflow-index">01</div>
-              <div>
-                <h3>Publish the season</h3>
-                <p>Launch a branded home page with upcoming games, tryouts, standings, news, and team cards tied to structured league data.</p>
-              </div>
-            </article>
-            <article class="workflow-item reveal">
-              <div class="workflow-index">02</div>
-              <div>
-                <h3>Turn signups into rosters</h3>
-                <p>Collect registrations and fees, route players to teams, and keep families connected to the schedule without spreadsheet handoffs.</p>
-              </div>
-            </article>
-            <article class="workflow-item reveal">
-              <div class="workflow-index">03</div>
-              <div>
-                <h3>Keep the public record current</h3>
-                <p>Scores, standings, calendar updates, and team pages update from the same operating data the commissioner and coaches use.</p>
-              </div>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="section" id="surfaces" aria-labelledby="surfaces-title">
       <div class="container">
         <div class="section-header reveal">
           <div>
-            <div class="section-kicker">Family-facing pages</div>
-            <h2 id="surfaces-title">Show families what is happening without another group text.</h2>
+            <div class="section-kicker">Calendar</div>
+            <h2 id="surfaces-title">What families see all season.</h2>
           </div>
-          <p>Parents need the basics fast: where to go, who is playing, what changed, and whether registration is still open.</p>
+          <p>Schedule, scores, venues, and last-minute changes — in one place, on every device.</p>
         </div>
 
         <div class="surface-board">
           <article class="board-main reveal">
             <div class="board-head">
-              <h3>June schedule</h3>
-              <span>Filter: 16U / home games</span>
+              <h3 id="surface-board-title">June schedule</h3>
+              <span id="surface-board-filter">Filter: 16U / home games</span>
             </div>
             <div class="calendar-grid" id="surface-calendar" aria-label="Interactive June schedule">
               <button type="button" data-surface-day="1">1</button><button type="button" data-surface-day="2">2</button><button class="has-game" type="button" data-surface-day="3">3</button><button type="button" data-surface-day="4">4</button><button class="final has-game" type="button" data-surface-day="5">5</button><button type="button" data-surface-day="6">6</button><button type="button" data-surface-day="7">7</button>
@@ -4667,14 +4451,72 @@
       </div>
     </section>
 
+    <section class="section" id="platform" aria-labelledby="platform-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="section-kicker">Site</div>
+            <h2 id="platform-title">Your league's home on the web.</h2>
+          </div>
+          <p>Schedule, teams, standings, tryouts, news, and registration — wired to live league data.</p>
+        </div>
+
+        <div class="platform-layout">
+          <article class="public-site-preview reveal" aria-label="Tenant public site mockup">
+            <div class="window-bar">
+              <img class="brand-mark" src="brand/leag-icon.svg" alt="" aria-hidden="true">
+              <strong>Bayside Diamonds</strong>
+              <span>Powered by LEAG</span>
+            </div>
+            <div class="tenant-hero">
+              <span class="tenant-badge">Fastpitch / Bayside, FL</span>
+              <h3 class="tenant-title">Diamonds 16U open tryouts</h3>
+              <div class="tenant-meta">July 8 / Bayside Field 2 / registration required</div>
+            </div>
+            <div class="tenant-nav" aria-hidden="true">
+              <span class="active">Home</span>
+              <span>Teams</span>
+              <span>Schedule</span>
+              <span>News</span>
+              <span>About</span>
+            </div>
+          </article>
+
+          <div class="workflow-list">
+            <article class="workflow-item reveal">
+              <div class="workflow-index">01</div>
+              <div>
+                <h3>Publish the season</h3>
+                <p>Branded home with games, tryouts, standings, news, and team cards — pulled from live league data.</p>
+              </div>
+            </article>
+            <article class="workflow-item reveal">
+              <div class="workflow-index">02</div>
+              <div>
+                <h3>Signups into rosters</h3>
+                <p>Collect registrations and fees, route players to teams. No spreadsheet handoffs.</p>
+              </div>
+            </article>
+            <article class="workflow-item reveal">
+              <div class="workflow-index">03</div>
+              <div>
+                <h3>Keep it current</h3>
+                <p>Scores, standings, and team pages update from the same data coaches and commissioners enter.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="operations" aria-labelledby="operations-title">
       <div class="container">
         <div class="section-header reveal">
           <div>
-            <div class="section-kicker">Run the season from one place</div>
-            <h2 id="operations-title">Open signups, build teams, publish the week, and keep parents updated.</h2>
+            <div class="section-kicker">Operations</div>
+            <h2 id="operations-title">Run the season from one place.</h2>
           </div>
-          <p>Each step below is a small fake-data demo. It shows the workflow without saving information, sending messages, or charging anyone.</p>
+          <p>Click each step. Demo data only — nothing saves, sends, or charges.</p>
         </div>
 
         <div class="ops-layout">
@@ -4833,15 +4675,139 @@
           </article>
         </div>
 
-        <aside class="ops-handoff reveal" aria-label="Get LEAG for your league">
-          <div>
-            <strong>Want this for your league?</strong>
-            <p>Send your league name, sport, and approximate roster size. We will set up a working sample for your league and walk you through it on a call.</p>
-          </div>
-          <a class="btn btn-primary" href="https://mail.google.com/mail/?view=cm&amp;to=contact@leag.app&amp;su=LEAG%20demo%20request" target="_blank" rel="noopener">Email contact@leag.app</a>
-        </aside>
       </div>
     </section>
+    <section class="section" id="marketplace" aria-labelledby="marketplace-title">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <div class="section-kicker">Marketplace</div>
+            <h2 id="marketplace-title">Find a game tonight.</h2>
+          </div>
+          <p>Players search by sport, area, and time. Organizers post the spots they need filled. Venues turn empty slots into bookings.</p>
+        </div>
+
+        <div class="market-hud demo-stage reveal" id="market-hud">
+          <header class="market-hud-head">
+            <div class="market-hud-title">
+              <span class="hud-kicker" id="market-hud-kicker">Players</span>
+              <h3 class="hud-h2" id="market-hud-h2">Search, save, or join a waitlist.</h3>
+            </div>
+            <span class="hud-hint">Demo only · resets on reload</span>
+          </header>
+
+          <nav class="market-hud-tabs" role="tablist" aria-label="Marketplace surfaces">
+            <button class="market-hud-tab is-active" data-market-tab="players" type="button" role="tab" aria-selected="true">
+              <em>01</em><span>Players</span>
+            </button>
+            <button class="market-hud-tab" data-market-tab="organizers" type="button" role="tab" aria-selected="false">
+              <em>02</em><span>Organizers</span>
+            </button>
+            <button class="market-hud-tab" data-market-tab="venues" type="button" role="tab" aria-selected="false">
+              <em>03</em><span>Venues</span>
+            </button>
+          </nav>
+
+          <div class="market-hud-body">
+            <div class="market-hud-panel is-active" data-market-panel="players" role="tabpanel">
+              <div class="market-hud-controls" aria-label="Player search controls">
+                <label>
+                  <span>Sport</span>
+                  <select class="sample-select" id="player-sport">
+                    <option>Softball</option>
+                    <option>Basketball</option>
+                    <option>Soccer</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Area</span>
+                  <select class="sample-select" id="player-location">
+                    <option>Bayside</option>
+                    <option>Lakeside</option>
+                    <option>Westport</option>
+                  </select>
+                </label>
+                <label>
+                  <span>When</span>
+                  <select class="sample-select" id="player-time">
+                    <option>Tonight</option>
+                    <option>This weekend</option>
+                    <option>Next week</option>
+                  </select>
+                </label>
+              </div>
+              <div class="market-hud-games" id="player-results"></div>
+              <p class="market-hud-note">Buttons update this page only. No payment or account creation.</p>
+            </div>
+
+            <div class="market-hud-panel" data-market-panel="organizers" role="tabpanel">
+              <div class="market-hud-board">
+                <div class="market-hud-lane">
+                  <header><span>Lane 01 · Registration queue</span><b id="registration-count">4 waiting</b></header>
+                  <div class="market-hud-lane-body">
+                    <div class="registration-list" id="registration-list"></div>
+                  </div>
+                </div>
+                <div class="market-hud-lane">
+                  <header><span>Lane 02 · Tryout draft board</span><b id="team-builder-count">0 picked</b></header>
+                  <div class="market-hud-lane-body">
+                    <div class="team-switcher">
+                      <button class="hud-chip is-active" type="button" data-team-switch="Riptide">Riptide</button>
+                      <button class="hud-chip" type="button" data-team-switch="Hammerheads">Hammerheads</button>
+                      <button class="hud-chip is-primary" type="button" id="random-draft">Random draft</button>
+                    </div>
+                    <div class="builder-grid">
+                      <div>
+                        <div class="hud-lane-cap">Player pool</div>
+                        <div class="player-pool" id="player-pool"></div>
+                      </div>
+                      <div>
+                        <div class="hud-lane-cap" id="active-team-label">Riptide</div>
+                        <div class="team-box" id="team-box"></div>
+                      </div>
+                    </div>
+                    <p class="market-hud-note">Drag or click to move players between pool and team.</p>
+                  </div>
+                </div>
+                <div class="market-hud-lane market-hud-lane-wide">
+                  <header><span>Lane 03 · Schedule conflicts</span><b id="conflict-state">2 conflicts</b></header>
+                  <div class="market-hud-lane-body">
+                    <div class="conflict-list" id="conflict-list"></div>
+                    <div class="market-hud-actions">
+                      <button class="hud-chip is-primary" type="button" id="resolve-conflicts">Resolve conflicts</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="market-hud-panel" data-market-panel="venues" role="tabpanel">
+              <div class="market-hud-controls" aria-label="Venue slot controls">
+                <label>
+                  <span>Date</span>
+                  <select class="sample-select" id="venue-date">
+                    <option value="jun17">Jun 17</option>
+                    <option value="jun18">Jun 18</option>
+                    <option value="jun19">Jun 19</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Slot</span>
+                  <select class="sample-select" id="venue-time">
+                    <option value="530">5:30 PM</option>
+                    <option value="645">6:45 PM</option>
+                    <option value="800">8:00 PM</option>
+                  </select>
+                </label>
+              </div>
+              <div class="market-hud-fields" id="venue-field-grid"></div>
+              <p class="market-hud-note">Deterministic fake availability — feels responsive without listing real inventory.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
 
   </main>
 
@@ -5401,10 +5367,10 @@
           ? `Mon 5:30 PM / ${copy.field} 1`
           : `Opener ${copy.opener} / ${copy.field} 1`;
       }
-      if (demoEls.stage) {
-        demoEls.stage.style.setProperty("--demo-primary", demoState.primary);
-        demoEls.stage.style.setProperty("--demo-accent", demoState.accent);
-      }
+      document.querySelectorAll(".demo-stage").forEach((stage) => {
+        stage.style.setProperty("--demo-primary", demoState.primary);
+        stage.style.setProperty("--demo-accent", demoState.accent);
+      });
 
       renderDemoSchedule(copy);
 
@@ -5433,7 +5399,9 @@
       const normalized = normalizeHex(hex);
       if (!isValidHex(normalized)) return;
       demoState[key] = normalized;
-      if (demoEls.stage) demoEls.stage.style.setProperty(`--demo-${key}`, normalized);
+      document.querySelectorAll(".demo-stage").forEach((stage) => {
+        stage.style.setProperty(`--demo-${key}`, normalized);
+      });
       const swatch = key === "primary" ? demoInputs.primary : demoInputs.accent;
       const text = key === "primary" ? demoInputs.primaryHex : demoInputs.accentHex;
       if (swatch && swatch.value.toLowerCase() !== normalized.toLowerCase()) swatch.value = normalized;
@@ -5585,8 +5553,9 @@
       }
     ];
     let selectedSurfaceDay = 17;
-
-    const getSurfaceEvent = (day) => surfaceEvents.find((event) => event.day === Number(day));
+    let publishedWeekSurface = null;
+    const getActiveSurfaceEvents = () => publishedWeekSurface ? publishedWeekSurface.events : surfaceEvents;
+    const getSurfaceEvent = (day) => getActiveSurfaceEvents().find((event) => event.day === Number(day));
 
     const renderSurfaceSchedule = () => {
       const selected = getSurfaceEvent(selectedSurfaceDay);
@@ -5605,7 +5574,8 @@
 
       if (tableBody) {
         tableBody.replaceChildren();
-        surfaceEvents.slice(4).forEach((event) => {
+        const tableEvents = publishedWeekSurface ? publishedWeekSurface.events : surfaceEvents.slice(4);
+        tableEvents.forEach((event) => {
           const row = document.createElement("tr");
           row.classList.toggle("is-selected", event.day === selectedSurfaceDay);
           const date = makeEl("td", "mono", event.date);
@@ -5646,12 +5616,120 @@
       document.getElementById("surface-stat-three").textContent = selected.stats[2];
     };
 
-    document.querySelectorAll("[data-surface-day]").forEach((button) => {
-      button.addEventListener("click", () => {
-        selectedSurfaceDay = Number(button.dataset.surfaceDay);
+    const surfaceCalendarEl = document.getElementById("surface-calendar");
+    if (surfaceCalendarEl) {
+      surfaceCalendarEl.addEventListener("click", (event) => {
+        const target = event.target instanceof Element ? event.target.closest("[data-surface-day]") : null;
+        if (!target) {
+          return;
+        }
+        selectedSurfaceDay = Number(target.dataset.surfaceDay);
         renderSurfaceSchedule();
       });
-    });
+    }
+
+    const surfaceBoardTitleEl = document.getElementById("surface-board-title");
+    const surfaceBoardFilterEl = document.getElementById("surface-board-filter");
+    const dayShortNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+    const getCurrentWeekDays = () => {
+      const today = new Date();
+      const monday = new Date(today);
+      const offsetFromMonday = (today.getDay() + 6) % 7;
+      monday.setDate(today.getDate() - offsetFromMonday);
+      const days = [];
+      for (let i = 0; i < 7; i += 1) {
+        const d = new Date(monday);
+        d.setDate(monday.getDate() + i);
+        days.push(d);
+      }
+      return { monday, days };
+    };
+
+    const buildPublishedSurfaceEvents = (days, cancelledPractice) => {
+      const fmt = (d) => `${monthShortNames[d.getMonth()]} ${d.getDate()}`;
+      return [
+        {
+          day: days[0].getDate(),
+          date: fmt(days[0]),
+          title: "Riptide vs Hammerheads",
+          venue: "Field 1",
+          time: "5:30 PM",
+          status: "Scheduled",
+          note: "Monday home opener. Just published from the operations demo.",
+          alerts: ["Schedule sent to parents", "Field 1 confirmed"],
+          stats: ["5:30", "18", "0"]
+        },
+        {
+          day: days[1].getDate(),
+          date: fmt(days[1]),
+          title: "Hammerheads practice",
+          venue: "Field 2",
+          time: "6:45 PM",
+          status: cancelledPractice ? "Cancelled" : "Scheduled",
+          note: cancelledPractice
+            ? "Practice cancelled. Parents already notified."
+            : "Tuesday team practice. Coach posted the field map.",
+          alerts: cancelledPractice
+            ? ["Cancellation sent", "Make-up TBD"]
+            : ["Practice reminder queued", "Bring water"],
+          stats: cancelledPractice ? ["—", "16", "1"] : ["6:45", "16", "1"]
+        },
+        {
+          day: days[3].getDate(),
+          date: fmt(days[3]),
+          title: "Gulls vs Marlins",
+          venue: "Field 1",
+          time: "6:45 PM",
+          status: "Scheduled",
+          note: "Thursday matchup. Standings update at final.",
+          alerts: ["Schedule sent to parents", "Standings live"],
+          stats: ["6:45", "22", "0"]
+        }
+      ];
+    };
+
+    const renderPublishedSurfaceCalendar = (days, cancelledPractice) => {
+      if (!surfaceCalendarEl) {
+        return;
+      }
+      surfaceCalendarEl.innerHTML = "";
+      days.forEach((d, idx) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.dataset.surfaceDay = String(d.getDate());
+        btn.textContent = `${dayShortNames[d.getDay()]} ${d.getDate()}`;
+        if (idx === 0 || idx === 3) {
+          btn.classList.add("has-game");
+        }
+        if (idx === 1) {
+          btn.classList.add("has-game");
+          if (cancelledPractice) {
+            btn.classList.add("final");
+          }
+        }
+        btn.classList.toggle("is-selected", Number(btn.dataset.surfaceDay) === selectedSurfaceDay);
+        surfaceCalendarEl.append(btn);
+      });
+    };
+
+    const applyPublishedSurface = (cancelledPractice) => {
+      const { monday, days } = getCurrentWeekDays();
+      const events = buildPublishedSurfaceEvents(days, cancelledPractice);
+      publishedWeekSurface = { days, events, cancelledPractice };
+      selectedSurfaceDay = events[0].day;
+      if (surfaceBoardTitleEl) {
+        surfaceBoardTitleEl.textContent = `Week of ${monthShortNames[monday.getMonth()]} ${monday.getDate()}`;
+      }
+      if (surfaceBoardFilterEl) {
+        surfaceBoardFilterEl.textContent = cancelledPractice
+          ? "Live: Tuesday practice cancelled"
+          : "Live: published from operations demo";
+      }
+      renderPublishedSurfaceCalendar(days, cancelledPractice);
+      renderSurfaceSchedule();
+    };
 
     const marketHudCopy = {
       players: { kicker: "Players", h2: "Search, save, or join a waitlist." },
@@ -5688,20 +5766,27 @@
 
     const playerResults = {
       Softball: [
-        { title: "12U open tryout", meta: "Bayside Field 2 · Tryout", spots: 4, action: "Join waitlist", done: "Joined" },
-        { title: "Fastpitch pickup night", meta: "Helmets provided · Intermediate", spots: 6, action: "Save", done: "Saved" },
-        { title: "Pitching clinic", meta: "Coach-led · 60 min", spots: 8, action: "Add to checkout", done: "Added" }
+        { title: "12U open tryout", meta: "Bayside Field 2 · Tryout", spots: 4, action: "reserve" },
+        { title: "Fastpitch pickup night", meta: "Helmets provided · Intermediate", spots: 6, action: "save" },
+        { title: "Pitching clinic", meta: "Coach-led · 60 min", spots: 8, action: "checkout" }
       ],
       Basketball: [
-        { title: "Adult 3v3 run", meta: "Indoor court · Drop-in", spots: 2, action: "Save", done: "Saved" },
-        { title: "JV skills session", meta: "Ball-handling · Shooting", spots: 5, action: "Join waitlist", done: "Joined" },
-        { title: "Saturday pickup", meta: "Balanced teams · No account needed", spots: 9, action: "Add to checkout", done: "Added" }
+        { title: "Adult 3v3 run", meta: "Indoor court · Drop-in", spots: 2, action: "reserve" },
+        { title: "JV skills session", meta: "Ball-handling · Shooting", spots: 5, action: "save" },
+        { title: "Saturday pickup", meta: "Balanced teams · No account needed", spots: 9, action: "reserve" }
       ],
       Soccer: [
-        { title: "U10 rec match", meta: "Coed · Parent coach needed", spots: 3, action: "Save", done: "Saved" },
-        { title: "Adult seven-a-side", meta: "Turf field · 60 min", spots: 3, action: "Join waitlist", done: "Joined" },
-        { title: "Goalkeeper clinic", meta: "Small group · Coach-led", spots: 4, action: "Add to checkout", done: "Added" }
+        { title: "U10 rec match", meta: "Coed · Parent coach needed", spots: 3, action: "save" },
+        { title: "Adult seven-a-side", meta: "Turf field · 60 min", spots: 3, action: "reserve" },
+        { title: "Goalkeeper clinic", meta: "Small group · Coach-led", spots: 4, action: "checkout" }
       ]
+    };
+
+    const ctaLabels = {
+      reserve: { open: "Reserve spot", done: "Reserved" },
+      checkout: { open: "Add to checkout", done: "Added" },
+      save: { open: "Save", done: "Saved" },
+      waitlist: { open: "Join waitlist", done: "Waitlisted" }
     };
 
     const renderPlayerResults = () => {
@@ -5722,12 +5807,38 @@
           makeEl("div", "market-hud-game-meta", `${location} · ${time} · ${result.meta}`)
         );
         const spots = makeEl("div", "market-hud-game-spots");
-        spots.append(makeEl("b", "", String(result.spots)), makeEl("em", "", "spots"));
-        const cta = makeEl("button", "market-hud-cta", result.action);
+        const spotsB = makeEl("b", "", String(result.spots));
+        const spotsEm = makeEl("em", "", result.spots === 1 ? "spot" : "spots");
+        spots.append(spotsB, spotsEm);
+
+        const cta = makeEl("button", "market-hud-cta");
         cta.type = "button";
+        const decrements = result.action === "reserve" || result.action === "checkout";
+
+        const sync = () => {
+          spotsB.textContent = String(result.spots);
+          spotsEm.textContent = result.spots === 1 ? "spot" : "spots";
+          const key = decrements && result.spots <= 0 && !result.taken ? "waitlist" : result.action;
+          const labels = ctaLabels[key];
+          cta.textContent = result.taken ? labels.done : labels.open;
+          cta.classList.toggle("is-active", !!result.taken);
+          card.classList.toggle("is-soldout", decrements && result.spots <= 0 && !result.taken);
+        };
+        sync();
+
         cta.addEventListener("click", () => {
-          const active = cta.classList.toggle("is-active");
-          cta.textContent = active ? result.done : result.action;
+          if (!decrements) {
+            result.taken = !result.taken;
+          } else if (result.taken) {
+            result.taken = false;
+            result.spots += 1;
+          } else if (result.spots > 0) {
+            result.taken = true;
+            result.spots -= 1;
+          } else {
+            result.taken = true;
+          }
+          sync();
         });
         card.append(mark, body, spots, cta);
         container.append(card);
@@ -6204,6 +6315,7 @@
         setOpenAccordion(document.querySelector('[data-panel="publish"]'));
         renderWeeklySchedule();
         runParentNotificationSequence("Week schedule", "sent");
+        applyPublishedSurface(false);
       });
     }
 
@@ -6221,6 +6333,7 @@
             status.textContent = "practice cancelled";
           }
         });
+        applyPublishedSurface(true);
       });
     }
 
