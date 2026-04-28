@@ -57,6 +57,7 @@
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 86px;
     }
 
     body {
@@ -357,7 +358,7 @@
     .platform-layout > *,
     .surface-board > *,
     .ops-layout > *,
-    .market-grid > * {
+    .market-accordion > * {
       min-width: 0;
     }
 
@@ -1315,14 +1316,25 @@
       border-bottom: 1px solid var(--line);
     }
 
-    .calendar-grid span {
+    .calendar-grid button {
       min-height: 74px;
       padding: 8px;
+      border: 0;
       background: var(--surface);
       color: var(--quiet);
       font-family: var(--font-mono);
       font-size: 11px;
       position: relative;
+      text-align: left;
+      cursor: pointer;
+      transition: background 180ms ease, color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .calendar-grid button:hover,
+    .calendar-grid button.is-selected {
+      color: var(--ink);
+      background: rgba(98, 183, 124, 0.1);
+      box-shadow: inset 0 0 0 1px rgba(98, 183, 124, 0.4);
     }
 
     .calendar-grid .has-game::after {
@@ -1347,6 +1359,21 @@
 
     .calendar-grid .live::after {
       background: var(--red);
+    }
+
+    .calendar-grid .is-selected::before {
+      content: "Selected";
+      position: absolute;
+      right: 8px;
+      bottom: 7px;
+      color: var(--green-hi);
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .list-table tr.is-selected td {
+      background: rgba(98, 183, 124, 0.08);
     }
 
     .list-table {
@@ -1398,30 +1425,48 @@
       flex-direction: column;
     }
 
-    .roster-list {
-      padding: 4px 16px 16px;
+    .family-detail {
+      display: grid;
+      gap: 12px;
+      padding: 16px;
     }
 
-    .roster-row {
+    .family-detail-card {
       display: grid;
-      grid-template-columns: 34px 1fr 48px;
+      gap: 6px;
+      min-height: 78px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .family-detail-card strong {
+      font-size: 18px;
+    }
+
+    .family-detail-card span,
+    .family-detail-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .family-alert-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .family-alert-list div {
+      display: grid;
+      grid-template-columns: 1fr auto;
       gap: 10px;
       align-items: center;
-      min-height: 48px;
-      border-bottom: 1px solid var(--line);
+      min-height: 42px;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--muted);
       font-size: 13px;
-    }
-
-    .roster-row:last-child {
-      border-bottom: 0;
-    }
-
-    .player-num {
-      color: var(--green-hi);
-      font-family: var(--font-display);
-      font-style: italic;
-      font-size: 23px;
-      line-height: 1;
     }
 
     .stat-stack {
@@ -1452,26 +1497,15 @@
       font-size: 10px;
     }
 
-    .market-grid {
+    .market-accordion {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr 1fr;
-      gap: 18px;
-      align-items: stretch;
+      gap: 12px;
     }
 
     .market-card {
-      min-height: 320px;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .market-card:nth-child(2) {
-      margin-top: 34px;
-    }
-
-    .market-card:nth-child(3) {
-      margin-top: 68px;
+      min-height: auto;
+      padding: 0;
+      display: block;
     }
 
     .market-label {
@@ -1482,16 +1516,82 @@
       text-transform: uppercase;
     }
 
-    .market-card h3 {
-      margin: 14px 0 10px;
-      font-size: 28px;
-      line-height: 1.05;
+    .market-trigger {
+      width: 100%;
+      min-height: 116px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: center;
+      padding: 22px;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      text-align: left;
+      font: inherit;
+      cursor: pointer;
     }
 
-    .market-card p {
+    .market-trigger strong {
+      display: block;
+      margin-top: 10px;
+      font-size: 30px;
+      line-height: 1.05;
+      text-wrap: balance;
+    }
+
+    .market-trigger em {
+      display: block;
+      max-width: 58ch;
+      margin-top: 10px;
+      color: var(--muted);
+      font-style: normal;
+      font-size: 15px;
+    }
+
+    .market-trigger b {
+      color: var(--green-hi);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .market-panel {
+      display: none;
+      gap: 18px;
+      padding: 0 22px 22px;
+      border-top: 1px solid var(--line);
+    }
+
+    .market-card.is-open .market-panel {
+      display: grid;
+    }
+
+    .market-panel.two-column {
+      grid-template-columns: minmax(280px, 0.44fr) minmax(0, 0.56fr);
+      align-items: start;
+    }
+
+    .market-panel.organizer-panel {
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+
+    .market-panel-copy {
       color: var(--muted);
       font-size: 15px;
-      text-wrap: pretty;
+      max-width: 56ch;
+    }
+
+    .market-card-player .market-panel-copy {
+      max-width: 48ch;
+      margin-top: 22px;
+    }
+
+    .organizer-panel > .market-panel-copy {
+      max-width: 78ch;
+      margin-bottom: 2px;
     }
 
     .market-list {
@@ -1521,8 +1621,7 @@
     }
 
     .market-demo {
-      margin-top: auto;
-      padding-top: 18px;
+      padding-top: 0;
     }
 
     .player-search {
@@ -1531,12 +1630,12 @@
     }
 
     .player-search-row {
-      min-height: 42px;
-      display: flex;
+      min-height: 76px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 0 12px;
+      gap: 18px;
+      padding: 14px 16px;
       border: 1px solid var(--line);
       border-radius: 6px;
       background: rgba(255, 255, 255, 0.03);
@@ -1562,6 +1661,14 @@
       gap: 10px;
     }
 
+    .organizer-panel .organizer-board {
+      grid-template-columns: minmax(300px, 0.9fr) minmax(0, 1.1fr);
+    }
+
+    .organizer-panel .organizer-lane:nth-child(3) {
+      grid-column: 1 / -1;
+    }
+
     .organizer-lane {
       border: 1px solid var(--line);
       border-radius: 6px;
@@ -1582,7 +1689,7 @@
       text-transform: uppercase;
     }
 
-    .organizer-lane div {
+    .organizer-lane > div {
       padding: 10px;
       color: var(--muted);
       font-size: 13px;
@@ -1667,6 +1774,41 @@
       gap: 8px;
     }
 
+    .player-pool,
+    .team-box {
+      align-content: start;
+      grid-auto-rows: min-content;
+      min-height: 180px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(5, 9, 8, 0.32);
+    }
+
+    .team-box {
+      background:
+        linear-gradient(180deg, rgba(98, 183, 124, 0.08), rgba(5, 9, 8, 0.24)),
+        rgba(5, 9, 8, 0.52);
+      box-shadow: inset 0 0 0 1px rgba(98, 183, 124, 0.1);
+    }
+
+    .team-box.is-empty {
+      border-style: dashed;
+      border-color: rgba(98, 183, 124, 0.42);
+    }
+
+    .drop-hint {
+      display: grid;
+      place-items: center;
+      min-height: 108px;
+      padding: 18px;
+      border: 1px dashed rgba(98, 183, 124, 0.34);
+      border-radius: 6px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 13px;
+    }
+
     .registration-row {
       display: grid;
       grid-template-columns: 1fr auto;
@@ -1690,7 +1832,9 @@
     }
 
     .player-card {
+      min-height: 72px;
       display: grid;
+      align-content: center;
       gap: 4px;
       padding: 10px;
       color: var(--muted);
@@ -1735,6 +1879,63 @@
     .field-card.hold {
       background: rgba(201, 162, 75, 0.12);
       border-color: rgba(201, 162, 75, 0.34);
+    }
+
+    .sample-player-card {
+      display: grid;
+      gap: 12px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background:
+        linear-gradient(180deg, rgba(98, 183, 124, 0.08), transparent 58%),
+        rgba(255, 255, 255, 0.035);
+    }
+
+    .sample-player-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .sample-player-head strong {
+      font-size: 20px;
+    }
+
+    .sample-player-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .sample-player-grid div {
+      min-height: 58px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(5, 9, 8, 0.26);
+    }
+
+    .sample-player-grid b {
+      display: block;
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+    }
+
+    .sample-player-grid span {
+      display: block;
+      margin-top: 4px;
+      color: var(--ink);
+      font-family: var(--font-sans);
+      font-size: 14px;
+    }
+
+    .sample-player-note {
+      color: var(--muted);
+      font-size: 13px;
     }
 
     .ops-accordion-card {
@@ -1830,6 +2031,30 @@
       transition: width 240ms ease;
     }
 
+    .publish-controls {
+      display: grid;
+      gap: 12px;
+    }
+
+    .week-indicator {
+      display: grid;
+      gap: 4px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .week-indicator strong {
+      font-size: 15px;
+    }
+
+    .week-indicator span {
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
     .parent-row,
     .week-card {
       display: grid;
@@ -1844,6 +2069,134 @@
     .week-card.cancelled {
       background: rgba(216, 58, 72, 0.12);
       border-color: rgba(216, 58, 72, 0.3);
+    }
+
+    .scoreboard-demo {
+      display: grid;
+      gap: 14px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background:
+        linear-gradient(180deg, rgba(216, 58, 72, 0.08), transparent 70%),
+        rgba(255, 255, 255, 0.035);
+    }
+
+    .scoreline-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .score-team {
+      display: grid;
+      gap: 4px;
+      min-height: 86px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(5, 9, 8, 0.32);
+    }
+
+    .score-team.is-batting {
+      border-color: rgba(98, 183, 124, 0.44);
+      background: var(--green-soft);
+    }
+
+    .score-team b {
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+    }
+
+    .score-team strong {
+      font-family: var(--font-display);
+      font-size: 56px;
+      font-style: italic;
+      line-height: 0.9;
+    }
+
+    .score-divider {
+      color: var(--quiet);
+      font-family: var(--font-display);
+      font-size: 42px;
+      font-style: italic;
+    }
+
+    .score-meta-line {
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 12px;
+    }
+
+    .score-count-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .score-count-grid div {
+      min-height: 48px;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: rgba(5, 9, 8, 0.26);
+    }
+
+    .score-count-grid span {
+      display: block;
+      color: var(--quiet);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+    }
+
+    .score-count-grid strong {
+      display: block;
+      margin-top: 2px;
+      font-size: 20px;
+    }
+
+    .score-controls-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .score-control-group {
+      display: grid;
+      gap: 8px;
+    }
+
+    .score-control-group b {
+      color: var(--green-hi);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+    }
+
+    .score-button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .standings-row {
+      transition: transform 260ms ease, border-color 260ms ease, background 260ms ease;
+    }
+
+    .standings-row.move-up {
+      border-color: rgba(98, 183, 124, 0.48);
+      background: var(--green-soft);
+      animation: standings-lift 720ms ease;
+    }
+
+    @keyframes standings-lift {
+      0% { transform: translateY(12px); }
+      55% { transform: translateY(-4px); }
+      100% { transform: translateY(0); }
     }
 
     .ops-layout {
@@ -2092,17 +2445,6 @@
         display: none;
       }
 
-      .market-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .market-card,
-      .market-card:nth-child(2),
-      .market-card:nth-child(3) {
-        min-height: auto;
-        margin-top: 0;
-      }
-
       .cta-grid {
         grid-template-columns: 1fr;
       }
@@ -2233,14 +2575,32 @@
 
       .demo-layout,
       .demo-output,
-      .mini-demo-grid {
+      .mini-demo-grid,
+      .market-panel.two-column,
+      .market-panel.organizer-panel,
+      .organizer-panel .organizer-board {
         grid-template-columns: 1fr;
       }
 
       .market-controls,
       .builder-grid,
-      .field-grid {
+      .field-grid,
+      .sample-player-grid,
+      .score-controls-grid {
         grid-template-columns: 1fr;
+      }
+
+      .market-trigger {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .scoreline-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .score-divider {
+        display: none;
       }
 
       .accordion-panel {
@@ -2274,7 +2634,7 @@
         font-size: 34px;
       }
 
-      .calendar-grid span {
+      .calendar-grid button {
         min-height: 56px;
       }
 
@@ -2365,7 +2725,7 @@
         grid-template-columns: repeat(4, 1fr);
       }
 
-      .calendar-grid span:nth-child(n+21) {
+      .calendar-grid button:nth-child(n+21) {
         display: none;
       }
 
@@ -2433,16 +2793,16 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="container hero-grid">
         <div class="hero-copy-block reveal">
-          <div class="eyebrow">Try a sample season first</div>
+          <div class="eyebrow">Try the season flow first</div>
           <h1 id="hero-title">LEAG <span>runs the league.</span></h1>
           <p class="hero-copy">
             Launch a public league site, take signups, build teams, publish the weekly schedule, and show families what changed.
           </p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#playground">Try a sample season -></a>
+            <a class="btn btn-primary" href="#playground">Try the flow -></a>
             <a class="btn btn-secondary" href="#platform">See a league site</a>
           </div>
-          <p class="hero-note">No call required: click through a sample league flow directly on this page.</p>
+          <p class="hero-note">No call required: click through the league flow directly on this page.</p>
         </div>
 
         <div class="hero-scene reveal" aria-label="Live league site preview">
@@ -2542,20 +2902,20 @@
     <section class="proof-strip" aria-label="What the demos show">
       <div class="container proof-grid">
         <div class="proof-item">
-          <div class="proof-number">Create a sample season</div>
+          <div class="proof-number">Create a season</div>
           <div class="proof-label">Name the organization, choose the sport, and see a public page update.</div>
         </div>
         <div class="proof-item">
           <div class="proof-number">Approve registrations</div>
-          <div class="proof-label">Review sample players, mark them approved or on hold, and keep the list clear.</div>
+          <div class="proof-label">Review players, mark them approved or on hold, and keep the list clear.</div>
         </div>
         <div class="proof-item">
           <div class="proof-number">Build teams</div>
-          <div class="proof-label">Move tryout players into teams by hand or run a sample random draft.</div>
+          <div class="proof-label">Move tryout players into teams by hand or run a random draft.</div>
         </div>
         <div class="proof-item">
           <div class="proof-number">Publish a weekly schedule</div>
-          <div class="proof-label">Resolve conflicts, publish the week, and watch sample parent notifications send.</div>
+          <div class="proof-label">Resolve conflicts, publish the week, and watch parent notifications send.</div>
         </div>
       </div>
     </section>
@@ -2565,24 +2925,24 @@
         <div class="section-header reveal">
           <div>
             <div class="section-kicker">Interactive demo</div>
-            <h2 id="playground-title">Build a sample season before you talk to anyone.</h2>
+            <h2 id="playground-title">Build a season before you talk to anyone.</h2>
           </div>
-          <p>Use a few fake values, publish a sample week, and see what families would see. Nothing saves, exports, or sends outside this page.</p>
+          <p>Use a few fake values, publish a week, and see what families would see. Nothing saves, exports, or sends outside this page.</p>
         </div>
 
         <div class="demo-layout reveal">
           <aside class="demo-controls" aria-label="Demo controls">
             <p class="demo-reset-note">Demo data resets when you leave this page.</p>
             <div class="sample-field">
-              <label for="demo-org-input">Sample organization</label>
+              <label for="demo-org-input">Organization</label>
               <input class="sample-input" id="demo-org-input" type="text" maxlength="32" value="Miami County Softball">
             </div>
             <div class="sample-field">
-              <label for="demo-team-a-input">Sample team one</label>
+              <label for="demo-team-a-input">Team one</label>
               <input class="sample-input" id="demo-team-a-input" type="text" maxlength="22" value="Firecrackers">
             </div>
             <div class="sample-field">
-              <label for="demo-team-b-input">Sample team two</label>
+              <label for="demo-team-b-input">Team two</label>
               <input class="sample-input" id="demo-team-b-input" type="text" maxlength="22" value="Panthers">
             </div>
             <div class="demo-group">
@@ -2605,7 +2965,7 @@
               <strong id="demo-status-title">Softball league loaded</strong>
               <span id="demo-status-copy">Eight teams, two fields, registration open, schedule draft ready.</span>
             </div>
-            <button class="btn btn-primary" type="button" id="demo-generate">Publish sample schedule</button>
+            <button class="btn btn-primary" type="button" id="demo-generate">Publish schedule</button>
           </aside>
 
           <article class="demo-stage" id="demo-stage" aria-label="Live demo preview">
@@ -2719,11 +3079,11 @@
               <h3>June schedule</h3>
               <span>Filter: 16U / home games</span>
             </div>
-            <div class="calendar-grid" aria-hidden="true">
-              <span>1</span><span>2</span><span class="has-game">3</span><span>4</span><span class="final has-game">5</span><span>6</span><span>7</span>
-              <span class="has-game">8</span><span>9</span><span class="final has-game">10</span><span>11</span><span>12</span><span>13</span><span>14</span>
-              <span>15</span><span class="has-game">16</span><span class="live has-game">17</span><span>18</span><span class="has-game">19</span><span>20</span><span>21</span>
-              <span>22</span><span>23</span><span class="has-game">24</span><span>25</span><span>26</span><span>27</span><span>28</span>
+            <div class="calendar-grid" id="surface-calendar" aria-label="Interactive June schedule">
+              <button type="button" data-surface-day="1">1</button><button type="button" data-surface-day="2">2</button><button class="has-game" type="button" data-surface-day="3">3</button><button type="button" data-surface-day="4">4</button><button class="final has-game" type="button" data-surface-day="5">5</button><button type="button" data-surface-day="6">6</button><button type="button" data-surface-day="7">7</button>
+              <button class="has-game" type="button" data-surface-day="8">8</button><button type="button" data-surface-day="9">9</button><button class="final has-game" type="button" data-surface-day="10">10</button><button type="button" data-surface-day="11">11</button><button type="button" data-surface-day="12">12</button><button type="button" data-surface-day="13">13</button><button type="button" data-surface-day="14">14</button>
+              <button type="button" data-surface-day="15">15</button><button class="has-game" type="button" data-surface-day="16">16</button><button class="live has-game is-selected" type="button" data-surface-day="17">17</button><button type="button" data-surface-day="18">18</button><button class="has-game" type="button" data-surface-day="19">19</button><button type="button" data-surface-day="20">20</button><button type="button" data-surface-day="21">21</button>
+              <button type="button" data-surface-day="22">22</button><button type="button" data-surface-day="23">23</button><button class="has-game" type="button" data-surface-day="24">24</button><button type="button" data-surface-day="25">25</button><button type="button" data-surface-day="26">26</button><button type="button" data-surface-day="27">27</button><button type="button" data-surface-day="28">28</button>
             </div>
             <table class="list-table">
               <thead>
@@ -2734,60 +3094,27 @@
                   <th scope="col">Status</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td class="mono">Jun 17</td>
-                  <td>Firecrackers vs Pitch Perfect</td>
-                  <td>Field 1</td>
-                  <td><span class="status-tag red">Live</span></td>
-                </tr>
-                <tr>
-                  <td class="mono">Jun 19</td>
-                  <td>Sparks vs Pink Panthers</td>
-                  <td>Field 4</td>
-                  <td><span class="status-tag">Scheduled</span></td>
-                </tr>
-                <tr>
-                  <td class="mono">Jun 24</td>
-                  <td>Semifinal bracket</td>
-                  <td>Main complex</td>
-                  <td><span class="status-tag">Open</span></td>
-                </tr>
-              </tbody>
+              <tbody id="surface-table-body"></tbody>
             </table>
           </article>
 
-          <aside class="board-side reveal" aria-label="Featured roster">
+          <aside class="board-side reveal" aria-label="Selected day details">
             <div class="board-head">
-              <h3>Featured roster</h3>
-              <span>Firecrackers</span>
+              <h3 id="surface-detail-title">Jun 17 game update</h3>
+              <span id="surface-detail-status">Live</span>
             </div>
-            <div class="roster-list">
-              <div class="roster-row">
-                <span class="player-num">04</span>
-                <span>Hadley Cross <span class="muted">/ P</span></span>
-                <span class="mono">.451</span>
+            <div class="family-detail">
+              <div class="family-detail-card">
+                <strong id="surface-detail-matchup">Firecrackers vs Pitch Perfect</strong>
+                <span id="surface-detail-meta">Field 1 / 5:30 PM / live now</span>
+                <p id="surface-detail-note">Families see the game status, venue, arrival note, and any change without scrolling through a roster.</p>
               </div>
-              <div class="roster-row">
-                <span class="player-num">11</span>
-                <span>Bree Walden <span class="muted">/ C</span></span>
-                <span class="mono">.398</span>
-              </div>
-              <div class="roster-row">
-                <span class="player-num">18</span>
-                <span>Elle Knox <span class="muted">/ SS</span></span>
-                <span class="mono">2.18</span>
-              </div>
-              <div class="roster-row">
-                <span class="player-num">27</span>
-                <span>Maya Ramos <span class="muted">/ OF</span></span>
-                <span class="mono">17</span>
-              </div>
+              <div class="family-alert-list" id="surface-family-alerts" aria-live="polite"></div>
             </div>
             <div class="stat-stack">
-              <div><strong>12</strong><span>wins</span></div>
-              <div><strong>47</strong><span>runs</span></div>
-              <div><strong>8</strong><span>games left</span></div>
+              <div><strong id="surface-stat-one">5:30</strong><span>start</span></div>
+              <div><strong id="surface-stat-two">18</strong><span>families</span></div>
+              <div><strong id="surface-stat-three">2</strong><span>alerts</span></div>
             </div>
           </aside>
         </div>
@@ -2804,93 +3131,121 @@
           <p>The public side should feel concrete: players search for the right activity, organizers approve real people, and venues show exactly what is open.</p>
         </div>
 
-        <div class="market-grid">
-          <article class="market-card market-card-player reveal">
-            <div class="market-label">Players</div>
-            <h3>Search, save, or join a sample waitlist.</h3>
-            <p>Try filters a player would understand. The buttons only change sample state here, with no payment or account creation.</p>
-            <div class="market-controls" aria-label="Player search controls">
-              <select class="sample-select" id="player-sport">
-                <option>Softball</option>
-                <option>Basketball</option>
-                <option>Soccer</option>
-              </select>
-              <select class="sample-select" id="player-location">
-                <option>Irvine</option>
-                <option>Orlando</option>
-                <option>Miami County</option>
-              </select>
-              <select class="sample-select" id="player-time">
-                <option>Tonight</option>
-                <option>This weekend</option>
-                <option>Next week</option>
-              </select>
-            </div>
-            <div class="market-demo player-search" id="player-results">
-              <div class="player-search-row"><span>Loading sample games</span><strong>demo</strong></div>
-            </div>
-          </article>
-
-          <article class="market-card market-card-organizer reveal">
-            <div class="market-label">Organizers</div>
-            <h3>Approve players, draft teams, and clear conflicts.</h3>
-            <p>This is the admin work organizers actually do before a season goes public.</p>
-            <div class="market-demo organizer-board">
-              <div class="organizer-lane">
-                <header><span>Registration queue</span><b id="registration-count">4 waiting</b></header>
-                <div class="registration-list" id="registration-list"></div>
-              </div>
-              <div class="organizer-lane">
-                <header><span>Tryout team builder</span><b id="team-builder-count">0 picked</b></header>
-                <div>
-                  <div class="team-switcher">
-                    <button class="tiny-btn is-active" type="button" data-team-switch="Firecrackers">Firecrackers</button>
-                    <button class="tiny-btn" type="button" data-team-switch="Panthers">Panthers</button>
-                    <button class="tiny-btn" type="button" id="random-draft">Random draft</button>
-                  </div>
-                  <div class="builder-grid">
-                    <div>
-                      <div class="demo-label">Player pool</div>
-                      <div class="player-pool" id="player-pool"></div>
-                    </div>
-                    <div>
-                      <div class="demo-label" id="active-team-label">Firecrackers</div>
-                      <div class="team-box" id="team-box"></div>
-                    </div>
-                  </div>
-                  <p class="demo-reset-note">Click or drag sample players. Drafts and random drafts will be supported in the real product.</p>
+        <div class="market-accordion" id="market-demo-accordion">
+          <article class="market-card market-card-player reveal is-open" data-market-panel="players">
+            <button class="market-trigger" type="button" aria-expanded="true">
+              <span>
+                <span class="market-label">Players</span>
+                <strong>Search, save, or join a waitlist.</strong>
+                <em>Try filters a player would understand. Buttons only update this page, with no payment or account creation.</em>
+              </span>
+              <b>Open demo</b>
+            </button>
+            <div class="market-panel two-column">
+              <div>
+                <div class="market-controls" aria-label="Player search controls">
+                  <select class="sample-select" id="player-sport">
+                    <option>Softball</option>
+                    <option>Basketball</option>
+                    <option>Soccer</option>
+                  </select>
+                  <select class="sample-select" id="player-location">
+                    <option>Irvine</option>
+                    <option>Orlando</option>
+                    <option>Miami County</option>
+                  </select>
+                  <select class="sample-select" id="player-time">
+                    <option>Tonight</option>
+                    <option>This weekend</option>
+                    <option>Next week</option>
+                  </select>
                 </div>
+                <p class="market-panel-copy">Demo data resets when you leave this page. Checkout stops at a preview screen.</p>
               </div>
-              <div class="organizer-lane">
-                <header><span>Field conflicts</span><b id="conflict-state">2 conflicts</b></header>
-                <div>
-                  <div class="conflict-list" id="conflict-list"></div>
-                  <div class="market-action-row">
-                    <button class="tiny-btn" type="button" id="resolve-conflicts">Resolve conflicts</button>
-                  </div>
-                </div>
+              <div class="market-demo player-search" id="player-results">
+                <div class="player-search-row"><span>Loading games</span><strong>demo</strong></div>
               </div>
             </div>
           </article>
 
-          <article class="market-card market-card-venue reveal">
-            <div class="market-label">Venues</div>
-            <h3>Pick a time and see what is really open.</h3>
-            <p>Availability changes by date and time, with booked, open, and hold states clearly separated.</p>
-            <div class="market-controls" aria-label="Venue slot controls">
-              <select class="sample-select" id="venue-date">
-                <option value="jun17">Jun 17</option>
-                <option value="jun18">Jun 18</option>
-                <option value="jun19">Jun 19</option>
-              </select>
-              <select class="sample-select" id="venue-time">
-                <option value="530">5:30 PM</option>
-                <option value="645">6:45 PM</option>
-                <option value="800">8:00 PM</option>
-              </select>
+          <article class="market-card market-card-organizer reveal" data-market-panel="organizers">
+            <button class="market-trigger" type="button" aria-expanded="false">
+              <span>
+                <span class="market-label">Organizers</span>
+                <strong>Approve players, draft teams, and clear conflicts.</strong>
+                <em>This is the admin work organizers actually do before a season goes public.</em>
+              </span>
+              <b>Open demo</b>
+            </button>
+            <div class="market-panel organizer-panel">
+              <div class="market-panel-copy">Use the queue to approve or hold players, then move tryout players into teams or run a random draft.</div>
+              <div class="market-demo organizer-board">
+                <div class="organizer-lane">
+                  <header><span>Registration queue</span><b id="registration-count">4 waiting</b></header>
+                  <div class="registration-list" id="registration-list"></div>
+                </div>
+                <div class="organizer-lane">
+                  <header><span>Tryout team builder</span><b id="team-builder-count">0 picked</b></header>
+                  <div>
+                    <div class="team-switcher">
+                      <button class="tiny-btn is-active" type="button" data-team-switch="Firecrackers">Firecrackers</button>
+                      <button class="tiny-btn" type="button" data-team-switch="Panthers">Panthers</button>
+                      <button class="tiny-btn" type="button" id="random-draft">Random draft</button>
+                    </div>
+                    <div class="builder-grid">
+                      <div>
+                        <div class="demo-label">Player pool</div>
+                        <div class="player-pool" id="player-pool"></div>
+                      </div>
+                      <div>
+                        <div class="demo-label" id="active-team-label">Firecrackers</div>
+                        <div class="team-box" id="team-box"></div>
+                      </div>
+                    </div>
+                    <p class="demo-reset-note">Drag or click to move players. Drafts and random drafts will be supported in the real product.</p>
+                  </div>
+                </div>
+                <div class="organizer-lane">
+                  <header><span>Field conflicts</span><b id="conflict-state">2 conflicts</b></header>
+                  <div>
+                    <div class="conflict-list" id="conflict-list"></div>
+                    <div class="market-action-row">
+                      <button class="tiny-btn" type="button" id="resolve-conflicts">Resolve conflicts</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="market-demo field-grid" id="venue-field-grid">
-              <div class="field-card"><strong>Loading fields</strong><span>demo</span></div>
+          </article>
+
+          <article class="market-card market-card-venue reveal" data-market-panel="venues">
+            <button class="market-trigger" type="button" aria-expanded="false">
+              <span>
+                <span class="market-label">Venues</span>
+                <strong>Pick a time and see what is really open.</strong>
+                <em>Availability changes by date and time, with booked, open, and hold states clearly separated.</em>
+              </span>
+              <b>Open demo</b>
+            </button>
+            <div class="market-panel two-column">
+              <div>
+                <div class="market-controls" aria-label="Venue slot controls">
+                  <select class="sample-select" id="venue-date">
+                    <option value="jun17">Jun 17</option>
+                    <option value="jun18">Jun 18</option>
+                    <option value="jun19">Jun 19</option>
+                  </select>
+                  <select class="sample-select" id="venue-time">
+                    <option value="530">5:30 PM</option>
+                    <option value="645">6:45 PM</option>
+                    <option value="800">8:00 PM</option>
+                  </select>
+                </div>
+                <p class="market-panel-copy">This is deterministic fake availability so the state feels responsive without listing real inventory.</p>
+              </div>
+              <div class="market-demo field-grid" id="venue-field-grid">
+                <div class="field-card"><strong>Loading fields</strong><span>demo</span></div>
+              </div>
             </div>
           </article>
         </div>
@@ -2910,7 +3265,7 @@
         <div class="ops-layout">
           <article class="ops-card ops-accordion-card reveal">
             <div class="ops-head">
-              <h3>Sample season workflow</h3>
+              <h3>Season workflow</h3>
               <span>Demo data only</span>
             </div>
             <div class="accordion-list">
@@ -2919,7 +3274,7 @@
                   <span class="pipeline-step">1</span>
                   <span>
                     <h3>Take signups</h3>
-                    <p>Collect waiver checks, sample player data, and fee status.</p>
+                    <p>Collect waiver checks, player data, and fee status.</p>
                   </span>
                   <span class="status-tag" id="signup-status">2 of 3 ready</span>
                 </button>
@@ -2928,11 +3283,22 @@
                     <div class="check-list" id="signup-checks">
                       <label><input type="checkbox" checked data-signup-check> Waiver signed <span class="mono">ready</span></label>
                       <label><input type="checkbox" checked data-signup-check> Player data complete <span class="mono">ready</span></label>
-                      <label><input type="checkbox" data-signup-check> Sample fee marked paid <span class="mono">$142</span></label>
+                      <label><input type="checkbox" data-signup-check> Fee marked paid <span class="mono">$142</span></label>
                     </div>
-                    <div class="demo-status">
-                      <strong>Sample player card</strong>
-                      <span id="signup-player-card">Maya Ramos / 12U / guardian confirmed / fee pending</span>
+                    <div class="sample-player-card" id="signup-player-card">
+                      <div class="sample-player-head">
+                        <strong>Maya Ramos</strong>
+                        <span class="status-tag" id="signup-player-status">fee pending</span>
+                      </div>
+                      <div class="sample-player-grid">
+                        <div><b>Division</b><span>12U softball</span></div>
+                        <div><b>Guardian</b><span>Confirmed</span></div>
+                        <div><b>Tryout</b><span>Sat 10:00 AM</span></div>
+                        <div><b>Waiver</b><span id="signup-waiver-state">Signed</span></div>
+                        <div><b>Player data</b><span id="signup-data-state">Complete</span></div>
+                        <div><b>Fee</b><span id="signup-fee-state">Pending $142</span></div>
+                      </div>
+                      <div class="sample-player-note" id="signup-player-note">Ready to approve after the fee is marked paid.</div>
                     </div>
                   </div>
                 </div>
@@ -2943,7 +3309,7 @@
                   <span class="pipeline-step">2</span>
                   <span>
                     <h3>Build teams</h3>
-                    <p>Move tryout players into a team or run a sample random draft.</p>
+                    <p>Move tryout players into a team or run a random draft.</p>
                   </span>
                   <span class="status-tag" id="ops-team-count">0 picked</span>
                 </button>
@@ -2963,7 +3329,7 @@
                       <div class="team-box" id="ops-team-box"></div>
                     </div>
                   </div>
-                  <p class="demo-reset-note">Drag or click to move sample players. This does not save a roster.</p>
+                  <p class="demo-reset-note">Drag a player into a team column or click a player to move them. This does not save a roster.</p>
                 </div>
               </section>
 
@@ -2972,16 +3338,20 @@
                   <span class="pipeline-step">3</span>
                   <span>
                     <h3>Publish schedule</h3>
-                    <p>Send a sample week and watch parent notifications move in real time.</p>
+                    <p>Send a week and watch parent notifications move in real time.</p>
                   </span>
                   <span class="status-tag" id="publish-status">draft</span>
                 </button>
                 <div class="accordion-panel">
                   <div class="mini-demo-grid">
-                    <div>
-                      <button class="btn btn-primary" type="button" id="publish-week">Publish sample week</button>
-                      <div class="progress-track" style="margin-top:12px"><span class="progress-fill" id="publish-progress"></span></div>
-                      <div class="parent-list" id="publish-parent-list" style="margin-top:12px"></div>
+                    <div class="publish-controls">
+                      <div class="week-indicator">
+                        <strong id="publish-week-label">Current week</strong>
+                        <span id="publish-week-range">This week / demo schedule only</span>
+                      </div>
+                      <button class="btn btn-primary" type="button" id="publish-week">Publish week</button>
+                      <div class="progress-track"><span class="progress-fill" id="publish-progress"></span></div>
+                      <div class="parent-list" id="publish-parent-list"></div>
                     </div>
                     <div class="week-list" id="weekly-schedule"></div>
                   </div>
@@ -2993,18 +3363,51 @@
                   <span class="pipeline-step">4</span>
                   <span>
                     <h3>Run the season</h3>
-                    <p>Record a sample score and see standings move.</p>
+                    <p>Record a score and see standings move.</p>
                   </span>
                   <span class="status-tag" id="score-status">live</span>
                 </button>
                 <div class="accordion-panel">
                   <div class="mini-demo-grid">
-                    <div class="demo-status">
-                      <strong id="live-scoreline">Firecrackers 5, Panthers 3</strong>
-                      <span>Top 5 / Field 1 / runners on 1st and 3rd</span>
-                      <div class="market-action-row">
-                        <button class="tiny-btn" type="button" id="add-run">Add Firecrackers run</button>
-                        <button class="tiny-btn" type="button" id="finalize-game">Mark final</button>
+                    <div class="scoreboard-demo">
+                      <div class="scoreline-grid">
+                        <div class="score-team" id="score-team-fire">
+                          <b>Firecrackers</b>
+                          <strong id="score-fire">5</strong>
+                        </div>
+                        <div class="score-divider">-</div>
+                        <div class="score-team" id="score-team-panthers">
+                          <b>Panthers</b>
+                          <strong id="score-panthers">3</strong>
+                        </div>
+                      </div>
+                      <div class="score-meta-line" id="score-meta-line">Top 5 / Field 1 / Firecrackers batting</div>
+                      <div class="score-count-grid">
+                        <div><span>Balls</span><strong id="score-balls">0</strong></div>
+                        <div><span>Strikes</span><strong id="score-strikes">0</strong></div>
+                        <div><span>Outs</span><strong id="score-outs">0</strong></div>
+                      </div>
+                      <div class="score-controls-grid">
+                        <div class="score-control-group">
+                          <b>Score</b>
+                          <div class="score-button-row">
+                            <button class="tiny-btn" type="button" data-score-action="fire-up">+ Firecrackers</button>
+                            <button class="tiny-btn" type="button" data-score-action="fire-down">- Firecrackers</button>
+                            <button class="tiny-btn" type="button" data-score-action="panthers-up">+ Panthers</button>
+                            <button class="tiny-btn" type="button" data-score-action="panthers-down">- Panthers</button>
+                          </div>
+                        </div>
+                        <div class="score-control-group">
+                          <b>Count and inning</b>
+                          <div class="score-button-row">
+                            <button class="tiny-btn" type="button" data-score-action="ball">Ball +</button>
+                            <button class="tiny-btn" type="button" data-score-action="strike">Strike +</button>
+                            <button class="tiny-btn" type="button" data-score-action="out">Out +</button>
+                            <button class="tiny-btn" type="button" data-score-action="reset-count">Reset count</button>
+                            <button class="tiny-btn" type="button" data-score-action="next-half">Next half-inning</button>
+                            <button class="tiny-btn" type="button" data-score-action="final">Mark final</button>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     <div class="week-list" id="standings-demo"></div>
@@ -3017,18 +3420,6 @@
       </div>
     </section>
 
-    <section class="cta-section" id="contact" aria-labelledby="contact-title">
-      <div class="container cta-grid">
-        <div class="reveal">
-          <h2 id="contact-title">Try the season path first.</h2>
-          <p>Use the playground above, inspect the sample league pages, then reach out with specific gaps or organization needs.</p>
-        </div>
-        <div class="cta-actions reveal">
-          <a class="btn btn-primary" href="#playground">Open demo playground</a>
-          <a class="btn btn-secondary" href="mailto:contact@leag.app?subject=LEAG%20question">Ask a question</a>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer class="site-footer">
@@ -3097,7 +3488,7 @@
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/^-|-$/g, "")
         .slice(0, 24);
-      return slug || "sample-season";
+      return slug || "season-preview";
     };
 
     const optionLabel = (select) => {
@@ -3219,7 +3610,7 @@
     const getDemoSchedule = (copy, names) => ([
       { day: "Mon", title: `${names.teamA} vs ${copy.nextOpponent}`, meta: `${copy.field} 1 / 5:30 PM` },
       { day: "Wed", title: `${names.teamB} practice`, meta: `${copy.field} 2 / 6:45 PM` },
-      { day: "Sat", title: copy.open, meta: `${copy.field} 1 / 10:00 AM` }
+      { day: "Sat", title: copy.open, meta: "Online form / closes 10:00 AM" }
     ]);
 
     const renderDemoSchedule = (copy, names) => {
@@ -3236,7 +3627,7 @@
         demoEls.notifyCheck.classList.toggle("pending", !demoState.generated);
       }
       if (demoEls.notifyCopy) {
-        demoEls.notifyCopy.textContent = demoState.generated ? "Sample parent notifications sent" : "Parent notifications queued";
+        demoEls.notifyCopy.textContent = demoState.generated ? "Parent notifications sent" : "Parent notifications queued";
       }
       if (demoEls.notifyState) {
         demoEls.notifyState.textContent = demoState.generated ? "sent" : "ready";
@@ -3257,9 +3648,9 @@
       });
 
       renderParentRows(demoEls.parentList, [
-        { name: "Maya guardian", message: "Sample schedule sent", state: "sent" },
-        { name: "Leo guardian", message: "Sample schedule sent", state: "sent" },
-        { name: "Ari guardian", message: "Sample schedule sent", state: "sent" }
+        { name: "Maya guardian", message: "Schedule sent", state: "sent" },
+        { name: "Leo guardian", message: "Schedule sent", state: "sent" },
+        { name: "Ari guardian", message: "Schedule sent", state: "sent" }
       ]);
     };
 
@@ -3270,13 +3661,13 @@
       const copy = demoCopy[demoState.sport];
       const names = getDemoNames();
       const games = Math.round((demoState.teams * (demoState.teams - 1)) / 2);
-      const statusPrefix = demoState.generated ? "Sample week published" : copy.title;
+      const statusPrefix = demoState.generated ? "Week published" : copy.title;
       const statusDetail = demoState.generated
-        ? `${demoState.teams} teams, ${games} sample games, signup links, and parent notices are visible in the preview.`
+        ? `${demoState.teams} teams, ${games} games, signup links, and parent notices are visible in the preview.`
         : `${demoState.teams} ${copy.draftCopy}`;
 
       demoEls.org.textContent = names.org;
-      demoEls.url.textContent = `${toSlug(names.org)}.leag.app/sample`;
+      demoEls.url.textContent = `${toSlug(names.org)}.leag.app/preview`;
       demoEls.statusTag.textContent = demoState.generated ? "Schedule published" : "Registration open";
       demoEls.statusTitle.textContent = statusPrefix;
       demoEls.statusCopy.textContent = statusDetail;
@@ -3332,21 +3723,207 @@
       });
     }
 
+    const surfaceEvents = [
+      {
+        day: 3,
+        date: "Jun 3",
+        title: "Firecrackers practice",
+        venue: "Field 2",
+        time: "6:00 PM",
+        status: "Scheduled",
+        note: "Bring helmets and water. Coaches posted the field map for parents.",
+        alerts: ["Practice reminder queued", "Field map visible"],
+        stats: ["6:00", "14", "1"]
+      },
+      {
+        day: 5,
+        date: "Jun 5",
+        title: "Pitch Perfect 4, Firecrackers 2",
+        venue: "Field 1",
+        time: "Final",
+        status: "Final",
+        note: "Final score and recap are visible on the public schedule.",
+        alerts: ["Final score posted", "Standings updated"],
+        stats: ["Final", "2", "0"]
+      },
+      {
+        day: 8,
+        date: "Jun 8",
+        title: "12U skills clinic",
+        venue: "Community Center",
+        time: "10:00 AM",
+        status: "Open",
+        note: "Families see the community center location and registration cutoff.",
+        alerts: ["Registration open", "Waiver required"],
+        stats: ["10:00", "9", "2"]
+      },
+      {
+        day: 10,
+        date: "Jun 10",
+        title: "Panthers 5, Sparks 4",
+        venue: "Field 3",
+        time: "Final",
+        status: "Final",
+        note: "A final score can update the schedule card without a separate text thread.",
+        alerts: ["Final score posted", "Photo gallery added"],
+        stats: ["Final", "18", "1"]
+      },
+      {
+        day: 16,
+        date: "Jun 16",
+        title: "Firecrackers practice",
+        venue: "Field 2",
+        time: "6:45 PM",
+        status: "Scheduled",
+        note: "Parents see arrival time, parking note, and whether this is practice or game day.",
+        alerts: ["Arrive 20 minutes early", "Cage time moved to 6:15"],
+        stats: ["6:45", "16", "2"]
+      },
+      {
+        day: 17,
+        date: "Jun 17",
+        title: "Firecrackers vs Pitch Perfect",
+        venue: "Field 1",
+        time: "5:30 PM",
+        status: "Live",
+        note: "Families see the game status, venue, arrival note, and any change without scrolling through a roster.",
+        alerts: ["Game is live", "Runners on 1st and 3rd"],
+        stats: ["5:30", "18", "2"]
+      },
+      {
+        day: 19,
+        date: "Jun 19",
+        title: "Sparks vs Panthers",
+        venue: "Field 4",
+        time: "6:45 PM",
+        status: "Scheduled",
+        note: "Scheduled games keep the same public card format as live games.",
+        alerts: ["Uniform: red jersey", "Snack duty assigned"],
+        stats: ["6:45", "22", "2"]
+      },
+      {
+        day: 24,
+        date: "Jun 24",
+        title: "Semifinal bracket opens",
+        venue: "Main complex",
+        time: "TBD",
+        status: "Open",
+        note: "Tournament placeholders can show what is known before exact teams are locked.",
+        alerts: ["Bracket pending", "Venue confirmed"],
+        stats: ["TBD", "28", "1"]
+      }
+    ];
+    let selectedSurfaceDay = 17;
+
+    const getSurfaceEvent = (day) => surfaceEvents.find((event) => event.day === Number(day));
+
+    const renderSurfaceSchedule = () => {
+      const selected = getSurfaceEvent(selectedSurfaceDay);
+      const buttons = document.querySelectorAll("[data-surface-day]");
+      const tableBody = document.getElementById("surface-table-body");
+      const title = document.getElementById("surface-detail-title");
+      const status = document.getElementById("surface-detail-status");
+      const matchup = document.getElementById("surface-detail-matchup");
+      const meta = document.getElementById("surface-detail-meta");
+      const note = document.getElementById("surface-detail-note");
+      const alerts = document.getElementById("surface-family-alerts");
+
+      buttons.forEach((button) => {
+        button.classList.toggle("is-selected", Number(button.dataset.surfaceDay) === selectedSurfaceDay);
+      });
+
+      if (tableBody) {
+        tableBody.replaceChildren();
+        surfaceEvents.slice(4).forEach((event) => {
+          const row = document.createElement("tr");
+          row.classList.toggle("is-selected", event.day === selectedSurfaceDay);
+          const date = makeEl("td", "mono", event.date);
+          const eventTitle = makeEl("td", "", event.title);
+          const venue = makeEl("td", "", event.venue);
+          const eventStatus = makeEl("td");
+          const tag = makeEl("span", event.status === "Live" ? "status-tag red" : "status-tag", event.status);
+          eventStatus.append(tag);
+          row.append(date, eventTitle, venue, eventStatus);
+          tableBody.append(row);
+        });
+      }
+
+      if (!selected) {
+        const dateLabel = `Jun ${selectedSurfaceDay}`;
+        title.textContent = `${dateLabel} family view`;
+        status.textContent = "No event";
+        matchup.textContent = "No public schedule item";
+        meta.textContent = "Families would see a quiet day here";
+        note.textContent = "Click a marked day to preview the game, practice, or registration details families would receive.";
+        alerts.replaceChildren(makeEl("div", "", "No alerts scheduled"));
+        return;
+      }
+
+      title.textContent = `${selected.date} family update`;
+      status.textContent = selected.status;
+      matchup.textContent = selected.title;
+      meta.textContent = `${selected.venue} / ${selected.time}`;
+      note.textContent = selected.note;
+      alerts.replaceChildren();
+      selected.alerts.forEach((alertText, index) => {
+        const row = makeEl("div");
+        row.append(makeEl("span", "", alertText), makeEl("b", "mono", index === 0 ? "primary" : "note"));
+        alerts.append(row);
+      });
+      document.getElementById("surface-stat-one").textContent = selected.stats[0];
+      document.getElementById("surface-stat-two").textContent = selected.stats[1];
+      document.getElementById("surface-stat-three").textContent = selected.stats[2];
+    };
+
+    document.querySelectorAll("[data-surface-day]").forEach((button) => {
+      button.addEventListener("click", () => {
+        selectedSurfaceDay = Number(button.dataset.surfaceDay);
+        renderSurfaceSchedule();
+      });
+    });
+
+    document.querySelectorAll(".market-trigger").forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        document.querySelectorAll(".market-card").forEach((card) => {
+          const open = card.contains(trigger);
+          card.classList.toggle("is-open", open);
+          const cardTrigger = card.querySelector(".market-trigger");
+          if (cardTrigger) {
+            cardTrigger.setAttribute("aria-expanded", String(open));
+            const marker = cardTrigger.querySelector("b");
+            if (marker) {
+              marker.textContent = open ? "Showing" : "Open demo";
+            }
+          }
+        });
+      });
+    });
+    document.querySelectorAll(".market-card").forEach((card) => {
+      const trigger = card.querySelector(".market-trigger");
+      const marker = trigger ? trigger.querySelector("b") : null;
+      if (trigger) {
+        trigger.setAttribute("aria-expanded", String(card.classList.contains("is-open")));
+      }
+      if (marker) {
+        marker.textContent = card.classList.contains("is-open") ? "Showing" : "Open demo";
+      }
+    });
+
     const playerResults = {
       Softball: [
-        { title: "12U open tryout", detail: "4 sample spots / South Orange Field", action: "Join sample waitlist", done: "Joined sample waitlist" },
+        { title: "12U open tryout", detail: "4 spots / South Orange Field", action: "Join waitlist", done: "Joined waitlist" },
         { title: "Fastpitch pickup night", detail: "Intermediate / helmets provided", action: "Save", done: "Saved" },
-        { title: "Pitching clinic", detail: "Coach-led / no payment collected", action: "Add to sample checkout", done: "Added to sample checkout" }
+        { title: "Pitching clinic", detail: "Coach-led / no payment collected", action: "Add to checkout", done: "Added to checkout" }
       ],
       Basketball: [
-        { title: "Adult 3v3 run", detail: "Indoor court / 2 sample spots", action: "Save", done: "Saved" },
-        { title: "JV skills session", detail: "Ball-handling and shooting", action: "Join sample waitlist", done: "Joined sample waitlist" },
-        { title: "Saturday pickup", detail: "Balanced teams / no account needed here", action: "Add to sample checkout", done: "Added to sample checkout" }
+        { title: "Adult 3v3 run", detail: "Indoor court / 2 spots", action: "Save", done: "Saved" },
+        { title: "JV skills session", detail: "Ball-handling and shooting", action: "Join waitlist", done: "Joined waitlist" },
+        { title: "Saturday pickup", detail: "Balanced teams / no account needed here", action: "Add to checkout", done: "Added to checkout" }
       ],
       Soccer: [
         { title: "U10 rec match", detail: "Coed / parent coach needed", action: "Save", done: "Saved" },
-        { title: "Adult seven-a-side", detail: "Turf field / 3 sample spots", action: "Join sample waitlist", done: "Joined sample waitlist" },
-        { title: "Goalkeeper clinic", detail: "Small group / no payment collected", action: "Add to sample checkout", done: "Added to sample checkout" }
+        { title: "Adult seven-a-side", detail: "Turf field / 3 spots", action: "Join waitlist", done: "Joined waitlist" },
+        { title: "Goalkeeper clinic", detail: "Small group / no payment collected", action: "Add to checkout", done: "Added to checkout" }
       ]
     };
 
@@ -3490,6 +4067,8 @@
 
       pool.replaceChildren();
       teamBox.replaceChildren();
+      pool.classList.toggle("is-empty", false);
+      teamBox.classList.toggle("is-empty", false);
       if (label) {
         label.textContent = activeTeam;
       }
@@ -3513,10 +4092,12 @@
       });
 
       if (!unassigned.length) {
-        pool.append(makeEl("div", "player-card", "No unassigned sample players"));
+        pool.classList.add("is-empty");
+        pool.append(makeEl("div", "drop-hint", "Every player is assigned. Drag one back here to remove them from a team."));
       }
       if (!selected.length) {
-        teamBox.append(makeEl("div", "player-card", "No players selected yet"));
+        teamBox.classList.add("is-empty");
+        teamBox.append(makeEl("div", "drop-hint", `Drop players here or click a player to add them to ${activeTeam}.`));
       }
 
       wireDropZone(pool, (name) => {
@@ -3616,7 +4197,7 @@
     const venueFields = ["Diamond 1", "Diamond 2", "Bullpen Cage", "Turf Field"];
     const statusCycle = ["booked", "open", "hold", "open"];
     const venueStatusCopy = {
-      booked: "Booked by sample league",
+      booked: "Booked by league",
       open: "Open for request",
       hold: "Held for organizer review"
     };
@@ -3681,13 +4262,30 @@
       const checks = Array.from(document.querySelectorAll("[data-signup-check]"));
       const ready = checks.filter((check) => check.checked).length;
       const status = document.getElementById("signup-status");
-      const card = document.getElementById("signup-player-card");
+      const playerStatus = document.getElementById("signup-player-status");
+      const waiverState = document.getElementById("signup-waiver-state");
+      const dataState = document.getElementById("signup-data-state");
+      const feeState = document.getElementById("signup-fee-state");
+      const note = document.getElementById("signup-player-note");
       if (status) {
         status.textContent = `${ready} of ${checks.length} ready`;
       }
-      if (card) {
-        const feeState = checks[2] && checks[2].checked ? "fee paid" : "fee pending";
-        card.textContent = `Maya Ramos / 12U / guardian confirmed / ${feeState}`;
+      if (playerStatus) {
+        playerStatus.textContent = ready === checks.length ? "ready to approve" : "needs review";
+      }
+      if (waiverState) {
+        waiverState.textContent = checks[0] && checks[0].checked ? "Signed" : "Missing";
+      }
+      if (dataState) {
+        dataState.textContent = checks[1] && checks[1].checked ? "Complete" : "Incomplete";
+      }
+      if (feeState) {
+        feeState.textContent = checks[2] && checks[2].checked ? "Paid $142" : "Pending $142";
+      }
+      if (note) {
+        note.textContent = ready === checks.length
+          ? "All registration requirements are ready for approval."
+          : "Ready to approve after the remaining requirement is complete.";
       }
     };
 
@@ -3702,6 +4300,27 @@
     };
     let publishTimer = null;
 
+    const formatWeekDate = (date) => new Intl.DateTimeFormat(undefined, {
+      month: "short",
+      day: "numeric"
+    }).format(date);
+
+    const renderCurrentWeekLabel = () => {
+      const label = document.getElementById("publish-week-label");
+      const range = document.getElementById("publish-week-range");
+      if (!label || !range) {
+        return;
+      }
+      const today = new Date();
+      const start = new Date(today);
+      const offsetFromMonday = (today.getDay() + 6) % 7;
+      start.setDate(today.getDate() - offsetFromMonday);
+      const end = new Date(start);
+      end.setDate(start.getDate() + 6);
+      label.textContent = `Week of ${formatWeekDate(start)}`;
+      range.textContent = `Mon ${formatWeekDate(start)} - Sun ${formatWeekDate(end)} / demo schedule only`;
+    };
+
     const renderWeeklySchedule = () => {
       const container = document.getElementById("weekly-schedule");
       if (!container) {
@@ -3709,7 +4328,7 @@
       }
       container.replaceChildren();
       if (!weeklyScheduleState.visible) {
-        container.append(makeEl("div", "week-card", "Publish the sample week to reveal schedule cards."));
+        container.append(makeEl("div", "week-card", "Publish the week to reveal schedule cards."));
         return;
       }
 
@@ -3784,7 +4403,7 @@
         weeklyScheduleState.cancelledPractice = false;
         setOpenAccordion(document.querySelector('[data-panel="publish"]'));
         renderWeeklySchedule();
-        runParentNotificationSequence("Sample week schedule", "sent");
+        runParentNotificationSequence("Week schedule", "sent");
       });
     }
 
@@ -3808,27 +4427,90 @@
     const scoreState = {
       fire: 5,
       panthers: 3,
+      balls: 0,
+      strikes: 0,
+      outs: 0,
+      inning: 5,
+      half: "top",
       final: false
     };
 
+    const resetCount = () => {
+      scoreState.balls = 0;
+      scoreState.strikes = 0;
+    };
+
+    const advanceHalfInning = () => {
+      resetCount();
+      scoreState.outs = 0;
+      if (scoreState.half === "top") {
+        scoreState.half = "bottom";
+      } else {
+        scoreState.half = "top";
+        scoreState.inning += 1;
+      }
+    };
+
     const renderScoreDemo = () => {
-      const scoreline = document.getElementById("live-scoreline");
+      const fireScore = document.getElementById("score-fire");
+      const panthersScore = document.getElementById("score-panthers");
+      const fireTeam = document.getElementById("score-team-fire");
+      const panthersTeam = document.getElementById("score-team-panthers");
+      const meta = document.getElementById("score-meta-line");
+      const balls = document.getElementById("score-balls");
+      const strikes = document.getElementById("score-strikes");
+      const outs = document.getElementById("score-outs");
       const status = document.getElementById("score-status");
       const standings = document.getElementById("standings-demo");
-      if (scoreline) {
-        scoreline.textContent = `Firecrackers ${scoreState.fire}, Panthers ${scoreState.panthers}`;
+      const halfLabel = scoreState.half === "top" ? "Top" : "Bottom";
+      const battingTeam = scoreState.half === "top" ? "Firecrackers" : "Panthers";
+      const panthersWon = scoreState.final && scoreState.panthers > scoreState.fire;
+
+      if (fireScore) {
+        fireScore.textContent = scoreState.fire;
+      }
+      if (panthersScore) {
+        panthersScore.textContent = scoreState.panthers;
+      }
+      if (fireTeam) {
+        fireTeam.classList.toggle("is-batting", scoreState.half === "top" && !scoreState.final);
+      }
+      if (panthersTeam) {
+        panthersTeam.classList.toggle("is-batting", scoreState.half === "bottom" && !scoreState.final);
+      }
+      if (meta) {
+        meta.textContent = scoreState.final
+          ? `Final / ${scoreState.fire > scoreState.panthers ? "Firecrackers" : "Panthers"} win`
+          : `${halfLabel} ${scoreState.inning} / Field 1 / ${battingTeam} batting`;
+      }
+      if (balls) {
+        balls.textContent = scoreState.balls;
+      }
+      if (strikes) {
+        strikes.textContent = scoreState.strikes;
+      }
+      if (outs) {
+        outs.textContent = scoreState.outs;
       }
       if (status) {
         status.textContent = scoreState.final ? "final" : "live";
       }
       if (standings) {
         standings.replaceChildren();
-        [
-          { team: "Firecrackers", record: scoreState.final ? "13-3 / .813" : "12-3 / .800" },
-          { team: "Sparks", record: "10-5 / .667" },
-          { team: "Panthers", record: scoreState.final ? "10-6 / .625" : "10-5 / .667" }
-        ].forEach((rowData, index) => {
-          const row = makeEl("div", "week-card");
+        const rows = panthersWon
+          ? [
+            { team: "Firecrackers", record: "12-4 / .750" },
+            { team: "Panthers", record: "11-5 / .688", moveUp: true },
+            { team: "Sparks", record: "10-5 / .667" }
+          ]
+          : [
+            { team: "Firecrackers", record: scoreState.final ? "13-3 / .813" : "12-3 / .800" },
+            { team: "Sparks", record: "10-5 / .667" },
+            { team: "Panthers", record: scoreState.final ? "10-6 / .625" : "10-5 / .667" }
+          ];
+
+        rows.forEach((rowData, index) => {
+          const row = makeEl("div", rowData.moveUp ? "week-card standings-row move-up" : "week-card standings-row");
           row.append(
             makeEl("strong", "", `${index + 1}. ${rowData.team}`),
             makeEl("b", "mono", rowData.record)
@@ -3838,30 +4520,57 @@
       }
     };
 
-    const addRun = document.getElementById("add-run");
-    if (addRun) {
-      addRun.addEventListener("click", () => {
+    const applyScoreAction = (action) => {
+      scoreState.final = false;
+      if (action === "fire-up") {
         scoreState.fire += 1;
-        scoreState.final = false;
-        renderScoreDemo();
-      });
-    }
-
-    const finalizeGame = document.getElementById("finalize-game");
-    if (finalizeGame) {
-      finalizeGame.addEventListener("click", () => {
+      } else if (action === "fire-down") {
+        scoreState.fire = Math.max(0, scoreState.fire - 1);
+      } else if (action === "panthers-up") {
+        scoreState.panthers += 1;
+      } else if (action === "panthers-down") {
+        scoreState.panthers = Math.max(0, scoreState.panthers - 1);
+      } else if (action === "ball") {
+        scoreState.balls = scoreState.balls >= 3 ? 0 : scoreState.balls + 1;
+      } else if (action === "strike") {
+        if (scoreState.strikes >= 2) {
+          scoreState.outs += 1;
+          resetCount();
+        } else {
+          scoreState.strikes += 1;
+        }
+      } else if (action === "out") {
+        scoreState.outs += 1;
+        resetCount();
+      } else if (action === "reset-count") {
+        resetCount();
+      } else if (action === "next-half") {
+        advanceHalfInning();
+      } else if (action === "final") {
         scoreState.final = true;
-        renderScoreDemo();
+      }
+
+      if (scoreState.outs >= 3 && !scoreState.final) {
+        advanceHalfInning();
+      }
+      renderScoreDemo();
+    };
+
+    document.querySelectorAll("[data-score-action]").forEach((button) => {
+      button.addEventListener("click", () => {
+        applyScoreAction(button.dataset.scoreAction);
       });
-    }
+    });
 
     updateDemo();
+    renderSurfaceSchedule();
     renderPlayerResults();
     renderRegistrations();
     renderAllTeamBuilders();
     renderConflicts();
     renderVenueFields();
     updateSignupDemo();
+    renderCurrentWeekLabel();
     renderWeeklySchedule();
     renderScoreDemo();
 
