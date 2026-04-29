@@ -5,8 +5,15 @@
 #       Source code protection relies on private repositories, proprietary license,
 #       and deployed-app authentication — NOT this file.
 
+# --- Hidden preview routes (disallow for ALL crawlers) ---
+# Internal demo surfaces, not for indexing. robots.txt is voluntary;
+# pages also carry <meta name="robots" content="noindex,nofollow">.
+User-agent: *
+Disallow: /_preview/
+
 # --- Traditional search engines (explicitly allowed) ---
 User-agent: Googlebot
+Disallow: /_preview/
 Allow: /
 
 User-agent: Googlebot-Image
