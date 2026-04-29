@@ -9,13 +9,13 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://leag.app/">
   <meta property="og:title" content="LEAG | Run the Season From One Place">
-  <meta property="og:description" content="Registration, teams, schedules, scores, standings, and parent updates — one place.">
+  <meta property="og:description" content="Registration, teams, schedules, scores, standings, and parent updates. One place.">
   <meta property="og:image" content="https://leag.app/brand/leag-wordmark-text-green.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="LEAG | Run the Season From One Place">
-  <meta name="twitter:description" content="Registration, teams, schedules, scores, standings, and parent updates — one place.">
+  <meta name="twitter:description" content="Registration, teams, schedules, scores, standings, and parent updates. One place.">
   <meta name="twitter:image" content="https://leag.app/brand/leag-wordmark-text-green.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,6 +42,8 @@
       --paper-ink: #161311;
       --red: #d83a48;
       --blue: #5b8fb7;
+      --demo-primary: #3667B5;
+      --demo-accent: #70ECF0;
       --container: 1180px;
       --radius: 8px;
       --font-sans: "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -591,7 +593,7 @@
       padding: 30px 24px 24px;
       border-bottom: 1px solid var(--line);
       background:
-        linear-gradient(180deg, rgba(216, 58, 72, 0.12), transparent 66%),
+        linear-gradient(180deg, color-mix(in srgb, var(--demo-primary) 18%, transparent), transparent 66%),
         var(--surface);
     }
 
@@ -612,7 +614,7 @@
       gap: 7px;
       padding: 6px 9px;
       border-radius: 4px;
-      background: var(--red);
+      background: var(--demo-primary);
       color: #fff;
       font-weight: 700;
     }
@@ -660,7 +662,7 @@
       object-fit: contain;
       flex: 0 0 auto;
       border-radius: 10px;
-      filter: drop-shadow(0 0 18px rgba(216, 58, 72, 0.28));
+      filter: drop-shadow(0 0 18px color-mix(in srgb, var(--demo-primary) 36%, transparent));
     }
 
     .team-name {
@@ -670,7 +672,7 @@
       line-height: 0.95;
       letter-spacing: 0;
       text-transform: uppercase;
-      text-shadow: 0 0 34px rgba(216, 58, 72, 0.22);
+      text-shadow: 0 0 34px rgba(244, 245, 244, 0.18);
       max-width: 100%;
       white-space: nowrap;
       overflow: hidden;
@@ -683,8 +685,8 @@
     }
 
     .team-name.batting {
-      color: var(--red);
-      text-shadow: 0 0 42px rgba(216, 58, 72, 0.34);
+      color: var(--demo-primary);
+      text-shadow: 0 0 42px color-mix(in srgb, var(--demo-primary) 38%, transparent);
     }
 
     .team-caption {
@@ -766,8 +768,8 @@
       text-overflow: ellipsis;
     }
 
-    .linescore-team.home {
-      color: var(--red);
+    .linescore-team.away {
+      color: var(--demo-primary);
     }
 
     .linescore .inning-num {
@@ -781,7 +783,7 @@
     }
 
     .linescore .inning-num.inning-active {
-      background: var(--red);
+      background: var(--demo-primary);
       color: #fff;
       border-radius: 4px;
       font-weight: 700;
@@ -801,9 +803,9 @@
     }
 
     .linescore .inning-run.active {
-      background: var(--red);
-      color: #fff;
-      border-color: var(--red);
+      background: var(--demo-accent);
+      color: #0c1616;
+      border-color: var(--demo-accent);
       font-weight: 700;
     }
 
@@ -890,6 +892,11 @@
       background: var(--green);
       flex: 0 0 auto;
       transform: skewX(-10deg);
+    }
+
+    .team-swatch.demo-tinted {
+      background: var(--demo-primary);
+      box-shadow: 0 0 12px color-mix(in srgb, var(--demo-primary) 50%, transparent);
     }
 
     .team-chip span:last-child {
@@ -1009,11 +1016,6 @@
       border-radius: var(--radius);
       background: rgba(16, 25, 24, 0.78);
       overflow: hidden;
-    }
-
-    .demo-stage {
-      --demo-primary: #3667B5;
-      --demo-accent: #70ECF0;
     }
 
     .demo-controls {
@@ -4130,7 +4132,7 @@
         <a href="pricing.html">Pricing</a>
       </nav>
       <div class="nav-actions">
-        <button class="btn btn-primary" type="button" aria-disabled="true" tabindex="-1">Join waitlist</button>
+        <a class="btn btn-primary copy-email" href="#" data-email="contact@leag.app" data-copy-label="Email copied">Join waitlist</a>
         <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav" id="menu-button" aria-label="Open navigation">
           <span></span>
           <span></span>
@@ -4149,7 +4151,7 @@
             The whole season, <span class="green-underline">one place.</span>
           </p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="https://mail.google.com/mail/?view=cm&amp;to=contact@leag.app&amp;su=LEAG%20demo%20request" target="_blank" rel="noopener">Book a demo</a>
+            <a class="btn btn-primary copy-email" href="#" data-email="contact@leag.app" data-copy-label="Email copied">Book a demo</a>
             <a class="btn btn-secondary" href="#playground">Try a sample season</a>
           </div>
           <p class="hero-note">Or click through a sample season below first. No signup, no signin.</p>
@@ -4172,12 +4174,12 @@
               <div class="ticker-label">LIVE</div>
               <div class="ticker-viewport">
                 <div class="ticker-track">
-                  <span><strong>Stingrays</strong> 5 - 3 Hammerheads T5</span>
-                  <span>FINAL GULLS 8 - 6 MARLINS</span>
+                  <span><strong>Diamonds</strong> 5 - 3 Hammerheads T5</span>
+                  <span>FINAL COMETS 8 - 6 MARLINS</span>
                   <span>NEXT MON 5:30 FIELD 1</span>
                   <span>TRYOUTS 12U OPEN</span>
-                  <span><strong>Stingrays</strong> 5 - 3 Hammerheads T5</span>
-                  <span>FINAL GULLS 8 - 6 MARLINS</span>
+                  <span><strong>Diamonds</strong> 5 - 3 Hammerheads T5</span>
+                  <span>FINAL COMETS 8 - 6 MARLINS</span>
                 </div>
               </div>
             </div>
@@ -4189,28 +4191,28 @@
                   <svg class="diamond" viewBox="0 0 44 44" aria-label="Runners on 1st and 3rd, no outs in 2nd" role="img">
                     <polygon points="22,5 39,22 22,39 5,22" fill="none" stroke="rgba(244,245,244,0.32)" stroke-width="1.2"/>
                     <rect x="18" y="1" width="8" height="8" rx="1.4" fill="none" stroke="rgba(244,245,244,0.55)" stroke-width="1.2"/>
-                    <rect x="35" y="18" width="8" height="8" rx="1.4" fill="var(--red)"/>
+                    <rect x="35" y="18" width="8" height="8" rx="1.4" fill="var(--demo-accent)"/>
                     <rect x="18" y="35" width="8" height="8" rx="1.4" fill="rgba(244,245,244,0.18)" stroke="rgba(244,245,244,0.55)" stroke-width="1"/>
-                    <rect x="1" y="18" width="8" height="8" rx="1.4" fill="var(--red)"/>
+                    <rect x="1" y="18" width="8" height="8" rx="1.4" fill="var(--demo-accent)"/>
                   </svg>
                 </div>
               </div>
               <div class="score-row">
                 <div class="score-side">
-                  <img class="team-icon" src="brand/hammerheads-icon.png" alt="" aria-hidden="true">
+                  <img class="team-icon" src="brand/bayside-diamonds-icon.png" alt="" aria-hidden="true">
                   <div>
-                    <div class="team-name batting">Hammerheads</div>
-                    <div class="team-caption">10-5 / away / batting</div>
+                    <div class="team-name batting">Diamonds</div>
+                    <div class="team-caption">12-3 / away / batting</div>
                   </div>
                 </div>
-                <div class="score-number" aria-label="Hammerheads 3, Stingrays 5">
-                  <span>3</span><em>-</em><span>5</span>
+                <div class="score-number" aria-label="Diamonds 5, Hammerheads 3">
+                  <span>5</span><em>-</em><span>3</span>
                 </div>
                 <div class="score-side score-side-right">
-                  <img class="team-icon" src="brand/stingrays-icon.png" alt="" aria-hidden="true">
+                  <img class="team-icon" src="brand/hammerheads-icon.png" alt="" aria-hidden="true">
                   <div>
-                    <div class="team-name right">Stingrays</div>
-                    <div class="team-caption">12-3 / home</div>
+                    <div class="team-name right">Hammerheads</div>
+                    <div class="team-caption">10-5 / home</div>
                   </div>
                 </div>
               </div>
@@ -4224,14 +4226,14 @@
                   <span class="inning-num total">R</span>
                 </div>
                 <div class="linescore-row" role="row">
-                  <span class="linescore-team" role="rowheader">Hammerheads</span>
-                  <span class="inning-run">1</span><span class="inning-run">0</span><span class="inning-run">1</span><span class="inning-run">1</span><span class="inning-run">0</span><span class="inning-run"></span><span class="inning-run"></span>
-                  <span class="inning-run total">3</span>
+                  <span class="linescore-team away" role="rowheader">Diamonds</span>
+                  <span class="inning-run">0</span><span class="inning-run">2</span><span class="inning-run">0</span><span class="inning-run">3</span><span class="inning-run">0</span><span class="inning-run"></span><span class="inning-run"></span>
+                  <span class="inning-run total">5</span>
                 </div>
                 <div class="linescore-row" role="row">
-                  <span class="linescore-team home" role="rowheader">Stingrays</span>
-                  <span class="inning-run">0</span><span class="inning-run">2</span><span class="inning-run">0</span><span class="inning-run">3</span><span class="inning-run"></span><span class="inning-run"></span><span class="inning-run"></span>
-                  <span class="inning-run total">5</span>
+                  <span class="linescore-team" role="rowheader">Hammerheads</span>
+                  <span class="inning-run">1</span><span class="inning-run">0</span><span class="inning-run">1</span><span class="inning-run">1</span><span class="inning-run"></span><span class="inning-run"></span><span class="inning-run"></span>
+                  <span class="inning-run total">3</span>
                 </div>
               </div>
             </div>
@@ -4240,13 +4242,13 @@
                 <div class="panel-title">Standings <span>Updated live</span></div>
                 <div class="standings-row">
                   <span class="mono">1</span>
-                  <span class="team-chip"><span class="team-swatch"></span><span>Stingrays</span></span>
+                  <span class="team-chip"><span class="team-swatch demo-tinted"></span><span>Diamonds</span></span>
                   <span class="mono">12-3</span>
                   <span class="mono">.800</span>
                 </div>
                 <div class="standings-row">
                   <span class="mono">2</span>
-                  <span class="team-chip"><span class="team-swatch" style="background:#c9a24b"></span><span>Gulls</span></span>
+                  <span class="team-chip"><span class="team-swatch" style="background:#c9a24b"></span><span>Comets</span></span>
                   <span class="mono">10-5</span>
                   <span class="mono">.667</span>
                 </div>
@@ -4261,12 +4263,12 @@
                 <div class="panel-title">Up next <span>Calendar sync</span></div>
                 <div class="schedule-row">
                   <span class="mono">Jun 17</span>
-                  <span>Stingrays vs Marlins</span>
+                  <span>Diamonds vs Marlins</span>
                   <span class="mono">5:30</span>
                 </div>
                 <div class="schedule-row">
                   <span class="mono">Jun 19</span>
-                  <span>Gulls vs Hammerheads</span>
+                  <span>Comets vs Hammerheads</span>
                   <span class="mono">6:45</span>
                 </div>
                 <div class="schedule-row">
@@ -4408,7 +4410,7 @@
             <div class="section-kicker">Calendar</div>
             <h2 id="surfaces-title">What families see all season.</h2>
           </div>
-          <p>Schedule, scores, venues, and last-minute changes — in one place, on every device.</p>
+          <p>Schedule, scores, venues, and last-minute changes. One place, every device.</p>
         </div>
 
         <div class="surface-board">
@@ -4443,7 +4445,7 @@
             </div>
             <div class="family-detail">
               <div class="family-detail-card">
-                <strong id="surface-detail-matchup">Riptide vs Marlins</strong>
+                <strong id="surface-detail-matchup">Diamonds vs Marlins</strong>
                 <span id="surface-detail-meta">Field 1 / 5:30 PM / live now</span>
                 <p id="surface-detail-note">Families see the game status, venue, arrival note, and any change without scrolling through a roster.</p>
               </div>
@@ -4466,7 +4468,7 @@
             <div class="section-kicker">Site</div>
             <h2 id="platform-title">Your league's home on the web.</h2>
           </div>
-          <p>Schedule, teams, standings, tryouts, news, and registration — wired to live league data.</p>
+          <p>Schedule, teams, standings, tryouts, news, and registration. Wired to live league data.</p>
         </div>
 
         <div class="platform-layout">
@@ -4495,7 +4497,7 @@
               <div class="workflow-index">01</div>
               <div>
                 <h3>Publish the season</h3>
-                <p>Branded home with games, tryouts, standings, news, and team cards — pulled from live league data.</p>
+                <p>Branded home with games, tryouts, standings, news, and team cards, pulled from live league data.</p>
               </div>
             </article>
             <article class="workflow-item reveal">
@@ -4524,7 +4526,7 @@
             <div class="section-kicker">Operations</div>
             <h2 id="operations-title">Run the season from one place.</h2>
           </div>
-          <p>Click each step. Demo data only — nothing saves, sends, or charges.</p>
+          <p>Click each step. Demo data only. Nothing saves, sends, or charges.</p>
         </div>
 
         <div class="ops-layout">
@@ -4580,7 +4582,7 @@
                 </button>
                 <div class="accordion-panel">
                   <div class="team-switcher">
-                    <button class="tiny-btn is-active" type="button" data-ops-team="Riptide">Riptide</button>
+                    <button class="tiny-btn is-active" type="button" data-ops-team="Diamonds">Diamonds</button>
                     <button class="tiny-btn" type="button" data-ops-team="Hammerheads">Hammerheads</button>
                     <button class="tiny-btn" type="button" id="ops-random-draft">Random draft</button>
                   </div>
@@ -4590,7 +4592,7 @@
                       <div class="player-pool" id="ops-player-pool"></div>
                     </div>
                     <div>
-                      <div class="demo-label" id="ops-active-team-label">Riptide</div>
+                      <div class="demo-label" id="ops-active-team-label">Diamonds</div>
                       <div class="team-box" id="ops-team-box"></div>
                     </div>
                   </div>
@@ -4637,7 +4639,7 @@
                     <div class="scoreboard-demo">
                       <div class="scoreline-grid">
                         <div class="score-team" id="score-team-fire">
-                          <b>Riptide</b>
+                          <b>Diamonds</b>
                           <strong id="score-fire">5</strong>
                         </div>
                         <div class="score-divider">-</div>
@@ -4646,7 +4648,7 @@
                           <strong id="score-panthers">3</strong>
                         </div>
                       </div>
-                      <div class="score-meta-line" id="score-meta-line">Top 5 / Field 1 / Riptide batting</div>
+                      <div class="score-meta-line" id="score-meta-line">Top 5 / Field 1 / Diamonds batting</div>
                       <div class="score-count-grid">
                         <div><span>Balls</span><strong id="score-balls">0</strong></div>
                         <div><span>Strikes</span><strong id="score-strikes">0</strong></div>
@@ -4656,8 +4658,8 @@
                         <div class="score-control-group">
                           <b>Score</b>
                           <div class="score-button-row">
-                            <button class="tiny-btn" type="button" data-score-action="fire-up">+ Riptide</button>
-                            <button class="tiny-btn" type="button" data-score-action="fire-down">- Riptide</button>
+                            <button class="tiny-btn" type="button" data-score-action="fire-up">+ Diamonds</button>
+                            <button class="tiny-btn" type="button" data-score-action="fire-down">- Diamonds</button>
                             <button class="tiny-btn" type="button" data-score-action="panthers-up">+ Hammerheads</button>
                             <button class="tiny-btn" type="button" data-score-action="panthers-down">- Hammerheads</button>
                           </div>
@@ -4760,7 +4762,7 @@
                   <header><span>Lane 02 · Tryout draft board</span><b id="team-builder-count">0 picked</b></header>
                   <div class="market-hud-lane-body">
                     <div class="team-switcher">
-                      <button class="hud-chip is-active" type="button" data-team-switch="Riptide">Riptide</button>
+                      <button class="hud-chip is-active" type="button" data-team-switch="Diamonds">Diamonds</button>
                       <button class="hud-chip" type="button" data-team-switch="Hammerheads">Hammerheads</button>
                       <button class="hud-chip is-primary" type="button" id="random-draft">Random draft</button>
                     </div>
@@ -4770,7 +4772,7 @@
                         <div class="player-pool" id="player-pool"></div>
                       </div>
                       <div>
-                        <div class="hud-lane-cap" id="active-team-label">Riptide</div>
+                        <div class="hud-lane-cap" id="active-team-label">Diamonds</div>
                         <div class="team-box" id="team-box"></div>
                       </div>
                     </div>
@@ -4809,7 +4811,7 @@
                 </label>
               </div>
               <div class="market-hud-fields" id="venue-field-grid"></div>
-              <p class="market-hud-note">Deterministic fake availability — feels responsive without listing real inventory.</p>
+              <p class="market-hud-note">Deterministic fake availability. Feels responsive without listing real inventory.</p>
             </div>
           </div>
         </div>
@@ -4827,9 +4829,9 @@
       </a>
       <div>Copyright <span id="current-year"></span> Stryder Labs LLC. All rights reserved.</div>
       <div class="footer-links">
-        <a href="mailto:contact@leag.app?subject=LEAG%20privacy">Privacy</a>
-        <a href="mailto:contact@leag.app?subject=LEAG%20terms">Terms</a>
-        <a href="mailto:contact@leag.app">contact@leag.app</a>
+        <a class="copy-email" href="#" data-email="contact@leag.app" data-copy-label="Email copied">Privacy</a>
+        <a class="copy-email" href="#" data-email="contact@leag.app" data-copy-label="Email copied">Terms</a>
+        <a class="copy-email" href="#" data-email="contact@leag.app" data-copy-label="Copied">contact@leag.app</a>
         <a href="tel:4077774283">407-777-4283</a>
       </div>
     </div>
@@ -4990,17 +4992,17 @@
         cols: ["AVG", "HR", "RBI", "ERA"],
         rows: [
           { num: "1",  name: "Hadley Cross",  pos: "P",    captain: true, avg: ".451", a: "7", b: "31", c: "1.62" },
-          { num: "3",  name: "Bree Walden",   pos: "C",                    avg: ".402", a: "5", b: "28", c: "—" },
-          { num: "7",  name: "Sage Foster",   pos: "SS",   captain: true, avg: ".388", a: "4", b: "22", c: "—" },
-          { num: "9",  name: "Kinley Brooks", pos: "1B",                   avg: ".351", a: "6", b: "24", c: "—" },
-          { num: "11", name: "Marlee Quinn",  pos: "2B",                   avg: ".342", a: "1", b: "15", c: "—" },
-          { num: "14", name: "Reese Tatum",   pos: "3B",                   avg: ".376", a: "3", b: "19", c: "—" },
-          { num: "17", name: "Wren Halliday", pos: "OF",                   avg: ".412", a: "2", b: "17", c: "—" },
-          { num: "21", name: "Avery Pike",    pos: "OF",                   avg: ".298", a: "0", b: "11", c: "—" },
-          { num: "24", name: "Harlow Vance",  pos: "OF",                   avg: ".331", a: "2", b: "14", c: "—" },
+          { num: "3",  name: "Bree Walden",   pos: "C",                    avg: ".402", a: "5", b: "28", c: "-" },
+          { num: "7",  name: "Sage Foster",   pos: "SS",   captain: true, avg: ".388", a: "4", b: "22", c: "-" },
+          { num: "9",  name: "Kinley Brooks", pos: "1B",                   avg: ".351", a: "6", b: "24", c: "-" },
+          { num: "11", name: "Marlee Quinn",  pos: "2B",                   avg: ".342", a: "1", b: "15", c: "-" },
+          { num: "14", name: "Reese Tatum",   pos: "3B",                   avg: ".376", a: "3", b: "19", c: "-" },
+          { num: "17", name: "Wren Halliday", pos: "OF",                   avg: ".412", a: "2", b: "17", c: "-" },
+          { num: "21", name: "Avery Pike",    pos: "OF",                   avg: ".298", a: "0", b: "11", c: "-" },
+          { num: "24", name: "Harlow Vance",  pos: "OF",                   avg: ".331", a: "2", b: "14", c: "-" },
           { num: "27", name: "Ember Knox",    pos: "P",                    avg: ".276", a: "1", b: "8",  c: "2.18" },
-          { num: "32", name: "Juno Reid",     pos: "UTIL",                 avg: ".301", a: "1", b: "10", c: "—" },
-          { num: "44", name: "Sloane Beck",   pos: "DP",                   avg: ".367", a: "4", b: "21", c: "—" }
+          { num: "32", name: "Juno Reid",     pos: "UTIL",                 avg: ".301", a: "1", b: "10", c: "-" },
+          { num: "44", name: "Sloane Beck",   pos: "DP",                   avg: ".367", a: "4", b: "21", c: "-" }
         ]
       },
       basketball: {
@@ -5010,7 +5012,7 @@
         kpi: [
           { cap: "Record",  val: "0-0",    muted: true },
           { cap: "Roster",  val: "12" },
-          { cap: "PPG",     val: "—",      muted: true },
+          { cap: "PPG",     val: "-",      muted: true },
           { cap: "Tipoff",  val: "Nov 14", muted: true }
         ],
         cols: ["PPG", "RPG", "APG", "FG%"],
@@ -5024,7 +5026,7 @@
         kpi: [
           { cap: "Record",  val: "0-0",    muted: true },
           { cap: "Roster",  val: "12" },
-          { cap: "GPG",     val: "—",      muted: true },
+          { cap: "GPG",     val: "-",      muted: true },
           { cap: "Kickoff", val: "Aug 22", muted: true }
         ],
         cols: ["G", "A", "SH", "%"],
@@ -5110,11 +5112,11 @@
       if (!copy.started) {
         return [
           { date: { day: "MON", num: "04" }, opp: opp1, meta: `${copy.field} 1 / 5:30 PM`, state: "scheduled", result: { label: "OPENER" } },
-          { date: { day: "WED", num: "06" }, opp: opp2, meta: `${copy.field} 2 / 6:45 PM`, state: "scheduled", result: { label: "—" } },
-          { date: { day: "MON", num: "11" }, opp: opp3, meta: `${copy.field} 1 / 5:30 PM`, state: "scheduled", result: { label: "—" } },
-          { date: { day: "WED", num: "13" }, opp: opp2, meta: `${copy.field} 4 / 5:30 PM`, state: "scheduled", result: { label: "—" } },
-          { date: { day: "THU", num: "14" }, opp: opp1, meta: `${copy.field} 1 / 5:30 PM`, state: "scheduled", result: { label: "—" } },
-          { date: { day: "MON", num: "18" }, opp: opp2, meta: `${copy.field} 4 / 5:30 PM`, state: "scheduled", result: { label: "—" } }
+          { date: { day: "WED", num: "06" }, opp: opp2, meta: `${copy.field} 2 / 6:45 PM`, state: "scheduled", result: { label: "-" } },
+          { date: { day: "MON", num: "11" }, opp: opp3, meta: `${copy.field} 1 / 5:30 PM`, state: "scheduled", result: { label: "-" } },
+          { date: { day: "WED", num: "13" }, opp: opp2, meta: `${copy.field} 4 / 5:30 PM`, state: "scheduled", result: { label: "-" } },
+          { date: { day: "THU", num: "14" }, opp: opp1, meta: `${copy.field} 1 / 5:30 PM`, state: "scheduled", result: { label: "-" } },
+          { date: { day: "MON", num: "18" }, opp: opp2, meta: `${copy.field} 4 / 5:30 PM`, state: "scheduled", result: { label: "-" } }
         ].map((g) => Object.assign(g, { mark: getTeamMark(g.opp) }));
       }
       return [
@@ -5123,7 +5125,7 @@
         { date: { day: "MON", num: "11" }, opp: opp3, mark: getTeamMark(opp3), meta: `${copy.field} 1 / 5:30 PM`, state: "final", result: { score: "5-7", flag: "L" } },
         { date: { day: "WED", num: "13" }, opp: opp2, mark: getTeamMark(opp2), meta: `${copy.field} 4 / 5:30 PM`, state: "final", result: { score: "14-2", flag: "W" } },
         { date: { day: "THU", num: "14" }, opp: opp1, mark: getTeamMark(opp1), meta: `${copy.field} 1 / 5:30 PM`, state: "upnext", result: { label: "UP NEXT" } },
-        { date: { day: "MON", num: "18" }, opp: opp2, mark: getTeamMark(opp2), meta: `${copy.field} 4 / 5:30 PM`, state: "scheduled", result: { label: "—" } }
+        { date: { day: "MON", num: "18" }, opp: opp2, mark: getTeamMark(opp2), meta: `${copy.field} 4 / 5:30 PM`, state: "scheduled", result: { label: "-" } }
       ];
     };
 
@@ -5202,7 +5204,7 @@
           makeEl("span", "roster-card-meta", `${p.pos} · ${p.cls}`)
         );
         const avgClass = p.avg ? "roster-card-avg" : "roster-card-avg muted";
-        const avg = makeEl("span", avgClass, p.avg || "—");
+        const avg = makeEl("span", avgClass, p.avg || "-");
         foot.append(left, avg);
         card.append(foot);
         grid.append(card);
@@ -5230,7 +5232,7 @@
       demoEls.schedule.append(strip);
 
       if (!data.rows.length) {
-        demoEls.schedule.append(makeEl("div", "stats-empty", data.empty || "—"));
+        demoEls.schedule.append(makeEl("div", "stats-empty", data.empty || "-"));
         return;
       }
 
@@ -5254,7 +5256,7 @@
         if (r.captain) {
           name.append(makeEl("span", "star", " ★"));
         }
-        const eraMuted = r.c === "—";
+        const eraMuted = r.c === "-";
         row.append(
           makeEl("span", "stats-table-num", r.num),
           name,
@@ -5366,7 +5368,7 @@
           });
         } else {
           for (let i = 0; i < 5; i += 1) {
-            demoEls.last5.append(makeEl("span", "last5-box loss", "—"));
+            demoEls.last5.append(makeEl("span", "last5-box loss", "-"));
           }
         }
       }
@@ -5376,10 +5378,8 @@
           ? `Mon 5:30 PM / ${copy.field} 1`
           : `Opener ${copy.opener} / ${copy.field} 1`;
       }
-      document.querySelectorAll(".demo-stage").forEach((stage) => {
-        stage.style.setProperty("--demo-primary", demoState.primary);
-        stage.style.setProperty("--demo-accent", demoState.accent);
-      });
+      document.documentElement.style.setProperty("--demo-primary", demoState.primary);
+      document.documentElement.style.setProperty("--demo-accent", demoState.accent);
 
       renderDemoSchedule(copy);
 
@@ -5408,9 +5408,7 @@
       const normalized = normalizeHex(hex);
       if (!isValidHex(normalized)) return;
       demoState[key] = normalized;
-      document.querySelectorAll(".demo-stage").forEach((stage) => {
-        stage.style.setProperty(`--demo-${key}`, normalized);
-      });
+      document.documentElement.style.setProperty(`--demo-${key}`, normalized);
       const swatch = key === "primary" ? demoInputs.primary : demoInputs.accent;
       const text = key === "primary" ? demoInputs.primaryHex : demoInputs.accentHex;
       if (swatch && swatch.value.toLowerCase() !== normalized.toLowerCase()) swatch.value = normalized;
@@ -5475,7 +5473,7 @@
       {
         day: 3,
         date: "Jun 3",
-        title: "Riptide practice",
+        title: "Diamonds practice",
         venue: "Field 2",
         time: "6:00 PM",
         status: "Scheduled",
@@ -5486,7 +5484,7 @@
       {
         day: 5,
         date: "Jun 5",
-        title: "Marlins 4, Riptide 2",
+        title: "Marlins 4, Diamonds 2",
         venue: "Field 1",
         time: "Final",
         status: "Final",
@@ -5508,7 +5506,7 @@
       {
         day: 10,
         date: "Jun 10",
-        title: "Hammerheads 5, Gulls 4",
+        title: "Hammerheads 5, Comets 4",
         venue: "Field 3",
         time: "Final",
         status: "Final",
@@ -5519,7 +5517,7 @@
       {
         day: 16,
         date: "Jun 16",
-        title: "Riptide practice",
+        title: "Diamonds practice",
         venue: "Field 2",
         time: "6:45 PM",
         status: "Scheduled",
@@ -5530,7 +5528,7 @@
       {
         day: 17,
         date: "Jun 17",
-        title: "Riptide vs Marlins",
+        title: "Diamonds vs Marlins",
         venue: "Field 1",
         time: "5:30 PM",
         status: "Live",
@@ -5541,7 +5539,7 @@
       {
         day: 19,
         date: "Jun 19",
-        title: "Gulls vs Hammerheads",
+        title: "Comets vs Hammerheads",
         venue: "Field 4",
         time: "6:45 PM",
         status: "Scheduled",
@@ -5662,7 +5660,7 @@
         {
           day: days[0].getDate(),
           date: fmt(days[0]),
-          title: "Riptide vs Hammerheads",
+          title: "Diamonds vs Hammerheads",
           venue: "Field 1",
           time: "5:30 PM",
           status: "Scheduled",
@@ -5683,12 +5681,12 @@
           alerts: cancelledPractice
             ? ["Cancellation sent", "Make-up TBD"]
             : ["Practice reminder queued", "Bring water"],
-          stats: cancelledPractice ? ["—", "16", "1"] : ["6:45", "16", "1"]
+          stats: cancelledPractice ? ["-", "16", "1"] : ["6:45", "16", "1"]
         },
         {
           day: days[3].getDate(),
           date: fmt(days[3]),
-          title: "Gulls vs Marlins",
+          title: "Comets vs Marlins",
           venue: "Field 1",
           time: "6:45 PM",
           status: "Scheduled",
@@ -5917,11 +5915,11 @@
       { name: "Jules Kim", meta: "OF · range", num: "4" },
       { name: "Tali Moore", meta: "1B · power", num: "14" }
     ];
-    const draftTeams = ["Riptide", "Hammerheads"];
+    const draftTeams = ["Diamonds", "Hammerheads"];
     const teamBuilderState = {
       active: {
-        market: "Riptide",
-        ops: "Riptide"
+        market: "Diamonds",
+        ops: "Diamonds"
       },
       assignments: Object.fromEntries(draftPlayers.map((player) => [player.name, null]))
     };
@@ -6253,9 +6251,9 @@
       }
 
       const items = [
-        { title: "Mon game", meta: "Riptide vs Hammerheads / Field 1 / 5:30 PM", state: "published" },
+        { title: "Mon game", meta: "Diamonds vs Hammerheads / Field 1 / 5:30 PM", state: "published" },
         { title: "Tue practice", meta: "Hammerheads practice / Field 2 / 6:45 PM", state: weeklyScheduleState.cancelledPractice ? "cancelled" : "published", cancellable: true },
-        { title: "Thu game", meta: "Gulls vs Marlins / Field 1 / 6:45 PM", state: "published" }
+        { title: "Thu game", meta: "Comets vs Marlins / Field 1 / 6:45 PM", state: "published" }
       ];
 
       items.forEach((item) => {
@@ -6385,7 +6383,7 @@
       const status = document.getElementById("score-status");
       const standings = document.getElementById("standings-demo");
       const halfLabel = scoreState.half === "top" ? "Top" : "Bottom";
-      const battingTeam = scoreState.half === "top" ? "Riptide" : "Hammerheads";
+      const battingTeam = scoreState.half === "top" ? "Diamonds" : "Hammerheads";
       const panthersWon = scoreState.final && scoreState.panthers > scoreState.fire;
 
       if (fireScore) {
@@ -6402,7 +6400,7 @@
       }
       if (meta) {
         meta.textContent = scoreState.final
-          ? `Final / ${scoreState.fire > scoreState.panthers ? "Riptide" : "Hammerheads"} win`
+          ? `Final / ${scoreState.fire > scoreState.panthers ? "Diamonds" : "Hammerheads"} win`
           : `${halfLabel} ${scoreState.inning} / Field 1 / ${battingTeam} batting`;
       }
       if (balls) {
@@ -6421,13 +6419,13 @@
         standings.replaceChildren();
         const rows = panthersWon
           ? [
-            { team: "Riptide", record: "12-4 / .750" },
+            { team: "Diamonds", record: "12-4 / .750" },
             { team: "Hammerheads", record: "11-5 / .688", moveUp: true },
-            { team: "Gulls", record: "10-5 / .667" }
+            { team: "Comets", record: "10-5 / .667" }
           ]
           : [
-            { team: "Riptide", record: scoreState.final ? "13-3 / .813" : "12-3 / .800" },
-            { team: "Gulls", record: "10-5 / .667" },
+            { team: "Diamonds", record: scoreState.final ? "13-3 / .813" : "12-3 / .800" },
+            { team: "Comets", record: "10-5 / .667" },
             { team: "Hammerheads", record: scoreState.final ? "10-6 / .625" : "10-5 / .667" }
           ];
 
@@ -6511,6 +6509,42 @@
     } else {
       document.querySelectorAll(".reveal").forEach((item) => item.classList.add("is-visible"));
     }
+
+    document.addEventListener("click", (e) => {
+      const trigger = e.target.closest(".copy-email");
+      if (!trigger) return;
+      e.preventDefault();
+      const email = trigger.dataset.email || "contact@leag.app";
+      const label = trigger.dataset.copyLabel || "Copied";
+      const original = trigger.textContent;
+      const restore = () => {
+        trigger.textContent = original;
+        trigger.classList.remove("is-copied");
+      };
+      const flash = (text) => {
+        trigger.textContent = text;
+        trigger.classList.add("is-copied");
+        clearTimeout(trigger._copyTimer);
+        trigger._copyTimer = setTimeout(restore, 1800);
+      };
+      const fallback = () => {
+        const ta = document.createElement("textarea");
+        ta.value = email;
+        ta.setAttribute("readonly", "");
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand("copy"); flash(label); }
+        catch { flash("Copy failed"); }
+        document.body.removeChild(ta);
+      };
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(email).then(() => flash(label)).catch(fallback);
+      } else {
+        fallback();
+      }
+    });
   </script>
 </body>
 </html>

@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>LEAG | Pricing</title>
-  <meta name="description" content="Free Pickup, $19 Coach, $39 Club, $149 League. Federation custom — built for how rec sports actually run.">
+  <meta name="description" content="Free Pickup, $24 Coach, $79 Club, $199 League. Built for how rec sports actually run.">
   <link rel="icon" type="image/svg+xml" href="brand/bracket-green-on-black.svg">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://leag.app/pricing">
   <meta property="og:title" content="LEAG | Pricing">
-  <meta property="og:description" content="Free Pickup, $19 Coach, $39 Club, $149 League. Federation custom — built for how rec sports actually run.">
+  <meta property="og:description" content="Free Pickup, $24 Coach, $79 Club, $199 League. Built for how rec sports actually run.">
   <meta property="og:image" content="https://leag.app/brand/leag-wordmark-text-green.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="LEAG | Pricing">
-  <meta name="twitter:description" content="Free Pickup, $19 Coach, $39 Club, $149 League. Federation custom — built for how rec sports actually run.">
+  <meta name="twitter:description" content="Free Pickup, $24 Coach, $79 Club, $199 League. Built for how rec sports actually run.">
   <meta name="twitter:image" content="https://leag.app/brand/leag-wordmark-text-green.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -288,6 +288,47 @@
       .tier-grid { grid-template-columns: 1fr; }
     }
 
+    /* === transparency principles === */
+    .pricing-principles {
+      margin-top: 28px;
+      margin-bottom: 36px;
+    }
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 800px) {
+      .principles-grid { grid-template-columns: 1fr; }
+    }
+    .principle {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .principle h3 {
+      margin: 0 0 8px;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.005em;
+    }
+    .principle p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+    .matrix-intro,
+    .faq-intro {
+      margin: 0 0 18px;
+      color: var(--quiet);
+      font-size: 14px;
+      line-height: 1.55;
+      max-width: 680px;
+    }
+
     /* === federation strip === */
     .federation-strip {
       margin: 16px 0 56px;
@@ -508,7 +549,11 @@
       font-size: 28px;
       font-weight: 800;
       text-align: center;
-      margin: 0 0 32px;
+      margin: 0 0 12px;
+    }
+    .faq .faq-intro {
+      text-align: center;
+      margin: 0 auto 32px;
     }
     .faq-list { max-width: 760px; margin: 0 auto; }
     details {
@@ -603,7 +648,7 @@
         <a href="pricing.html" aria-current="page">Pricing</a>
       </nav>
       <div class="nav-actions">
-        <button class="btn btn-primary" type="button" aria-disabled="true" tabindex="-1">Join waitlist</button>
+        <a class="btn btn-primary copy-email" href="#" data-email="contact@leag.app" data-copy-label="Email copied">Join waitlist</a>
         <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav" id="menu-button" aria-label="Open navigation">
           <span></span>
           <span></span>
@@ -617,8 +662,8 @@
     <section class="pricing-hero">
       <div class="container">
         <div class="eyebrow">Pricing</div>
-        <h1>Built for how <span class="green">rec sports</span> actually run.</h1>
-        <p>Free to start. Pay-as-you-go on transactions. Subscriptions unlock tools and lower rates.</p>
+        <h1>Every price. <span class="green">Up front.</span> No surprises.</h1>
+        <p>Four tiers, listed in plain numbers. No per-player tax that punishes you for growing. Free to start, fair as you scale, and the math is on this page. Need something bigger or have questions? Book a call and we'll figure it out together.</p>
         <p class="founding-note">Founding tenants lock in these rates and unlock features as they ship throughout 2026.</p>
       </div>
     </section>
@@ -634,6 +679,7 @@
             <li>Booking + checkout</li>
             <li>Marketplace listing on play.leag.app/find</li>
             <li>$1,000/mo in payments processed (cap)</li>
+            <li>$3 minimum sticker on paid events</li>
             <li>Community Discord support</li>
           </ul>
           <a class="cta" href="https://play.leag.app/account/sign-up">Start with Pickup</a>
@@ -641,12 +687,12 @@
 
         <article class="tier">
           <h2>Coach</h2>
-          <p class="price">$19<span>/mo</span></p>
+          <p class="price">$24<span>/mo</span></p>
           <p class="rate">5% + $0.50<br><small>per transaction</small></p>
           <ul>
             <li>Everything in Pickup</li>
             <li>Waivers e-sign</li>
-            <li>1-person calendar / availability</li>
+            <li>Manual schedule + calendar (1 team)</li>
             <li>Community Discord support</li>
           </ul>
           <a class="cta" href="https://play.leag.app/account/sign-up">Start with Coach</a>
@@ -655,15 +701,18 @@
         <article class="tier featured">
           <span class="badge">Most popular</span>
           <h2>Club</h2>
-          <p class="price">$39<span>/mo</span></p>
+          <p class="price">$79<span>/mo</span></p>
           <p class="rate">5% + $0.50<br><small>per transaction</small></p>
           <ul>
             <li>Everything in Coach</li>
             <li>Custom domain (yourbrand.com)</li>
-            <li>Roster management</li>
+            <li>Roster management (up to 15 teams)</li>
             <li>Member / parent directory</li>
             <li>Broadcast email tool</li>
-            <li>3 staff seats</li>
+            <li>ACH dues + installment plans</li>
+            <li>Basic schedule generator</li>
+            <li>Bulk roster import</li>
+            <li>5 staff seats</li>
             <li>Email support</li>
           </ul>
           <a class="cta" href="https://play.leag.app/account/sign-up">Start with Club</a>
@@ -671,15 +720,17 @@
 
         <article class="tier">
           <h2>League</h2>
-          <p class="price">$149<span>/mo</span></p>
+          <p class="price">$199<span>/mo</span></p>
           <p class="rate">4% + $0.50<br><small>per transaction</small></p>
           <ul>
             <li>Everything in Club</li>
+            <li>Multi-club rollup</li>
+            <li>Full schedule generator + divisions/standings</li>
+            <li>White-label (no LEAG branding)</li>
             <li>Unlimited staff seats</li>
-            <li>Advanced reporting + dashboards</li>
             <li>Background-check integration (at cost)</li>
             <li>Developer API access + bulk data export</li>
-            <li>Priority support</li>
+            <li>Priority support (24-hr SLA)</li>
             <li>3 promoted-event placements/mo</li>
           </ul>
           <a class="cta" href="https://play.leag.app/account/sign-up">Start with League</a>
@@ -687,29 +738,38 @@
 
       </div>
 
+      <section class="pricing-principles" aria-label="How we price">
+        <div class="principles-grid">
+          <div class="principle">
+            <h3>Listed first, talked through after.</h3>
+            <p>Every tier price lives on this page so you can size the fit before you ever talk to us. Want a walkthrough or a tailored setup? Book a call once you know the number.</p>
+          </div>
+          <div class="principle">
+            <h3>Flat, not per-player.</h3>
+            <p>Your subscription doesn't go up because your roster did. Add the team, the season, the new league night. Same price.</p>
+          </div>
+          <div class="principle">
+            <h3>Lower as you grow.</h3>
+            <p>Your transaction rate drops as you grow: 8% on Pickup, 5% on Coach and Club, 4% on League, even lower for the bigger setups beyond. The bigger you get, the cheaper each dollar moves. Growth shouldn't punish you.</p>
+          </div>
+        </div>
+      </section>
+
       <section class="federation-strip" aria-labelledby="federation-heading">
         <div class="fed-headline">
-          <h2 id="federation-heading">Federation</h2>
-          <p>For multi-org governing bodies and federations.</p>
+          <h2 id="federation-heading">Need something more?</h2>
+          <p>Running a sanctioning body, a multi-region governing org, or a federation with its own rules? Tell us how you actually operate and we'll figure out a fit together. Lower transaction rate, multi-org orchestration, dedicated support, and whatever else the four tiers don't already cover.</p>
         </div>
-        <ul class="fed-features">
-          <li>Everything in League</li>
-          <li>Multi-org / multi-region orchestration</li>
-          <li>Dedicated account manager + uptime guarantee</li>
-          <li>Background-check integration (included)</li>
-          <li>Unlimited promoted-event placements</li>
-          <li>Volume-based pricing on payments processed</li>
-        </ul>
         <div class="fed-cta">
-          <span class="fed-price">Custom pricing<small>every federation is different</small></span>
-          <a class="btn btn-primary" href="https://mail.google.com/mail/?view=cm&amp;to=contact@leag.app&amp;su=LEAG%20Federation%20tier%20inquiry" target="_blank" rel="noopener">Talk to sales &rarr;</a>
+          <a class="btn btn-primary copy-email" href="#" data-email="contact@leag.app" data-copy-label="Email copied">Copy contact@leag.app &rarr;</a>
         </div>
       </section>
     </section>
 
     <section class="capabilities">
       <div class="container">
-        <h2>What's in each tier</h2>
+        <h2>Every feature, in every tier, with every checkmark visible.</h2>
+        <p class="matrix-intro">No "available with Enterprise upgrade." No surprise add-on fees buried in onboarding. If a row has a check, it's included at that price.</p>
         <div class="matrix-wrap">
           <table class="matrix">
             <thead>
@@ -719,23 +779,26 @@
                 <th>Coach</th>
                 <th>Club</th>
                 <th>League</th>
-                <th>Federation</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>Booking + checkout</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
-              <tr><td>Waivers e-sign</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
-              <tr><td>Custom domain (yourbrand.com)</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
-              <tr><td>Calendar / availability</td><td class="no">&mdash;</td><td class="note">1-person</td><td class="note">multi-staff</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
-              <tr><td>Roster management</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
-              <tr><td>Member / parent directory</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
-              <tr><td>Broadcast email tool</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
-              <tr><td>Multi-staff seats</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="note">3</td><td class="note">unlimited</td><td class="yes">&#10003;</td></tr>
-              <tr><td>Multi-event dashboards + reporting</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="note">basic</td><td class="note">advanced</td><td class="yes">&#10003;</td></tr>
-              <tr><td>Background-check integration</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="note">at cost</td><td class="note">included</td></tr>
-              <tr><td>Developer API access + bulk data export</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="no">&mdash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
-              <tr><td>Support</td><td class="note">Discord</td><td class="note">Discord</td><td class="note">email</td><td class="note">priority</td><td class="note">account manager</td></tr>
-              <tr><td>Marketplace surfacing on play.leag.app/find</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+              <tr><td>Booking + checkout</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+              <tr><td>Waivers e-sign</td><td class="no">&ndash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+              <tr><td>Custom domain (yourbrand.com)</td><td class="no">&ndash;</td><td class="no">&ndash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+              <tr><td>Manual schedule + calendar</td><td class="no">&ndash;</td><td class="note">1 team</td><td class="note">multi-team</td><td class="yes">&#10003;</td></tr>
+              <tr><td>Roster management</td><td class="no">&ndash;</td><td class="note">1 team</td><td class="note">up to 15 teams</td><td class="yes">unlimited</td></tr>
+              <tr><td>Member / parent directory</td><td class="no">&ndash;</td><td class="no">&ndash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+              <tr><td>Broadcast email tool</td><td class="no">&ndash;</td><td class="no">&ndash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+              <tr><td>ACH dues + installment plans</td><td class="no">&ndash;</td><td class="no">&ndash;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
+              <tr><td>Schedule generator</td><td class="no">&ndash;</td><td class="no">&ndash;</td><td class="note">basic</td><td class="note">full + divisions</td></tr>
+              <tr><td>Multi-club rollup</td><td class="no">&ndash;</td><td class="no">&ndash;</td><td class="no">&ndash;</td><td class="yes">&#10003;</td></tr>
+              <tr><td>White-label (no LEAG branding)</td><td class="no">&ndash;</td><td class="no">&ndash;</td><td class="no">&ndash;</td><td class="yes">&#10003;</td></tr>
+              <tr><td>Multi-staff seats</td><td class="no">&ndash;</td><td class="no">&ndash;</td><td class="note">5</td><td class="note">unlimited</td></tr>
+              <tr><td>Multi-event dashboards + reporting</td><td class="no">&ndash;</td><td class="no">&ndash;</td><td class="note">basic</td><td class="note">advanced</td></tr>
+              <tr><td>Background-check integration</td><td class="no">&ndash;</td><td class="no">&ndash;</td><td class="no">&ndash;</td><td class="note">at cost</td></tr>
+              <tr><td>Developer API access + bulk data export</td><td class="no">&ndash;</td><td class="no">&ndash;</td><td class="no">&ndash;</td><td class="yes">&#10003;</td></tr>
+              <tr><td>Support</td><td class="note">Discord</td><td class="note">Discord</td><td class="note">email</td><td class="note">priority</td></tr>
+              <tr><td>Marketplace surfacing on play.leag.app/find</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td><td class="yes">&#10003;</td></tr>
             </tbody>
           </table>
         </div>
@@ -744,32 +807,41 @@
 
     <section class="faq">
       <div class="container">
-        <h2>Frequently asked</h2>
+        <h2>Straight answers.</h2>
+        <p class="faq-intro">No fine print. If something here ever stops being true, this page changes first.</p>
         <div class="faq-list">
           <details>
             <summary>How are transaction fees collected?</summary>
-            <p>The transaction fee comes out of the customer's payment via your connected Stripe account. You receive your sticker price minus 2.9% + $0.30 (Stripe processing) minus your tier's LEAG share. To pass the fee to the customer instead of absorbing it, flip the toggle in your billing settings.</p>
+            <p>The rate you see on each tier (8%, 5%, 4%) is the total customer-facing service fee on cards. One number, billed on top of the sticker price at checkout, settled through your connected Stripe account. No separate Stripe line, no LEAG line stacked on top. Your payout receipt shows the sticker price, the service fee collected, and your net deposit, every time. Want to absorb the service fee yourself instead of passing it to the customer? Flip one toggle in billing settings.</p>
           </details>
           <details>
             <summary>Can I switch tiers mid-month?</summary>
-            <p>Yes. Upgrades take effect immediately with prorated billing. Downgrades take effect at the end of your current billing period.</p>
+            <p>Yes. Upgrades take effect immediately with prorated billing. Downgrades take effect at the end of your current billing period. No retention call, no "let me check with my manager," no friction.</p>
           </details>
           <details>
             <summary>Can I cancel anytime?</summary>
-            <p>Yes. You'll keep your current tier's features through the end of the billing period, then drop to the free Pickup tier. If you got auto-renewed and want to cancel + refund, you have a 7-day window to do that yourself from your billing dashboard.</p>
+            <p>Yes. You keep your current tier's features through the end of the billing period, then drop to the free Pickup tier. Your data stays, your event history stays, your customer list stays. If you got auto-renewed and want to cancel + refund, you have a 7-day window to do that yourself from your billing dashboard. No support ticket required.</p>
           </details>
           <details>
             <summary>What's the difference between Coach and Club?</summary>
-            <p>Same transaction rate (5% + $0.50). The Club $20/mo bump pays for org-grade tools: custom domain, roster management, member/parent directory, broadcast email, and multi-staff seats. Switch to Club when you start running recurring rosters or add a coaching partner.</p>
+            <p>Same transaction rate (5% + $0.50). Coach at $24/mo is built for a single coach running one team: waivers, manual schedule, 1-team roster, one login. Club at $79/mo pays for itself in tools and in multiple coach accounts under one club: custom domain, up to 15 teams, member/parent directory, broadcast email, ACH dues + installment plans, basic schedule generator, bulk roster import, and 5 staff seats. Switch to Club when you bring on assistant coaches, run multiple teams under one brand, or parents start asking for installment plans.</p>
+          </details>
+          <details>
+            <summary>Where does each tier pay for itself?</summary>
+            <p>Coach $24 vs free Pickup: 8% drops to 5% on every transaction, so Coach pays for itself at ~$800/mo in payments processed (well before Pickup's $1k/mo cap). Club $79 vs Coach $24: same 5% rate, so Club pays for itself in tools (custom domain, multi-team roster, broadcast email, ACH, schedule generator, bulk import, 5 staff seats) and in multiple coach accounts under one club. League $199 vs Club $79: 5% drops to 4%, so the $120/mo sub bump pays for itself at ~$12k/mo ($144k/yr) in payments processed, plus you get multi-club rollup, full schedule generator with divisions, white-label, unlimited staff, and 24-hour priority support.</p>
+          </details>
+          <details>
+            <summary>What's the ACH rate (Club and League)?</summary>
+            <p>Lower than card. ACH is opt-in for big-ticket signups (season fees, multi-month memberships, $500+ camp registrations) where the card service fee starts to feel punitive. Rate card:</p>
+            <ul>
+              <li>Club: 2% + $0.50, capped at $50 per transaction</li>
+              <li>League: 1.5% + $0.50, capped at $50 per transaction</li>
+            </ul>
+            <p>Customer picks card or ACH at checkout. Card stays the default; ACH is the cheaper option for high-ticket items.</p>
           </details>
           <details>
             <summary>What counts toward Pickup's $1,000/mo payment cap?</summary>
-            <p>Total payments processed through your LEAG checkout in a calendar month. Once you cross the cap, you'll be prompted to upgrade to Coach to keep taking signups.</p>
-          </details>
-          <details>
-            <summary>How does Federation pricing work?</summary>
-            <p>Federation is custom because multi-org governing bodies have distinct needs: running multiple regions, a dedicated account manager, uptime guarantees, and volume-based pricing on payments processed. Talk to us about your federation and we'll quote a rate that fits.</p>
-            <button class="btn btn-primary faq-cta" type="button" data-copy-email="contact@leag.app" aria-live="polite">Copy contact@leag.app</button>
+            <p>Total payments processed through your LEAG checkout in a calendar month. Once you cross the cap, you'll be prompted to upgrade to Coach to keep taking signups. Pickup also has a $3 minimum sticker on paid events to keep the free tier honest; free events stay free.</p>
           </details>
         </div>
       </div>
@@ -785,9 +857,9 @@
       </a>
       <div>Copyright <span id="current-year"></span> Stryder Labs LLC. All rights reserved.</div>
       <div class="footer-links">
-        <a href="mailto:contact@leag.app?subject=LEAG%20privacy">Privacy</a>
-        <a href="mailto:contact@leag.app?subject=LEAG%20terms">Terms</a>
-        <a href="mailto:contact@leag.app">contact@leag.app</a>
+        <a class="copy-email" href="#" data-email="contact@leag.app" data-copy-label="Email copied">Privacy</a>
+        <a class="copy-email" href="#" data-email="contact@leag.app" data-copy-label="Email copied">Terms</a>
+        <a class="copy-email" href="#" data-email="contact@leag.app" data-copy-label="Copied">contact@leag.app</a>
       </div>
     </div>
   </footer>
@@ -795,29 +867,6 @@
   <script>
     const year = document.getElementById("current-year");
     if (year) year.textContent = new Date().getFullYear();
-
-    document.querySelectorAll("[data-copy-email]").forEach((btn) => {
-      const email = btn.getAttribute("data-copy-email");
-      const original = btn.textContent;
-      btn.addEventListener("click", async () => {
-        try {
-          await navigator.clipboard.writeText(email);
-        } catch (err) {
-          const ta = document.createElement("textarea");
-          ta.value = email;
-          ta.setAttribute("readonly", "");
-          ta.style.position = "absolute";
-          ta.style.left = "-9999px";
-          document.body.appendChild(ta);
-          ta.select();
-          try { document.execCommand("copy"); } catch (_) {}
-          document.body.removeChild(ta);
-        }
-        btn.textContent = "Copied " + email;
-        clearTimeout(btn._copyTimer);
-        btn._copyTimer = setTimeout(() => { btn.textContent = original; }, 1800);
-      });
-    });
 
     const menuButton = document.getElementById("menu-button");
     const nav = document.getElementById("site-nav");
@@ -835,6 +884,42 @@
         });
       });
     }
+
+    document.addEventListener("click", (e) => {
+      const trigger = e.target.closest(".copy-email");
+      if (!trigger) return;
+      e.preventDefault();
+      const email = trigger.dataset.email || "contact@leag.app";
+      const label = trigger.dataset.copyLabel || "Copied";
+      const original = trigger.textContent;
+      const restore = () => {
+        trigger.textContent = original;
+        trigger.classList.remove("is-copied");
+      };
+      const flash = (text) => {
+        trigger.textContent = text;
+        trigger.classList.add("is-copied");
+        clearTimeout(trigger._copyTimer);
+        trigger._copyTimer = setTimeout(restore, 1800);
+      };
+      const fallback = () => {
+        const ta = document.createElement("textarea");
+        ta.value = email;
+        ta.setAttribute("readonly", "");
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand("copy"); flash(label); }
+        catch { flash("Copy failed"); }
+        document.body.removeChild(ta);
+      };
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(email).then(() => flash(label)).catch(fallback);
+      } else {
+        fallback();
+      }
+    });
   </script>
 </body>
 </html>
