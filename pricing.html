@@ -452,13 +452,22 @@
     }
     .tier .price.custom { font-size: 26px; letter-spacing: -0.01em; }
     .tier .rate {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.5;
+      font-size: 16px;
+      color: var(--ink);
+      line-height: 1.25;
       margin: 0 0 18px;
-      min-height: 40px;
+      min-height: 44px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
-    .tier .rate small { display: block; color: var(--quiet); font-size: 12px; }
+    .tier .rate small {
+      color: var(--quiet);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-family: var(--font-mono);
+    }
     .tier .tagline {
       font-size: 14px;
       color: var(--quiet);
@@ -676,7 +685,7 @@
         <article class="tier">
           <h2>Pickup</h2>
           <p class="price">Free</p>
-          <p class="rate"><small>Family checkout fee</small><br>8% + $0.50</p>
+          <p class="rate"><small>Family checkout fee</small>8% + $0.50</p>
           <ul>
             <li>Booking + checkout</li>
             <li>Marketplace listing on play.leag.app/find</li>
@@ -690,7 +699,7 @@
         <article class="tier">
           <h2>Coach</h2>
           <p class="price">$24<span>/mo</span></p>
-          <p class="rate"><small>Family checkout fee</small><br>5% + $0.50</p>
+          <p class="rate"><small>Family checkout fee</small>5% + $0.50</p>
           <ul>
             <li>Everything in Pickup</li>
             <li>Waivers e-sign</li>
@@ -704,7 +713,7 @@
           <span class="badge">Most popular</span>
           <h2>Club</h2>
           <p class="price">$79<span>/mo</span></p>
-          <p class="rate"><small>Family checkout fee</small><br>5% + $0.50</p>
+          <p class="rate"><small>Family checkout fee</small>5% + $0.50</p>
           <ul>
             <li>Everything in Coach</li>
             <li>Custom domain (yourbrand.com)</li>
@@ -723,7 +732,7 @@
         <article class="tier">
           <h2>League</h2>
           <p class="price">$199<span>/mo</span></p>
-          <p class="rate"><small>Family checkout fee</small><br>4% + $0.50</p>
+          <p class="rate"><small>Family checkout fee</small>4% + $0.50</p>
           <ul>
             <li>Everything in Club</li>
             <li>Multi-club rollup</li>
@@ -741,7 +750,7 @@
         <article class="tier">
           <h2>Federation</h2>
           <p class="price">Custom</p>
-          <p class="rate"><small>Family checkout fee</small><br>3% + $0.50</p>
+          <p class="rate"><small>Family checkout fee</small>3% + $0.50</p>
           <ul>
             <li>Everything in League</li>
             <li>Multi-org / multi-region orchestration</li>
