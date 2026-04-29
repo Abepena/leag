@@ -321,7 +321,8 @@
       color: var(--muted);
     }
     .matrix-intro,
-    .faq-intro {
+    .faq-intro,
+    .tier-intro {
       margin: 0 0 18px;
       color: var(--quiet);
       font-size: 14px;
@@ -669,12 +670,13 @@
     </section>
 
     <section class="container">
+      <p class="tier-intro">Your subscription is the only LEAG charge on you. Each tier shows the small service fee added to a family's checkout at registration, the same way ticketing platforms do it. One toggle in billing if you'd rather cover it yourself.</p>
       <div class="tier-grid">
 
         <article class="tier">
           <h2>Pickup</h2>
           <p class="price">Free</p>
-          <p class="rate">8% + $0.50<br><small>per transaction</small></p>
+          <p class="rate"><small>Family checkout fee</small><br>8% + $0.50</p>
           <ul>
             <li>Booking + checkout</li>
             <li>Marketplace listing on play.leag.app/find</li>
@@ -688,7 +690,7 @@
         <article class="tier">
           <h2>Coach</h2>
           <p class="price">$24<span>/mo</span></p>
-          <p class="rate">5% + $0.50<br><small>per transaction</small></p>
+          <p class="rate"><small>Family checkout fee</small><br>5% + $0.50</p>
           <ul>
             <li>Everything in Pickup</li>
             <li>Waivers e-sign</li>
@@ -702,7 +704,7 @@
           <span class="badge">Most popular</span>
           <h2>Club</h2>
           <p class="price">$79<span>/mo</span></p>
-          <p class="rate">5% + $0.50<br><small>per transaction</small></p>
+          <p class="rate"><small>Family checkout fee</small><br>5% + $0.50</p>
           <ul>
             <li>Everything in Coach</li>
             <li>Custom domain (yourbrand.com)</li>
@@ -721,7 +723,7 @@
         <article class="tier">
           <h2>League</h2>
           <p class="price">$199<span>/mo</span></p>
-          <p class="rate">4% + $0.50<br><small>per transaction</small></p>
+          <p class="rate"><small>Family checkout fee</small><br>4% + $0.50</p>
           <ul>
             <li>Everything in Club</li>
             <li>Multi-club rollup</li>
@@ -739,7 +741,7 @@
         <article class="tier">
           <h2>Federation</h2>
           <p class="price">Custom</p>
-          <p class="rate">3% + $0.50<br><small>per transaction</small></p>
+          <p class="rate"><small>Family checkout fee</small><br>3% + $0.50</p>
           <ul>
             <li>Everything in League</li>
             <li>Multi-org / multi-region orchestration</li>
@@ -765,7 +767,7 @@
           </div>
           <div class="principle">
             <h3>Lower as you grow.</h3>
-            <p>Your transaction rate drops as you grow: 8% on Pickup, 5% on Coach and Club, 4% on League, 3% on Federation. The bigger you get, the cheaper each dollar moves. Growth shouldn't punish you.</p>
+            <p>The family checkout fee drops as your tier grows: 8% on Pickup, 5% on Coach and Club, 4% on League, 3% on Federation. The bigger you get, the cheaper each registration moves through the platform. Growth shouldn't punish you or your families.</p>
           </div>
         </div>
       </section>
@@ -820,8 +822,8 @@
         <p class="faq-intro">No fine print. If something here ever stops being true, this page changes first.</p>
         <div class="faq-list">
           <details>
-            <summary>How are transaction fees collected?</summary>
-            <p>The rate you see on each tier (8%, 5%, 4%) is the total customer-facing service fee on cards. One number, billed on top of the sticker price at checkout, settled through your connected Stripe account. No separate Stripe line, no LEAG line stacked on top. Your payout receipt shows the sticker price, the service fee collected, and your net deposit, every time. Want to absorb the service fee yourself instead of passing it to the customer? Flip one toggle in billing settings.</p>
+            <summary>How does the service fee work?</summary>
+            <p>Your subscription is the only number we charge you directly. The rate on each tier (8%, 5%, 4%, 3%) is the family checkout fee, added to the registration sticker at checkout the same way ticketing platforms do it. One number on the family's receipt, settled through your connected Stripe account. No separate Stripe line, no LEAG line stacked on top of your monthly. Want the org to cover that fee itself so families pay only the sticker? One toggle in billing settings flips it.</p>
           </details>
           <details>
             <summary>Can I switch tiers mid-month?</summary>
@@ -837,18 +839,18 @@
           </details>
           <details>
             <summary>What's the difference between Coach and Club?</summary>
-            <p>Same transaction rate (5% + $0.50). Coach at $24/mo is built for a single coach running one team: waivers, manual schedule, 1-team roster, one login. Club at $79/mo pays for itself in tools and in multiple coach accounts under one club: custom domain, up to 15 teams, member/parent directory, broadcast email, ACH dues + installment plans, basic schedule generator, bulk roster import, and 5 staff seats. Switch to Club when you bring on assistant coaches, run multiple teams under one brand, or parents start asking for installment plans.</p>
+            <p>Same family checkout fee (5% + $0.50). Coach at $24/mo is built for a single coach running one team: waivers, manual schedule, 1-team roster, one login. Club at $79/mo pays for itself in tools and in multiple coach accounts under one club: custom domain, up to 15 teams, member/parent directory, broadcast email, ACH dues + installment plans, basic schedule generator, bulk roster import, and 5 staff seats. Switch to Club when you bring on assistant coaches, run multiple teams under one brand, or parents start asking for installment plans.</p>
           </details>
           <details>
             <summary>Where does each tier pay for itself?</summary>
-            <p>Coach $24 vs free Pickup: 8% drops to 5% on every transaction, so Coach pays for itself at ~$800/mo in payments processed (well before Pickup's $1k/mo cap). Club $79 vs Coach $24: same 5% rate, so Club pays for itself in tools (custom domain, multi-team roster, broadcast email, ACH, schedule generator, bulk import, 5 staff seats) and in multiple coach accounts under one club. League $199 vs Club $79: 5% drops to 4%, so the $120/mo sub bump pays for itself at ~$12k/mo ($144k/yr) in payments processed, plus you get multi-club rollup, full schedule generator with divisions, white-label, unlimited staff, and 24-hour priority support. Federation: 4% drops to 3% with a custom subscription. Break-even depends on your volume and onboarding scope, so we work the math with you on a sales call.</p>
+            <p>Coach $24 vs free Pickup: family checkout fee drops 8% to 5%, so families save ~$800/mo in volume before Pickup's $1k/mo cap kicks in (and your sub pays for itself even faster if you choose to absorb the fee). Club $79 vs Coach $24: same 5% rate, so Club pays for itself in tools (custom domain, multi-team roster, broadcast email, ACH, schedule generator, bulk import, 5 staff seats) and in multiple coach accounts under one club. League $199 vs Club $79: 5% drops to 4%, so the $120/mo sub bump is offset by ~$12k/mo ($144k/yr) in registrations either as savings to families or recovered margin if you absorb. League also unlocks multi-club rollup, full schedule generator with divisions, white-label, unlimited staff, and 24-hour priority support. Federation: 4% drops to 3% with a custom subscription. Break-even depends on your volume and onboarding scope, so we work the math with you on a sales call.</p>
           </details>
           <details>
             <summary>What's the ACH rate (Club and League)?</summary>
             <p>Lower than card. ACH is opt-in for big-ticket signups (season fees, multi-month memberships, $500+ camp registrations) where the card service fee starts to feel punitive. Rate card:</p>
             <ul>
-              <li>Club: 2% + $0.50, capped at $50 per transaction</li>
-              <li>League: 1.5% + $0.50, capped at $50 per transaction</li>
+              <li>Club: 2% + $0.50, capped at $50 per registration</li>
+              <li>League: 1.5% + $0.50, capped at $50 per registration</li>
             </ul>
             <p>Customer picks card or ACH at checkout. Card stays the default; ACH is the cheaper option for high-ticket items.</p>
           </details>
