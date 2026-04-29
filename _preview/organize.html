@@ -5247,16 +5247,16 @@
 
       <button class="org-switcher" id="org-switcher" aria-haspopup="true" aria-expanded="false">
         <span style="display:inline-flex;align-items:center;gap:8px">
-          <span style="width:18px;height:18px;background:var(--demo-primary);border-radius:4px;display:grid;place-items:center;color:#fff;font-family:var(--font-mono);font-size:8px;font-weight:700">BC</span>
+          <span data-org-initials style="width:18px;height:18px;background:var(--demo-primary);border-radius:4px;display:grid;place-items:center;color:#fff;font-family:var(--font-mono);font-size:8px;font-weight:700">BC</span>
           Bayside County Sports
         </span>
         <span class="caret">▾</span>
       </button>
       <div class="org-pop" id="org-pop">
         <div class="org-pop-row">
-          <div class="org-icon">BC</div>
+          <div class="org-icon" data-org-initials>BC</div>
           <div>
-            <div style="font-weight:600">Bayside County Sports</div>
+            <div style="font-weight:600" data-org-name>Bayside County Sports</div>
             <div class="mono" style="font-size:10px;color:var(--quiet);margin-top:1px">bayside.leag.app</div>
           </div>
           <span class="check">✓</span>
@@ -5288,7 +5288,7 @@
       <svg width="16" height="16"><use href="#i-bell"/></svg>
       <span class="dot-bell"></span>
     </button>
-    <div class="avatar" title="Bayside County Sports">BC</div>
+    <div class="avatar" data-org-initials data-org-title>BC</div>
   </header>
 
   <!-- ============ SIDEBAR ============ -->
@@ -5411,18 +5411,12 @@
           <!-- Pickup payment cap (Soon) -->
           <article class="card" style="grid-column:1 / -1">
   
-  <header class="card-head">
-    <div class="titles">
-      <div class="eyebrow">Live · Live scoring</div>
-      <h2 class="card-title">Score it from the dugout</h2>
-    </div>
-  </header>
   <div class="card-body" style="padding:0">
     <section class="section demo-section" id="scores" aria-labelledby="scores-title">
   <div class="container">
     <div class="demo-stage scores-stage reveal" id="scores-stage">
       <div class="demo-stage-bar scores-stagebar">
-        <strong>Bayside County Sports</strong>
+        <strong data-org-name>Bayside County Sports</strong>
         <span class="scores-url">bayside.leag.app/scores</span>
       </div>
 
@@ -5727,18 +5721,12 @@
 
         <article class="card is-locked" data-tier="Club" style="grid-column:1 / -1">
   <span class="corner-pill locked"><svg width="10" height="10"><use href="#i-lock"/></svg> Locked · Club</span>
-  <header class="card-head">
-    <div class="titles">
-      <div class="eyebrow">Demo · Publish schedule</div>
-      <h2 class="card-title">A week of games, out the door in seconds</h2>
-    </div>
-  </header>
   <div class="card-body" style="padding:0">
     <section class="section demo-section" id="publish-schedule" aria-labelledby="publish-title">
   <div class="container">
     <div class="demo-stage publish-stage reveal" id="publish-stage">
       <div class="demo-stage-bar publish-stagebar">
-        <strong>Bayside County Sports</strong>
+        <strong data-org-name>Bayside County Sports</strong>
         <span class="publish-meta-path">12U Spring Softball / week of Apr 15</span>
         <span class="publish-status" id="publish-status" data-state="draft" aria-live="polite">
           <span class="publish-status-dot" aria-hidden="true"></span>
@@ -5948,18 +5936,12 @@
 
           <article class="card is-locked" data-tier="Club" style="grid-column:1 / -1">
   <span class="corner-pill locked"><svg width="10" height="10"><use href="#i-lock"/></svg> Locked · Club</span>
-  <header class="card-head">
-    <div class="titles">
-      <div class="eyebrow">Demo · Team builder</div>
-      <h2 class="card-title">Build rosters across the org</h2>
-    </div>
-  </header>
   <div class="card-body" style="padding:0">
     <section class="section demo-section" id="teams" aria-labelledby="teams-title">
   <div class="container">
     <div class="demo-stage teams-stage reveal" id="teams-stage">
       <div class="demo-stage-bar teams-stagebar">
-        <strong>Bayside County Sports</strong>
+        <strong data-org-name>Bayside County Sports</strong>
         <span class="teams-url">bayside.leag.app/roster</span>
       </div>
 
@@ -6137,18 +6119,12 @@
 
       <article class="card" style="grid-column:1 / -1">
   
-  <header class="card-head">
-    <div class="titles">
-      <div class="eyebrow">Live · Registration form</div>
-      <h2 class="card-title">How parents sign up</h2>
-    </div>
-  </header>
   <div class="card-body" style="padding:0">
     <section class="section demo-section" id="registrations" aria-labelledby="registrations-title">
   <div class="container">
     <div class="demo-stage reg-stage reveal" id="reg-stage">
       <div class="demo-stage-bar reg-stagebar">
-        <strong>Bayside County Sports</strong>
+        <strong data-org-name>Bayside County Sports</strong>
         <span class="reg-url">bayside.leag.app/register</span>
       </div>
 
@@ -6328,7 +6304,7 @@
           <div class="reg-receipt">
             <div class="reg-receipt-head">
               <span class="reg-receipt-eyebrow">Order summary</span>
-              <span class="reg-receipt-org">Bayside County Sports</span>
+              <span class="reg-receipt-org" data-org-name>Bayside County Sports</span>
             </div>
 
             <div class="reg-receipt-event">
@@ -6648,18 +6624,12 @@
       <div class="grid-2-3">
         <article class="card is-locked" data-tier="Club" style="grid-column:1 / -1">
   <span class="corner-pill locked"><svg width="10" height="10"><use href="#i-lock"/></svg> Locked · Club</span>
-  <header class="card-head">
-    <div class="titles">
-      <div class="eyebrow">Demo · Broadcast email + SMS</div>
-      <h2 class="card-title">Tell every parent at once</h2>
-    </div>
-  </header>
   <div class="card-body" style="padding:0">
     <section class="section demo-section" id="notifications" aria-labelledby="notifications-title">
   <div class="container">
     <div class="demo-stage notif-stage reveal" id="notifications-stage">
       <div class="demo-stage-bar notif-stagebar">
-        <strong>Bayside County Sports</strong>
+        <strong data-org-name>Bayside County Sports</strong>
         <span class="notif-url">bayside.leag.app/messages/new</span>
       </div>
 
@@ -7002,7 +6972,7 @@ Coach</textarea>
           <header class="card-head">
             <div class="titles">
               <div class="eyebrow">Live · Org profile</div>
-              <h2 class="card-title">Bayside County Sports</h2>
+              <h2 class="card-title" data-org-name>Bayside County Sports</h2>
             </div>
             <div class="card-head-actions">
               <button class="btn btn-primary btn-sm">Save changes</button>
@@ -7010,14 +6980,14 @@ Coach</textarea>
           </header>
           <div class="card-body">
             <div class="logo-row">
-              <div class="logo-prev">BC</div>
+              <div class="logo-prev" data-org-initials>BC</div>
               <div>
                 <button class="btn btn-secondary btn-sm">Replace logo</button>
                 <div class="mono" style="font-size:11px;color:var(--quiet);margin-top:6px">PNG or SVG, square, 256px+</div>
               </div>
             </div>
             <div class="setting-form" style="margin-top:14px">
-              <div class="field"><label>Org name</label><input type="text" value="Bayside County Sports"/></div>
+              <div class="field"><label>Org name</label><input type="text" value="Bayside County Sports" data-org-input/></div>
               <div class="field"><label>Contact email</label><input type="text" value="orgs@bayside.example.com"/></div>
               <div class="field"><label>Public slug</label><input type="text" value="bayside.leag.app"/></div>
             </div>
@@ -7077,7 +7047,7 @@ Coach</textarea>
               <div class="wl-prev after">
                 <div class="lbl">After</div>
                 <div class="org-mark" style="font-size:18px">BAYSIDE</div>
-                <div class="mono" style="font-size:10px;color:var(--quiet)">© Bayside County Sports</div>
+                <div class="mono" style="font-size:10px;color:var(--quiet)">© <span data-org-name>Bayside County Sports</span></div>
               </div>
             </div>
           </div>
@@ -7790,8 +7760,66 @@ Coach</textarea>
     renderTeamTabs(t);
     renderRegRows(t);
     renderRevLines(t);
+    applyPreviewSwaps(t);
   }
   window.__leagApplyTokens = applyTokens;
+
+  /* ---------- Preview-text swaps (spliced demo previews react to sport) ---------- */
+  // Source baseline = softball-themed. Target = current sport's tokens.
+  // Walks text nodes inside the spliced preview sections only.
+  var PREVIEW_SECTION_IDS = ["registrations", "teams", "notifications", "scores", "publish-schedule"];
+  function applyPreviewSwaps(t) {
+    PREVIEW_SECTION_IDS.forEach(function (id) {
+      var root = document.getElementById(id);
+      if (!root) return;
+      // skip walking inside sub-script / style nodes
+      var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+        acceptNode: function (n) {
+          if (!n.nodeValue || !n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+          var p = n.parentNode;
+          if (!p) return NodeFilter.FILTER_REJECT;
+          var tag = p.nodeName;
+          if (tag === "SCRIPT" || tag === "STYLE") return NodeFilter.FILTER_REJECT;
+          return NodeFilter.FILTER_ACCEPT;
+        }
+      });
+      var nodes = [];
+      var n; while ((n = walker.nextNode())) nodes.push(n);
+      // Pull originals once via dataset
+      nodes.forEach(function (tn) {
+        if (tn.__leagOrig === undefined) tn.__leagOrig = tn.nodeValue;
+      });
+      nodes.forEach(function (tn) {
+        var s = tn.__leagOrig;
+        s = s.replace(/\bDiamonds\b/g, t.team);
+        s = s.replace(/\bField 1\b/g, t.venue_a);
+        s = s.replace(/\bField 2\b/g, t.venue_b);
+        s = s.replace(/\bCage A\b/g, t.venue_b);
+        s = s.replace(/\bSoftball\b/g, t.sport);
+        s = s.replace(/\bsoftball\b/g, t.sport.toLowerCase());
+        s = s.replace(/\bfastpitch\b/g, t.sport.toLowerCase());
+        s = s.replace(/\b12U\b/g, t.age);
+        s = s.replace(/\bU12\b/g, t.age);
+        // Generic team-2/3 references in previews (Hammers, Comets) -- leave; they read fine across sports
+        if (s !== tn.nodeValue) tn.nodeValue = s;
+      });
+    });
+  }
+
+  /* ---------- Org name + initials + image-placeholder ---------- */
+  function deriveOrgInitials(name) {
+    return (name || "").trim().split(/\s+/).map(function (w) { return w[0] || ""; }).join("").toUpperCase().slice(0, 3) || "BC";
+  }
+  function applyOrg(name) {
+    name = (name || "").trim() || "Bayside County Sports";
+    var initials = deriveOrgInitials(name);
+    document.querySelectorAll("[data-org-name]").forEach(function (el) { el.textContent = name; });
+    document.querySelectorAll("[data-org-initials]").forEach(function (el) { el.textContent = initials; });
+    document.querySelectorAll("[data-org-title]").forEach(function (el) { el.title = name; });
+    document.querySelectorAll("[data-org-input]").forEach(function (el) { el.value = name; });
+    window.__leagOrg = { name: name, initials: initials };
+  }
+  window.__leagApplyOrg = applyOrg;
 
   function setSport(sportKey) {
     if (!SPORT_PRESETS[sportKey]) return;
@@ -8369,6 +8397,10 @@ Coach</textarea>
       <input type="text" class="tweaks-input" id="tweaks-coach" autocomplete="off" spellcheck="false">
     </div>
     <div class="tweaks-group">
+      <label class="tweaks-label" for="tweaks-org">Org name<span class="hint">Top-bar, demo-stage bars, settings, receipts</span></label>
+      <input type="text" class="tweaks-input" id="tweaks-org" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="tweaks-group">
       <span class="tweaks-label">Sport<span class="hint">Swaps booker copy + group sessions</span></span>
       <div class="tweaks-segment" role="radiogroup" aria-label="Sport">
         <button type="button" class="tweaks-chip" data-sport="basketball" role="radio" aria-pressed="true"><span class="emoji" aria-hidden="true">🏀</span> Basketball</button>
@@ -8426,24 +8458,30 @@ Coach</textarea>
     var p = new URLSearchParams(window.location.search);
     var rawCoach = p.get("coach");
     var rawSport = (p.get("sport") || "").toLowerCase();
+    var rawOrg = p.get("org");
     return {
       coach: rawCoach ? deriveCoach(rawCoach) : deriveCoach("Chris Morales"),
       sport: VALID_SPORTS.indexOf(rawSport) >= 0 ? rawSport : "basketball",
+      org: rawOrg && rawOrg.trim() ? rawOrg.trim() : "Bayside County Sports",
     };
   }
   function writeToUrl() {
     var u = new URL(window.location.href);
     if (window.__leagCoach) u.searchParams.set("coach", window.__leagCoach.full);
     if (window.__leagSport) u.searchParams.set("sport", window.__leagSport);
+    if (window.__leagOrg) u.searchParams.set("org", window.__leagOrg.name);
     history.replaceState(null, "", u.toString());
   }
 
   // Init
   var initial = readFromUrl();
   applyCoach(initial.coach);
+  if (typeof window.__leagApplyOrg === "function") window.__leagApplyOrg(initial.org);
   applySport(initial.sport);
   var coachInput = document.getElementById("tweaks-coach");
   coachInput.value = initial.coach.full;
+  var orgInput = document.getElementById("tweaks-org");
+  if (orgInput) orgInput.value = initial.org;
 
   // Wire panel open/close
   var launcher = document.getElementById("tweaks-launcher");
@@ -8490,6 +8528,25 @@ Coach</textarea>
   coachInput.addEventListener("keydown", function (e) {
     if (e.key === "Enter") { e.preventDefault(); commitCoach(); closePanel(); }
   });
+
+  // Org input -- live update + URL persist
+  function commitOrg() {
+    if (!orgInput) return;
+    var v = orgInput.value.trim() || "Bayside County Sports";
+    orgInput.value = v;
+    if (typeof window.__leagApplyOrg === "function") window.__leagApplyOrg(v);
+    writeToUrl();
+  }
+  if (orgInput) {
+    orgInput.addEventListener("input", function () {
+      if (typeof window.__leagApplyOrg === "function") window.__leagApplyOrg(orgInput.value);
+    });
+    orgInput.addEventListener("change", commitOrg);
+    orgInput.addEventListener("blur", commitOrg);
+    orgInput.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") { e.preventDefault(); commitOrg(); closePanel(); }
+    });
+  }
 
   // Sport chips
   document.querySelectorAll(".tweaks-chip[data-sport]").forEach(function (chip) {
