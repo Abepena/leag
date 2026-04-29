@@ -4,12 +4,18 @@ Nav links 6 anchors. Each should land on an interactive demo section like `#publ
 
 | Anchor | Feature | Status |
 |---|---|---|
-| `#schedules` | Schedule publisher | ✅ done — `#publish-schedule` accordion-item |
-| `#registrations` | Parent signup flow | 🚧 to build |
-| `#teams` | Roster + team builder | 🚧 to build |
-| `#scores` | Live scoring + ticker | 🚧 to build |
-| `#standings` | Standings table | 🚧 partial — `#standings-demo` div exists, may need surfacing |
-| `#notifications` | Parent broadcast/update | 🚧 to build |
+| `#schedules` | Schedule publisher | done — `#publish-schedule` accordion-item |
+| `#registrations` | Parent signup flow | designed (2026-04-29) — see `prompts/registrations.md`. Pending: build into index.html |
+| `#teams` | Roster + team builder | designed (2026-04-29) — see `prompts/teams.md`. Pending: build into index.html |
+| `#scores` | Live scoring + ticker | designed (2026-04-29) — see `prompts/scores.md`. Pending: build into index.html |
+| `#standings` | Standings table | designed (2026-04-29) — see `prompts/standings.md`. Pending: build into index.html |
+| `#notifications` | Parent broadcast/update | designed (2026-04-29) — see `prompts/notifications.md`. Pending: build into index.html |
+
+## Design checkpoint — 2026-04-29
+
+All 5 outstanding nav-anchor sections have approved design briefs in `prompts/`. Each prompt is self-contained for paste into a fresh design agent (Claude Code cloud / Cloud Design / similar). Shared style canon lives in `prompts/_style-guide.md`.
+
+Next up: implementation. Build order recommendation in the section below remains valid (cheapest first: Standings, Scores, Notifications, Registrations, Teams).
 
 ---
 
