@@ -1,3 +1,9 @@
+Codebase (current state): https://github.com/Abepena/leag
+
+Please read and address the following:
+
+---
+
 # Demo artifact prompt — Notifications (`#notifications`)
 
 You are designing a single interactive demo section for the LEAG landing page (leag.app), anchored at `#notifications`. Demonstrates the broadcast-message tool: pick a segment, compose a message with template variables, preview, send, see the success toast.

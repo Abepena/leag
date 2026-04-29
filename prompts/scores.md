@@ -1,3 +1,9 @@
+Codebase (current state): https://github.com/Abepena/leag
+
+Please read and address the following:
+
+---
+
 # Demo artifact prompt — Scores (`#scores`)
 
 You are designing a single interactive demo section for the LEAG landing page (leag.app), anchored at `#scores`. Demonstrates live in-game scoring + a public-facing ticker that auto-scrolls with nearby games.

@@ -1,3 +1,9 @@
+Codebase (current state): https://github.com/Abepena/leag
+
+Please read and address the following:
+
+---
+
 # Demo artifact prompt — Standings (`#standings`)
 
 You are designing a single interactive demo section for the LEAG landing page (leag.app), anchored at `#standings`. Demonstrates a sortable division-standings table with click-to-highlight + last-3-results sparkline.

@@ -1,3 +1,9 @@
+Codebase (current state): https://github.com/Abepena/leag
+
+Please read and address the following:
+
+---
+
 # Demo artifact prompt — Family calendar revamp (`#surfaces`)
 
 You are revamping an existing landing-page demo at `#surfaces` titled "What families see all season." It currently shows a static June calendar grid + a side panel with a "Jun 17 family update" card. The grid has dot markers per day, a selected day with a green outline, a venue table below, and a metric strip (start time, family count, alerts) at the bottom-right.

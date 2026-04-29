@@ -1,3 +1,9 @@
+Codebase (current state): https://github.com/Abepena/leag
+
+Please read and address the following:
+
+---
+
 # Demo artifact prompt — Marketplace search (`#marketplace`)
 
 You are revamping the existing `#marketplace` section ("Find a game tonight"). Currently it has 3 audience tabs (Players / Organizers / Venues), Sport / Area / When dropdowns, and a list of 3 listings (12U Open Tryout, Fastpitch Pickup Night, Pitching Clinic) with Reserve / Save / Add-to-checkout buttons.

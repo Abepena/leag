@@ -1,3 +1,9 @@
+Codebase (current state): https://github.com/Abepena/leag
+
+Please read and address the following:
+
+---
+
 # Demo artifact prompt — Coach booking (`#coach-booking`)
 
 You are designing a single interactive demo section for the LEAG landing page (leag.app), anchored at `#coach-booking`. This is a Calendly-style booking surface for a single coach: post group classes (open enrollment, capped seats) and open private-lesson availability that parents can book directly.

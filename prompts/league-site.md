@@ -1,3 +1,9 @@
+Codebase (current state): https://github.com/Abepena/leag
+
+Please read and address the following:
+
+---
+
 # Demo artifact prompt — Mini league site (`#platform`)
 
 You are revamping the existing `#platform` section ("Your league's home on the web") into an interactive mini-site demo. Currently it shows a static screenshot-style card with a tryouts hero on the left and a 3-step list (Publish the season / Signups into rosters / Keep it current) on the right.

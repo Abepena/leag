@@ -1,3 +1,9 @@
+Codebase (current state): https://github.com/Abepena/leag
+
+Please read and address the following:
+
+---
+
 # Demo artifact prompt — Teams (`#teams`)
 
 You are designing a single interactive demo section for the LEAG landing page (leag.app), anchored at `#teams`. Demonstrates roster + team-builder workflow: drag (or tap) players from an unassigned pool into team rosters, with auto-balance.

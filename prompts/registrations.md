@@ -1,3 +1,9 @@
+Codebase (current state): https://github.com/Abepena/leag
+
+Please read and address the following:
+
+---
+
 # Demo artifact prompt — Registrations (`#registrations`)
 
 You are designing a single interactive demo section for the LEAG landing page (leag.app). This section will be appended to `index.html` and anchored at `#registrations`. It demonstrates the parent signup / event-registration flow without touching a real backend.
