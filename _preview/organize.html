@@ -4459,6 +4459,29 @@
     display: flex; flex-direction: column; gap: 8px; align-self: stretch; justify-content: center;
   }
   #scores .scores-controls-state-row { display: flex; gap: 8px; }
+  #scores .scores-count-readout {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
+    padding: 10px 12px;
+    border-radius: var(--radius);
+    background: var(--bg-2); border: 1px solid var(--line);
+  }
+  #scores .scores-count-readout > div {
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+  }
+  #scores .scores-count-readout span {
+    font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--quiet);
+  }
+  #scores .scores-count-readout strong {
+    font-family: var(--font-display); font-style: italic; font-size: 22px;
+    color: var(--ink); font-variant-numeric: tabular-nums; line-height: 1;
+  }
+  #scores .scores-count-actions {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px;
+  }
+  #scores .scores-count-actions .scores-btn {
+    min-height: 36px; padding: 6px 10px; font-size: 12px;
+  }
   #scores .scores-btn {
     display: inline-flex; flex-direction: column; gap: 2px;
     align-items: center; justify-content: center;
@@ -5631,6 +5654,17 @@
           </div>
 
           <div class="scores-controls-state">
+            <div class="scores-count-readout" aria-label="Count">
+              <div><span>Balls</span><strong id="scores-balls">0</strong></div>
+              <div><span>Strikes</span><strong id="scores-strikes">0</strong></div>
+              <div><span>Outs</span><strong id="scores-outs">0</strong></div>
+            </div>
+            <div class="scores-count-actions" role="group" aria-label="Count actions">
+              <button type="button" class="scores-btn scores-btn--ghost" data-count-action="ball">Ball +</button>
+              <button type="button" class="scores-btn scores-btn--ghost" data-count-action="strike">Strike +</button>
+              <button type="button" class="scores-btn scores-btn--ghost" data-count-action="out">Out +</button>
+              <button type="button" class="scores-btn scores-btn--ghost" data-count-action="reset-count">Reset count</button>
+            </div>
             <button type="button" class="scores-btn scores-btn--primary" id="scores-next">
               <span class="scores-btn-label">Next half-inning</span>
               <span class="scores-btn-meta" id="scores-next-meta">Currently Top 5</span>
@@ -9614,6 +9648,7 @@ Coach</textarea>
     inning: 5,
     half: "top", // "top" -> away bats, "bottom" -> home bats
     final: false,
+    balls: 0, strikes: 0, outs: 0,
     away: { total: 3, runs: [1, 0, 1, 1, 0, null, null] },
     home: { total: 5, runs: [0, 2, 0, 3, null, null, null] }
   };
@@ -9623,6 +9658,7 @@ Coach</textarea>
   function clone(s) {
     return {
       inning: s.inning, half: s.half, final: s.final,
+      balls: s.balls || 0, strikes: s.strikes || 0, outs: s.outs || 0,
       away: { total: s.away.total, runs: s.away.runs.slice() },
       home: { total: s.home.total, runs: s.home.runs.slice() }
     };
@@ -9897,6 +9933,57 @@ Coach</textarea>
     announce("Reset. Top of the 5th, Hammerheads batting.");
   }
 
+  // --- Count actions (baseball rules) ---
+  function renderCount() {
+    var b = root.querySelector('#scores-balls');
+    var s = root.querySelector('#scores-strikes');
+    var o = root.querySelector('#scores-outs');
+    if (b) b.textContent = state.balls;
+    if (s) s.textContent = state.strikes;
+    if (o) o.textContent = state.outs;
+  }
+  function resetCount(silent) {
+    state.balls = 0; state.strikes = 0;
+    renderCount();
+    if (!silent) announce("Count reset to 0-0.");
+  }
+  function ball() {
+    if (state.final) return;
+    state.balls += 1;
+    if (state.balls >= 4) {
+      state.balls = 0; state.strikes = 0;
+      announce("Ball four. Walk. Count reset.");
+    } else {
+      announce(`${state.balls}-${state.strikes} count.`);
+    }
+    renderCount();
+  }
+  function strike() {
+    if (state.final) return;
+    state.strikes += 1;
+    if (state.strikes >= 3) {
+      state.balls = 0; state.strikes = 0;
+      addOut(true);
+    } else {
+      announce(`${state.balls}-${state.strikes} count.`);
+      renderCount();
+    }
+  }
+  function addOut(fromStrikeout) {
+    if (state.final) return;
+    state.outs += 1;
+    if (state.outs >= 3) {
+      state.outs = 0; state.balls = 0; state.strikes = 0;
+      renderCount();
+      nextHalf();
+    } else {
+      renderCount();
+      announce(fromStrikeout
+        ? `Strikeout. ${state.outs} out${state.outs === 1 ? "" : "s"}.`
+        : `Out. ${state.outs} out${state.outs === 1 ? "" : "s"}.`);
+    }
+  }
+
   // --- Wire up ---
   root.addEventListener("click", (e) => {
     const pill = e.target.closest('.scores-pill');
@@ -9907,13 +9994,23 @@ Coach</textarea>
       else if (action === "dec") add(side, -1);
       return;
     }
+    const cbtn = e.target.closest('[data-count-action]');
+    if (cbtn) {
+      const a = cbtn.getAttribute('data-count-action');
+      if (a === "ball") ball();
+      else if (a === "strike") strike();
+      else if (a === "out") addOut(false);
+      else if (a === "reset-count") resetCount(false);
+      return;
+    }
   });
-  elNextBtn.addEventListener("click", nextHalf);
+  elNextBtn.addEventListener("click", function () { nextHalf(); resetCount(true); state.outs = 0; renderCount(); });
   elFinalBtn.addEventListener("click", endGame);
-  elResetBtn.addEventListener("click", reset);
+  elResetBtn.addEventListener("click", function () { reset(); resetCount(true); state.outs = 0; renderCount(); });
 
   // Init
   render();
+  renderCount();
 })();
 
 
