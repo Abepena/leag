@@ -2231,6 +2231,73 @@
     text-transform: uppercase;
     margin-bottom: 14px;
   }
+  /* Coach-card service-fee toggle */
+  #coach-booking .cb-fee-toggle {
+    margin: 14px 18px 8px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: var(--surface-3);
+    border: 1px solid var(--line);
+  }
+  #coach-booking .cb-fee-toggle-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  #coach-booking .cb-fee-toggle-label {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--quiet);
+  }
+  #coach-booking .cb-fee-toggle-rate {
+    font-family: var(--font-mono); font-size: 11px; color: var(--ink); font-weight: 600;
+  }
+  #coach-booking .cb-fee-toggle-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 8px;
+  }
+  #coach-booking .cb-fee-chip {
+    appearance: none; cursor: pointer;
+    height: 32px; padding: 0 10px;
+    border-radius: 8px;
+    background: var(--bg-2); color: var(--muted);
+    border: 1px solid var(--line);
+    font-family: var(--font-sans); font-size: 12px; font-weight: 600;
+    transition: background 140ms, color 140ms, border-color 140ms;
+  }
+  #coach-booking .cb-fee-chip:hover { color: var(--ink); border-color: var(--line-strong); }
+  #coach-booking .cb-fee-chip.is-active {
+    background: color-mix(in srgb, var(--demo-primary) 22%, var(--bg-2));
+    color: var(--ink);
+    border-color: var(--demo-primary);
+  }
+  #coach-booking .cb-fee-toggle-note {
+    color: var(--quiet); font-size: 11.5px; line-height: 1.4;
+  }
+
+  /* Payout card inside modal checkout pane (visible only when coach absorbs) */
+  .cb-payout-card {
+    margin-top: 12px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--green-soft) 60%, var(--bg-2));
+    border: 1px solid var(--green);
+  }
+  .cb-payout-eyebrow {
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--green); margin-bottom: 6px;
+  }
+  .cb-payout-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 13px; color: var(--muted);
+  }
+  .cb-payout-row b {
+    font-family: var(--font-mono); font-variant-numeric: tabular-nums;
+    color: var(--ink); font-weight: 600;
+  }
+  .cb-payout-row.cb-payout-net {
+    margin-top: 6px; padding-top: 6px; border-top: 1px solid color-mix(in srgb, var(--green) 30%, transparent);
+    color: var(--ink); font-weight: 600;
+  }
+  .cb-payout-row.cb-payout-net b { color: var(--green); font-size: 16px; }
+
   .cb-checkout-rows {
     margin: 0;
     display: flex; flex-direction: column; gap: 8px;
@@ -5208,6 +5275,23 @@
     #publish-schedule * { transition: none !important; animation: none !important; }
   }
 
+
+  /* ===== Spliced preview embeds: neutralize landing-page section/container chrome ===== */
+  .preview-host.section { padding: 0; border: 0; margin: 0; }
+  .preview-host .container { padding: 0; max-width: none; width: auto; margin: 0; }
+  .preview-host { position: relative; }
+  .preview-host .demo-stage { position: relative; }
+  /* Locked state -- dashed gold-tinted border on the demo-stage itself */
+  .preview-host.is-locked .demo-stage { border-style: dashed; border-color: var(--line-strong); }
+  /* Beta state -- green outline */
+  .preview-host.is-beta .demo-stage { border-color: var(--green); }
+  /* Lock-foot now lives inside demo-stage; flush against its bottom edge */
+  .preview-host .demo-stage > .lock-foot {
+    border-top: 1px solid var(--line);
+    border-bottom-left-radius: calc(var(--radius) - 1px);
+    border-bottom-right-radius: calc(var(--radius) - 1px);
+  }
+
 </style>
 </head>
 <body>
@@ -5409,10 +5493,7 @@
           </article>
 
           <!-- Pickup payment cap (Soon) -->
-          <article class="card" style="grid-column:1 / -1">
-  
-  <div class="card-body" style="padding:0">
-    <section class="section demo-section" id="scores" aria-labelledby="scores-title">
+          <section class="section demo-section preview-host" id="scores" aria-labelledby="scores-title">
   <div class="container">
     <div class="demo-stage scores-stage reveal" id="scores-stage">
       <div class="demo-stage-bar scores-stagebar">
@@ -5579,10 +5660,6 @@
     </div>
   </div>
 </section>
-    
-  </div>
-  
-</article>
         </div>
 
         <div class="stack">
@@ -5719,12 +5796,10 @@
           </div>
         </article>
 
-        <article class="card is-locked" data-tier="Club" style="grid-column:1 / -1">
-  <span class="corner-pill locked"><svg width="10" height="10"><use href="#i-lock"/></svg> Locked · Club</span>
-  <div class="card-body" style="padding:0">
-    <section class="section demo-section" id="publish-schedule" aria-labelledby="publish-title">
+        <section class="section demo-section preview-host is-locked" id="publish-schedule" data-tier="Club" aria-labelledby="publish-title">
   <div class="container">
     <div class="demo-stage publish-stage reveal" id="publish-stage">
+              <span class="corner-pill locked"><svg width="10" height="10"><use href="#i-lock"/></svg> Locked · Club</span>
       <div class="demo-stage-bar publish-stagebar">
         <strong data-org-name>Bayside County Sports</strong>
         <span class="publish-meta-path">12U Spring Softball / week of Apr 15</span>
@@ -5823,12 +5898,9 @@
       </div>
 
       <p class="publish-sr-status" aria-live="polite" aria-atomic="true" id="publish-sr-status"></p>
-    </div>
+    <div class="lock-foot"><div class="msg">Available on <b>Club</b>. Publish to families, push reminders.</div><button class="btn btn-primary btn-sm" data-locked-cta data-tier="Club">Upgrade to Club · $79/mo</button></div></div>
   </div>
 </section>
-  </div>
-  <div class="lock-foot"><div class="msg">Available on <b>Club</b>. Publish to families, push reminders.</div><button class="btn btn-primary btn-sm" data-locked-cta data-tier="Club">Upgrade to Club · $79/mo</button></div>
-</article>
       </div>
 
       <div style="height:18px"></div>
@@ -5934,12 +6006,10 @@
             </div>
           </article>
 
-          <article class="card is-locked" data-tier="Club" style="grid-column:1 / -1">
-  <span class="corner-pill locked"><svg width="10" height="10"><use href="#i-lock"/></svg> Locked · Club</span>
-  <div class="card-body" style="padding:0">
-    <section class="section demo-section" id="teams" aria-labelledby="teams-title">
+          <section class="section demo-section preview-host is-locked" id="teams" data-tier="Club" aria-labelledby="teams-title">
   <div class="container">
     <div class="demo-stage teams-stage reveal" id="teams-stage">
+              <span class="corner-pill locked"><svg width="10" height="10"><use href="#i-lock"/></svg> Locked · Club</span>
       <div class="demo-stage-bar teams-stagebar">
         <strong data-org-name>Bayside County Sports</strong>
         <span class="teams-url">bayside.leag.app/roster</span>
@@ -6041,12 +6111,9 @@
 
       <!-- Live region for keyboard / a11y announcements -->
       <p class="teams-sr-status" aria-live="polite" aria-atomic="true" id="teams-sr-status"></p>
-    </div>
+    <div class="lock-foot"><div class="msg">Available on <b>Club</b>. Multi-team rosters, drag-to-assign.</div><button class="btn btn-primary btn-sm" data-locked-cta data-tier="Club">Upgrade to Club · $79/mo</button></div></div>
   </div>
 </section>
-  </div>
-  <div class="lock-foot"><div class="msg">Available on <b>Club</b>. Multi-team rosters, drag-to-assign.</div><button class="btn btn-primary btn-sm" data-locked-cta data-tier="Club">Upgrade to Club · $79/mo</button></div>
-</article>
         </div>
 
         <div class="stack">
@@ -6117,10 +6184,7 @@
         </div>
       </header>
 
-      <article class="card" style="grid-column:1 / -1">
-  
-  <div class="card-body" style="padding:0">
-    <section class="section demo-section" id="registrations" aria-labelledby="registrations-title">
+      <section class="section demo-section preview-host" id="registrations" aria-labelledby="registrations-title">
   <div class="container">
     <div class="demo-stage reg-stage reveal" id="reg-stage">
       <div class="demo-stage-bar reg-stagebar">
@@ -6397,10 +6461,6 @@
     </div>
   </div>
 </section>
-    
-  </div>
-  
-</article>
 
       <div class="grid-2">
         <article class="card">
@@ -6519,6 +6579,18 @@
               </div>
             </dl>
 
+            <div class="cb-fee-toggle" role="group" aria-label="Service fee handling">
+              <div class="cb-fee-toggle-head">
+                <span class="cb-fee-toggle-label">Signup checkout fee</span>
+                <span class="cb-fee-toggle-rate">5% + $0.50</span>
+              </div>
+              <div class="cb-fee-toggle-row" role="radiogroup" aria-label="Who pays the service fee">
+                <button type="button" class="cb-fee-chip is-active" role="radio" aria-checked="true" data-fee-mode="external">Parent pays</button>
+                <button type="button" class="cb-fee-chip" role="radio" aria-checked="false" data-fee-mode="internal">Coach absorbs</button>
+              </div>
+              <div class="cb-fee-toggle-note" id="cb-fee-note">Parent sees sticker + fee. You receive sticker.</div>
+            </div>
+
             <button type="button" class="cb-share-btn" data-copy="coach.chris.leag.app/book" data-coach-url-template="coach.{slug}.leag.app/book">
               <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
                 <path d="M11 5 L11 3 L14 3 L14 6 M14 3 L8.5 8.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -6622,12 +6694,10 @@
       </header>
 
       <div class="grid-2-3">
-        <article class="card is-locked" data-tier="Club" style="grid-column:1 / -1">
-  <span class="corner-pill locked"><svg width="10" height="10"><use href="#i-lock"/></svg> Locked · Club</span>
-  <div class="card-body" style="padding:0">
-    <section class="section demo-section" id="notifications" aria-labelledby="notifications-title">
+        <section class="section demo-section preview-host is-locked" id="notifications" data-tier="Club" aria-labelledby="notifications-title">
   <div class="container">
     <div class="demo-stage notif-stage reveal" id="notifications-stage">
+              <span class="corner-pill locked"><svg width="10" height="10"><use href="#i-lock"/></svg> Locked · Club</span>
       <div class="demo-stage-bar notif-stagebar">
         <strong data-org-name>Bayside County Sports</strong>
         <span class="notif-url">bayside.leag.app/messages/new</span>
@@ -6796,12 +6866,9 @@ Coach</textarea>
         <span class="notif-foot-note">Demo only. Nothing saves, sends, or charges.</span>
         <span class="notif-foot-hint">Real sends go through your verified domain via Postmark.</span>
       </div>
-    </div>
+    <div class="lock-foot"><div class="msg">Available on <b>Club</b>. Email + SMS, segmented audiences, delivery stats.</div><button class="btn btn-primary btn-sm" data-locked-cta data-tier="Club">Upgrade to Club · $79/mo</button></div></div>
   </div>
 </section>
-  </div>
-  <div class="lock-foot"><div class="msg">Available on <b>Club</b>. Email + SMS, segmented audiences, delivery stats.</div><button class="btn btn-primary btn-sm" data-locked-cta data-tier="Club">Upgrade to Club · $79/mo</button></div>
-</article>
 
         <article class="card is-locked" data-tier="Club">
           <span class="corner-pill locked"><svg width="10" height="10"><use href="#i-lock"/></svg> Locked · Club</span>
@@ -7270,8 +7337,8 @@ Coach</textarea>
             <dt id="cb-line-label">Pitching velocity clinic</dt>
             <dd id="cb-line-amt">$45.00</dd>
           </div>
-          <div class="cb-checkout-row cb-checkout-row-quiet">
-            <dt>Service fee (5% + $0.50)</dt>
+          <div class="cb-checkout-row cb-checkout-row-quiet" id="cb-fee-row">
+            <dt id="cb-fee-label">Service fee (5% + $0.50)</dt>
             <dd id="cb-fee-amt">$2.75</dd>
           </div>
           <hr class="cb-checkout-rule">
@@ -7280,6 +7347,17 @@ Coach</textarea>
             <dd id="cb-total-amt">$47.75</dd>
           </div>
         </dl>
+      </div>
+      <div class="cb-payout-card" id="cb-payout-card" hidden>
+        <div class="cb-payout-eyebrow">Coach payout</div>
+        <div class="cb-payout-row">
+          <span>You absorb the fee</span>
+          <b id="cb-payout-fee">- $2.75</b>
+        </div>
+        <div class="cb-payout-row cb-payout-net">
+          <span>Net payout</span>
+          <b id="cb-payout-net">$32.75</b>
+        </div>
       </div>
       <div class="cb-checkout-foot-note">Demo only. Nothing saves, sends, or charges.</div>
       <footer class="cb-modal-foot">
@@ -8134,12 +8212,44 @@ Coach</textarea>
     document.getElementById("cb-checkout-meta").textContent = `${o.when} / ${o.where}`;
     document.getElementById("cb-line-label").textContent = o.title;
     const fee = +(o.price * FEE_PCT + FEE_FIXED).toFixed(2);
-    const total = +(o.price + fee).toFixed(2);
+    const absorb = !!state.feeAbsorbed;
+    const total = absorb ? o.price : +(o.price + fee).toFixed(2);
+    const payout = absorb ? +(o.price - fee).toFixed(2) : o.price;
     document.getElementById("cb-line-amt").textContent = `$${o.price.toFixed(2)}`;
+    const feeRow = document.getElementById("cb-fee-row");
+    if (feeRow) feeRow.hidden = absorb;
     document.getElementById("cb-fee-amt").textContent  = `$${fee.toFixed(2)}`;
     document.getElementById("cb-total-amt").textContent = `$${total.toFixed(2)}`;
     document.querySelector(".cb-pay-label").textContent = `Pay $${total.toFixed(2)}`;
+    const payoutCard = document.getElementById("cb-payout-card");
+    if (payoutCard) {
+      payoutCard.hidden = !absorb;
+      const pf = document.getElementById("cb-payout-fee");
+      const pn = document.getElementById("cb-payout-net");
+      if (pf) pf.textContent = `- $${fee.toFixed(2)}`;
+      if (pn) pn.textContent = `$${payout.toFixed(2)}`;
+    }
   }
+
+  /* Service-fee toggle (parent pays vs coach absorbs) */
+  function setFeeMode(mode) {
+    state.feeAbsorbed = mode === "internal";
+    document.querySelectorAll('.cb-fee-chip[data-fee-mode]').forEach(function (c) {
+      var on = c.getAttribute("data-fee-mode") === mode;
+      c.classList.toggle("is-active", on);
+      c.setAttribute("aria-checked", on ? "true" : "false");
+    });
+    var note = document.getElementById("cb-fee-note");
+    if (note) {
+      note.textContent = state.feeAbsorbed
+        ? "You eat the fee. Parent sees a clean sticker. Your payout drops by the fee."
+        : "Parent sees sticker + fee. You receive sticker.";
+    }
+    if (state.activeOffer) renderCheckout();
+  }
+  document.querySelectorAll('.cb-fee-chip[data-fee-mode]').forEach(function (chip) {
+    chip.addEventListener("click", function () { setFeeMode(chip.getAttribute("data-fee-mode")); });
+  });
 
   // Close handlers
   document.addEventListener("click", e => {
