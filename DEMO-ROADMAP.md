@@ -13,9 +13,22 @@ Nav links 6 anchors. Each should land on an interactive demo section like `#publ
 
 ## Design checkpoint — 2026-04-29
 
-All 5 outstanding nav-anchor sections have approved design briefs in `prompts/`. Each prompt is self-contained for paste into a fresh design agent (Claude Code cloud / Cloud Design / similar). Shared style canon lives in `prompts/_style-guide.md`.
+All 5 outstanding nav-anchor sections + 4 additional surfaces have approved design briefs in `prompts/`. Each prompt is self-contained for paste into a fresh design agent (Claude Code cloud / Cloud Design / similar). Shared style canon lives in `prompts/_style-guide.md`.
 
-Next up: implementation. Build order recommendation in the section below remains valid (cheapest first: Standings, Scores, Notifications, Registrations, Teams).
+**Nav-anchor demos (new sections to add):**
+- `prompts/registrations.md` — 3-step parent-signup wizard
+- `prompts/teams.md` — drag/tap roster builder + auto-balance
+- `prompts/scores.md` — live scoring + ticker
+- `prompts/standings.md` — sortable division table + last-3 sparkline
+- `prompts/notifications.md` — segment broadcast composer
+
+**Additional surfaces (revamps + 1 new):**
+- `prompts/coach-booking.md` — Calendly-style booking page (Coach $24 tier proof) — NEW section `#coach-booking`
+- `prompts/family-calendar.md` — revamps existing `#surfaces` (interactive calendar + family update pane)
+- `prompts/league-site.md` — revamps existing `#platform` (interactive mini-site browser frame, 5 tabs)
+- `prompts/marketplace.md` — revamps existing `#marketplace` (auto-typing demo + 3 audience facet sets)
+
+Next up: implementation. Build order recommendation in the section below remains valid (cheapest first: Standings, Scores, Notifications, Registrations, Teams). Revamps are larger and benefit from being last so style tokens are settled.
 
 ---
 
