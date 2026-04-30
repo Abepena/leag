@@ -2677,18 +2677,6 @@
   }
   .cb-field-error[hidden] { display: none; }
 
-  .cb-contact-note {
-    grid-column: 1 / -1;
-    margin-top: 4px;
-    padding-top: 10px;
-    border-top: 1px dashed var(--line);
-    color: var(--quiet);
-    font-family: var(--font-mono);
-    font-size: 10.5px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
   .cb-ig-hint {
     display: none;
     align-items: center;
@@ -8086,15 +8074,14 @@ Coach</textarea>
             <option value="">Select position</option>
           </select>
         </div>
-        <div class="cb-contact-note" role="presentation">Contact (at least one required)</div>
         <div class="cb-field cb-field-wide">
-          <label for="cb-email">Player or parent email</label>
-          <input type="email" id="cb-email" name="contactEmail" autocomplete="email">
+          <label for="cb-email">Player or parent email <span class="cb-req" aria-hidden="true">*</span></label>
+          <input type="email" id="cb-email" name="contactEmail" autocomplete="email" aria-required="true">
           <span class="cb-field-error" id="cb-email-err" role="alert" hidden>Enter a valid email or fill in phone.</span>
         </div>
         <div class="cb-field cb-field-wide">
-          <label for="cb-phone">Player or parent phone</label>
-          <input type="tel" id="cb-phone" name="contactPhone" autocomplete="tel">
+          <label for="cb-phone">Player or parent phone <span class="cb-req" aria-hidden="true">*</span></label>
+          <input type="tel" id="cb-phone" name="contactPhone" autocomplete="tel" aria-required="true">
           <span class="cb-field-error" id="cb-phone-err" role="alert" hidden>Enter a valid phone or fill in email.</span>
         </div>
         <div class="cb-field cb-field-wide">
