@@ -8176,15 +8176,17 @@ Coach</textarea>
       <p class="cb-waitlist-intro">This class is sold out. Drop your details and we'll email if a spot opens.</p>
       <form class="cb-form" id="cb-waitlist-form" novalidate>
         <div class="cb-field cb-field-wide">
-          <label for="cb-w-email">Parent email</label>
-          <input type="email" id="cb-w-email" autocomplete="email">
+          <label for="cb-w-email">Player or parent email <span class="cb-req" aria-hidden="true">*</span></label>
+          <input type="email" id="cb-w-email" autocomplete="email" aria-required="true">
+          <span class="cb-field-error" id="cb-w-email-err" role="alert" hidden>Enter a valid email.</span>
         </div>
         <div class="cb-field">
-          <label for="cb-w-pname">Player name</label>
-          <input type="text" id="cb-w-pname">
+          <label for="cb-w-pname">Player first + last name <span class="cb-req" aria-hidden="true">*</span></label>
+          <input type="text" id="cb-w-pname" required aria-required="true">
+          <span class="cb-field-error" id="cb-w-pname-err" role="alert" hidden>Required.</span>
         </div>
         <div class="cb-field">
-          <label for="cb-w-pos">Position</label>
+          <label for="cb-w-pos">Position (optional)</label>
           <select id="cb-w-pos" data-coach-position-select>
             <option value="">Select position</option>
           </select>
@@ -9321,6 +9323,18 @@ Coach</textarea>
 
   // Waitlist submit
   document.getElementById("cb-waitlist-submit").addEventListener("click", () => {
+    const email = document.getElementById("cb-w-email").value.trim();
+    const name  = document.getElementById("cb-w-pname").value.trim();
+    const emailValid = EMAIL_RE.test(email);
+    setFieldError("cb-w-email",  "cb-w-email-err",  !emailValid);
+    setFieldError("cb-w-pname",  "cb-w-pname-err",  !name);
+    if (!emailValid || !name) {
+      const focusId = !name ? "cb-w-pname" : "cb-w-email";
+      const el = document.getElementById(focusId);
+      if (el && el.focus) el.focus();
+      toast("Add your name and a valid email.");
+      return;
+    }
     closeModal();
     toast("You're on the list. We'll email if a spot opens.");
   });
