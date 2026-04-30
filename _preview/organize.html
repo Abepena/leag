@@ -2334,12 +2334,21 @@
     line-height: 1.05;
   }
   #coach-booking .cb-coach-role {
+    display: flex; flex-direction: column; gap: 1px;
     color: var(--muted);
     font-family: var(--font-mono);
     font-size: 11px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
+    line-height: 1.25;
   }
+  #coach-booking .cb-coach-team { color: var(--muted); }
+  #coach-booking .cb-coach-location {
+    color: var(--quiet);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+  }
+  #coach-booking .cb-coach-location:empty { display: none; }
   #coach-booking .cb-coach-toggle {
     display: none;
     width: 32px; height: 32px;
@@ -8026,7 +8035,10 @@
             </div>
             <div class="cb-coach-id">
               <h3 id="cb-coach-name" class="cb-coach-name">Coach <span data-coach-name>Chris Morales</span></h3>
-              <span class="cb-coach-role" data-coach-role>Bayside Hoops · Cresskill, NJ</span>
+              <span class="cb-coach-role" data-coach-role>
+                <span class="cb-coach-team" data-coach-team>Bayside Hoops</span>
+                <span class="cb-coach-location" data-coach-location>Cresskill, NJ</span>
+              </span>
             </div>
             <button type="button" class="cb-coach-toggle" id="cb-coach-toggle" aria-expanded="true" aria-controls="cb-coach-body" aria-label="Show coach details">
               <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
@@ -9005,7 +9017,7 @@ Coach</textarea>
     },
     softball: {
       label: "Softball",
-      role: "Bayside Fastpitch",
+      role: "Bayside Fastpitch · Cresskill, NJ",
       bio: "12 years coaching Bayside Fastpitch. ASA-certified pitching specialist.",
       positions: ["Pitcher", "Catcher", "Infielder", "Outfielder", "Other"],
       privatePrice: 80,
@@ -9036,7 +9048,7 @@ Coach</textarea>
     },
     soccer: {
       label: "Soccer",
-      role: "Bayside Soccer Academy",
+      role: "Bayside Soccer Academy · Cresskill, NJ",
       bio: "10 years coaching club soccer. USSF B-licensed.",
       positions: ["Goalkeeper", "Defender", "Midfielder", "Forward", "Other"],
       privatePrice: 80,
@@ -9063,7 +9075,7 @@ Coach</textarea>
     },
     pickleball: {
       label: "Pickleball",
-      role: "Bayside Pickleball",
+      role: "Bayside Pickleball · Cresskill, NJ",
       bio: "8 years coaching pickleball at all levels. PPR-certified, runs nightly drop-in clinics.",
       positions: ["3.0", "3.5", "4.0", "4.5+", "New to pickleball"],
       privatePrice: 90,
@@ -9604,7 +9616,11 @@ Coach</textarea>
     const tierVal = document.querySelector(".cb-priv-tier-val");
     if (tierVal) tierVal.textContent = "$" + p.privatePrice;
     PRIVATE_PRICE = privateHalfPrice();
-    document.querySelectorAll("[data-coach-role]").forEach(el => { el.textContent = p.role; });
+    const roleParts = String(p.role || "").split(/\s*·\s*/);
+    const teamStr = roleParts[0] || "";
+    const locStr = roleParts.slice(1).join(" · ");
+    document.querySelectorAll("[data-coach-team]").forEach(el => { el.textContent = teamStr; });
+    document.querySelectorAll("[data-coach-location]").forEach(el => { el.textContent = locStr; });
     document.querySelectorAll("[data-coach-bio]").forEach(el => { el.textContent = p.bio; });
     document.querySelectorAll("[data-coach-position-select]").forEach(sel => {
       const placeholder = sel.querySelector('option[value=""]');
