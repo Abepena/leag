@@ -3026,8 +3026,26 @@
     font-size: 11.5px;
     letter-spacing: 0.02em;
     line-height: 1.5;
+    position: sticky;
+    top: 0;
+    z-index: 2;
   }
-  .cb-modal-context b { color: var(--ink); font-weight: 600; }
+  .cb-modal-context b { color: var(--ink); font-weight: 600; display: block; margin-bottom: 4px; }
+  .cb-modal-context .cb-ctx-when {
+    list-style: none;
+    margin: 0; padding: 0;
+    display: flex; flex-direction: column; gap: 1px;
+  }
+  .cb-modal-context .cb-ctx-when li {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .cb-modal-context .cb-ctx-meta {
+    margin-top: 4px;
+    color: var(--quiet);
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+  }
 
   .cb-modal-autofill {
     display: flex; justify-content: flex-end;
@@ -9723,6 +9741,7 @@ Coach</textarea>
       kind: "private",
       title: `Private lesson (${fmtDuration(totalMins)}) with Coach ${(window.__leagCoach && window.__leagCoach.first) || "Chris"}`,
       when: whenLines.join(" · "),
+      whenLines: whenLines,
       where: `Bayside Field 1 (default)`,
       price: totalPrice,
       slotCount: state.selectedSlots.length,
@@ -9780,12 +9799,19 @@ Coach</textarea>
     }
   }
 
+  function escHTML(s) {
+    return String(s).replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+  }
   function syncModalForOffer() {
     const o = state.activeOffer;
     if (!o) return;
-    // Player pane context line
+    // Player pane context line — multi-line for multiple time slots
     const ctx = document.getElementById("cb-modal-context");
-    ctx.innerHTML = `<b>${o.title}</b><br>${o.when} / ${o.where} / $${o.price}`;
+    const lines = (o.whenLines && o.whenLines.length) ? o.whenLines : [o.when];
+    const whenHTML = lines.length > 1
+      ? '<ul class="cb-ctx-when">' + lines.map(l => '<li>' + escHTML(l) + '</li>').join('') + '</ul>'
+      : escHTML(lines[0]);
+    ctx.innerHTML = `<b>${escHTML(o.title)}</b>${lines.length > 1 ? '' : '<br>'}${whenHTML}<div class="cb-ctx-meta">${escHTML(o.where)} &middot; $${o.price}</div>`;
     // Checkout numbers
     document.getElementById("cb-checkout-line").textContent = o.title;
     document.getElementById("cb-checkout-meta").textContent = `${o.when} / ${o.where}`;
