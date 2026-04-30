@@ -1652,6 +1652,52 @@
     font-weight: 600;
   }
 
+  /* Per-event payout breakdown (toolbar) */
+  #coach-dash .bk-toolbar-payout {
+    display: flex; flex-direction: column; gap: 4px;
+    padding: 10px 12px;
+    border-top: 1px solid var(--line);
+    background: var(--bg-2);
+    border-radius: 0 0 6px 6px;
+  }
+  #coach-dash .bk-toolbar-payout[hidden] { display: none; }
+  #coach-dash .bk-toolbar-payout-row {
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--muted);
+  }
+  #coach-dash .bk-toolbar-payout-row b {
+    color: var(--ink); font-weight: 600;
+  }
+  #coach-dash .bk-toolbar-payout-net {
+    border-top: 1px dashed var(--line);
+    padding-top: 4px; margin-top: 2px;
+    font-size: 12px;
+  }
+  #coach-dash .bk-toolbar-payout-net b { color: var(--green); font-size: 14px; }
+  #coach-dash .bk-toolbar-fee-override {
+    display: flex; align-items: center; gap: 6px;
+    margin-top: 6px;
+    flex-wrap: wrap;
+  }
+  #coach-dash .bk-toolbar-fee-key {
+    color: var(--quiet);
+    font-family: var(--font-mono); font-size: 9.5px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    margin-right: 4px;
+  }
+  #coach-dash .bk-toolbar-fee-override .bk-fee-chip {
+    min-width: 96px;
+    padding: 4px 10px;
+    font-size: 11px;
+  }
+  #coach-dash .bk-class-payout {
+    font-family: var(--font-mono); font-size: 9.5px;
+    letter-spacing: 0.04em;
+    color: rgba(255,255,255,0.85);
+    margin-top: 1px;
+  }
+
   /* ============ COMMS ============ */
   .compose-prev {
     background: var(--surface-2);
@@ -7611,6 +7657,25 @@
                   <button type="submit" class="bk-toolbar-btn bk-toolbar-btn-primary">Apply</button>
                 </div>
               </form>
+              <div class="bk-toolbar-payout" data-payout hidden>
+                <div class="bk-toolbar-payout-row">
+                  <span>Sticker</span>
+                  <b data-payout-sticker>$0.00</b>
+                </div>
+                <div class="bk-toolbar-payout-row">
+                  <span>Service fee</span>
+                  <b data-payout-fee>- $0.00</b>
+                </div>
+                <div class="bk-toolbar-payout-row bk-toolbar-payout-net">
+                  <span>You get</span>
+                  <b data-payout-net>$0.00</b>
+                </div>
+                <div class="bk-toolbar-fee-override" role="radiogroup" aria-label="Override fee for this event">
+                  <span class="bk-toolbar-fee-key">Fee mode</span>
+                  <button type="button" class="bk-fee-chip is-active" role="radio" aria-checked="true" data-fee-mode="external">Parent pays</button>
+                  <button type="button" class="bk-fee-chip" role="radio" aria-checked="false" data-fee-mode="internal">Coach absorbs</button>
+                </div>
+              </div>
             </div>
           </template>
         </div>
@@ -8520,6 +8585,18 @@ Coach</textarea>
   window.state = s;
   if (typeof window.rerenderBkCal !== "function") {
     window.rerenderBkCal = function () {}; // stub; real impl bound by later tasks
+  }
+  // Shared fee constants + payout helper. Mirrors FEE_PCT/FEE_FIXED used in
+  // syncModalForOffer; expose so the coach-dash IIFE can compute per-event payouts.
+  if (typeof window.computePayout !== "function") {
+    var FEE_PCT = 0.05;
+    var FEE_FIXED = 0.50;
+    window.computePayout = function (sticker, mode) {
+      var s = +sticker || 0;
+      var fee = +(s * FEE_PCT + FEE_FIXED).toFixed(2);
+      var net = mode === 'internal' ? +(s - fee).toFixed(2) : s;
+      return { sticker: +s.toFixed(2), fee: fee, net: net };
+    };
   }
 })();
 
@@ -9947,9 +10024,22 @@ Coach</textarea>
       node.innerHTML = `
         <span class="bk-class-title">${c.title}</span>
         <span class="bk-class-meta">${c.startTime}–${c.endTime} · cap ${c.capacity} · $${c.price}</span>
+        ${classPayoutLine(c)}
       `;
       grid.appendChild(node);
     });
+  }
+
+  function classFeeMode(c) {
+    return (c && c.feeMode) || (window.state && window.state.feeMode) || 'external';
+  }
+  function classPayoutLine(c) {
+    const mode = classFeeMode(c);
+    if (mode !== 'internal') return '';
+    const compute = window.computePayout;
+    if (typeof compute !== 'function') return '';
+    const net = compute(c.price, mode).net;
+    return '<span class="bk-class-payout">You get $' + net.toFixed(2) + '</span>';
   }
 
   window.addEventListener("resize", () => requestAnimationFrame(renderClassOverlays));
@@ -9990,12 +10080,25 @@ Coach</textarea>
 
   const grid = $('#bk-cal-grid');
   grid.addEventListener("mousedown", e => {
+    // Class tile: handled on click (open class toolbar). Don't start a cell-drag selection.
+    const tile = e.target.closest && e.target.closest('.bk-cal-class');
+    if (tile) { e.preventDefault(); return; }
     const c = cellAt(e.target);
     if (!c || c.dataset.state === "closed") return;
     e.preventDefault();
     sel.active = true; sel.anchor = c; sel.focus = c;
     paintSelection();
     hideToolbar();
+  });
+  grid.addEventListener("click", e => {
+    const tile = e.target.closest && e.target.closest('.bk-cal-class');
+    if (!tile) return;
+    e.stopPropagation();
+    const id = tile.dataset.classId;
+    const classObj = window.__coach.classes.find(c => c.id === id);
+    if (!classObj) return;
+    clearSelection();
+    showToolbarForClass(classObj, tile);
   });
   grid.addEventListener("mouseover", e => {
     if (!sel.active) return;
@@ -10041,6 +10144,59 @@ Coach</textarea>
     toolbarEl.querySelector('[data-meta]').textContent = `${cells.length} cell${cells.length === 1 ? "" : "s"} selected`;
     toolbarEl.addEventListener("click", onToolbarClick);
     toolbarEl.querySelectorAll('form').forEach(f => f.addEventListener("submit", onFormSubmit));
+    // Cell-only selection: no class context, hide payout block.
+    toolbarEl._evt = null;
+    renderToolbarPayout(toolbarEl, null);
+  }
+  function showToolbarForClass(classObj, anchorEl) {
+    hideToolbar();
+    const tpl = document.getElementById("bk-toolbar-tpl");
+    toolbarEl = tpl.content.firstElementChild.cloneNode(true);
+    const calWrap = $('.bk-cal');
+    calWrap.appendChild(toolbarEl);
+    const calRect = calWrap.getBoundingClientRect();
+    const aRect = anchorEl.getBoundingClientRect();
+    let top = aRect.bottom - calRect.top + 6;
+    let left = aRect.right - calRect.left - 280;
+    if (left < 0) left = 8;
+    if (top + 240 > calRect.height) {
+      top = aRect.top - calRect.top - 240;
+      if (top < 0) top = 8;
+    }
+    toolbarEl.style.top = `${top}px`;
+    toolbarEl.style.left = `${left}px`;
+    toolbarEl.querySelector('[data-meta]').textContent = classObj.title;
+    toolbarEl.addEventListener("click", onToolbarClick);
+    toolbarEl.querySelectorAll('form').forEach(f => f.addEventListener("submit", onFormSubmit));
+    toolbarEl._evt = classObj;
+    renderToolbarPayout(toolbarEl, classObj);
+  }
+  function classEffectiveFeeMode(evt) {
+    return (evt && evt.feeMode) || (window.state && window.state.feeMode) || 'external';
+  }
+  function renderToolbarPayout(toolbar, evt) {
+    const block = toolbar.querySelector('[data-payout]');
+    if (!block) return;
+    // No event context (cell-only selection): hide payout entirely.
+    if (!evt) { block.hidden = true; return; }
+    const mode = classEffectiveFeeMode(evt);
+    // Sync override chips to current effective mode.
+    block.querySelectorAll('.bk-fee-chip').forEach(function (c) {
+      const active = c.dataset.feeMode === mode;
+      c.classList.toggle('is-active', active);
+      c.setAttribute('aria-checked', active ? 'true' : 'false');
+    });
+    if (mode !== 'internal') {
+      block.hidden = true;
+      return;
+    }
+    const sticker = (evt && typeof evt.price === 'number') ? evt.price : 0;
+    const compute = window.computePayout;
+    const p = compute ? compute(sticker, mode) : { sticker: sticker, fee: 0, net: sticker };
+    block.hidden = false;
+    block.querySelector('[data-payout-sticker]').textContent = '$' + p.sticker.toFixed(2);
+    block.querySelector('[data-payout-fee]').textContent = '- $' + p.fee.toFixed(2);
+    block.querySelector('[data-payout-net]').textContent = '$' + p.net.toFixed(2);
   }
   function hideToolbar() {
     if (toolbarEl) { toolbarEl.remove(); toolbarEl = null; }
@@ -10052,6 +10208,19 @@ Coach</textarea>
     if (defaultRow) defaultRow.hidden = !!name;
   }
   function onToolbarClick(e) {
+    // Per-event fee-mode override chip: mutate the class's feeMode then re-render.
+    const overrideChip = e.target.closest('.bk-toolbar-fee-override .bk-fee-chip');
+    if (overrideChip) {
+      const mode = overrideChip.dataset.feeMode;
+      const evt = toolbarEl && toolbarEl._evt;
+      if (evt && (mode === 'internal' || mode === 'external')) {
+        evt.feeMode = mode;
+        renderToolbarPayout(toolbarEl, evt);
+        markDirty();
+        if (typeof window.rerenderBkCal === 'function') window.rerenderBkCal();
+      }
+      return;
+    }
     if (e.target.matches('[data-form-cancel]')) { showForm(null); return; }
     const btn = e.target.closest('.bk-toolbar-btn');
     if (!btn) return;
@@ -10157,6 +10326,10 @@ Coach</textarea>
   window.__coachDash.notify = notify;
   window.__coachDash.ALL_TIMES = ALL_TIMES;
   window.__coachDash.DAYS = DAYS;
+  // Real implementation of the rerender hook (replaces stub at top of file).
+  // The fee-toggle chip handler calls this when feeMode changes so tiles
+  // can redraw with/without their "You get $X" line.
+  window.rerenderBkCal = function () { renderCalendar(); };
   // Re-render calendar when other components mutate state
   window.__coach.listeners.add(renderCalendar);
 
