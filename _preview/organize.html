@@ -8569,7 +8569,7 @@ Coach</textarea>
       role: "Bayside Hoops · Cresskill, NJ",
       bio: "15 years coaching middle school + high school basketball. NJ-based skills trainer, host of weekly Mon and Wed group sessions.",
       positions: ["Guard", "Wing", "Forward", "Center", "Other"],
-      privatePrice: 40,
+      privatePrice: 80,
       groupClasses: [
         { id: "g1", title: "Skills class - Middle school", when: "Mon Apr 27 / 7-8 PM",  where: "75 Stivers St, Cresskill", price: 35, cap: 12, reserved: 8 },
         { id: "g2", title: "Skills class - High school",   when: "Mon Apr 27 / 8-9 PM",  where: "75 Stivers St, Cresskill", price: 35, cap: 12, reserved: 6 },
@@ -8604,7 +8604,7 @@ Coach</textarea>
       role: "Bayside Fastpitch",
       bio: "12 years coaching Bayside Fastpitch. ASA-certified pitching specialist.",
       positions: ["Pitcher", "Catcher", "Infielder", "Outfielder", "Other"],
-      privatePrice: 40,
+      privatePrice: 80,
       groupClasses: [
         { id: "g1", title: "Pitching velocity clinic",       when: "Sat May 2 / 9-11 AM",     where: "Bayside Field 2", price: 45, cap: 8,  reserved: 6 },
         { id: "g2", title: "Hitting mechanics small-group",  when: "Sun May 3 / 10-11:30 AM", where: "Bayside Cage A",  price: 35, cap: 6,  reserved: 6 },
@@ -8635,7 +8635,7 @@ Coach</textarea>
       role: "Bayside Soccer Academy",
       bio: "10 years coaching club soccer. USSF B-licensed.",
       positions: ["Goalkeeper", "Defender", "Midfielder", "Forward", "Other"],
-      privatePrice: 40,
+      privatePrice: 80,
       groupClasses: [
         { id: "g1", title: "Finishing clinic",          when: "Sat May 2 / 9-10:30 AM",  where: "Bayside Pitch 1", price: 40, cap: 10, reserved: 7 },
         { id: "g2", title: "Goalkeeper small-group",    when: "Sun May 3 / 10-11 AM",    where: "Bayside Pitch 2", price: 35, cap: 6,  reserved: 6 },
@@ -8662,7 +8662,7 @@ Coach</textarea>
       role: "Bayside Pickleball",
       bio: "8 years coaching pickleball at all levels. PPR-certified, runs nightly drop-in clinics.",
       positions: ["3.0", "3.5", "4.0", "4.5+", "New to pickleball"],
-      privatePrice: 45,
+      privatePrice: 90,
       groupClasses: [
         { id: "g1", title: "Dinks + drops clinic",            when: "Sat May 3 / 9-10 AM",   where: "Bayside Court 3", price: 40, cap: 8, reserved: 5 },
         { id: "g2", title: "Third-shot drop class",           when: "Sun May 4 / 10-11 AM",  where: "Bayside Court 3", price: 35, cap: 8, reserved: 8 },
@@ -8688,7 +8688,13 @@ Coach</textarea>
   let CURRENT_SPORT = "basketball";
   let GROUP_CLASSES = SPORT_PRESETS[CURRENT_SPORT].groupClasses;
   let STATE_OVERRIDES = SPORT_PRESETS[CURRENT_SPORT].slotOverrides;
-  let PRIVATE_PRICE = SPORT_PRESETS[CURRENT_SPORT].privatePrice;
+  // Half-hour display price derived from the hourly rate stored in window.__coach.privateRate.
+  // SPORT_PRESETS.*.privatePrice is HOURLY (e.g. $80/hour); the booker renders 30-min slots.
+  function privateHalfPrice() {
+    const hourly = (window.__coach && window.__coach.privateRate) || SPORT_PRESETS[CURRENT_SPORT].privatePrice || 0;
+    return Math.round((hourly / 2) / 5) * 5;
+  }
+  let PRIVATE_PRICE = privateHalfPrice();
   const PRIVATE_DURATION = "30 min";
   const FEE_PCT = 0.05;
   const FEE_FIXED = 0.50;
@@ -8775,12 +8781,15 @@ Coach</textarea>
     return "open";
   }
   function slotPrice(dayKey, time) {
+    // Returns the 30-min display price. cellRates and rateRules store HOURLY values
+    // (set via the bk-rate-base / rate-form input), so derive the half-rate here.
     const k = `${dayKey}|${time}`;
-    if (window.__coach.cellRates.has(k)) return window.__coach.cellRates.get(k);
+    const halfOf = h => Math.round((h / 2) / 5) * 5;
+    if (window.__coach.cellRates.has(k)) return halfOf(window.__coach.cellRates.get(k));
     for (const r of window.__coach.rateRules) {
-      if (r.days.includes(dayKey) && timeInRange24(time, r.from, r.to)) return r.rate;
+      if (r.days.includes(dayKey) && timeInRange24(time, r.from, r.to)) return halfOf(r.rate);
     }
-    return window.__coach.privateRate;
+    return privateHalfPrice();
   }
   function classToWhenStr(c) {
     const day = DAYS.find(d => d.key === c.dayKey);
@@ -8802,7 +8811,7 @@ Coach</textarea>
     return `${day.dow} ${day.month} ${day.num} / ${startStr}-${endStr} ${eP || sP}`;
   }
   function syncFromShared() {
-    PRIVATE_PRICE = window.__coach.privateRate;
+    PRIVATE_PRICE = privateHalfPrice();
     GROUP_CLASSES = window.__coach.classes.map(c => ({
       id: c.id,
       title: c.title,
@@ -9155,7 +9164,14 @@ Coach</textarea>
     const p = SPORT_PRESETS[sportKey];
     GROUP_CLASSES = p.groupClasses;
     STATE_OVERRIDES = p.slotOverrides;
-    PRIVATE_PRICE = p.privatePrice;
+    // p.privatePrice is HOURLY; refresh shared coach state and the bk-rate-base input,
+    // then derive PRIVATE_PRICE (the 30-min display value) from the helper.
+    if (window.__coach) window.__coach.privateRate = p.privatePrice;
+    const baseInput = document.getElementById("bk-rate-base");
+    if (baseInput) baseInput.value = String(p.privatePrice);
+    const tierVal = document.querySelector(".cb-priv-tier-val");
+    if (tierVal) tierVal.textContent = "$" + Math.round((p.privatePrice / 2) / 5) * 5;
+    PRIVATE_PRICE = privateHalfPrice();
     document.querySelectorAll("[data-coach-role]").forEach(el => { el.textContent = p.role; });
     document.querySelectorAll("[data-coach-bio]").forEach(el => { el.textContent = p.bio; });
     document.querySelectorAll("[data-coach-position-select]").forEach(sel => {
