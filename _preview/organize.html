@@ -1203,128 +1203,231 @@
     text-transform: uppercase; letter-spacing: 0.08em;
   }
   #coach-dash .bk-cal-legend {
-    display: flex; flex-wrap: wrap; gap: 12px;
+    display: flex; flex-wrap: wrap; gap: 14px;
+    color: var(--quiet);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
   #coach-dash .bk-legend-item {
     display: inline-flex; align-items: center; gap: 6px;
-    color: var(--quiet); font-family: var(--font-mono);
-    font-size: 10px; letter-spacing: 0.04em;
   }
   #coach-dash .bk-legend-dot {
-    width: 10px; height: 10px; border-radius: 3px;
-    border: 1px solid var(--line);
+    width: 10px; height: 10px;
+    border-radius: 3px;
+    border: 1px solid var(--line-strong);
+    background: var(--surface-2);
   }
-  #coach-dash .bk-legend-dot[data-state="open"]    { background: var(--bg-2); border-color: var(--line-strong); }
-  #coach-dash .bk-legend-dot[data-state="booked"]  { background: color-mix(in srgb, var(--demo-accent) 60%, var(--bg-2)); border-color: var(--demo-accent); }
-  #coach-dash .bk-legend-dot[data-state="pending"] { background: color-mix(in srgb, var(--gold) 50%, var(--bg-2)); border-color: var(--gold); }
-  #coach-dash .bk-legend-dot[data-state="blocked"] { background: transparent; border-style: dashed; }
+  #coach-dash .bk-legend-dot[data-state="open"]    { background: var(--surface-2); border-color: var(--line-strong); }
+  #coach-dash .bk-legend-dot[data-state="booked"]  {
+    background-color: var(--surface-3);
+    background-image: repeating-linear-gradient(
+      135deg,
+      transparent 0 3px,
+      color-mix(in srgb, var(--quiet) 50%, transparent) 3px 4px
+    );
+    border-color: var(--line-strong);
+  }
+  #coach-dash .bk-legend-dot[data-state="pending"] {
+    background: color-mix(in srgb, var(--gold) 30%, var(--bg-2));
+    border-style: dotted;
+    border-color: var(--gold);
+  }
+  #coach-dash .bk-legend-dot[data-state="blocked"] {
+    background-color: var(--surface);
+    background-image: repeating-linear-gradient(
+      135deg,
+      transparent 0 3px,
+      color-mix(in srgb, var(--line-strong) 80%, transparent) 3px 4px
+    );
+    border-color: var(--line);
+  }
   #coach-dash .bk-legend-dot[data-state="class"]   { background: var(--demo-primary); border-color: var(--demo-primary); }
 
+  /* ============ bk-cal day-stacked redesign ============ */
   #coach-dash .bk-cal-grid {
     display: grid;
-    grid-template-columns: 64px repeat(7, minmax(0, 1fr));
-    border: 1px solid var(--line); border-radius: 8px;
-    overflow: hidden;
-    background: var(--surface-2);
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 8px;
+    background: transparent;
+    border: 0;
+    overflow: visible;
+    padding: 0;
     user-select: none;
+  }
+  #coach-dash .bk-cal-day {
+    display: flex; flex-direction: column; gap: 6px;
+    min-width: 0;
     position: relative;
   }
-  #coach-dash .bk-cal-corner {
-    background: var(--bg-2);
-    border-right: 1px solid var(--line);
+  #coach-dash .bk-cal-day-head {
+    display: flex; flex-direction: column; gap: 1px;
+    padding: 6px 8px 8px;
     border-bottom: 1px solid var(--line);
-  }
-  #coach-dash .bk-cal-day-head,
-  #coach-dash .bk-cal-time-head {
-    padding: 8px 6px;
-    border-right: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    background: var(--bg-2);
-    color: var(--quiet);
-    font-family: var(--font-mono); font-size: 9px;
-    letter-spacing: 0.16em; text-transform: uppercase;
     text-align: center;
+    background: transparent;
+    border-right: 0;
   }
-  #coach-dash .bk-cal-day-head[data-today="true"] {
-    color: var(--demo-accent);
+  #coach-dash .bk-cal-day-head .dow {
+    color: var(--quiet);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
   }
   #coach-dash .bk-cal-day-head .dnum {
-    display: block;
-    font-family: var(--font-mono); font-size: 14px; font-weight: 600;
-    color: var(--ink); letter-spacing: -0.01em; margin-top: 2px;
-    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.01em;
   }
-  #coach-dash .bk-cal-time-head {
-    font-family: var(--font-mono); font-size: 10px; font-weight: 600;
-    color: var(--muted); text-align: right;
-    padding-right: 8px;
+  #coach-dash .bk-cal-day-head[data-today="true"] .dnum {
+    color: var(--demo-accent);
   }
-  #coach-dash .bk-cal-cell {
+  #coach-dash .bk-cal-day[data-day-state="closed"] .bk-cal-day-head { opacity: 0.5; }
+
+  #coach-dash .bk-cal-slots {
+    display: flex; flex-direction: column; gap: 3px;
     position: relative;
-    min-height: 30px;
-    border-right: 1px solid var(--line);
-    border-bottom: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
-    background: var(--bg-2);
-    color: var(--muted); font-family: var(--font-mono); font-size: 10px;
-    font-variant-numeric: tabular-nums;
-    display: flex; align-items: center; justify-content: center;
-    cursor: cell;
-    transition: background 100ms, outline-color 120ms;
   }
-  #coach-dash .bk-cal-cell:hover { background: color-mix(in srgb, var(--demo-accent) 8%, var(--bg-2)); }
-  #coach-dash .bk-cal-cell[data-state="closed"] {
+  #coach-dash .bk-cal-day-empty {
+    padding: 18px 6px;
+    color: var(--faint);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-align: center;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border: 1px dashed var(--line);
+    border-radius: 6px;
+  }
+
+  #coach-dash .bk-cal-slot {
+    position: relative;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 4px 8px;
+    min-height: 28px;
+    border-radius: 5px;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    cursor: cell;
+    user-select: none;
+    transition: background 100ms, border-color 120ms, color 120ms;
+  }
+  #coach-dash .bk-cal-slot:hover {
+    border-color: var(--demo-accent);
+    color: var(--demo-accent);
+  }
+  #coach-dash .bk-cal-slot-time { flex: 0 0 auto; }
+  #coach-dash .bk-cal-slot-state {
+    font-family: var(--font-mono);
+    font-size: 8.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--quiet);
+  }
+  #coach-dash .bk-cal-slot-price {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    color: var(--quiet);
+    margin-left: auto;
+    padding-left: 6px;
+  }
+
+  #coach-dash .bk-cal-slot[data-state="closed"] {
     background: var(--surface);
     color: var(--quiet);
     cursor: not-allowed;
+    opacity: 0.7;
   }
-  #coach-dash .bk-cal-cell[data-state="closed"]:hover { background: var(--surface); }
-  #coach-dash .bk-cal-cell[data-state="booked"] {
-    background: color-mix(in srgb, var(--demo-accent) 24%, var(--bg-2));
-    color: var(--demo-accent);
+  #coach-dash .bk-cal-slot[data-state="closed"]:hover {
+    border-color: var(--line); color: var(--quiet);
   }
-  #coach-dash .bk-cal-cell[data-state="pending"] {
-    background: color-mix(in srgb, var(--gold) 18%, var(--bg-2));
-    color: var(--gold);
-  }
-  #coach-dash .bk-cal-cell[data-state="blocked"] {
-    background: var(--surface);
-    background-image: repeating-linear-gradient(135deg, transparent 0 4px, color-mix(in srgb, var(--line-strong) 80%, transparent) 4px 5px);
+  #coach-dash .bk-cal-slot[data-state="closed"] .bk-cal-slot-state { color: var(--quiet); }
+
+  #coach-dash .bk-cal-slot[data-state="blocked"] {
+    background-color: var(--surface);
+    background-image: repeating-linear-gradient(
+      135deg,
+      transparent 0 4px,
+      color-mix(in srgb, var(--line-strong) 80%, transparent) 4px 5px
+    );
     color: var(--quiet);
+    cursor: cell;
   }
-  #coach-dash .bk-cal-cell[data-selected="true"] {
-    outline: 2px solid var(--demo-accent);
-    outline-offset: -2px;
-    background: color-mix(in srgb, var(--demo-accent) 16%, var(--bg-2));
-  }
-  #coach-dash .bk-cell-price {
-    font-family: var(--font-mono); font-size: 10px; font-weight: 600;
-    color: inherit;
+  #coach-dash .bk-cal-slot[data-state="blocked"] .bk-cal-slot-state { color: var(--quiet); }
+
+  #coach-dash .bk-cal-slot[data-state="booked"] {
+    background-color: var(--surface-3);
+    background-image: repeating-linear-gradient(
+      135deg,
+      transparent 0 5px,
+      color-mix(in srgb, var(--quiet) 32%, transparent) 5px 6px
+    );
+    color: var(--quiet);
+    cursor: not-allowed;
   }
 
-  /* Group class spans */
-  #coach-dash .bk-cal-class {
-    position: absolute;
-    z-index: 2;
+  #coach-dash .bk-cal-slot[data-state="pending"] {
+    border-style: dotted;
+    border-color: color-mix(in srgb, var(--gold) 60%, transparent);
+    background: color-mix(in srgb, var(--gold) 16%, var(--bg-2));
+    color: var(--gold);
+  }
+  #coach-dash .bk-cal-slot[data-state="pending"] .bk-cal-slot-state { color: var(--gold); }
+
+  #coach-dash .bk-cal-slot[data-selected="true"] {
     background: var(--demo-primary);
     color: #fff;
-    border-radius: 4px;
+    border-color: var(--demo-primary);
+  }
+  #coach-dash .bk-cal-slot[data-selected="true"] .bk-cal-slot-state { color: rgba(255,255,255,0.85); }
+  #coach-dash .bk-cal-slot[data-selected="true"] .bk-cal-slot-price { color: rgba(255,255,255,0.75); }
+
+  /* Selection bracket (drawn around contiguous selection in a single day column) */
+  #coach-dash .bk-cal-select-bracket {
+    position: absolute;
+    pointer-events: none;
+    border: 2px solid var(--demo-accent);
+    border-radius: 7px;
+    left: -2px; right: -2px;
+    z-index: 4;
+  }
+
+  /* Class blocks — single tall tile spanning multiple slots */
+  #coach-dash .bk-cal-class {
+    display: flex; flex-direction: column; gap: 2px; justify-content: center;
     padding: 6px 8px;
-    display: flex; flex-direction: column; gap: 2px;
+    border-radius: 5px;
+    background: var(--demo-primary);
+    color: #fff;
     font-family: var(--font-sans); font-size: 11px; font-weight: 600;
     line-height: 1.15;
     cursor: pointer;
     box-shadow: 0 2px 6px -2px color-mix(in srgb, var(--demo-primary) 60%, transparent);
+    position: relative;
+    z-index: 3;
     overflow: hidden;
   }
   #coach-dash .bk-cal-class .bk-class-title {
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   #coach-dash .bk-cal-class .bk-class-meta {
-    font-family: var(--font-mono); font-size: 9px; font-weight: 500;
+    font-family: var(--font-mono); font-size: 9.5px; font-weight: 500;
     color: rgba(255,255,255,0.85); letter-spacing: 0.04em;
   }
+
   #coach-dash .bk-cal-hint {
-    margin: 0; color: var(--quiet);
+    margin: 12px 0 0; color: var(--quiet);
     font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em;
   }
 
@@ -7624,7 +7727,7 @@
               </div>
             </header>
             <div class="bk-cal-grid" id="bk-cal-grid" role="grid" aria-label="Edit availability and prices for the week"></div>
-            <p class="bk-cal-hint">Drag across cells to select. Then block, add a class, or set a custom rate. Press Esc to cancel.</p>
+            <p class="bk-cal-hint">Drag across slots to select. Then block, add a class, or set a custom rate. Press Esc to cancel.</p>
           </section>
 
           <!-- Floating toolbar template -->
@@ -9975,65 +10078,122 @@ Coach</textarea>
   })();
   const TODAY = { month: "Apr", num: 29 };
 
-  function renderCalendar() {
-    const grid = $('#bk-cal-grid');
-    const cells = [];
-    cells.push(`<div class="bk-cal-corner" role="presentation"></div>`);
-    DAYS.forEach(d => {
-      const isToday = d.month === TODAY.month && d.num === TODAY.num;
-      cells.push(`<div class="bk-cal-day-head" data-today="${isToday}" role="columnheader"><span>${d.dow}</span><span class="dnum">${d.num}</span></div>`);
-    });
-    ALL_TIMES.forEach(time => {
-      cells.push(`<div class="bk-cal-time-head" role="rowheader">${time}</div>`);
-      DAYS.forEach(d => {
-        if (!d.times.includes(time)) {
-          cells.push(`<div class="bk-cal-cell" data-state="closed" aria-disabled="true" role="gridcell"></div>`);
-          return;
-        }
-        const state = window.__coach.api.slotState(d.key, time);
-        const showPrice = state === "open";
-        const price = showPrice ? window.__coach.api.slotPrice(d.key, time) : null;
-        const inner = price != null ? `<span class="bk-cell-price">$${price}</span>` : "";
-        cells.push(`<div class="bk-cal-cell" data-state="${state}" data-day="${d.key}" data-time="${time}" role="gridcell">${inner}</div>`);
-      });
-    });
-    grid.innerHTML = cells.join("");
-    requestAnimationFrame(renderClassOverlays);
+  // Hourly base price (matches privateHalfPrice's hourly source). Used to detect
+  // "is this slot using a non-default rate?" so we only render the price chip
+  // when the rate actually deviates from the base.
+  function baseHourlyRate() {
+    return (window.__coach && window.__coach.privateRate) || 0;
+  }
+  // Returns the hourly rate that applies at (dayKey, time) — cellRates / rateRules
+  // store HOURLY values. We compare this against baseHourlyRate to decide whether
+  // to render the small price chip on a slot tile.
+  function effectiveHourlyAt(dayKey, time) {
+    const k = `${dayKey}|${time}`;
+    const cellMap = window.__coach.cellRates;
+    if (cellMap && cellMap.has(k)) return cellMap.get(k);
+    const to24 = window.__coach.api.to24;
+    const rules = window.__coach.rateRules || [];
+    for (const r of rules) {
+      if (r.days.includes(dayKey)) {
+        const t = to24(time);
+        const [fh, fm] = r.from.split(":").map(Number);
+        const [th, tm] = r.to.split(":").map(Number);
+        if (t >= fh + fm/60 && t < th + tm/60) return r.rate;
+      }
+    }
+    return baseHourlyRate();
   }
 
-  function renderClassOverlays() {
+  function renderCalendar() {
     const grid = $('#bk-cal-grid');
-    grid.querySelectorAll('.bk-cal-class').forEach(n => n.remove());
-    window.__coach.classes.forEach(c => {
-      const startCell = grid.querySelector(`.bk-cal-cell[data-day="${c.dayKey}"][data-time="${c.startTime}"]`);
-      if (!startCell) return;
-      // Find last cell whose time < endTime
-      let endCell = startCell;
-      const endT = window.__coach.api.to24(c.endTime);
-      for (let i = ALL_TIMES.length - 1; i >= 0; i--) {
-        if (window.__coach.api.to24(ALL_TIMES[i]) < endT) {
-          const cand = grid.querySelector(`.bk-cal-cell[data-day="${c.dayKey}"][data-time="${ALL_TIMES[i]}"]`);
-          if (cand) { endCell = cand; break; }
-        }
+    const to24 = window.__coach.api.to24;
+    const slotState = window.__coach.api.slotState;
+    const slotPrice = window.__coach.api.slotPrice;
+    const base = baseHourlyRate();
+    const dayHTML = DAYS.map(d => {
+      const isToday = d.month === TODAY.month && d.num === TODAY.num;
+      const dayClosed = !d.times || d.times.length === 0;
+      const dayState = dayClosed ? "closed" : "open";
+      const head =
+        `<div class="bk-cal-day-head" data-today="${isToday}" role="columnheader">` +
+          `<span class="dow">${d.dow}</span>` +
+          `<span class="dnum">${d.num}</span>` +
+        `</div>`;
+
+      if (dayClosed) {
+        return `<div class="bk-cal-day" data-day-state="closed" data-day="${d.key}" role="presentation">` +
+                 head +
+                 `<div class="bk-cal-slots"><div class="bk-cal-day-empty">Closed</div></div>` +
+               `</div>`;
       }
-      const top = startCell.offsetTop + 2;
-      const bottom = endCell.offsetTop + endCell.offsetHeight - 2;
-      const left = startCell.offsetLeft + 2;
-      const width = startCell.offsetWidth - 4;
-      const node = document.createElement("div");
-      node.className = "bk-cal-class";
-      node.style.top = `${top}px`;
-      node.style.left = `${left}px`;
-      node.style.height = `${bottom - top}px`;
-      node.style.width = `${width}px`;
-      node.dataset.classId = c.id;
-      node.innerHTML = `
-        <span class="bk-class-title">${c.title}</span>
-        <span class="bk-class-meta">${c.startTime}–${c.endTime} · cap ${c.capacity} · $${c.price}</span>
-        ${classPayoutLine(c)}
-      `;
-      grid.appendChild(node);
+
+      // Within-day rendering: walk the day's open-hour times in order, but skip
+      // any times that fall inside an existing class block (the class becomes
+      // a single tall tile rendered in its place). Then surface a closed slot
+      // for any ALL_TIMES outside d.times that fall within the day's open band
+      // (so visual rows still align across columns conceptually).
+      const dayClasses = (window.__coach.classes || [])
+        .filter(c => c.dayKey === d.key)
+        .map(c => ({ ...c, _start: to24(c.startTime), _end: to24(c.endTime) }))
+        .sort((a, b) => a._start - b._start);
+
+      // Build the ordered list of "rendered units" for this day. Each unit is
+      // either { type: 'slot', time } or { type: 'class', cls }.
+      // Insert classes at their first time-in-range; otherwise emit a slot tile.
+      const units = [];
+      const seenClass = new Set();
+      d.times.forEach(t => {
+        const t24 = to24(t);
+        // If this time is the start of a class, emit the class unit.
+        const cls = dayClasses.find(c => c._start <= t24 && c._end > t24);
+        if (cls) {
+          if (!seenClass.has(cls.id)) {
+            units.push({ type: "class", cls });
+            seenClass.add(cls.id);
+          }
+          return; // class block consumes this time
+        }
+        units.push({ type: "slot", time: t });
+      });
+
+      const slotsHTML = units.map(u => {
+        if (u.type === "class") {
+          const c = u.cls;
+          const meta = `${c.startTime}–${c.endTime} · cap ${c.capacity} · $${c.price}`;
+          // Approx ~28px per 30-min slot, +3px gap
+          const slotsCount = Math.max(1, Math.round((c._end - c._start) * 2));
+          const minH = slotsCount * 28 + (slotsCount - 1) * 3;
+          return `<div class="bk-cal-class" data-class-id="${c.id}" style="min-height:${minH}px">` +
+                   `<span class="bk-class-title">${c.title}</span>` +
+                   `<span class="bk-class-meta">${meta}</span>` +
+                   `${classPayoutLine(c)}` +
+                 `</div>`;
+        }
+        const time = u.time;
+        const state = slotState(d.key, time);
+        const stateLabel = state.toUpperCase();
+        // Price chip: only when rate != base, and only on slots that could be sold.
+        let priceHTML = "";
+        if (state === "open" || state === "booked" || state === "pending") {
+          const hourly = effectiveHourlyAt(d.key, time);
+          if (hourly !== base) {
+            const price = slotPrice(d.key, time);
+            priceHTML = `<span class="bk-cal-slot-price">$${price} / 30 min</span>`;
+          }
+        }
+        return `<div class="bk-cal-slot" data-state="${state}" data-day="${d.key}" data-time="${time}" role="gridcell">` +
+                 `<span class="bk-cal-slot-time">${time}</span>` +
+                 priceHTML +
+                 `<span class="bk-cal-slot-state">${stateLabel}</span>` +
+               `</div>`;
+      }).join("");
+
+      return `<div class="bk-cal-day" data-day-state="${dayState}" data-day="${d.key}" role="group">` +
+               head +
+               `<div class="bk-cal-slots">${slotsHTML}</div>` +
+             `</div>`;
     });
+    grid.innerHTML = dayHTML.join("");
   }
 
   function classFeeMode(c) {
@@ -10048,13 +10208,11 @@ Coach</textarea>
     return '<span class="bk-class-payout">You get $' + net.toFixed(2) + '</span>';
   }
 
-  window.addEventListener("resize", () => requestAnimationFrame(renderClassOverlays));
-
   /* ---------- Drag-to-select ---------- */
   const sel = { active: false, anchor: null, focus: null };
 
   function cellAt(target) {
-    return target && target.closest && target.closest('#bk-cal-grid .bk-cal-cell[data-day]');
+    return target && target.closest && target.closest('#bk-cal-grid .bk-cal-slot[data-day]');
   }
   function cellsBetween(a, b) {
     if (!a || !b) return [];
@@ -10068,15 +10226,43 @@ Coach</textarea>
     const grid = $('#bk-cal-grid');
     for (let di = d1; di <= d2; di++) {
       for (let ti = t1; ti <= t2; ti++) {
-        const c = grid.querySelector(`.bk-cal-cell[data-day="${DAY_KEYS[di]}"][data-time="${ALL_TIMES[ti]}"]`);
+        const c = grid.querySelector(`.bk-cal-slot[data-day="${DAY_KEYS[di]}"][data-time="${ALL_TIMES[ti]}"]`);
+        // Skip closed slots (mask) and any slot consumed by a class block (it
+        // won't be in the DOM as a .bk-cal-slot in the first place).
         if (c && c.dataset.state !== "closed") out.push(c);
       }
     }
     return out;
   }
   function paintSelection() {
-    $$('#bk-cal-grid .bk-cal-cell[data-selected="true"]').forEach(c => c.removeAttribute("data-selected"));
-    cellsBetween(sel.anchor, sel.focus).forEach(c => c.setAttribute("data-selected", "true"));
+    const grid = $('#bk-cal-grid');
+    grid.querySelectorAll('.bk-cal-slot[data-selected="true"]').forEach(c => c.removeAttribute("data-selected"));
+    grid.querySelectorAll('.bk-cal-select-bracket').forEach(n => n.remove());
+    const cells = cellsBetween(sel.anchor, sel.focus);
+    cells.forEach(c => c.setAttribute("data-selected", "true"));
+    if (!cells.length) return;
+    // Draw one bracket per day column spanning the contiguous selected tiles in that day.
+    const byDay = new Map();
+    cells.forEach(c => {
+      const k = c.dataset.day;
+      if (!byDay.has(k)) byDay.set(k, []);
+      byDay.get(k).push(c);
+    });
+    byDay.forEach(tiles => {
+      // Sort by offsetTop so first/last bracket math is correct.
+      tiles.sort((a, b) => a.offsetTop - b.offsetTop);
+      const first = tiles[0];
+      const last = tiles[tiles.length - 1];
+      const slotsWrap = first.parentElement; // .bk-cal-slots
+      if (!slotsWrap) return;
+      const top = first.offsetTop - 2;
+      const bottom = last.offsetTop + last.offsetHeight + 2;
+      const bracket = document.createElement("div");
+      bracket.className = "bk-cal-select-bracket";
+      bracket.style.top = `${top}px`;
+      bracket.style.height = `${bottom - top}px`;
+      slotsWrap.appendChild(bracket);
+    });
   }
   function clearSelection() {
     sel.active = false; sel.anchor = null; sel.focus = null;
@@ -10147,7 +10333,7 @@ Coach</textarea>
     }
     toolbarEl.style.top = `${top}px`;
     toolbarEl.style.left = `${left}px`;
-    toolbarEl.querySelector('[data-meta]').textContent = `${cells.length} cell${cells.length === 1 ? "" : "s"} selected`;
+    toolbarEl.querySelector('[data-meta]').textContent = `${cells.length} slot${cells.length === 1 ? "" : "s"} selected`;
     toolbarEl.addEventListener("click", onToolbarClick);
     toolbarEl.querySelectorAll('form').forEach(f => f.addEventListener("submit", onFormSubmit));
     // Cell-only selection: no class context, hide payout block.
