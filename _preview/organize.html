@@ -112,7 +112,26 @@
     transition: border-color 140ms ease, background 140ms ease;
   }
   .org-switcher:hover { border-color: var(--line-strong); background: var(--surface-2); }
-  .org-switcher .caret { color: var(--quiet); font-size: 10px; }
+  .org-switcher .caret { color: var(--quiet); font-size: 10px; flex: 0 0 auto; }
+  .org-switcher { max-width: 240px; min-width: 0; }
+  .org-switcher-inner {
+    display: inline-flex; align-items: center; gap: 8px;
+    min-width: 0; flex: 1 1 auto;
+  }
+  .org-switcher-initials {
+    flex: 0 0 auto;
+    width: 18px; height: 18px;
+    background: var(--demo-primary); border-radius: 4px;
+    display: grid; place-items: center;
+    color: #fff; font-family: var(--font-mono); font-size: 8px; font-weight: 700;
+  }
+  .org-switcher-name {
+    flex: 1 1 auto; min-width: 0;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  @media (max-width: 720px) {
+    .org-switcher { max-width: 160px; }
+  }
   .tier-pill {
     cursor: default;
     font-family: var(--font-mono);
@@ -313,7 +332,10 @@
   }
   .page {
     padding: 28px 32px 80px;
-    max-width: 1340px;
+    max-width: 1490px;
+    display: grid;
+    gap: 18px;
+    align-content: start;
   }
   .page-header {
     display: flex;
@@ -391,15 +413,15 @@
     margin-bottom: 8px;
   }
   .kpi-val {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: 32px;
+    font-family: var(--font-mono);
+    font-size: 28px;
+    font-weight: 600;
     line-height: 1;
     color: var(--ink);
-    letter-spacing: 0.005em;
+    letter-spacing: -0.01em;
     font-variant-numeric: tabular-nums;
   }
-  .kpi-val .unit { font-size: 18px; color: var(--quiet); margin-right: 2px; font-style: italic; }
+  .kpi-val .unit { font-size: 16px; color: var(--quiet); margin-right: 2px; font-weight: 500; }
   .kpi-sub {
     margin-top: 8px;
     font-family: var(--font-mono);
@@ -658,7 +680,8 @@
   .mini-table th, .mini-table td { padding: 9px 12px; }
   .mini-table .name { font-weight: 500; }
   .mini-table .ours { color: var(--demo-primary); font-weight: 600; }
-  .mini-table tr.ours-row td { background: color-mix(in srgb, var(--demo-primary) 8%, transparent); border-left: 3px solid var(--demo-primary); }
+  .mini-table tr.ours-row td { background: color-mix(in srgb, var(--demo-primary) 8%, transparent); }
+  .mini-table tr.ours-row td:first-child { border-left: 3px solid var(--demo-primary); }
 
   /* sparkline */
   .spark {
@@ -704,12 +727,13 @@
     color: var(--quiet);
   }
   .day-head .dnum {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: 18px;
+    font-family: var(--font-mono);
+    font-size: 16px;
+    font-weight: 600;
     color: var(--ink);
     line-height: 1;
     margin-top: 2px;
+    font-variant-numeric: tabular-nums;
   }
   .day-events { padding: 8px; display: flex; flex-direction: column; gap: 6px; }
   .day-event {
@@ -722,6 +746,74 @@
   }
   .day-event .time { font-family: var(--font-mono); font-size: 10px; color: var(--demo-accent); display: block; }
   .day-event b { font-weight: 600; }
+
+  /* Month calendar (Schedule page) */
+  .month-cal {
+    display: flex; flex-direction: column;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 4px;
+  }
+  .month-dow-row, .month-row {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+  .month-dow-row { background: var(--bg-2); border-bottom: 1px solid var(--line); }
+  .month-dow {
+    padding: 8px 10px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--quiet);
+    border-right: 1px solid var(--line);
+  }
+  .month-dow:last-child { border-right: 0; }
+  .month-row { border-bottom: 1px solid var(--line); }
+  .month-row:last-child { border-bottom: 0; }
+  .month-cell {
+    min-height: 88px;
+    padding: 6px 8px 8px;
+    border-right: 1px solid var(--line);
+    background: var(--surface-2);
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .month-cell:last-child { border-right: 0; }
+  .month-cell.is-out { background: var(--bg-2); }
+  .month-cell.is-out .month-num { color: var(--quiet); }
+  .month-cell.is-current-week { background: color-mix(in srgb, var(--demo-primary) 8%, var(--surface-2)); }
+  .month-cell.is-today { box-shadow: inset 0 0 0 1px var(--demo-primary); }
+  .month-num {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .month-event {
+    background: color-mix(in srgb, var(--demo-primary) 18%, transparent);
+    border-left: 2px solid var(--demo-primary);
+    border-radius: 2px;
+    padding: 3px 5px;
+    font-size: 10px;
+    line-height: 1.25;
+    color: var(--ink);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .month-event .time {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--demo-accent);
+    display: block;
+  }
+  @media (max-width: 720px) {
+    .month-cell { min-height: 60px; padding: 4px 6px 6px; gap: 2px; }
+    .month-num { font-size: 12px; }
+    .month-event { font-size: 9px; padding: 2px 4px; }
+    .month-dow { padding: 6px 4px; font-size: 8px; }
+  }
 
   /* generator wizard */
   .wizard-form { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
@@ -754,10 +846,11 @@
     border: 1px solid var(--line);
     border-radius: 6px;
     padding: 14px;
-    display: flex; gap: 10px; align-items: center;
-    height: 96px;
+    display: flex; align-items: center; justify-content: center;
+    align-self: stretch;
+    min-height: 180px;
   }
-  .bracket-prev svg { width: 100%; height: 100%; }
+  .bracket-prev svg { width: 100%; height: auto; max-height: 240px; display: block; }
 
   /* ============ ROSTER ============ */
   .team-tabs {
@@ -872,10 +965,12 @@
     margin-bottom: 6px;
   }
   .ach-kpi .v {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: 22px;
+    font-family: var(--font-mono);
+    font-size: 20px;
+    font-weight: 600;
     line-height: 1;
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
     color: var(--ink);
     font-variant-numeric: tabular-nums;
   }
@@ -975,6 +1070,357 @@
   }
   .seat-bar > i { display: block; height: 100%; background: var(--green); }
   .seat-count { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+
+  /* Coach booking dashboard - rate rules + week calendar */
+
+  #coach-dash .card-body {
+    display: flex; flex-direction: column; gap: 16px;
+  }
+
+  /* Rate rules panel */
+  #coach-dash .bk-rates {
+    border: 1px solid var(--line); border-radius: var(--radius);
+    background: var(--surface-2);
+    padding: 14px 16px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  #coach-dash .bk-rates-head {
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
+    flex-wrap: wrap;
+  }
+  #coach-dash .bk-rates-title {
+    margin: 0; font-family: var(--font-sans);
+    font-size: 13px; font-weight: 700; color: var(--ink);
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  #coach-dash .bk-rates-sub {
+    margin: 4px 0 0; color: var(--quiet);
+    font-family: var(--font-sans); font-size: 12px;
+  }
+  #coach-dash .bk-rates-base {
+    display: flex; align-items: end; gap: 10px;
+  }
+  #coach-dash .bk-rates-base-label {
+    display: flex; flex-direction: column; gap: 3px;
+  }
+  #coach-dash .bk-rates-base-label > span:first-child {
+    color: var(--quiet); font-family: var(--font-mono);
+    font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  #coach-dash .bk-rates-base-input {
+    display: inline-flex; align-items: center; gap: 2px;
+    background: var(--bg-2); border: 1px solid var(--line); border-radius: 6px;
+    padding: 4px 8px;
+  }
+  #coach-dash .bk-rates-base-input input {
+    width: 60px; background: transparent; border: 0; padding: 2px 0;
+    color: var(--ink); font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  #coach-dash .bk-rates-base-input input:focus { outline: none; }
+  #coach-dash .bk-rates-empty {
+    margin: 0; color: var(--quiet);
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.02em;
+  }
+  #coach-dash .bk-rate-list {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  #coach-dash .bk-rate-list:empty { display: none; }
+  #coach-dash .bk-rate-row {
+    display: grid;
+    grid-template-columns: minmax(180px, 1.2fr) minmax(160px, 1fr) auto auto;
+    gap: 10px; align-items: center;
+    padding: 8px 10px;
+    border: 1px solid var(--line); border-radius: 6px;
+    background: var(--bg-2);
+  }
+  @media (max-width: 720px) {
+    #coach-dash .bk-rate-row { grid-template-columns: 1fr 1fr; }
+  }
+  #coach-dash .bk-rate-days {
+    display: flex; gap: 3px; flex-wrap: wrap;
+  }
+  #coach-dash .bk-day-chip {
+    width: 26px; height: 22px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border: 1px solid var(--line); border-radius: 4px;
+    background: transparent; color: var(--quiet);
+    font-family: var(--font-mono); font-size: 9px; font-weight: 600;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    cursor: pointer; transition: background 140ms, color 140ms, border-color 140ms;
+  }
+  #coach-dash .bk-day-chip[aria-pressed="true"] {
+    background: color-mix(in srgb, var(--demo-accent) 16%, var(--bg-2));
+    color: var(--demo-accent);
+    border-color: color-mix(in srgb, var(--demo-accent) 60%, transparent);
+  }
+  #coach-dash .bk-rate-times {
+    display: flex; align-items: center; gap: 6px;
+    color: var(--muted); font-family: var(--font-mono); font-size: 12px;
+  }
+  #coach-dash .bk-rate-times input {
+    width: 80px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 4px;
+    padding: 4px 6px;
+    color: var(--ink); font-family: var(--font-mono); font-size: 12px;
+  }
+  #coach-dash .bk-rate-amt {
+    display: inline-flex; align-items: center; gap: 2px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 4px;
+    padding: 4px 8px;
+  }
+  #coach-dash .bk-rate-amt input {
+    width: 56px; background: transparent; border: 0; padding: 0;
+    color: var(--ink); font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  #coach-dash .bk-rate-amt input:focus { outline: none; }
+  #coach-dash .bk-rate-remove {
+    width: 26px; height: 26px;
+    border: 1px solid var(--line); border-radius: 4px;
+    background: transparent; color: var(--quiet);
+    font-size: 14px; line-height: 1; cursor: pointer;
+    transition: border-color 140ms, color 140ms;
+  }
+  #coach-dash .bk-rate-remove:hover { border-color: var(--demo-accent); color: var(--demo-accent); }
+  #coach-dash .bk-edit-prefix {
+    color: var(--quiet); font-family: var(--font-mono); font-size: 12px;
+  }
+
+  /* Calendar */
+  #coach-dash .bk-cal {
+    display: flex; flex-direction: column; gap: 10px;
+    position: relative;
+  }
+  #coach-dash .bk-cal-head {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+    flex-wrap: wrap;
+  }
+  #coach-dash .bk-cal-title {
+    margin: 0; font-family: var(--font-sans);
+    font-size: 13px; font-weight: 700; color: var(--ink);
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  #coach-dash .bk-cal-legend {
+    display: flex; flex-wrap: wrap; gap: 12px;
+  }
+  #coach-dash .bk-legend-item {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--quiet); font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: 0.04em;
+  }
+  #coach-dash .bk-legend-dot {
+    width: 10px; height: 10px; border-radius: 3px;
+    border: 1px solid var(--line);
+  }
+  #coach-dash .bk-legend-dot[data-state="open"]    { background: var(--bg-2); border-color: var(--line-strong); }
+  #coach-dash .bk-legend-dot[data-state="booked"]  { background: color-mix(in srgb, var(--demo-accent) 60%, var(--bg-2)); border-color: var(--demo-accent); }
+  #coach-dash .bk-legend-dot[data-state="pending"] { background: color-mix(in srgb, var(--gold) 50%, var(--bg-2)); border-color: var(--gold); }
+  #coach-dash .bk-legend-dot[data-state="blocked"] { background: transparent; border-style: dashed; }
+  #coach-dash .bk-legend-dot[data-state="class"]   { background: var(--demo-primary); border-color: var(--demo-primary); }
+
+  #coach-dash .bk-cal-grid {
+    display: grid;
+    grid-template-columns: 64px repeat(7, minmax(0, 1fr));
+    border: 1px solid var(--line); border-radius: 8px;
+    overflow: hidden;
+    background: var(--surface-2);
+    user-select: none;
+    position: relative;
+  }
+  #coach-dash .bk-cal-corner {
+    background: var(--bg-2);
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  #coach-dash .bk-cal-day-head,
+  #coach-dash .bk-cal-time-head {
+    padding: 8px 6px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-2);
+    color: var(--quiet);
+    font-family: var(--font-mono); font-size: 9px;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    text-align: center;
+  }
+  #coach-dash .bk-cal-day-head[data-today="true"] {
+    color: var(--demo-accent);
+  }
+  #coach-dash .bk-cal-day-head .dnum {
+    display: block;
+    font-family: var(--font-mono); font-size: 14px; font-weight: 600;
+    color: var(--ink); letter-spacing: -0.01em; margin-top: 2px;
+    font-variant-numeric: tabular-nums;
+  }
+  #coach-dash .bk-cal-time-head {
+    font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+    color: var(--muted); text-align: right;
+    padding-right: 8px;
+  }
+  #coach-dash .bk-cal-cell {
+    position: relative;
+    min-height: 30px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+    background: var(--bg-2);
+    color: var(--muted); font-family: var(--font-mono); font-size: 10px;
+    font-variant-numeric: tabular-nums;
+    display: flex; align-items: center; justify-content: center;
+    cursor: cell;
+    transition: background 100ms, outline-color 120ms;
+  }
+  #coach-dash .bk-cal-cell:hover { background: color-mix(in srgb, var(--demo-accent) 8%, var(--bg-2)); }
+  #coach-dash .bk-cal-cell[data-state="closed"] {
+    background: var(--surface);
+    color: var(--quiet);
+    cursor: not-allowed;
+  }
+  #coach-dash .bk-cal-cell[data-state="closed"]:hover { background: var(--surface); }
+  #coach-dash .bk-cal-cell[data-state="booked"] {
+    background: color-mix(in srgb, var(--demo-accent) 24%, var(--bg-2));
+    color: var(--demo-accent);
+  }
+  #coach-dash .bk-cal-cell[data-state="pending"] {
+    background: color-mix(in srgb, var(--gold) 18%, var(--bg-2));
+    color: var(--gold);
+  }
+  #coach-dash .bk-cal-cell[data-state="blocked"] {
+    background: var(--surface);
+    background-image: repeating-linear-gradient(135deg, transparent 0 4px, color-mix(in srgb, var(--line-strong) 80%, transparent) 4px 5px);
+    color: var(--quiet);
+  }
+  #coach-dash .bk-cal-cell[data-selected="true"] {
+    outline: 2px solid var(--demo-accent);
+    outline-offset: -2px;
+    background: color-mix(in srgb, var(--demo-accent) 16%, var(--bg-2));
+  }
+  #coach-dash .bk-cell-price {
+    font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+    color: inherit;
+  }
+
+  /* Group class spans */
+  #coach-dash .bk-cal-class {
+    position: absolute;
+    z-index: 2;
+    background: var(--demo-primary);
+    color: #fff;
+    border-radius: 4px;
+    padding: 6px 8px;
+    display: flex; flex-direction: column; gap: 2px;
+    font-family: var(--font-sans); font-size: 11px; font-weight: 600;
+    line-height: 1.15;
+    cursor: pointer;
+    box-shadow: 0 2px 6px -2px color-mix(in srgb, var(--demo-primary) 60%, transparent);
+    overflow: hidden;
+  }
+  #coach-dash .bk-cal-class .bk-class-title {
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  #coach-dash .bk-cal-class .bk-class-meta {
+    font-family: var(--font-mono); font-size: 9px; font-weight: 500;
+    color: rgba(255,255,255,0.85); letter-spacing: 0.04em;
+  }
+  #coach-dash .bk-cal-hint {
+    margin: 0; color: var(--quiet);
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em;
+  }
+
+  /* Floating toolbar */
+  #coach-dash .bk-toolbar {
+    position: absolute; z-index: 10;
+    display: flex; flex-direction: column; gap: 8px;
+    padding: 10px;
+    background: var(--surface);
+    border: 1px solid var(--line-strong); border-radius: 8px;
+    box-shadow: 0 12px 28px -10px rgba(0,0,0,0.45);
+    max-width: min(440px, calc(100vw - 40px));
+    animation: bk-toolbar-in 160ms ease-out;
+  }
+  @keyframes bk-toolbar-in {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: none; }
+  }
+  #coach-dash .bk-toolbar-row {
+    display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  }
+  #coach-dash .bk-toolbar-meta {
+    color: var(--quiet); font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: 0.04em; text-transform: uppercase;
+    margin-right: 4px;
+  }
+  #coach-dash .bk-toolbar-btn {
+    background: var(--bg-2); border: 1px solid var(--line); border-radius: 6px;
+    padding: 6px 10px;
+    color: var(--ink); font-family: var(--font-sans);
+    font-size: 12px; font-weight: 600;
+    cursor: pointer;
+    transition: background 140ms, border-color 140ms, color 140ms;
+  }
+  #coach-dash .bk-toolbar-btn:hover {
+    border-color: var(--demo-accent); color: var(--demo-accent);
+  }
+  #coach-dash .bk-toolbar-btn-ghost {
+    background: transparent; border-color: var(--line);
+    color: var(--quiet);
+    padding: 6px 8px;
+  }
+  #coach-dash .bk-toolbar-btn-primary {
+    background: var(--demo-primary); border-color: var(--demo-primary); color: #fff;
+  }
+  #coach-dash .bk-toolbar-btn-primary:hover {
+    background: color-mix(in srgb, var(--demo-primary) 88%, white);
+    color: #fff;
+  }
+  #coach-dash .bk-toolbar-form {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    width: 100%;
+    padding-top: 8px;
+    border-top: 1px solid var(--line);
+    margin: 0;
+  }
+  #coach-dash .bk-toolbar-form .bk-edit-field {
+    display: flex; flex-direction: column; gap: 3px;
+    min-width: 0;
+  }
+  #coach-dash .bk-toolbar-form .bk-edit-field > span:first-child {
+    color: var(--quiet); font-family: var(--font-mono);
+    font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  #coach-dash .bk-toolbar-form .bk-edit-field input,
+  #coach-dash .bk-toolbar-form .bk-edit-field select {
+    background: var(--bg-2); border: 1px solid var(--line); border-radius: 6px;
+    padding: 6px 8px;
+    color: var(--ink); font-family: var(--font-sans); font-size: 12px;
+    min-width: 0; width: 100%;
+  }
+  #coach-dash .bk-toolbar-form .bk-edit-num {
+    flex-direction: row; flex-wrap: wrap; align-items: center;
+  }
+  #coach-dash .bk-toolbar-form .bk-edit-num > span:first-child {
+    flex: 1 0 100%;
+  }
+  #coach-dash .bk-toolbar-form .bk-edit-num input {
+    flex: 1; font-family: var(--font-mono); font-variant-numeric: tabular-nums;
+  }
+  #coach-dash .bk-toolbar-form-actions {
+    grid-column: 1 / -1;
+    display: flex; gap: 6px; justify-content: flex-end;
+  }
+
+  /* Save / discard pending state */
+  #coach-dash .card-head-actions [disabled] { opacity: 0.5; cursor: not-allowed; }
+  #coach-dash[data-dirty="true"] #bk-save {
+    background: var(--demo-primary);
+    border-color: var(--demo-primary);
+    color: #fff;
+    opacity: 1; cursor: pointer;
+  }
+  #coach-dash[data-dirty="true"] #bk-discard {
+    opacity: 1; cursor: pointer;
+  }
 
   /* ============ COMMS ============ */
   .compose-prev {
@@ -1222,11 +1668,13 @@
     border-radius: 6px;
   }
   .seats-bar .v {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: 22px;
+    font-family: var(--font-mono);
+    font-size: 20px;
+    font-weight: 600;
     color: var(--ink);
     line-height: 1;
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
   }
   .seats-bar .v small { font-size: 13px; color: var(--quiet); margin-left: 4px; }
 
@@ -1282,7 +1730,7 @@
 
   /* ============ PAGE BODY HIDE FOR INACTIVE TABS ============ */
   .tab-pane { display: none; }
-  .tab-pane.active { display: block; animation: fade 160ms ease; }
+  .tab-pane.active { display: grid; animation: fade 160ms ease; }
   @keyframes fade {
     from { opacity: 0; transform: translateY(4px); }
     to { opacity: 1; transform: none; }
@@ -1514,6 +1962,25 @@
   }
 
   /* ---------- Offerings & tabs ---------- */
+  #coach-booking .cb-offerings-wrap {
+    display: flex; flex-direction: column; gap: 10px;
+    min-width: 0;
+  }
+  #coach-booking .cb-offerings-eyebrow {
+    display: flex; align-items: baseline; gap: 10px;
+    padding: 0 2px;
+  }
+  #coach-booking .cb-offerings-eyebrow-key {
+    color: var(--quiet); font-family: var(--font-mono); font-size: 10px;
+    font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+  }
+  #coach-booking .cb-offerings-eyebrow-title {
+    margin: 0;
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 16px; font-weight: 700; letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
   #coach-booking .cb-offerings {
     border: 1px solid var(--line);
     border-radius: var(--radius);
@@ -1765,11 +2232,11 @@
   }
   #coach-booking .cb-priv-weekrange strong {
     color: var(--ink);
-    font-family: var(--font-display);
-    font-style: italic;
+    font-family: var(--font-sans);
     font-size: 14px;
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1;
+    letter-spacing: -0.005em;
   }
   #coach-booking .cb-priv-weekrange span {
     color: var(--quiet);
@@ -3178,8 +3645,8 @@
   }
   #teams .teams-bin-title {
     margin: 0; color: var(--ink);
-    font-family: var(--font-display); font-style: italic;
-    font-size: 22px; font-weight: 800; letter-spacing: 0.005em; line-height: 1.05;
+    font-family: var(--font-sans);
+    font-size: 18px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.15;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
   }
   #teams .teams-rename { cursor: text; outline: none; border-radius: 4px; padding: 0 2px; margin: 0 -2px; }
@@ -4400,37 +4867,40 @@
   #scores .scores-controls {
     display: grid;
     grid-template-columns: 1fr minmax(220px, auto) 1fr;
-    gap: 16px;
-    padding: 18px 22px;
+    gap: 14px;
+    padding: 14px 22px;
     border-top: 1px solid var(--line);
     background: rgba(8, 16, 15, 0.42);
+    align-items: stretch;
   }
   #scores .scores-controls.is-final .scores-pill { display: none; }
   #scores .scores-controls-team {
     display: flex; flex-direction: column; gap: 6px;
-    padding: 12px 14px;
+    padding: 10px 12px;
     border: 1px solid var(--line); border-radius: var(--radius);
     background: var(--surface-2);
   }
   #scores .scores-controls-team--home { align-items: flex-end; text-align: right; }
+  #scores .scores-recap[hidden] { display: none !important; }
   #scores .scores-controls-eyebrow {
     color: var(--quiet); font-family: var(--font-mono); font-size: 10px;
     font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
   }
   #scores .scores-controls-name {
-    color: var(--ink); font-family: var(--font-display); font-style: italic;
-    font-size: 20px; font-weight: 800; line-height: 1;
-    text-transform: uppercase; letter-spacing: 0.01em;
+    color: var(--ink); font-family: var(--font-sans);
+    font-size: 15px; font-weight: 700; line-height: 1.1;
+    letter-spacing: -0.005em;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;
   }
   #scores .scores-controls-pills {
-    margin-top: 8px; display: flex; gap: 8px;
+    margin-top: 6px; display: flex; gap: 6px;
+    align-self: stretch; width: 100%;
   }
   #scores .scores-pill {
-    flex: 1; min-height: 48px; padding: 0 16px;
-    border-radius: 999px; border: 1px solid var(--line-strong);
+    flex: 1 1 0; min-width: 0; min-height: 40px; padding: 0 14px;
+    border-radius: 8px; border: 1px solid var(--line-strong);
     background: var(--bg-2); color: var(--ink);
-    font-family: var(--font-mono); font-size: 16px; font-weight: 700;
+    font-family: var(--font-mono); font-size: 15px; font-weight: 700;
     font-variant-numeric: tabular-nums; cursor: pointer;
     transition: background 140ms, border-color 140ms, color 140ms, transform 60ms, box-shadow 140ms;
   }
@@ -4440,7 +4910,6 @@
   }
   #scores .scores-pill--plus {
     background: var(--demo-primary); border-color: var(--demo-primary); color: #fff;
-    font-size: 18px;
   }
   #scores .scores-pill--plus:hover {
     background: color-mix(in srgb, var(--demo-primary) 86%, white);
@@ -4473,8 +4942,9 @@
     text-transform: uppercase; color: var(--quiet);
   }
   #scores .scores-count-readout strong {
-    font-family: var(--font-display); font-style: italic; font-size: 22px;
+    font-family: var(--font-mono); font-weight: 600; font-size: 22px;
     color: var(--ink); font-variant-numeric: tabular-nums; line-height: 1;
+    letter-spacing: -0.01em;
   }
   #scores .scores-count-actions {
     display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px;
@@ -4482,6 +4952,12 @@
   #scores .scores-count-actions .scores-btn {
     min-height: 36px; padding: 6px 10px; font-size: 12px;
   }
+  #scores .scores-count-actions .scores-count-actions-full { grid-column: 1 / -1; }
+  #scores .scores-btn--step {
+    flex: 0 0 auto; width: 38px; padding: 0; min-height: 38px;
+    font-size: 18px; line-height: 1;
+  }
+  #scores .scores-btn--step:hover { border-color: var(--demo-accent); color: var(--demo-accent); }
   #scores .scores-btn {
     display: inline-flex; flex-direction: column; gap: 2px;
     align-items: center; justify-content: center;
@@ -4815,11 +5291,10 @@
   }
   #publish-schedule .publish-week-indicator strong {
     color: var(--ink);
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: 16px;
-    font-weight: 800;
-    letter-spacing: 0.005em;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.005em;
     line-height: 1;
   }
   #publish-schedule .publish-week-indicator span {
@@ -4950,8 +5425,8 @@
   }
   #publish-schedule .publish-bin-title {
     margin: 0; color: var(--ink);
-    font-family: var(--font-display); font-style: italic;
-    font-size: 22px; font-weight: 800; letter-spacing: 0.005em; line-height: 1.05;
+    font-family: var(--font-sans);
+    font-size: 18px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.15;
   }
   #publish-schedule .publish-bin-hint {
     color: var(--quiet); font-family: var(--font-mono); font-size: 10px;
@@ -4985,8 +5460,9 @@
     font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em;
   }
   #publish-schedule .publish-day-num {
-    color: var(--ink); font-family: var(--font-display); font-style: italic;
-    font-size: 26px; font-weight: 800; line-height: 1;
+    color: var(--ink); font-family: var(--font-mono);
+    font-size: 22px; font-weight: 600; line-height: 1;
+    font-variant-numeric: tabular-nums; letter-spacing: -0.02em;
   }
   #publish-schedule .publish-day-events {
     display: flex; flex-direction: column; gap: 6px;
@@ -5302,8 +5778,10 @@
   /* ===== Spliced preview embeds: neutralize landing-page section/container chrome ===== */
   .preview-host.section { padding: 0; border: 0; margin: 0; }
   .preview-host .container { padding: 0; max-width: none; width: auto; margin: 0; }
-  .preview-host { position: relative; }
+  .preview-host { position: relative; overflow: visible; }
   .preview-host .demo-stage { position: relative; }
+  /* Pills live as direct children of preview-host so demo-stage overflow:hidden never clips them. */
+  .preview-host > .corner-pill { z-index: 5; }
   /* Locked state -- dashed gold-tinted border on the demo-stage itself */
   .preview-host.is-locked .demo-stage { border-style: dashed; border-color: var(--line-strong); }
   /* Beta state -- green outline */
@@ -5352,10 +5830,10 @@
       <a href="index.html" class="wordmark" aria-label="LEAG home">LEAG</a>
       <span class="topbar-divider"></span>
 
-      <button class="org-switcher" id="org-switcher" aria-haspopup="true" aria-expanded="false">
-        <span style="display:inline-flex;align-items:center;gap:8px">
-          <span data-org-initials style="width:18px;height:18px;background:var(--demo-primary);border-radius:4px;display:grid;place-items:center;color:#fff;font-family:var(--font-mono);font-size:8px;font-weight:700">BC</span>
-          Bayside County Sports
+      <button class="org-switcher" id="org-switcher" aria-haspopup="true" aria-expanded="false" title="Bayside County Sports">
+        <span class="org-switcher-inner">
+          <span data-org-initials class="org-switcher-initials">BC</span>
+          <span class="org-switcher-name" data-org-name>Bayside County Sports</span>
         </span>
         <span class="caret">▾</span>
       </button>
@@ -5499,23 +5977,7 @@
 
       <div class="grid-2-3">
         <div class="stack">
-          <!-- Upcoming games (Live) -->
-          <article class="card">
-            <header class="card-head">
-              <div class="titles">
-                <div class="eyebrow">Live · Upcoming games</div>
-                <h2 class="card-title">Next 5 on the schedule</h2>
-              </div>
-              <div class="card-head-actions">
-                <button class="btn btn-secondary btn-sm">View all</button>
-              </div>
-            </header>
-            <div class="card-body tight">
-              <div class="games-list" data-render="ov-games"></div>
-            </div>
-          </article>
-
-          <!-- Pickup payment cap (Soon) -->
+          <!-- Live scoreboard preview -->
           <section class="section demo-section preview-host" id="scores" aria-labelledby="scores-title">
   <div class="container">
     <div class="demo-stage scores-stage reveal" id="scores-stage">
@@ -5663,12 +6125,16 @@
               <button type="button" class="scores-btn scores-btn--ghost" data-count-action="ball">Ball +</button>
               <button type="button" class="scores-btn scores-btn--ghost" data-count-action="strike">Strike +</button>
               <button type="button" class="scores-btn scores-btn--ghost" data-count-action="out">Out +</button>
-              <button type="button" class="scores-btn scores-btn--ghost" data-count-action="reset-count">Reset count</button>
+              <button type="button" class="scores-btn scores-btn--ghost" data-count-action="out-minus">Out -</button>
+              <button type="button" class="scores-btn scores-btn--ghost scores-count-actions-full" data-count-action="reset-count">Reset count</button>
             </div>
-            <button type="button" class="scores-btn scores-btn--primary" id="scores-next">
-              <span class="scores-btn-label">Next half-inning</span>
-              <span class="scores-btn-meta" id="scores-next-meta">Currently Top 5</span>
-            </button>
+            <div class="scores-controls-state-row">
+              <button type="button" class="scores-btn scores-btn--ghost scores-btn--step" id="scores-prev" aria-label="Previous half-inning" title="Previous half-inning">‹</button>
+              <button type="button" class="scores-btn scores-btn--primary" id="scores-next">
+                <span class="scores-btn-label">Next half-inning</span>
+                <span class="scores-btn-meta" id="scores-next-meta">Currently Top 5</span>
+              </button>
+            </div>
             <div class="scores-controls-state-row">
               <button type="button" class="scores-btn scores-btn--final" id="scores-final" disabled>End game</button>
               <button type="button" class="scores-btn scores-btn--ghost" id="scores-reset">Reset</button>
@@ -5694,6 +6160,22 @@
     </div>
   </div>
 </section>
+
+          <!-- Upcoming games (Live) -->
+          <article class="card">
+            <header class="card-head">
+              <div class="titles">
+                <div class="eyebrow">Live · Upcoming games</div>
+                <h2 class="card-title">Next 5 on the schedule</h2>
+              </div>
+              <div class="card-head-actions">
+                <button class="btn btn-secondary btn-sm">View all</button>
+              </div>
+            </header>
+            <div class="card-body tight">
+              <div class="games-list" data-render="ov-games"></div>
+            </div>
+          </article>
         </div>
 
         <div class="stack">
@@ -5786,11 +6268,11 @@
         </div>
       </header>
 
-      <div class="grid-2" style="grid-template-columns:1.1fr 1fr">
+      <div class="stack">
         <article class="card">
           <header class="card-head">
             <div class="titles">
-              <div class="eyebrow">Live · Manual schedule</div>
+              <div class="eyebrow">Live · Manual schedule · May 2026</div>
               <h2 class="card-title"><span data-stoken="team">Breakers</span> (1 team)</h2>
               <p class="card-sub">Drag to add events. Conflicts surface immediately.</p>
             </div>
@@ -5800,40 +6282,90 @@
             </div>
           </header>
           <div class="card-body">
-            <div class="day-strip">
-              <div class="day-col"><div class="day-head"><div class="dow">Mon</div><div class="dnum">4</div></div><div class="day-events"></div></div>
-              <div class="day-col"><div class="day-head"><div class="dow">Tue</div><div class="dnum">5</div></div><div class="day-events"></div></div>
-              <div class="day-col"><div class="day-head"><div class="dow">Wed</div><div class="dnum">6</div></div><div class="day-events"></div></div>
-              <div class="day-col"><div class="day-head"><div class="dow">Thu</div><div class="dnum">7</div></div><div class="day-events"></div></div>
-              <div class="day-col"><div class="day-head"><div class="dow">Fri</div><div class="dnum">8</div></div><div class="day-events"></div></div>
-              <div class="day-col">
-                <div class="day-head"><div class="dow">Sat</div><div class="dnum">9</div></div>
-                <div class="day-events">
-                  <div class="day-event">
-                    <span class="time">9:00 AM</span>
-                    <b><span data-stoken="team">Breakers</span> practice</b><br/>
-                    <span style="color:var(--muted)"><span data-stoken="venue_a">Court A</span> &middot; 90 min</span>
-                  </div>
+            <div class="month-cal" role="grid" aria-label="May 2026 schedule">
+              <div class="month-dow-row" role="row">
+                <div class="month-dow" role="columnheader">Mon</div>
+                <div class="month-dow" role="columnheader">Tue</div>
+                <div class="month-dow" role="columnheader">Wed</div>
+                <div class="month-dow" role="columnheader">Thu</div>
+                <div class="month-dow" role="columnheader">Fri</div>
+                <div class="month-dow" role="columnheader">Sat</div>
+                <div class="month-dow" role="columnheader">Sun</div>
+              </div>
+              <div class="month-row" role="row">
+                <div class="month-cell is-out" role="gridcell"><div class="month-num">27</div></div>
+                <div class="month-cell is-out" role="gridcell"><div class="month-num">28</div></div>
+                <div class="month-cell is-out" role="gridcell"><div class="month-num">29</div></div>
+                <div class="month-cell is-out" role="gridcell"><div class="month-num">30</div></div>
+                <div class="month-cell" role="gridcell"><div class="month-num">1</div></div>
+                <div class="month-cell" role="gridcell"><div class="month-num">2</div></div>
+                <div class="month-cell" role="gridcell"><div class="month-num">3</div></div>
+              </div>
+              <div class="month-row" role="row">
+                <div class="month-cell is-current-week" role="gridcell"><div class="month-num">4</div></div>
+                <div class="month-cell is-current-week" role="gridcell">
+                  <div class="month-num">5</div>
+                  <div class="month-event"><span class="time">6:30 PM</span><b><span data-stoken="team">Breakers</span> practice</b></div>
+                </div>
+                <div class="month-cell is-current-week is-today" role="gridcell"><div class="month-num">6</div></div>
+                <div class="month-cell is-current-week" role="gridcell"><div class="month-num">7</div></div>
+                <div class="month-cell is-current-week" role="gridcell"><div class="month-num">8</div></div>
+                <div class="month-cell is-current-week" role="gridcell">
+                  <div class="month-num">9</div>
+                  <div class="month-event"><span class="time">9:00 AM</span><b><span data-stoken="team">Breakers</span> practice</b></div>
+                </div>
+                <div class="month-cell is-current-week" role="gridcell">
+                  <div class="month-num">10</div>
+                  <div class="month-event"><span class="time">11:00 AM</span><b>vs <span data-stoken="opp_a">Marlins</span></b></div>
                 </div>
               </div>
-              <div class="day-col">
-                <div class="day-head"><div class="dow">Sun</div><div class="dnum">10</div></div>
-                <div class="day-events">
-                  <div class="day-event">
-                    <span class="time">11:00 AM</span>
-                    <b><span data-stoken="team">Breakers</span> vs <span data-stoken="opp_a">Marlins</span></b><br/>
-                    <span style="color:var(--muted)"><span data-stoken="venue_a">Court A</span> &middot; scrimmage</span>
-                  </div>
+              <div class="month-row" role="row">
+                <div class="month-cell" role="gridcell"><div class="month-num">11</div></div>
+                <div class="month-cell" role="gridcell">
+                  <div class="month-num">12</div>
+                  <div class="month-event"><span class="time">6:30 PM</span><b><span data-stoken="team">Breakers</span> practice</b></div>
                 </div>
+                <div class="month-cell" role="gridcell"><div class="month-num">13</div></div>
+                <div class="month-cell" role="gridcell"><div class="month-num">14</div></div>
+                <div class="month-cell" role="gridcell"><div class="month-num">15</div></div>
+                <div class="month-cell" role="gridcell">
+                  <div class="month-num">16</div>
+                  <div class="month-event"><span class="time">10:00 AM</span><b>vs <span data-stoken="opp_b">Comets</span></b></div>
+                </div>
+                <div class="month-cell" role="gridcell"><div class="month-num">17</div></div>
+              </div>
+              <div class="month-row" role="row">
+                <div class="month-cell" role="gridcell"><div class="month-num">18</div></div>
+                <div class="month-cell" role="gridcell"><div class="month-num">19</div></div>
+                <div class="month-cell" role="gridcell"><div class="month-num">20</div></div>
+                <div class="month-cell" role="gridcell"><div class="month-num">21</div></div>
+                <div class="month-cell" role="gridcell"><div class="month-num">22</div></div>
+                <div class="month-cell" role="gridcell">
+                  <div class="month-num">23</div>
+                  <div class="month-event"><span class="time">9:00 AM</span><b>vs <span data-stoken="opp_c">Tide</span></b></div>
+                </div>
+                <div class="month-cell" role="gridcell"><div class="month-num">24</div></div>
+              </div>
+              <div class="month-row" role="row">
+                <div class="month-cell" role="gridcell"><div class="month-num">25</div></div>
+                <div class="month-cell" role="gridcell"><div class="month-num">26</div></div>
+                <div class="month-cell" role="gridcell"><div class="month-num">27</div></div>
+                <div class="month-cell" role="gridcell"><div class="month-num">28</div></div>
+                <div class="month-cell" role="gridcell"><div class="month-num">29</div></div>
+                <div class="month-cell" role="gridcell">
+                  <div class="month-num">30</div>
+                  <div class="month-event"><span class="time">10:00 AM</span><b>vs <span data-stoken="opp_d">Stingrays</span></b></div>
+                </div>
+                <div class="month-cell" role="gridcell"><div class="month-num">31</div></div>
               </div>
             </div>
           </div>
         </article>
 
         <section class="section demo-section preview-host is-locked" id="publish-schedule" data-tier="Club" aria-labelledby="publish-title">
+  <span class="corner-pill locked"><svg width="10" height="10"><use href="#i-lock"/></svg> Locked · Club</span>
   <div class="container">
     <div class="demo-stage publish-stage reveal" id="publish-stage">
-              <span class="corner-pill locked"><svg width="10" height="10"><use href="#i-lock"/></svg> Locked · Club</span>
       <div class="demo-stage-bar publish-stagebar">
         <strong data-org-name>Bayside County Sports</strong>
         <span class="publish-meta-path">12U Spring Softball / week of Apr 15</span>
@@ -5937,8 +6469,6 @@
 </section>
       </div>
 
-      <div style="height:18px"></div>
-
       <article class="card is-locked" data-tier="League">
         <span class="corner-pill locked"><svg width="10" height="10"><use href="#i-lock"/></svg> Locked · League</span>
         <header class="card-head">
@@ -5957,20 +6487,45 @@
             <div class="field"><label>Standings auto-update</label><select><option>On (after each linescore lands)</option></select></div>
           </div>
           <div class="bracket-prev">
-            <svg viewBox="0 0 200 80" preserveAspectRatio="none">
-              <g stroke="rgba(244,245,244,0.32)" stroke-width="1" fill="none">
-                <path d="M 8 14 L 60 14 L 60 30 L 100 30"/>
-                <path d="M 8 46 L 60 46 L 60 30 L 100 30"/>
-                <path d="M 100 30 L 140 30 L 140 50 L 188 50"/>
-                <path d="M 8 80 L 60 80 L 60 70 L 100 70 L 100 50 L 140 50"/>
+            <svg viewBox="0 0 280 160" aria-label="Bracket preview">
+              <g font-family="ui-monospace, SFMono-Regular, monospace" font-size="6" font-weight="700" letter-spacing="1.4" fill="rgba(244,245,244,0.42)">
+                <text x="50" y="11" text-anchor="middle">SEMIS</text>
+                <text x="162" y="11" text-anchor="middle">FINAL</text>
+                <text x="247" y="11" text-anchor="middle">CHAMPION</text>
               </g>
-              <g fill="rgba(244,245,244,0.18)">
-                <rect x="0" y="8" width="56" height="12" rx="2"/>
-                <rect x="0" y="40" width="56" height="12" rx="2"/>
-                <rect x="0" y="74" width="56" height="6" rx="1"/>
+              <g fill="none" stroke="rgba(244,245,244,0.28)" stroke-width="0.6">
+                <path d="M92 43 L106 43 L106 77 L120 77"/>
+                <path d="M92 97 L106 97 L106 77"/>
+                <path d="M204 77 L222 77"/>
               </g>
-              <g fill="#3667B5">
-                <rect x="148" y="44" width="44" height="12" rx="2"/>
+              <g>
+                <rect x="8" y="24" width="84" height="18" rx="3" fill="color-mix(in srgb, var(--demo-primary) 28%, transparent)" stroke="var(--demo-primary)" stroke-width="0.7"/>
+                <text x="14" y="36" font-family="system-ui, -apple-system, sans-serif" font-size="7.5" font-weight="700" fill="rgba(244,245,244,0.95)">Diamonds</text>
+                <text x="86" y="36" text-anchor="end" font-family="ui-monospace, monospace" font-size="7.5" font-weight="700" fill="rgba(244,245,244,0.95)">7</text>
+                <rect x="8" y="44" width="84" height="18" rx="3" fill="rgba(244,245,244,0.04)" stroke="rgba(244,245,244,0.18)" stroke-width="0.6"/>
+                <text x="14" y="56" font-family="system-ui, -apple-system, sans-serif" font-size="7.5" font-weight="600" fill="rgba(244,245,244,0.55)">Marlins</text>
+                <text x="86" y="56" text-anchor="end" font-family="ui-monospace, monospace" font-size="7.5" font-weight="600" fill="rgba(244,245,244,0.45)">3</text>
+              </g>
+              <g>
+                <rect x="8" y="78" width="84" height="18" rx="3" fill="color-mix(in srgb, var(--demo-primary) 28%, transparent)" stroke="var(--demo-primary)" stroke-width="0.7"/>
+                <text x="14" y="90" font-family="system-ui, -apple-system, sans-serif" font-size="7.5" font-weight="700" fill="rgba(244,245,244,0.95)">Comets</text>
+                <text x="86" y="90" text-anchor="end" font-family="ui-monospace, monospace" font-size="7.5" font-weight="700" fill="rgba(244,245,244,0.95)">5</text>
+                <rect x="8" y="98" width="84" height="18" rx="3" fill="rgba(244,245,244,0.04)" stroke="rgba(244,245,244,0.18)" stroke-width="0.6"/>
+                <text x="14" y="110" font-family="system-ui, -apple-system, sans-serif" font-size="7.5" font-weight="600" fill="rgba(244,245,244,0.55)">Tide</text>
+                <text x="86" y="110" text-anchor="end" font-family="ui-monospace, monospace" font-size="7.5" font-weight="600" fill="rgba(244,245,244,0.45)">2</text>
+              </g>
+              <g>
+                <rect x="120" y="58" width="84" height="18" rx="3" fill="color-mix(in srgb, var(--demo-primary) 32%, transparent)" stroke="var(--demo-primary)" stroke-width="0.7"/>
+                <text x="126" y="70" font-family="system-ui, -apple-system, sans-serif" font-size="7.5" font-weight="700" fill="rgba(244,245,244,0.95)">Diamonds</text>
+                <text x="198" y="70" text-anchor="end" font-family="ui-monospace, monospace" font-size="7.5" font-weight="700" fill="rgba(244,245,244,0.95)">4</text>
+                <rect x="120" y="78" width="84" height="18" rx="3" fill="rgba(244,245,244,0.04)" stroke="rgba(244,245,244,0.18)" stroke-width="0.6"/>
+                <text x="126" y="90" font-family="system-ui, -apple-system, sans-serif" font-size="7.5" font-weight="600" fill="rgba(244,245,244,0.55)">Comets</text>
+                <text x="198" y="90" text-anchor="end" font-family="ui-monospace, monospace" font-size="7.5" font-weight="600" fill="rgba(244,245,244,0.45)">1</text>
+              </g>
+              <g>
+                <rect x="222" y="60" width="50" height="34" rx="4" fill="var(--demo-primary)"/>
+                <text x="247" y="76" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="800" fill="#fff">★</text>
+                <text x="247" y="89" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="6" font-weight="800" letter-spacing="1.4" fill="#fff">DIAMONDS</text>
               </g>
             </svg>
           </div>
@@ -6040,114 +6595,6 @@
             </div>
           </article>
 
-          <section class="section demo-section preview-host is-locked" id="teams" data-tier="Club" aria-labelledby="teams-title">
-  <div class="container">
-    <div class="demo-stage teams-stage reveal" id="teams-stage">
-              <span class="corner-pill locked"><svg width="10" height="10"><use href="#i-lock"/></svg> Locked · Club</span>
-      <div class="demo-stage-bar teams-stagebar">
-        <strong data-org-name>Bayside County Sports</strong>
-        <span class="teams-url">bayside.leag.app/roster</span>
-      </div>
-
-      <div class="teams-controls">
-        <div class="teams-controls-left">
-          <button type="button" class="teams-btn teams-btn-primary" id="teams-balance">
-            <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
-              <path d="M8 2v12M3 6h10M3 11h10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-            </svg>
-            Auto-balance
-          </button>
-          <button type="button" class="teams-btn teams-btn-ghost" id="teams-reset">Reset</button>
-        </div>
-        <div class="teams-readout" aria-live="polite" id="teams-readout">
-          <span class="teams-readout-key">12 unassigned</span>
-          <span class="teams-readout-sep" aria-hidden="true">·</span>
-          <span class="teams-readout-key">avg skill</span>
-          <span class="teams-readout-vals">
-            <span class="teams-readout-val" data-team="A">—</span>
-            <span class="teams-readout-slash" aria-hidden="true">/</span>
-            <span class="teams-readout-val" data-team="B">—</span>
-            <span class="teams-readout-slash" aria-hidden="true">/</span>
-            <span class="teams-readout-val" data-team="C">—</span>
-          </span>
-        </div>
-      </div>
-
-      <div class="teams-board">
-
-        <!-- Pool -->
-        <section class="teams-pool" id="teams-pool" role="region" aria-labelledby="teams-pool-title" data-bin="pool">
-          <header class="teams-bin-head">
-            <div class="teams-bin-title-wrap">
-              <span class="teams-bin-eyebrow">Pool</span>
-              <h3 class="teams-bin-title" id="teams-pool-title">Unassigned</h3>
-            </div>
-            <span class="teams-count" data-count-for="pool" aria-label="players unassigned">12</span>
-          </header>
-          <div class="teams-bin-body" data-drop="pool" aria-label="Drop here to send a player back to the pool"></div>
-          <div class="teams-bin-foot">
-            <span class="teams-bin-hint">Drag a player to a team. Or click for details.</span>
-          </div>
-        </section>
-    <!-- Team columns -->
-        <div class="teams-rosters">
-          <section class="teams-card" role="region" aria-labelledby="teams-name-A" data-bin="A" style="--card-tint: var(--demo-primary);">
-            <header class="teams-bin-head">
-              <div class="teams-bin-title-wrap">
-                <span class="teams-bin-eyebrow">Team 1</span>
-                <h3 class="teams-bin-title teams-rename" id="teams-name-A" data-team="A" tabindex="0" role="textbox" aria-label="Team 1 name, click to rename">Diamonds Black</h3>
-              </div>
-              <span class="teams-count" data-count-for="A">0</span>
-            </header>
-            <div class="teams-stat">
-              <span class="teams-stat-key">Avg skill</span>
-              <span class="teams-stat-val" data-stat-for="A">—</span>
-            </div>
-            <div class="teams-bin-body" data-drop="A" aria-label="Drop a player onto Diamonds Black"></div>
-          </section>
-
-          <section class="teams-card" role="region" aria-labelledby="teams-name-B" data-bin="B" style="--card-tint: var(--demo-primary);">
-            <header class="teams-bin-head">
-              <div class="teams-bin-title-wrap">
-                <span class="teams-bin-eyebrow">Team 2</span>
-                <h3 class="teams-bin-title teams-rename" id="teams-name-B" data-team="B" tabindex="0" role="textbox" aria-label="Team 2 name, click to rename">Diamonds White</h3>
-              </div>
-              <span class="teams-count" data-count-for="B">0</span>
-            </header>
-            <div class="teams-stat">
-              <span class="teams-stat-key">Avg skill</span>
-              <span class="teams-stat-val" data-stat-for="B">—</span>
-            </div>
-            <div class="teams-bin-body" data-drop="B" aria-label="Drop a player onto Diamonds White"></div>
-          </section>
-
-          <section class="teams-card" role="region" aria-labelledby="teams-name-C" data-bin="C" style="--card-tint: var(--demo-primary);">
-            <header class="teams-bin-head">
-              <div class="teams-bin-title-wrap">
-                <span class="teams-bin-eyebrow">Team 3</span>
-                <h3 class="teams-bin-title teams-rename" id="teams-name-C" data-team="C" tabindex="0" role="textbox" aria-label="Team 3 name, click to rename">Diamonds Gold</h3>
-              </div>
-              <span class="teams-count" data-count-for="C">0</span>
-            </header>
-            <div class="teams-stat">
-              <span class="teams-stat-key">Avg skill</span>
-              <span class="teams-stat-val" data-stat-for="C">—</span>
-            </div>
-            <div class="teams-bin-body" data-drop="C" aria-label="Drop a player onto Diamonds Gold"></div>
-          </section>
-        </div>
-      </div>
-
-      <div class="teams-foot">
-        <span class="teams-foot-note">Demo only. Nothing saves, sends, or charges.</span>
-        <span class="teams-foot-hint" id="teams-kbhint">Tip: <kbd>Space</kbd> picks up · <kbd>← →</kbd> cycles teams · <kbd>Enter</kbd> drops · <kbd>Esc</kbd> cancels</span>
-      </div>
-
-      <!-- Live region for keyboard / a11y announcements -->
-      <p class="teams-sr-status" aria-live="polite" aria-atomic="true" id="teams-sr-status"></p>
-    <div class="lock-foot"><div class="msg">Available on <b>Club</b>. Multi-team rosters, drag-to-assign.</div><button class="btn btn-primary btn-sm" data-locked-cta data-tier="Club">Upgrade to Club · $79/mo</button></div></div>
-  </div>
-</section>
         </div>
 
         <div class="stack">
@@ -6201,6 +6648,110 @@
         </div>
       </div>
 
+      <section class="section demo-section preview-host is-locked" id="teams" data-tier="Club" aria-labelledby="teams-title">
+        <span class="corner-pill locked"><svg width="10" height="10"><use href="#i-lock"/></svg> Locked · Club</span>
+        <div class="demo-stage teams-stage reveal" id="teams-stage">
+          <div class="demo-stage-bar teams-stagebar">
+            <strong data-org-name>Bayside County Sports</strong>
+            <span class="teams-url">bayside.leag.app/roster</span>
+          </div>
+
+          <div class="teams-controls">
+            <div class="teams-controls-left">
+              <button type="button" class="teams-btn teams-btn-primary" id="teams-balance">
+                <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+                  <path d="M8 2v12M3 6h10M3 11h10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                </svg>
+                Auto-balance
+              </button>
+              <button type="button" class="teams-btn teams-btn-ghost" id="teams-reset">Reset</button>
+            </div>
+            <div class="teams-readout" aria-live="polite" id="teams-readout">
+              <span class="teams-readout-key">12 unassigned</span>
+              <span class="teams-readout-sep" aria-hidden="true">·</span>
+              <span class="teams-readout-key">avg skill</span>
+              <span class="teams-readout-vals">
+                <span class="teams-readout-val" data-team="A">—</span>
+                <span class="teams-readout-slash" aria-hidden="true">/</span>
+                <span class="teams-readout-val" data-team="B">—</span>
+                <span class="teams-readout-slash" aria-hidden="true">/</span>
+                <span class="teams-readout-val" data-team="C">—</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="teams-board">
+            <section class="teams-pool" id="teams-pool" role="region" aria-labelledby="teams-pool-title" data-bin="pool">
+              <header class="teams-bin-head">
+                <div class="teams-bin-title-wrap">
+                  <span class="teams-bin-eyebrow">Pool</span>
+                  <h3 class="teams-bin-title" id="teams-pool-title">Unassigned</h3>
+                </div>
+                <span class="teams-count" data-count-for="pool" aria-label="players unassigned">12</span>
+              </header>
+              <div class="teams-bin-body" data-drop="pool" aria-label="Drop here to send a player back to the pool"></div>
+              <div class="teams-bin-foot">
+                <span class="teams-bin-hint">Drag a player to a team. Or click for details.</span>
+              </div>
+            </section>
+            <div class="teams-rosters">
+              <section class="teams-card" role="region" aria-labelledby="teams-name-A" data-bin="A" style="--card-tint: var(--demo-primary);">
+                <header class="teams-bin-head">
+                  <div class="teams-bin-title-wrap">
+                    <span class="teams-bin-eyebrow">Team 1</span>
+                    <h3 class="teams-bin-title teams-rename" id="teams-name-A" data-team="A" tabindex="0" role="textbox" aria-label="Team 1 name, click to rename">Diamonds Black</h3>
+                  </div>
+                  <span class="teams-count" data-count-for="A">0</span>
+                </header>
+                <div class="teams-stat">
+                  <span class="teams-stat-key">Avg skill</span>
+                  <span class="teams-stat-val" data-stat-for="A">—</span>
+                </div>
+                <div class="teams-bin-body" data-drop="A" aria-label="Drop a player onto Diamonds Black"></div>
+              </section>
+
+              <section class="teams-card" role="region" aria-labelledby="teams-name-B" data-bin="B" style="--card-tint: var(--demo-primary);">
+                <header class="teams-bin-head">
+                  <div class="teams-bin-title-wrap">
+                    <span class="teams-bin-eyebrow">Team 2</span>
+                    <h3 class="teams-bin-title teams-rename" id="teams-name-B" data-team="B" tabindex="0" role="textbox" aria-label="Team 2 name, click to rename">Diamonds White</h3>
+                  </div>
+                  <span class="teams-count" data-count-for="B">0</span>
+                </header>
+                <div class="teams-stat">
+                  <span class="teams-stat-key">Avg skill</span>
+                  <span class="teams-stat-val" data-stat-for="B">—</span>
+                </div>
+                <div class="teams-bin-body" data-drop="B" aria-label="Drop a player onto Diamonds White"></div>
+              </section>
+
+              <section class="teams-card" role="region" aria-labelledby="teams-name-C" data-bin="C" style="--card-tint: var(--demo-primary);">
+                <header class="teams-bin-head">
+                  <div class="teams-bin-title-wrap">
+                    <span class="teams-bin-eyebrow">Team 3</span>
+                    <h3 class="teams-bin-title teams-rename" id="teams-name-C" data-team="C" tabindex="0" role="textbox" aria-label="Team 3 name, click to rename">Diamonds Gold</h3>
+                  </div>
+                  <span class="teams-count" data-count-for="C">0</span>
+                </header>
+                <div class="teams-stat">
+                  <span class="teams-stat-key">Avg skill</span>
+                  <span class="teams-stat-val" data-stat-for="C">—</span>
+                </div>
+                <div class="teams-bin-body" data-drop="C" aria-label="Drop a player onto Diamonds Gold"></div>
+              </section>
+            </div>
+          </div>
+
+          <div class="teams-foot">
+            <span class="teams-foot-note">Demo only. Nothing saves, sends, or charges.</span>
+            <span class="teams-foot-hint" id="teams-kbhint">Tip: <kbd>Space</kbd> picks up · <kbd>← →</kbd> cycles teams · <kbd>Enter</kbd> drops · <kbd>Esc</kbd> cancels</span>
+          </div>
+
+          <p class="teams-sr-status" aria-live="polite" aria-atomic="true" id="teams-sr-status"></p>
+          <div class="lock-foot"><div class="msg">Available on <b>Club</b>. Multi-team rosters, drag-to-assign.</div><button class="btn btn-primary btn-sm" data-locked-cta data-tier="Club">Upgrade to Club · $79/mo</button></div>
+        </div>
+      </section>
+
       <p class="demo-foot">Demo only. Nothing saves, sends, or charges.</p>
     </section>
 
@@ -6218,7 +6769,49 @@
         </div>
       </header>
 
-      <section class="section demo-section preview-host" id="registrations" aria-labelledby="registrations-title">
+      <article class="card">
+        <header class="card-head">
+          <div class="titles">
+            <div class="eyebrow">Live · Registrations · Spring 2026 Basketball</div>
+            <h2 class="card-title">14 paid · 2 pending · 1 refunded</h2>
+            <p class="card-sub">$3,430 collected this season. Service fee absorbed: $172.</p>
+          </div>
+          <div class="card-head-actions">
+            <button class="btn btn-secondary btn-sm">Export CSV</button>
+            <button class="btn btn-primary btn-sm">Send signup link</button>
+          </div>
+        </header>
+        <div class="card-body tight">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Player</th>
+                <th>Parent</th>
+                <th class="num" style="text-align:right">Sticker</th>
+                <th class="num" style="text-align:right">Fee</th>
+                <th class="num" style="text-align:right">Total</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><b>Bree Walden</b></td><td>Hannah Park</td><td class="num" style="text-align:right">$245.00</td><td class="num" style="text-align:right">$12.75</td><td class="num" style="text-align:right">$257.75</td><td class="meta">Apr 4</td><td><span class="pill ok"><span class="pip"></span> Paid</span></td><td><button class="btn btn-ghost btn-sm">Open</button></td></tr>
+              <tr><td><b>Sage Foster</b></td><td>Mara Foster</td><td class="num" style="text-align:right">$245.00</td><td class="num" style="text-align:right">$12.75</td><td class="num" style="text-align:right">$257.75</td><td class="meta">Apr 5</td><td><span class="pill ok"><span class="pip"></span> Paid</span></td><td><button class="btn btn-ghost btn-sm">Open</button></td></tr>
+              <tr><td><b>Kinley Brooks</b></td><td>Sam Brooks</td><td class="num" style="text-align:right">$245.00</td><td class="num" style="text-align:right">$12.75</td><td class="num" style="text-align:right">$257.75</td><td class="meta">Apr 6</td><td><span class="pill warn"><span class="pip"></span> Pending</span></td><td><button class="btn btn-ghost btn-sm">Open</button></td></tr>
+              <tr><td><b>Marlee Quinn</b></td><td>Lou Vega</td><td class="num" style="text-align:right">$245.00</td><td class="num" style="text-align:right">$12.75</td><td class="num" style="text-align:right">$257.75</td><td class="meta">Apr 8</td><td><span class="pill ok"><span class="pip"></span> Paid</span></td><td><button class="btn btn-ghost btn-sm">Open</button></td></tr>
+              <tr><td><b>Reese Tatum</b></td><td>Tasha Reid</td><td class="num" style="text-align:right">$245.00</td><td class="num" style="text-align:right">$12.75</td><td class="num" style="text-align:right">$257.75</td><td class="meta">Apr 10</td><td><span class="pill ok"><span class="pip"></span> Paid</span></td><td><button class="btn btn-ghost btn-sm">Open</button></td></tr>
+              <tr><td><b>Wren Halliday</b></td><td>Mira Halliday</td><td class="num" style="text-align:right">$245.00</td><td class="num" style="text-align:right">$12.75</td><td class="num" style="text-align:right">$257.75</td><td class="meta">Apr 11</td><td><span class="pill warn"><span class="pip"></span> Pending</span></td><td><button class="btn btn-ghost btn-sm">Open</button></td></tr>
+              <tr><td><b>Avery Pike</b></td><td>Joel Pike</td><td class="num" style="text-align:right">$15.00</td><td class="num" style="text-align:right">$1.70</td><td class="num" style="text-align:right">$16.70</td><td class="meta">Apr 27</td><td><span class="pill"><span class="pip"></span> Refunded</span></td><td><button class="btn btn-ghost btn-sm">Open</button></td></tr>
+              <tr><td><b>Harlow Vance</b></td><td>Cory Vance</td><td class="num" style="text-align:right">$245.00</td><td class="num" style="text-align:right">$12.75</td><td class="num" style="text-align:right">$257.75</td><td class="meta">Apr 12</td><td><span class="pill ok"><span class="pip"></span> Paid</span></td><td><button class="btn btn-ghost btn-sm">Open</button></td></tr>
+              <tr><td><b>Juno Reid</b></td><td>Tasha Reid</td><td class="num" style="text-align:right">$245.00</td><td class="num" style="text-align:right">$12.75</td><td class="num" style="text-align:right">$257.75</td><td class="meta">Apr 14</td><td><span class="pill ok"><span class="pip"></span> Paid</span></td><td><button class="btn btn-ghost btn-sm">Open</button></td></tr>
+              <tr><td><b>Sloane Beck</b></td><td>Asha Shah</td><td class="num" style="text-align:right">$245.00</td><td class="num" style="text-align:right">$12.75</td><td class="num" style="text-align:right">$257.75</td><td class="meta">Apr 16</td><td><span class="pill ok"><span class="pip"></span> Paid</span></td><td><button class="btn btn-ghost btn-sm">Open</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <section class="section demo-section preview-host" id="registrations" aria-labelledby="registrations-title" hidden>
   <div class="container">
     <div class="demo-stage reg-stage reveal" id="reg-stage">
       <div class="demo-stage-bar reg-stagebar">
@@ -6559,11 +7152,100 @@
           <button class="filter-pill"><span class="label-mono">Coach</span> <span data-coach-name>Chris Morales</span> <span class="caret">▾</span></button>
           <div class="filter-pill" style="padding:0 8px">
             <button class="arrow"><svg width="12" height="12"><use href="#i-arrl"/></svg></button>
-            <span class="label-mono">Week of May 5-11</span>
+            <span class="label-mono">Week of Apr 27 - May 3</span>
             <button class="arrow"><svg width="12" height="12"><use href="#i-arrr"/></svg></button>
           </div>
         </div>
       </header>
+
+      <article class="card" id="coach-dash">
+        <header class="card-head">
+          <div class="titles">
+            <div class="eyebrow">Live · Coach dashboard</div>
+            <h2 class="card-title">Manage availability and prices</h2>
+            <p class="card-sub">Drag across cells to block, add classes, or set custom rates. Preview below updates as you go.</p>
+          </div>
+          <div class="card-head-actions">
+            <button class="btn btn-ghost btn-sm" id="bk-discard" disabled>Discard</button>
+            <button class="btn btn-primary btn-sm" id="bk-save" disabled><span id="bk-save-label">Saved</span></button>
+          </div>
+        </header>
+        <div class="card-body">
+          <!-- Rate rules panel -->
+          <section class="bk-rates" aria-labelledby="bk-rates-title">
+            <header class="bk-rates-head">
+              <div>
+                <h3 class="bk-rates-title" id="bk-rates-title">Private rate rules</h3>
+                <p class="bk-rates-sub">First matching rule wins. Cells outside any rule use the base rate.</p>
+              </div>
+              <div class="bk-rates-base">
+                <label class="bk-rates-base-label">
+                  <span>Base rate / 30 min</span>
+                  <span class="bk-rates-base-input">
+                    <span class="bk-edit-prefix">$</span>
+                    <input type="number" id="bk-rate-base" value="40" min="0" step="5">
+                  </span>
+                </label>
+                <button type="button" class="btn btn-secondary btn-sm" id="bk-rate-add"><svg width="12" height="12"><use href="#i-plus"/></svg> Add rule</button>
+              </div>
+            </header>
+            <p class="bk-rates-empty" id="bk-rates-empty">All slots use the base rate. Click <b>Add rule</b> to charge more during prime time.</p>
+            <ul class="bk-rate-list" id="bk-rate-list" role="list"></ul>
+          </section>
+
+          <!-- Calendar grid -->
+          <section class="bk-cal" aria-labelledby="bk-cal-title">
+            <header class="bk-cal-head">
+              <h3 class="bk-cal-title" id="bk-cal-title">Week of Apr 27 - May 3</h3>
+              <div class="bk-cal-legend" aria-hidden="true">
+                <span class="bk-legend-item"><span class="bk-legend-dot" data-state="open"></span>Open</span>
+                <span class="bk-legend-item"><span class="bk-legend-dot" data-state="booked"></span>Booked</span>
+                <span class="bk-legend-item"><span class="bk-legend-dot" data-state="pending"></span>Pending</span>
+                <span class="bk-legend-item"><span class="bk-legend-dot" data-state="blocked"></span>Blocked</span>
+                <span class="bk-legend-item"><span class="bk-legend-dot" data-state="class"></span>Group class</span>
+              </div>
+            </header>
+            <div class="bk-cal-grid" id="bk-cal-grid" role="grid" aria-label="Edit availability and prices for the week"></div>
+            <p class="bk-cal-hint">Drag across cells to select. Then block, add a class, or set a custom rate. Press Esc to cancel.</p>
+          </section>
+
+          <!-- Floating toolbar template -->
+          <template id="bk-toolbar-tpl">
+            <div class="bk-toolbar" role="toolbar" aria-label="Selection actions">
+              <div class="bk-toolbar-row" data-row="default">
+                <span class="bk-toolbar-meta" data-meta>0 cells</span>
+                <button type="button" class="bk-toolbar-btn" data-action="block">Block</button>
+                <button type="button" class="bk-toolbar-btn" data-action="class">Add class</button>
+                <button type="button" class="bk-toolbar-btn" data-action="rate">Set rate</button>
+                <button type="button" class="bk-toolbar-btn bk-toolbar-btn-ghost" data-action="cancel" aria-label="Cancel">×</button>
+              </div>
+              <form class="bk-toolbar-form bk-class-form" data-form="class" hidden>
+                <label class="bk-edit-field"><span>Title</span><input name="title" required value="Skills class"></label>
+                <label class="bk-edit-field"><span>Where</span><input name="where" value="75 Stivers St, Cresskill"></label>
+                <label class="bk-edit-field bk-edit-num"><span>Capacity</span><input name="cap" type="number" value="12" min="1"></label>
+                <label class="bk-edit-field bk-edit-num"><span>Price</span><span class="bk-edit-prefix">$</span><input name="price" type="number" value="35" min="0" step="5"></label>
+                <div class="bk-toolbar-form-actions">
+                  <button type="button" class="bk-toolbar-btn bk-toolbar-btn-ghost" data-form-cancel>Back</button>
+                  <button type="submit" class="bk-toolbar-btn bk-toolbar-btn-primary">Save class</button>
+                </div>
+              </form>
+              <form class="bk-toolbar-form bk-rate-form" data-form="rate" hidden>
+                <label class="bk-edit-field bk-edit-num"><span>Rate / 30 min</span><span class="bk-edit-prefix">$</span><input name="rate" type="number" value="40" min="0" step="5"></label>
+                <label class="bk-edit-field"><span>Save as</span>
+                  <select name="scope">
+                    <option value="cells">Just these cells</option>
+                    <option value="rule">A reusable rule</option>
+                  </select>
+                </label>
+                <div class="bk-toolbar-form-actions">
+                  <button type="button" class="bk-toolbar-btn bk-toolbar-btn-ghost" data-form-cancel>Back</button>
+                  <button type="submit" class="bk-toolbar-btn bk-toolbar-btn-primary">Apply</button>
+                </div>
+              </form>
+            </div>
+          </template>
+        </div>
+      </article>
 
       <section id="coach-booking" class="booker-frame" aria-labelledby="coach-booking-title">
         <span class="corner-pill beta"><svg width="10" height="10"><use href="#i-spark"/></svg> Beta · Under your account</span>
@@ -6636,6 +7318,11 @@
         </aside>
 
         <!-- ============ Offerings (right) ============ -->
+        <div class="cb-offerings-wrap">
+        <header class="cb-offerings-eyebrow">
+          <span class="cb-offerings-eyebrow-key">Preview</span>
+          <h3 class="cb-offerings-eyebrow-title">What they see</h3>
+        </header>
         <section class="cb-offerings" aria-labelledby="cb-offerings-title">
           <div class="cb-tabs" role="tablist" aria-label="Offerings">
             <button type="button" class="cb-tab" role="tab" id="cb-tab-group" aria-selected="true" aria-controls="cb-panel-group" data-tab="group">
@@ -6669,8 +7356,8 @@
                   <span aria-hidden="true">‹</span>
                 </button>
                 <div class="cb-priv-weekrange">
-                  <strong>Week of May 5</strong>
-                  <span>May 5 - May 11</span>
+                  <strong>Week of Apr 27</strong>
+                  <span>Apr 27 - May 3</span>
                 </div>
                 <button type="button" class="cb-priv-weekstep" disabled aria-label="Next week">
                   <span aria-hidden="true">›</span>
@@ -6685,7 +7372,7 @@
               <span class="cb-priv-legend-item"><span class="cb-priv-legend-dot" data-state="blocked"></span>Blocked</span>
             </div>
 
-            <div class="cb-priv-grid" id="cb-priv-grid" role="grid" aria-label="Private lesson availability for week of May 5">
+            <div class="cb-priv-grid" id="cb-priv-grid" role="grid" aria-label="Private lesson availability for week of Apr 27">
               <!-- injected -->
             </div>
 
@@ -6696,7 +7383,7 @@
             <div class="cb-priv-actionbar" id="cb-priv-actionbar" hidden>
               <div class="cb-priv-actionbar-info">
                 <span class="cb-priv-actionbar-key">Booking</span>
-                <span class="cb-priv-actionbar-val" id="cb-priv-selected-label">Tue May 6 at 4:30 PM / 30 min / $40</span>
+                <span class="cb-priv-actionbar-val" id="cb-priv-selected-label">Tue Apr 28 at 4:30 PM / 30 min / $40</span>
               </div>
               <button type="button" class="cb-btn cb-btn-primary" id="cb-priv-continue">
                 Continue to player info
@@ -6707,6 +7394,7 @@
             </div>
           </div>
         </section>
+        </div>
       </div>
       </section>
 
@@ -6729,9 +7417,9 @@
 
       <div class="grid-2-3">
         <section class="section demo-section preview-host is-locked" id="notifications" data-tier="Club" aria-labelledby="notifications-title">
+  <span class="corner-pill locked"><svg width="10" height="10"><use href="#i-lock"/></svg> Locked · Club</span>
   <div class="container">
     <div class="demo-stage notif-stage reveal" id="notifications-stage">
-              <span class="corner-pill locked"><svg width="10" height="10"><use href="#i-lock"/></svg> Locked · Club</span>
       <div class="demo-stage-bar notif-stagebar">
         <strong data-org-name>Bayside County Sports</strong>
         <span class="notif-url">bayside.leag.app/messages/new</span>
@@ -7196,8 +7884,8 @@ Coach</textarea>
             <div>
               <p style="margin:0;color:var(--muted);font-size:13px">League tier ships with 3 included placements per month. Each placement runs 7 days, geo-scoped to the org's home zip code + 25 miles. Past 3, they're $20 each.</p>
               <div class="row" style="margin-top:14px;gap:18px">
-                <div><div class="mono" style="font-size:10px;color:var(--quiet);text-transform:uppercase;letter-spacing:0.14em">Used</div><div class="num" style="font-family:var(--font-display);font-style:italic;font-size:28px;line-height:1;color:var(--ink)">0<span style="color:var(--quiet);font-size:16px">/3</span></div></div>
-                <div><div class="mono" style="font-size:10px;color:var(--quiet);text-transform:uppercase;letter-spacing:0.14em">Reset</div><div class="num" style="font-family:var(--font-display);font-style:italic;font-size:18px;line-height:1.2;color:var(--ink)">May 1</div></div>
+                <div><div class="mono" style="font-size:10px;color:var(--quiet);text-transform:uppercase;letter-spacing:0.14em">Used</div><div class="num" style="font-family:var(--font-mono);font-size:24px;font-weight:600;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-0.01em">0<span style="color:var(--quiet);font-size:14px">/3</span></div></div>
+                <div><div class="mono" style="font-size:10px;color:var(--quiet);text-transform:uppercase;letter-spacing:0.14em">Reset</div><div class="num" style="font-family:var(--font-sans);font-size:16px;font-weight:700;line-height:1.2;color:var(--ink)">May 1</div></div>
               </div>
             </div>
             <div class="promo-prev">
@@ -7468,13 +8156,13 @@ Coach</textarea>
   const SAT_TIMES = ["8:00 AM","8:30 AM","9:00 AM","9:30 AM","10:00 AM","10:30 AM","11:00 AM","11:30 AM"];
 
   const DAYS = [
-    { dow: "Mon", num: 5, key: "mon", times: WEEKDAY_TIMES },
-    { dow: "Tue", num: 6, key: "tue", times: WEEKDAY_TIMES },
-    { dow: "Wed", num: 7, key: "wed", times: WEEKDAY_TIMES },
-    { dow: "Thu", num: 8, key: "thu", times: WEEKDAY_TIMES },
-    { dow: "Fri", num: 9, key: "fri", times: WEEKDAY_TIMES },
-    { dow: "Sat", num: 10, key: "sat", times: SAT_TIMES },
-    { dow: "Sun", num: 11, key: "sun", times: [] },
+    { dow: "Mon", num: 27, month: "Apr", key: "mon", times: WEEKDAY_TIMES },
+    { dow: "Tue", num: 28, month: "Apr", key: "tue", times: WEEKDAY_TIMES },
+    { dow: "Wed", num: 29, month: "Apr", key: "wed", times: WEEKDAY_TIMES },
+    { dow: "Thu", num: 30, month: "Apr", key: "thu", times: WEEKDAY_TIMES },
+    { dow: "Fri", num: 1,  month: "May", key: "fri", times: WEEKDAY_TIMES },
+    { dow: "Sat", num: 2,  month: "May", key: "sat", times: SAT_TIMES },
+    { dow: "Sun", num: 3,  month: "May", key: "sun", times: [] },
   ];
 
   const SPORT_PRESETS = {
@@ -7485,10 +8173,10 @@ Coach</textarea>
       positions: ["Guard", "Wing", "Forward", "Center", "Other"],
       privatePrice: 40,
       groupClasses: [
-        { id: "g1", title: "Skills class - Middle school", when: "Mon May 5 / 7-8 PM",  where: "75 Stivers St, Cresskill", price: 35, cap: 12, reserved: 8 },
-        { id: "g2", title: "Skills class - High school",   when: "Mon May 5 / 8-9 PM",  where: "75 Stivers St, Cresskill", price: 35, cap: 12, reserved: 6 },
-        { id: "g3", title: "Skills class - Middle school", when: "Wed May 7 / 7-8 PM",  where: "75 Stivers St, Cresskill", price: 35, cap: 12, reserved: 10 },
-        { id: "g4", title: "Skills class - High school",   when: "Wed May 7 / 8-9 PM",  where: "75 Stivers St, Cresskill", price: 35, cap: 12, reserved: 12 },
+        { id: "g1", title: "Skills class - Middle school", when: "Mon Apr 27 / 7-8 PM",  where: "75 Stivers St, Cresskill", price: 35, cap: 12, reserved: 8 },
+        { id: "g2", title: "Skills class - High school",   when: "Mon Apr 27 / 8-9 PM",  where: "75 Stivers St, Cresskill", price: 35, cap: 12, reserved: 6 },
+        { id: "g3", title: "Skills class - Middle school", when: "Wed Apr 29 / 7-8 PM",  where: "75 Stivers St, Cresskill", price: 35, cap: 12, reserved: 10 },
+        { id: "g4", title: "Skills class - High school",   when: "Wed Apr 29 / 8-9 PM",  where: "75 Stivers St, Cresskill", price: 35, cap: 12, reserved: 12 },
       ],
       // Mon + Wed are blocked from privates -- coach runs group sessions those nights.
       slotOverrides: Object.assign(
@@ -7520,9 +8208,9 @@ Coach</textarea>
       positions: ["Pitcher", "Catcher", "Infielder", "Outfielder", "Other"],
       privatePrice: 40,
       groupClasses: [
-        { id: "g1", title: "Pitching velocity clinic",       when: "Sat May 3 / 9-11 AM",     where: "Bayside Field 2", price: 45, cap: 8,  reserved: 6 },
-        { id: "g2", title: "Hitting mechanics small-group",  when: "Sun May 4 / 10-11:30 AM", where: "Bayside Cage A",  price: 35, cap: 6,  reserved: 6 },
-        { id: "g3", title: "Catcher fundamentals",           when: "Sat May 10 / 9-10:30 AM", where: "Bayside Field 1", price: 30, cap: 10, reserved: 2 },
+        { id: "g1", title: "Pitching velocity clinic",       when: "Sat May 2 / 9-11 AM",     where: "Bayside Field 2", price: 45, cap: 8,  reserved: 6 },
+        { id: "g2", title: "Hitting mechanics small-group",  when: "Sun May 3 / 10-11:30 AM", where: "Bayside Cage A",  price: 35, cap: 6,  reserved: 6 },
+        { id: "g3", title: "Catcher fundamentals",           when: "Sat May 9 / 9-10:30 AM",  where: "Bayside Field 1", price: 30, cap: 10, reserved: 2 },
       ],
       slotOverrides: {
         "mon|4:00 PM": "blocked",
@@ -7551,9 +8239,9 @@ Coach</textarea>
       positions: ["Goalkeeper", "Defender", "Midfielder", "Forward", "Other"],
       privatePrice: 40,
       groupClasses: [
-        { id: "g1", title: "Finishing clinic",          when: "Sat May 3 / 9-10:30 AM",  where: "Bayside Pitch 1", price: 40, cap: 10, reserved: 7 },
-        { id: "g2", title: "Goalkeeper small-group",    when: "Sun May 4 / 10-11 AM",    where: "Bayside Pitch 2", price: 35, cap: 6,  reserved: 6 },
-        { id: "g3", title: "1v1 footskills",            when: "Sat May 10 / 9-10 AM",    where: "Bayside Pitch 1", price: 30, cap: 12, reserved: 4 },
+        { id: "g1", title: "Finishing clinic",          when: "Sat May 2 / 9-10:30 AM",  where: "Bayside Pitch 1", price: 40, cap: 10, reserved: 7 },
+        { id: "g2", title: "Goalkeeper small-group",    when: "Sun May 3 / 10-11 AM",    where: "Bayside Pitch 2", price: 35, cap: 6,  reserved: 6 },
+        { id: "g3", title: "1v1 footskills",            when: "Sat May 9 / 9-10 AM",     where: "Bayside Pitch 1", price: 30, cap: 12, reserved: 4 },
       ],
       slotOverrides: {
         "mon|4:30 PM": "booked",
@@ -7606,6 +8294,136 @@ Coach</textarea>
   const PRIVATE_DURATION = "30 min";
   const FEE_PCT = 0.05;
   const FEE_FIXED = 0.50;
+
+  /* ---------- Shared canonical state (dashboard <-> preview) ---------- */
+  function parseGroupClassWhen(when) {
+    // "Mon Apr 27 / 7-8 PM"  -> { dayKey: "mon", startTime: "7:00 PM", endTime: "8:00 PM" }
+    const m = /^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)\s+\w+\s+\d+\s*\/\s*([\d:]+)\s*[-–]\s*([\d:]+)\s*(AM|PM)$/i.exec(when);
+    if (!m) return null;
+    const dowMap = { mon:"mon",tue:"tue",wed:"wed",thu:"thu",fri:"fri",sat:"sat",sun:"sun" };
+    const dayKey = dowMap[m[1].toLowerCase()];
+    const period = m[4].toUpperCase();
+    const startNum = m[2].includes(":") ? m[2] : `${m[2]}:00`;
+    const endNum = m[3].includes(":") ? m[3] : `${m[3]}:00`;
+    // Heuristic: both share period unless start is < end and crosses 12.
+    return {
+      dayKey,
+      startTime: `${startNum} ${period}`,
+      endTime: `${endNum} ${period}`,
+    };
+  }
+  function buildSeedClasses(presetClasses) {
+    return presetClasses.map(c => {
+      const t = parseGroupClassWhen(c.when);
+      return {
+        id: c.id,
+        title: c.title,
+        dayKey: t ? t.dayKey : "mon",
+        startTime: t ? t.startTime : "7:00 PM",
+        endTime: t ? t.endTime : "8:00 PM",
+        capacity: c.cap,
+        price: c.price,
+        reserved: c.reserved || 0,
+        where: c.where,
+      };
+    });
+  }
+  function buildSeedBookings(overrides) {
+    const out = new Map();
+    Object.entries(overrides || {}).forEach(([k, v]) => {
+      if (v === "booked" || v === "pending") out.set(k, { state: v });
+    });
+    return out;
+  }
+  if (!window.__coach) {
+    const preset = SPORT_PRESETS[CURRENT_SPORT];
+    window.__coach = {
+      privateRate: preset.privatePrice,
+      rateRules: [],
+      blocks: new Set(),
+      bookings: buildSeedBookings(preset.slotOverrides),
+      classes: buildSeedClasses(preset.groupClasses),
+      cellRates: new Map(),
+      dirty: false,
+      listeners: new Set(),
+    };
+  }
+  function to24(t) {
+    const m = /^(\d+):(\d+)\s+(AM|PM)$/.exec(t);
+    if (!m) return 0;
+    let h = +m[1]; const min = +m[2]; const p = m[3];
+    if (p === "PM" && h !== 12) h += 12;
+    if (p === "AM" && h === 12) h = 0;
+    return h + min / 60;
+  }
+  function timeInRange24(t12, from24, to24h) {
+    const t = to24(t12);
+    const [fh, fm] = from24.split(":").map(Number);
+    const [th, tm] = to24h.split(":").map(Number);
+    return t >= fh + fm/60 && t < th + tm/60;
+  }
+  function classCovers(dayKey, time) {
+    const t = to24(time);
+    return window.__coach.classes.some(c =>
+      c.dayKey === dayKey && t >= to24(c.startTime) && t < to24(c.endTime)
+    );
+  }
+  function slotState(dayKey, time) {
+    const k = `${dayKey}|${time}`;
+    if (window.__coach.blocks.has(k)) return "blocked";
+    if (classCovers(dayKey, time)) return "blocked";
+    const b = window.__coach.bookings.get(k);
+    if (b) return b.state;
+    return "open";
+  }
+  function slotPrice(dayKey, time) {
+    const k = `${dayKey}|${time}`;
+    if (window.__coach.cellRates.has(k)) return window.__coach.cellRates.get(k);
+    for (const r of window.__coach.rateRules) {
+      if (r.days.includes(dayKey) && timeInRange24(time, r.from, r.to)) return r.rate;
+    }
+    return window.__coach.privateRate;
+  }
+  function classToWhenStr(c) {
+    const day = DAYS.find(d => d.key === c.dayKey);
+    if (!day) return c.startTime + "-" + c.endTime;
+    function trimPeriod(t) {
+      // Drop space-AM/PM if shared with end. "7:00 PM" -> "7" or "7:30"
+      const m = /^(\d+)(?::(\d+))?\s+(AM|PM)$/.exec(t);
+      if (!m) return t;
+      const h = m[1]; const min = m[2];
+      return min && min !== "00" ? `${h}:${min}` : h;
+    }
+    function period(t) {
+      const m = /(AM|PM)$/.exec(t); return m ? m[1] : "";
+    }
+    const sP = period(c.startTime), eP = period(c.endTime);
+    const startStr = trimPeriod(c.startTime);
+    const endStr = trimPeriod(c.endTime);
+    const periodStr = sP === eP ? eP : sP + " - " + eP;
+    return `${day.dow} ${day.month} ${day.num} / ${startStr}-${endStr} ${eP || sP}`;
+  }
+  function syncFromShared() {
+    PRIVATE_PRICE = window.__coach.privateRate;
+    GROUP_CLASSES = window.__coach.classes.map(c => ({
+      id: c.id,
+      title: c.title,
+      when: classToWhenStr(c),
+      where: c.where,
+      price: c.price,
+      cap: c.capacity,
+      reserved: c.reserved || 0,
+    }));
+    // Build STATE_OVERRIDES on the fly from blocks/bookings/classes
+    const out = {};
+    DAYS.forEach(d => {
+      d.times.forEach(t => {
+        const s = slotState(d.key, t);
+        if (s !== "open") out[`${d.key}|${t}`] = s;
+      });
+    });
+    STATE_OVERRIDES = out;
+  }
 
   /* ---------- Sport-wide tokens (drive copy across every tab) ---------- */
   const SPORT_TOKENS = {
@@ -7985,6 +8803,7 @@ Coach</textarea>
 
   /* ---------- Render: group classes ---------- */
   function renderClasses() {
+    syncFromShared();
     const list = $('#cb-class-list');
     list.innerHTML = GROUP_CLASSES.map(c => {
       const remaining = c.cap - c.reserved;
@@ -8024,6 +8843,7 @@ Coach</textarea>
 
   /* ---------- Render: privates grid ---------- */
   function renderPrivates() {
+    syncFromShared();
     const grid = $('#cb-priv-grid');
     grid.innerHTML = DAYS.map(d => {
       if (!d.times.length) {
@@ -8069,7 +8889,7 @@ Coach</textarea>
       state === "pending" ? "pending" :
       state === "booked" ? "booked, unavailable" :
       "blocked, unavailable";
-    const aria = `${day.dow} May ${day.num}, ${time}, 30 minutes, $${PRIVATE_PRICE}, ${ariaState}`;
+    const aria = `${day.dow} ${day.month} ${day.num}, ${time}, 30 minutes, $${PRIVATE_PRICE}, ${ariaState}`;
     if (state === "blocked") {
       return `<button type="button" class="cb-slot" data-state="blocked" aria-disabled="true" aria-label="${aria}" tabindex="-1"></button>`;
     }
@@ -8086,7 +8906,7 @@ Coach</textarea>
       </button>`;
     }
     return `<button type="button" class="cb-slot" data-state="open" aria-pressed="false" aria-label="${aria}"
-      data-day-key="${day.key}" data-day-num="${day.num}" data-day-dow="${day.dow}" data-time="${time}">
+      data-day-key="${day.key}" data-day-num="${day.num}" data-day-month="${day.month}" data-day-dow="${day.dow}" data-time="${time}">
       <span>${time}</span>
       <span class="cb-slot-state">$${PRIVATE_PRICE}</span>
     </button>`;
@@ -8145,12 +8965,13 @@ Coach</textarea>
         el: slot,
         dayKey: slot.dataset.dayKey,
         dayNum: slot.dataset.dayNum,
+        dayMonth: slot.dataset.dayMonth,
         dow: slot.dataset.dayDow,
         time: slot.dataset.time,
       };
       const dowFull = { Mon:"Monday",Tue:"Tuesday",Wed:"Wednesday",Thu:"Thursday",Fri:"Friday",Sat:"Saturday",Sun:"Sunday" }[state.selectedSlot.dow];
       $('#cb-priv-selected-label').textContent =
-        `${state.selectedSlot.dow} May ${state.selectedSlot.dayNum} at ${state.selectedSlot.time} / 30 min / $${PRIVATE_PRICE}`;
+        `${state.selectedSlot.dow} ${state.selectedSlot.dayMonth} ${state.selectedSlot.dayNum} at ${state.selectedSlot.time} / 30 min / $${PRIVATE_PRICE}`;
       const bar = $('#cb-priv-actionbar');
       bar.hidden = false;
     }
@@ -8416,6 +9237,449 @@ Coach</textarea>
   /* ---------- Init ---------- */
   renderClasses();
   renderPrivates();
+
+  // Expose preview re-render so the coach dashboard can push edits live.
+  window.__coach.api = window.__coach.api || {};
+  window.__coach.api.rerenderPreview = function () {
+    renderClasses();
+    renderPrivates();
+    const cnt = document.getElementById("cb-priv-open-count");
+    if (cnt) {
+      let openN = 0;
+      DAYS.forEach(d => d.times.forEach(t => {
+        if (slotState(d.key, t) === "open") openN++;
+      }));
+      cnt.textContent = openN;
+    }
+  };
+  window.__coach.listeners.add(window.__coach.api.rerenderPreview);
+  // Helpers used by dashboard IIFE
+  window.__coach.api.DAYS = DAYS;
+  window.__coach.api.slotState = slotState;
+  window.__coach.api.slotPrice = slotPrice;
+  window.__coach.api.to24 = to24;
+})();
+
+
+/* === Coach dashboard editor IIFE === */
+
+(function () {
+  "use strict";
+  const root = document.getElementById("coach-dash");
+  if (!root || !window.__coach) return;
+
+  const $ = sel => root.querySelector(sel);
+  const $$ = sel => Array.from(root.querySelectorAll(sel));
+  const DAY_KEYS = ["mon","tue","wed","thu","fri","sat","sun"];
+
+  function notify() {
+    window.__coach.listeners.forEach(fn => { try { fn(); } catch(_){} });
+  }
+
+  /* ---------- Rate rules ---------- */
+  function renderRateRules() {
+    const list = $('#bk-rate-list');
+    const empty = $('#bk-rates-empty');
+    const rules = window.__coach.rateRules;
+    if (!rules.length) {
+      list.innerHTML = "";
+      empty.hidden = false;
+      return;
+    }
+    empty.hidden = true;
+    list.innerHTML = rules.map((r, i) => `
+      <li class="bk-rate-row" data-rule-idx="${i}">
+        <div class="bk-rate-days" role="group" aria-label="Days">
+          ${DAY_KEYS.map(d => `
+            <button type="button" class="bk-day-chip" data-day="${d}" aria-pressed="${r.days.includes(d)}">${d.slice(0,1).toUpperCase() + d.slice(1)}</button>
+          `).join("")}
+        </div>
+        <div class="bk-rate-times">
+          <input type="text" data-field="from" value="${r.from}" placeholder="from" aria-label="From time">
+          <span aria-hidden="true">–</span>
+          <input type="text" data-field="to" value="${r.to}" placeholder="to" aria-label="To time">
+        </div>
+        <span class="bk-rate-amt">
+          <span class="bk-edit-prefix">$</span>
+          <input type="number" data-field="rate" value="${r.rate}" min="0" step="5" aria-label="Rate">
+        </span>
+        <button type="button" class="bk-rate-remove" data-rule-remove aria-label="Remove rule">×</button>
+      </li>
+    `).join("");
+  }
+
+  $('#bk-rate-base').addEventListener("input", e => {
+    const v = parseInt(e.target.value, 10);
+    if (Number.isFinite(v) && v >= 0) {
+      window.__coach.privateRate = v;
+      markDirty(); notify();
+    }
+  });
+
+  $('#bk-rate-add').addEventListener("click", () => {
+    window.__coach.rateRules.push({ days: ["mon","tue","wed","thu","fri"], from: "16:00", to: "20:00", rate: 50 });
+    renderRateRules(); markDirty(); notify();
+  });
+
+  $('#bk-rate-list').addEventListener("click", e => {
+    const row = e.target.closest('.bk-rate-row');
+    if (!row) return;
+    const idx = Number(row.dataset.ruleIdx);
+    if (e.target.matches('[data-rule-remove]')) {
+      window.__coach.rateRules.splice(idx, 1);
+      renderRateRules(); markDirty(); notify();
+      return;
+    }
+    const dayBtn = e.target.closest('.bk-day-chip');
+    if (dayBtn) {
+      const d = dayBtn.dataset.day;
+      const set = new Set(window.__coach.rateRules[idx].days);
+      if (set.has(d)) set.delete(d); else set.add(d);
+      window.__coach.rateRules[idx].days = Array.from(set);
+      renderRateRules(); markDirty(); notify();
+    }
+  });
+
+  $('#bk-rate-list').addEventListener("change", e => {
+    const row = e.target.closest('.bk-rate-row');
+    if (!row) return;
+    const idx = Number(row.dataset.ruleIdx);
+    const field = e.target.dataset.field;
+    if (!field) return;
+    let val = e.target.value;
+    if (field === "rate") val = parseInt(val, 10);
+    window.__coach.rateRules[idx][field] = val;
+    markDirty(); notify();
+  });
+
+  /* ---------- Save / discard (full impl in Task 8) ---------- */
+  let cleanSnapshot = JSON.stringify(serialize());
+  function serialize() {
+    const s = window.__coach;
+    return {
+      privateRate: s.privateRate,
+      rateRules: s.rateRules.map(r => ({ ...r, days: r.days.slice() })),
+      blocks: Array.from(s.blocks),
+      bookings: Array.from(s.bookings.entries()),
+      classes: s.classes.map(c => ({ ...c })),
+      cellRates: Array.from(s.cellRates.entries()),
+    };
+  }
+  function restoreFromClean() {
+    const data = JSON.parse(cleanSnapshot);
+    const s = window.__coach;
+    s.privateRate = data.privateRate;
+    s.rateRules = data.rateRules.map(r => ({ ...r, days: r.days.slice() }));
+    s.blocks = new Set(data.blocks);
+    s.bookings = new Map(data.bookings);
+    s.classes = data.classes.map(c => ({ ...c }));
+    s.cellRates = new Map(data.cellRates);
+    $('#bk-rate-base').value = String(s.privateRate);
+  }
+  function markDirty() {
+    window.__coach.dirty = true;
+    root.dataset.dirty = "true";
+    $('#bk-save').disabled = false;
+    $('#bk-save-label').textContent = "Save changes";
+    $('#bk-discard').disabled = false;
+  }
+  function markClean() {
+    window.__coach.dirty = false;
+    root.dataset.dirty = "false";
+    $('#bk-save').disabled = true;
+    $('#bk-save-label').textContent = "Saved";
+    $('#bk-discard').disabled = true;
+    cleanSnapshot = JSON.stringify(serialize());
+  }
+  $('#bk-save').addEventListener("click", () => { markClean(); });
+  $('#bk-discard').addEventListener("click", () => {
+    restoreFromClean();
+    renderRateRules();
+    if (window.__coachDash && window.__coachDash.renderCalendar) window.__coachDash.renderCalendar();
+    markClean();
+    notify();
+  });
+
+  /* ---------- Calendar grid ---------- */
+  const DAYS = window.__coach.api.DAYS;
+  const ALL_TIMES = (() => {
+    const set = new Set();
+    DAYS.forEach(d => d.times.forEach(t => set.add(t)));
+    return Array.from(set).sort((a, b) => window.__coach.api.to24(a) - window.__coach.api.to24(b));
+  })();
+  const TODAY = { month: "Apr", num: 29 };
+
+  function renderCalendar() {
+    const grid = $('#bk-cal-grid');
+    const cells = [];
+    cells.push(`<div class="bk-cal-corner" role="presentation"></div>`);
+    DAYS.forEach(d => {
+      const isToday = d.month === TODAY.month && d.num === TODAY.num;
+      cells.push(`<div class="bk-cal-day-head" data-today="${isToday}" role="columnheader"><span>${d.dow}</span><span class="dnum">${d.num}</span></div>`);
+    });
+    ALL_TIMES.forEach(time => {
+      cells.push(`<div class="bk-cal-time-head" role="rowheader">${time}</div>`);
+      DAYS.forEach(d => {
+        if (!d.times.includes(time)) {
+          cells.push(`<div class="bk-cal-cell" data-state="closed" aria-disabled="true" role="gridcell"></div>`);
+          return;
+        }
+        const state = window.__coach.api.slotState(d.key, time);
+        const showPrice = state === "open";
+        const price = showPrice ? window.__coach.api.slotPrice(d.key, time) : null;
+        const inner = price != null ? `<span class="bk-cell-price">$${price}</span>` : "";
+        cells.push(`<div class="bk-cal-cell" data-state="${state}" data-day="${d.key}" data-time="${time}" role="gridcell">${inner}</div>`);
+      });
+    });
+    grid.innerHTML = cells.join("");
+    requestAnimationFrame(renderClassOverlays);
+  }
+
+  function renderClassOverlays() {
+    const grid = $('#bk-cal-grid');
+    grid.querySelectorAll('.bk-cal-class').forEach(n => n.remove());
+    window.__coach.classes.forEach(c => {
+      const startCell = grid.querySelector(`.bk-cal-cell[data-day="${c.dayKey}"][data-time="${c.startTime}"]`);
+      if (!startCell) return;
+      // Find last cell whose time < endTime
+      let endCell = startCell;
+      const endT = window.__coach.api.to24(c.endTime);
+      for (let i = ALL_TIMES.length - 1; i >= 0; i--) {
+        if (window.__coach.api.to24(ALL_TIMES[i]) < endT) {
+          const cand = grid.querySelector(`.bk-cal-cell[data-day="${c.dayKey}"][data-time="${ALL_TIMES[i]}"]`);
+          if (cand) { endCell = cand; break; }
+        }
+      }
+      const top = startCell.offsetTop + 2;
+      const bottom = endCell.offsetTop + endCell.offsetHeight - 2;
+      const left = startCell.offsetLeft + 2;
+      const width = startCell.offsetWidth - 4;
+      const node = document.createElement("div");
+      node.className = "bk-cal-class";
+      node.style.top = `${top}px`;
+      node.style.left = `${left}px`;
+      node.style.height = `${bottom - top}px`;
+      node.style.width = `${width}px`;
+      node.dataset.classId = c.id;
+      node.innerHTML = `
+        <span class="bk-class-title">${c.title}</span>
+        <span class="bk-class-meta">${c.startTime}–${c.endTime} · cap ${c.capacity} · $${c.price}</span>
+      `;
+      grid.appendChild(node);
+    });
+  }
+
+  window.addEventListener("resize", () => requestAnimationFrame(renderClassOverlays));
+
+  /* ---------- Drag-to-select ---------- */
+  const sel = { active: false, anchor: null, focus: null };
+
+  function cellAt(target) {
+    return target && target.closest && target.closest('#bk-cal-grid .bk-cal-cell[data-day]');
+  }
+  function cellsBetween(a, b) {
+    if (!a || !b) return [];
+    const dayA = DAY_KEYS.indexOf(a.dataset.day);
+    const dayB = DAY_KEYS.indexOf(b.dataset.day);
+    const tA = ALL_TIMES.indexOf(a.dataset.time);
+    const tB = ALL_TIMES.indexOf(b.dataset.time);
+    const [d1, d2] = [Math.min(dayA, dayB), Math.max(dayA, dayB)];
+    const [t1, t2] = [Math.min(tA, tB), Math.max(tA, tB)];
+    const out = [];
+    const grid = $('#bk-cal-grid');
+    for (let di = d1; di <= d2; di++) {
+      for (let ti = t1; ti <= t2; ti++) {
+        const c = grid.querySelector(`.bk-cal-cell[data-day="${DAY_KEYS[di]}"][data-time="${ALL_TIMES[ti]}"]`);
+        if (c && c.dataset.state !== "closed") out.push(c);
+      }
+    }
+    return out;
+  }
+  function paintSelection() {
+    $$('#bk-cal-grid .bk-cal-cell[data-selected="true"]').forEach(c => c.removeAttribute("data-selected"));
+    cellsBetween(sel.anchor, sel.focus).forEach(c => c.setAttribute("data-selected", "true"));
+  }
+  function clearSelection() {
+    sel.active = false; sel.anchor = null; sel.focus = null;
+    paintSelection();
+    hideToolbar();
+  }
+
+  const grid = $('#bk-cal-grid');
+  grid.addEventListener("mousedown", e => {
+    const c = cellAt(e.target);
+    if (!c || c.dataset.state === "closed") return;
+    e.preventDefault();
+    sel.active = true; sel.anchor = c; sel.focus = c;
+    paintSelection();
+    hideToolbar();
+  });
+  grid.addEventListener("mouseover", e => {
+    if (!sel.active) return;
+    const c = cellAt(e.target);
+    if (!c || c.dataset.state === "closed") return;
+    sel.focus = c;
+    paintSelection();
+  });
+  window.addEventListener("mouseup", () => {
+    if (!sel.active) return;
+    sel.active = false;
+    if (sel.anchor && sel.focus) showToolbar();
+  });
+  window.addEventListener("keydown", e => {
+    if (e.key === "Escape") clearSelection();
+  });
+
+  /* ---------- Floating toolbar + actions ---------- */
+  let toolbarEl = null;
+
+  function showToolbar() {
+    hideToolbar();
+    const cells = cellsBetween(sel.anchor, sel.focus);
+    if (!cells.length) return;
+    const tpl = document.getElementById("bk-toolbar-tpl");
+    toolbarEl = tpl.content.firstElementChild.cloneNode(true);
+    const calWrap = $('.bk-cal');
+    calWrap.appendChild(toolbarEl);
+    const last = cells[cells.length - 1];
+    const calRect = calWrap.getBoundingClientRect();
+    const cellRect = last.getBoundingClientRect();
+    let top = cellRect.bottom - calRect.top + 6;
+    let left = cellRect.right - calRect.left - 280;
+    if (left < 0) left = 8;
+    if (top + 220 > calRect.height) {
+      // Flip above selection
+      const first = cells[0].getBoundingClientRect();
+      top = first.top - calRect.top - 220;
+      if (top < 0) top = 8;
+    }
+    toolbarEl.style.top = `${top}px`;
+    toolbarEl.style.left = `${left}px`;
+    toolbarEl.querySelector('[data-meta]').textContent = `${cells.length} cell${cells.length === 1 ? "" : "s"} selected`;
+    toolbarEl.addEventListener("click", onToolbarClick);
+    toolbarEl.querySelectorAll('form').forEach(f => f.addEventListener("submit", onFormSubmit));
+  }
+  function hideToolbar() {
+    if (toolbarEl) { toolbarEl.remove(); toolbarEl = null; }
+  }
+  function showForm(name) {
+    if (!toolbarEl) return;
+    toolbarEl.querySelectorAll('.bk-toolbar-form').forEach(f => f.hidden = (f.dataset.form !== name));
+    const defaultRow = toolbarEl.querySelector('[data-row="default"]');
+    if (defaultRow) defaultRow.hidden = !!name;
+  }
+  function onToolbarClick(e) {
+    if (e.target.matches('[data-form-cancel]')) { showForm(null); return; }
+    const btn = e.target.closest('.bk-toolbar-btn');
+    if (!btn) return;
+    const action = btn.dataset.action;
+    if (action === "cancel") { clearSelection(); return; }
+    if (action === "block")  { doBlock(); return; }
+    if (action === "class")  { showForm("class"); return; }
+    if (action === "rate")   { showForm("rate"); return; }
+  }
+
+  function doBlock() {
+    const cells = cellsBetween(sel.anchor, sel.focus);
+    cells.forEach(c => {
+      const k = `${c.dataset.day}|${c.dataset.time}`;
+      if (window.__coach.blocks.has(k)) window.__coach.blocks.delete(k);
+      else window.__coach.blocks.add(k);
+    });
+    clearSelection();
+    markDirty();
+    renderCalendar();
+    notify();
+  }
+
+  function addHalf(time) {
+    return from24(window.__coach.api.to24(time) + 0.5);
+  }
+  function from24(t24) {
+    let h = Math.floor(t24);
+    const m = Math.round((t24 - h) * 60);
+    const p = h >= 12 ? "PM" : "AM";
+    if (h === 0) h = 12;
+    else if (h > 12) h -= 12;
+    return `${h}:${String(m).padStart(2, "0")} ${p}`;
+  }
+  function to24Str(time) {
+    const t = window.__coach.api.to24(time);
+    const h = Math.floor(t);
+    const m = Math.round((t - h) * 60);
+    return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
+  }
+
+  function onFormSubmit(e) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    if (form.dataset.form === "class") {
+      const cells = cellsBetween(sel.anchor, sel.focus);
+      if (!cells.length) return;
+      const byDay = new Map();
+      cells.forEach(c => {
+        const arr = byDay.get(c.dataset.day) || [];
+        arr.push(c.dataset.time);
+        byDay.set(c.dataset.day, arr);
+      });
+      byDay.forEach((times, dayKey) => {
+        times.sort((a, b) => window.__coach.api.to24(a) - window.__coach.api.to24(b));
+        const start = times[0];
+        const last = times[times.length - 1];
+        const end = addHalf(last);
+        window.__coach.classes.push({
+          id: `g${Date.now().toString(36)}-${dayKey}`,
+          title: form.title.value || "Class",
+          dayKey, startTime: start, endTime: end,
+          capacity: parseInt(form.cap.value, 10) || 12,
+          price: parseInt(form.price.value, 10) || 35,
+          where: form.where.value || "",
+          reserved: 0,
+        });
+      });
+    } else if (form.dataset.form === "rate") {
+      const rate = parseInt(form.rate.value, 10) || window.__coach.privateRate;
+      const scope = form.scope.value;
+      const cells = cellsBetween(sel.anchor, sel.focus);
+      if (scope === "rule") {
+        const days = Array.from(new Set(cells.map(c => c.dataset.day)));
+        const times = cells.map(c => c.dataset.time);
+        const minT = times.reduce((a, b) => window.__coach.api.to24(a) < window.__coach.api.to24(b) ? a : b);
+        const maxT = times.reduce((a, b) => window.__coach.api.to24(a) > window.__coach.api.to24(b) ? a : b);
+        window.__coach.rateRules.push({
+          days,
+          from: to24Str(minT),
+          to: to24Str(addHalf(maxT)),
+          rate,
+        });
+        renderRateRules();
+      } else {
+        cells.forEach(c => {
+          const k = `${c.dataset.day}|${c.dataset.time}`;
+          window.__coach.cellRates.set(k, rate);
+        });
+      }
+    }
+    clearSelection();
+    markDirty();
+    renderCalendar();
+    notify();
+  }
+
+  /* Expose for later tasks */
+  window.__coachDash = window.__coachDash || {};
+  window.__coachDash.renderRateRules = renderRateRules;
+  window.__coachDash.renderCalendar = renderCalendar;
+  window.__coachDash.markDirty = markDirty;
+  window.__coachDash.notify = notify;
+  window.__coachDash.ALL_TIMES = ALL_TIMES;
+  window.__coachDash.DAYS = DAYS;
+  // Re-render calendar when other components mutate state
+  window.__coach.listeners.add(renderCalendar);
+
+  /* ---------- Init ---------- */
+  renderRateRules();
+  renderCalendar();
 })();
 
 
@@ -9644,24 +10908,62 @@ Coach</textarea>
     away: { name: "Hammerheads", record: "10-5", side: "away" }
   };
 
+  // Empty starting state used by Reset.
   const INITIAL = {
-    inning: 5,
+    inning: 1,
     half: "top", // "top" -> away bats, "bottom" -> home bats
     final: false,
     balls: 0, strikes: 0, outs: 0,
+    bases: { first: false, second: false, third: false },
+    away: { total: 0, runs: [null, null, null, null, null, null, null] },
+    home: { total: 0, runs: [null, null, null, null, null, null, null] }
+  };
+
+  // Page-load state: mid-game so demo lands on something interesting.
+  const LOAD_STATE = {
+    inning: 5,
+    half: "top",
+    final: false,
+    balls: 0, strikes: 0, outs: 0,
+    bases: { first: true, second: false, third: true },
     away: { total: 3, runs: [1, 0, 1, 1, 0, null, null] },
     home: { total: 5, runs: [0, 2, 0, 3, null, null, null] }
   };
 
-  const state = clone(INITIAL);
+  const state = clone(LOAD_STATE);
 
   function clone(s) {
     return {
       inning: s.inning, half: s.half, final: s.final,
       balls: s.balls || 0, strikes: s.strikes || 0, outs: s.outs || 0,
+      bases: { first: !!s.bases.first, second: !!s.bases.second, third: !!s.bases.third },
       away: { total: s.away.total, runs: s.away.runs.slice() },
       home: { total: s.home.total, runs: s.home.runs.slice() }
     };
+  }
+
+  function clearBases() {
+    state.bases.first = false;
+    state.bases.second = false;
+    state.bases.third = false;
+  }
+  function renderBases() {
+    if (!elDiamond) return;
+    const rects = elDiamond.querySelectorAll('rect');
+    // rects order in markup: 2nd (top), 1st (right), home (bottom), 3rd (left)
+    const order = ["second", "first", null, "third"];
+    rects.forEach((r, i) => {
+      const key = order[i];
+      if (!key) return;
+      if (state.bases[key]) {
+        r.setAttribute("fill", "var(--demo-accent)");
+        r.setAttribute("stroke-width", "0");
+      } else {
+        r.setAttribute("fill", "none");
+        r.setAttribute("stroke", "rgba(244,245,244,0.55)");
+        r.setAttribute("stroke-width", "1.2");
+      }
+    });
   }
 
   // --- DOM refs ---
@@ -9687,6 +10989,7 @@ Coach</textarea>
   const elNextMeta = $('#scores-next-meta');
   const elFinalBtn = $('#scores-final');
   const elResetBtn = $('#scores-reset');
+  const elPrevBtn = $('#scores-prev');
   const elControls = $('#scores-controls');
   const elRecap = $('#scores-recap');
 
@@ -9796,17 +11099,27 @@ Coach</textarea>
       // Final enabled only after bottom of 7
       elFinalBtn.disabled = !(state.inning === TOTAL_INNINGS && state.half === "bottom");
     }
+    // Prev half: enabled if a prior half exists, or if we can step out of final
+    if (elPrevBtn) {
+      const atStart = !state.final && state.inning === 1 && state.half === "top";
+      elPrevBtn.disabled = atStart;
+      elPrevBtn.title = atStart ? "Already at top of 1st" : "Previous half-inning";
+    }
 
-    // +/- bounds
+    // +/- bounds: both buttons disabled when not the batting team's half
     ["away", "home"].forEach(side => {
       const minus = root.querySelector(`.scores-pill--minus[data-side="${side}"]`);
       const plus  = root.querySelector(`.scores-pill--plus[data-side="${side}"]`);
       if (!minus || !plus) return;
-      minus.disabled = state.final || state[side].total <= 0;
-      // +1 only enabled for currently-batting side
-      plus.disabled = state.final || side !== bat;
-      plus.title = state.final ? "" : (side === bat ? "Add 1" : `${TEAMS[side].name} doesn't bat in this half`);
+      const offHalf = side !== bat;
+      minus.disabled = state.final || offHalf || state[side].total <= 0;
+      plus.disabled  = state.final || offHalf;
+      const offTitle = `${TEAMS[side].name} doesn't bat in this half`;
+      minus.title = state.final ? "" : (offHalf ? offTitle : "Subtract 1");
+      plus.title  = state.final ? "" : (offHalf ? offTitle : "Add 1");
     });
+
+    renderBases();
 
     // Recap
     if (state.final) {
@@ -9905,6 +11218,8 @@ Coach</textarea>
       // Was bottom of 7, advance to final
       state.final = true;
     }
+    // Half changed -- bases cleared
+    clearBases();
     // Pre-fill new half-inning's cell with 0 so the active cell shows the working count
     if (!state.final) {
       const newBat = battingSide();
@@ -9927,10 +11242,38 @@ Coach</textarea>
     announce(`Final. ${winner.name} win ${Math.max(state.home.total, state.away.total)} to ${Math.min(state.home.total, state.away.total)}.`);
   }
 
+  function prevHalf() {
+    if (state.final) {
+      // Step out of final back into bottom of last inning.
+      state.final = false;
+      state.inning = TOTAL_INNINGS;
+      state.half = "bottom";
+    } else if (state.half === "bottom") {
+      state.half = "top";
+    } else if (state.inning > 1) {
+      state.inning -= 1;
+      state.half = "bottom";
+    } else {
+      return; // top of 1, nowhere to go
+    }
+    // Wipe runs entered for the half we just left so it can be re-entered cleanly.
+    const leftSide = state.half === "top" ? "home" : "away";
+    const wipeInning = state.half === "bottom" ? state.inning : state.inning;
+    if (state.half === "top") {
+      // We rolled inning back; clear the half we exited (was bottom of state.inning).
+      // No-op: prior half's data preserved so user only loses the half they left.
+    }
+    state.balls = 0; state.strikes = 0; state.outs = 0;
+    clearBases();
+    render();
+    renderCount();
+    announce(`Back to ${halfLabel()}. ${TEAMS[battingSide()].name} batting.`);
+  }
+
   function reset() {
     Object.assign(state, clone(INITIAL));
     render();
-    announce("Reset. Top of the 5th, Hammerheads batting.");
+    announce("Reset. Top of the 1st, Hammerheads batting.");
   }
 
   // --- Count actions (baseball rules) ---
@@ -9983,6 +11326,14 @@ Coach</textarea>
         : `Out. ${state.outs} out${state.outs === 1 ? "" : "s"}.`);
     }
   }
+  function decOut() {
+    if (state.final) return;
+    if (state.outs <= 0) return;
+    state.outs -= 1;
+    state.balls = 0; state.strikes = 0;
+    renderCount();
+    announce(`Out removed. ${state.outs} out${state.outs === 1 ? "" : "s"}.`);
+  }
 
   // --- Wire up ---
   root.addEventListener("click", (e) => {
@@ -10000,11 +11351,13 @@ Coach</textarea>
       if (a === "ball") ball();
       else if (a === "strike") strike();
       else if (a === "out") addOut(false);
+      else if (a === "out-minus") decOut();
       else if (a === "reset-count") resetCount(false);
       return;
     }
   });
   elNextBtn.addEventListener("click", function () { nextHalf(); resetCount(true); state.outs = 0; renderCount(); });
+  if (elPrevBtn) elPrevBtn.addEventListener("click", prevHalf);
   elFinalBtn.addEventListener("click", endGame);
   elResetBtn.addEventListener("click", function () { reset(); resetCount(true); state.outs = 0; renderCount(); });
 
