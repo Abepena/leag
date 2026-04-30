@@ -1374,6 +1374,10 @@
     background: color-mix(in srgb, var(--demo-primary) 88%, white);
     color: #fff;
   }
+  #coach-dash .bk-toolbar-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
   #coach-dash .bk-toolbar-form {
     display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
     width: 100%;
@@ -7629,7 +7633,9 @@
               <div class="bk-toolbar-row" data-row="default">
                 <span class="bk-toolbar-meta" data-meta>0 cells</span>
                 <button type="button" class="bk-toolbar-btn" data-action="block">Block</button>
+                <button type="button" class="bk-toolbar-btn" data-action="unblock" hidden>Unblock</button>
                 <button type="button" class="bk-toolbar-btn" data-action="class">Add class</button>
+                <button type="button" class="bk-toolbar-btn" data-action="remove-class" hidden>Remove class</button>
                 <button type="button" class="bk-toolbar-btn" data-action="rate">Set rate</button>
                 <button type="button" class="bk-toolbar-btn bk-toolbar-btn-ghost" data-action="cancel" aria-label="Cancel">×</button>
               </div>
@@ -10147,6 +10153,10 @@ Coach</textarea>
     // Cell-only selection: no class context, hide payout block.
     toolbarEl._evt = null;
     renderToolbarPayout(toolbarEl, null);
+    configureToolbarActions(toolbarEl, {
+      kind: 'cells',
+      cells: cells.map(c => ({ state: c.dataset.state }))
+    });
   }
   function showToolbarForClass(classObj, anchorEl) {
     hideToolbar();
@@ -10170,6 +10180,28 @@ Coach</textarea>
     toolbarEl.querySelectorAll('form').forEach(f => f.addEventListener("submit", onFormSubmit));
     toolbarEl._evt = classObj;
     renderToolbarPayout(toolbarEl, classObj);
+    configureToolbarActions(toolbarEl, { kind: 'class', classObj: classObj });
+  }
+  function configureToolbarActions(toolbarEl, ctx) {
+    // ctx is { kind: 'cells' | 'class', cells?: [{state}], classObj? }
+    const blockBtn   = toolbarEl.querySelector('[data-action="block"]');
+    const unblockBtn = toolbarEl.querySelector('[data-action="unblock"]');
+    const classBtn   = toolbarEl.querySelector('[data-action="class"]');
+    const removeBtn  = toolbarEl.querySelector('[data-action="remove-class"]');
+    const rateBtn    = toolbarEl.querySelector('[data-action="rate"]');
+    if (!ctx) return;
+    const isClass = ctx.kind === 'class';
+    const cells = ctx.cells || [];
+    const allBlocked = cells.length > 0 && cells.every(function (c) { return c.state === 'blocked'; });
+
+    if (blockBtn)   blockBtn.hidden   = isClass || allBlocked;
+    if (unblockBtn) unblockBtn.hidden = isClass || !allBlocked;
+    if (classBtn)   classBtn.hidden   = isClass;
+    if (removeBtn)  removeBtn.hidden  = !isClass;
+    if (rateBtn) {
+      rateBtn.hidden   = isClass;
+      rateBtn.disabled = allBlocked;
+    }
   }
   function classEffectiveFeeMode(evt) {
     return (evt && evt.feeMode) || (window.state && window.state.feeMode) || 'external';
@@ -10227,8 +10259,33 @@ Coach</textarea>
     const action = btn.dataset.action;
     if (action === "cancel") { clearSelection(); return; }
     if (action === "block")  { doBlock(); return; }
+    if (action === "unblock") { doUnblock(); return; }
     if (action === "class")  { showForm("class"); return; }
+    if (action === "remove-class") { doRemoveClass(); return; }
     if (action === "rate")   { showForm("rate"); return; }
+  }
+
+  function doUnblock() {
+    const cells = cellsBetween(sel.anchor, sel.focus);
+    cells.forEach(c => {
+      const k = `${c.dataset.day}|${c.dataset.time}`;
+      if (window.__coach.blocks.has(k)) window.__coach.blocks.delete(k);
+    });
+    clearSelection();
+    markDirty();
+    renderCalendar();
+    notify();
+  }
+
+  function doRemoveClass() {
+    const evt = toolbarEl && toolbarEl._evt;
+    if (evt && evt.id) {
+      window.__coach.classes = window.__coach.classes.filter(c => c.id !== evt.id);
+    }
+    hideToolbar();
+    markDirty();
+    renderCalendar();
+    notify();
   }
 
   function doBlock() {
