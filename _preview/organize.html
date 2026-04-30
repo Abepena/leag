@@ -9307,7 +9307,15 @@ Coach</textarea>
     var posSel = document.getElementById("cb-pos");
     if (posSel && posSel.options.length > 1) posSel.selectedIndex = 1;
     document.getElementById("cb-email").value = "jordan.pike@example.com";
-    document.getElementById("cb-phone").value = "555-0142";
+    document.getElementById("cb-phone").value = "555-014-2233";
+    document.getElementById("cb-ig").value = "@avery.pike";
+    // Clear any prior error states from a failed Continue click
+    ["cb-fn","cb-ln","cb-email","cb-phone"].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.removeAttribute("aria-invalid");
+      const err = document.getElementById(id + "-err");
+      if (err) err.hidden = true;
+    });
     toast("Sample data filled");
   });
 
