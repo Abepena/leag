@@ -1743,6 +1743,109 @@
     border-color: var(--demo-accent); color: var(--demo-accent);
   }
 
+  /* Bulk-booking discount promo (coach-dash) */
+  #coach-dash .bk-promo {
+    border-bottom: 1px solid var(--line);
+    padding: 14px 18px;
+    background: var(--bg-2);
+  }
+  #coach-dash .bk-promo-head {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 16px;
+  }
+  #coach-dash .bk-promo-title {
+    margin: 0 0 4px;
+    font-family: var(--font-sans); font-size: 13px; font-weight: 700;
+    color: var(--ink); text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  #coach-dash .bk-promo-sub {
+    margin: 0; color: var(--quiet);
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em;
+  }
+  #coach-dash .bk-promo-switch {
+    display: inline-flex; align-items: center; gap: 8px;
+    cursor: pointer;
+    user-select: none;
+  }
+  #coach-dash .bk-promo-switch input { position: absolute; opacity: 0; pointer-events: none; }
+  #coach-dash .bk-promo-switch-knob {
+    width: 32px; height: 18px;
+    border-radius: 999px;
+    background: var(--surface-3);
+    border: 1px solid var(--line-strong);
+    position: relative;
+    transition: background 140ms, border-color 140ms;
+  }
+  #coach-dash .bk-promo-switch-knob::after {
+    content: "";
+    position: absolute; top: 1px; left: 1px;
+    width: 14px; height: 14px;
+    border-radius: 999px;
+    background: var(--ink);
+    transition: transform 160ms;
+  }
+  #coach-dash .bk-promo-switch input:checked + .bk-promo-switch-knob {
+    background: var(--demo-primary);
+    border-color: var(--demo-primary);
+  }
+  #coach-dash .bk-promo-switch input:checked + .bk-promo-switch-knob::after {
+    transform: translateX(14px);
+    background: #fff;
+  }
+  #coach-dash .bk-promo-switch-label {
+    color: var(--muted);
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.06em; text-transform: uppercase;
+  }
+  #coach-dash .bk-promo-fields {
+    display: grid; grid-template-columns: auto auto 1fr; gap: 12px 16px;
+    align-items: center;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--line);
+  }
+  #coach-dash .bk-promo-fields[aria-hidden="true"] { display: none; }
+  #coach-dash .bk-promo-field {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--muted);
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+  #coach-dash .bk-promo-input {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    padding: 4px 8px;
+  }
+  #coach-dash .bk-promo-input input {
+    width: 48px;
+    background: transparent; border: 0; outline: 0;
+    color: var(--ink); font-family: var(--font-mono); font-size: 12px;
+    font-variant-numeric: tabular-nums;
+    padding: 0;
+  }
+  #coach-dash .bk-promo-suffix {
+    color: var(--quiet);
+    font-family: var(--font-mono); font-size: 11px;
+  }
+  #coach-dash .bk-promo-preview {
+    margin: 0; grid-column: 1 / -1;
+    padding: 6px 10px;
+    border-radius: 4px;
+    background: var(--surface);
+    color: var(--quiet);
+    font-family: var(--font-mono); font-size: 11px;
+    border: 1px dashed var(--line);
+  }
+  #coach-dash .bk-promo-preview b {
+    color: var(--demo-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 10px;
+    margin-right: 6px;
+  }
+
   /* Hourly rate meta + toolbar half-hour readout */
   #coach-dash .bk-rate-amt-suffix {
     color: var(--quiet); font-family: var(--font-mono);
@@ -2289,6 +2392,32 @@
     letter-spacing: 0.01em;
   }
   #coach-booking .cb-url-chip-icon { flex-shrink: 0; opacity: 0.7; }
+
+  #coach-booking .cb-coach-promo {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 10px;
+    margin-top: 12px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--demo-accent) 18%, var(--bg-2));
+    border: 1px solid color-mix(in srgb, var(--demo-accent) 50%, transparent);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--demo-accent) 6%, transparent);
+  }
+  #coach-booking .cb-coach-promo[hidden] { display: none; }
+  #coach-booking .cb-coach-promo svg { color: var(--demo-accent); flex-shrink: 0; }
+  #coach-booking .cb-coach-promo-key {
+    color: var(--demo-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 9.5px;
+  }
+  #coach-booking .cb-coach-promo-text {
+    color: var(--ink);
+  }
 
   #coach-booking .cb-coach-stats {
     display: grid;
@@ -7750,6 +7879,37 @@
               <p class="bk-defavail-band-empty" id="bk-defavail-band-empty">No recurring breaks. Add one for things like a weekly dinner block.</p>
             </div>
           </section>
+          <!-- Bulk-booking discount promo -->
+          <section class="bk-promo" id="bk-promo" aria-labelledby="bk-promo-title">
+            <div class="bk-promo-head">
+              <div>
+                <h3 class="bk-promo-title" id="bk-promo-title">Bulk-booking discount</h3>
+                <p class="bk-promo-sub">Reward parents who book multiple lessons in a month. Shown on your bio card when on.</p>
+              </div>
+              <label class="bk-promo-switch">
+                <input type="checkbox" id="bk-promo-enabled">
+                <span class="bk-promo-switch-knob" aria-hidden="true"></span>
+                <span class="bk-promo-switch-label" id="bk-promo-switch-label">Off</span>
+              </label>
+            </div>
+            <div class="bk-promo-fields" id="bk-promo-fields" aria-hidden="true">
+              <label class="bk-promo-field">
+                <span>Discount</span>
+                <span class="bk-promo-input">
+                  <input type="number" id="bk-promo-pct" value="10" min="1" max="50" step="1">
+                  <span class="bk-promo-suffix">% off</span>
+                </span>
+              </label>
+              <label class="bk-promo-field">
+                <span>Triggered after</span>
+                <span class="bk-promo-input">
+                  <input type="number" id="bk-promo-threshold" value="3" min="2" max="20" step="1">
+                  <span class="bk-promo-suffix">lessons / month</span>
+                </span>
+              </label>
+              <p class="bk-promo-preview" id="bk-promo-preview"><b>Bio chip:</b> <span id="bk-promo-preview-text">10% off when you book 3+ lessons in a month</span></p>
+            </div>
+          </section>
           <!-- Rate rules panel -->
           <section class="bk-rates" aria-labelledby="bk-rates-title">
             <header class="bk-rates-head">
@@ -7877,6 +8037,14 @@
 
           <div class="cb-coach-body" id="cb-coach-body">
             <p class="cb-coach-bio" data-coach-bio>15 years coaching middle school + high school basketball. NJ-based skills trainer, host of weekly Mon and Wed group sessions.</p>
+
+            <div class="cb-coach-promo" id="cb-coach-promo" hidden>
+              <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true">
+                <path d="M3 8 L7 12 L13 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span class="cb-coach-promo-key">Bulk save</span>
+              <span class="cb-coach-promo-text" id="cb-coach-promo-text">10% off when you book 3+ lessons in a month</span>
+            </div>
 
             <dl class="cb-coach-stats">
               <div>
@@ -9008,9 +9176,13 @@ Coach</textarea>
       bookings: buildSeedBookings(preset.slotOverrides),
       classes: buildSeedClasses(preset.groupClasses),
       cellRates: new Map(),
+      promo: { enabled: false, discountPct: 10, threshold: 3 },
       dirty: false,
       listeners: new Set(),
     };
+  }
+  if (!window.__coach.promo) {
+    window.__coach.promo = { enabled: false, discountPct: 10, threshold: 3 };
   }
   function to24(t) {
     const m = /^(\d+):(\d+)\s+(AM|PM)$/.exec(t);
@@ -10040,11 +10212,24 @@ Coach</textarea>
   renderClasses();
   renderPrivates();
 
+  function renderPromoChip() {
+    const chip = document.getElementById("cb-coach-promo");
+    const text = document.getElementById("cb-coach-promo-text");
+    if (!chip || !text) return;
+    const p = (window.__coach && window.__coach.promo) || null;
+    if (!p || !p.enabled) {
+      chip.hidden = true;
+      return;
+    }
+    text.textContent = p.discountPct + "% off when you book " + p.threshold + "+ lessons in a month";
+    chip.hidden = false;
+  }
   // Expose preview re-render so the coach dashboard can push edits live.
   window.__coach.api = window.__coach.api || {};
   window.__coach.api.rerenderPreview = function () {
     renderClasses();
     renderPrivates();
+    renderPromoChip();
     const cnt = document.getElementById("cb-priv-open-count");
     if (cnt) {
       let openN = 0;
@@ -10054,6 +10239,7 @@ Coach</textarea>
       cnt.textContent = openN;
     }
   };
+  renderPromoChip();
   window.__coach.listeners.add(window.__coach.api.rerenderPreview);
   // Helpers used by dashboard IIFE
   window.__coach.api.DAYS = DAYS;
@@ -10775,6 +10961,63 @@ Coach</textarea>
     const v = parseFloat(e.target.value) || 0;
     half.textContent = '$' + (Math.round((v / 2) / 5) * 5);
   });
+})();
+
+/* ---------- Bulk-booking discount promo wiring ---------- */
+(function () {
+  const enabled = document.getElementById('bk-promo-enabled');
+  const fields  = document.getElementById('bk-promo-fields');
+  const pctInp  = document.getElementById('bk-promo-pct');
+  const thrInp  = document.getElementById('bk-promo-threshold');
+  const label   = document.getElementById('bk-promo-switch-label');
+  const preview = document.getElementById('bk-promo-preview-text');
+  if (!enabled || !pctInp || !thrInp) return;
+  function getCoachPromo() {
+    if (!window.__coach) return null;
+    if (!window.__coach.promo) {
+      window.__coach.promo = { enabled: false, discountPct: 10, threshold: 3 };
+    }
+    return window.__coach.promo;
+  }
+  function syncFromState() {
+    const p = getCoachPromo();
+    if (!p) return;
+    enabled.checked = !!p.enabled;
+    pctInp.value = String(p.discountPct);
+    thrInp.value = String(p.threshold);
+    applyVisibility();
+    refreshPreview();
+  }
+  function applyVisibility() {
+    const on = enabled.checked;
+    fields.setAttribute('aria-hidden', on ? 'false' : 'true');
+    label.textContent = on ? 'On' : 'Off';
+  }
+  function refreshPreview() {
+    const pct = clamp(parseInt(pctInp.value, 10) || 0, 1, 50);
+    const thr = clamp(parseInt(thrInp.value, 10) || 0, 2, 20);
+    preview.textContent = pct + '% off when you book ' + thr + '+ lessons in a month';
+  }
+  function clamp(n, lo, hi) { return Math.max(lo, Math.min(hi, n)); }
+  function commit() {
+    const p = getCoachPromo();
+    if (!p) return;
+    p.enabled = enabled.checked;
+    p.discountPct = clamp(parseInt(pctInp.value, 10) || 0, 1, 50);
+    p.threshold = clamp(parseInt(thrInp.value, 10) || 0, 2, 20);
+    applyVisibility();
+    refreshPreview();
+    if (window.__coachDash && typeof window.__coachDash.markDirty === 'function') {
+      window.__coachDash.markDirty();
+    }
+    if (window.__coach && window.__coach.listeners) {
+      window.__coach.listeners.forEach(fn => { try { fn(); } catch (_) {} });
+    }
+  }
+  enabled.addEventListener('change', commit);
+  pctInp.addEventListener('input', commit);
+  thrInp.addEventListener('input', commit);
+  syncFromState();
 })();
 
 /* ---------- Privates panel tier-pill auto-derive (hourly) ---------- */
