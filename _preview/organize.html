@@ -1422,6 +1422,112 @@
     opacity: 1; cursor: pointer;
   }
 
+  /* Two-row coach-dash card header */
+  #coach-dash .bk-card-head {
+    display: flex; flex-direction: column;
+    gap: 0;
+    padding: 0;
+  }
+  #coach-dash .bk-card-head-row {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 16px;
+    padding: 16px 18px;
+  }
+  #coach-dash .bk-card-head-row-top {
+    border-bottom: 1px solid var(--line);
+  }
+  #coach-dash .bk-card-head-row-bottom {
+    align-items: center;
+  }
+
+  /* Default fee toggle — chip-toggle pattern with overflow fix */
+  #coach-dash .bk-fee-toggle {
+    display: flex; flex-direction: column; gap: 6px;
+    min-width: 240px;
+  }
+  #coach-dash .bk-fee-toggle-head {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
+  }
+  #coach-dash .bk-fee-toggle-label {
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  #coach-dash .bk-fee-toggle-rate {
+    color: var(--quiet);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+  }
+  #coach-dash .bk-fee-toggle-row {
+    display: inline-flex;
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    padding: 2px;
+    background: var(--bg-2);
+  }
+  #coach-dash .bk-fee-chip {
+    flex: 1 1 auto;
+    min-width: 110px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    background: transparent;
+    color: var(--muted);
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 120ms, color 120ms;
+  }
+  #coach-dash .bk-fee-chip:hover { color: var(--ink); }
+  #coach-dash .bk-fee-chip.is-active {
+    background: var(--demo-primary);
+    color: #fff;
+    box-shadow: 0 1px 2px color-mix(in srgb, var(--demo-primary) 40%, transparent);
+  }
+  #coach-dash .bk-fee-toggle-note {
+    color: var(--quiet);
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+  }
+
+  /* Default weekly availability collapsible trigger */
+  #coach-dash .bk-defavail-toggle {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 12px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--bg-2);
+    color: var(--ink);
+    cursor: pointer;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    transition: border-color 120ms;
+  }
+  #coach-dash .bk-defavail-toggle:hover { border-color: var(--demo-accent); }
+  #coach-dash .bk-defavail-toggle[aria-expanded="true"] svg {
+    transform: rotate(180deg);
+  }
+  #coach-dash .bk-defavail-toggle svg { transition: transform 160ms; }
+  #coach-dash .bk-defavail-toggle-label {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 10px;
+    color: var(--muted);
+  }
+  #coach-dash .bk-defavail-toggle-summary {
+    color: var(--quiet);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+
   /* ============ COMMS ============ */
   .compose-prev {
     background: var(--surface-2);
@@ -7246,15 +7352,37 @@
       </header>
 
       <article class="card" id="coach-dash">
-        <header class="card-head">
-          <div class="titles">
-            <div class="eyebrow">Live · Coach dashboard</div>
-            <h2 class="card-title">Manage availability and prices</h2>
-            <p class="card-sub">Drag across cells to block, add classes, or set custom rates. Preview below updates as you go.</p>
+        <header class="card-head bk-card-head">
+          <div class="bk-card-head-row bk-card-head-row-top">
+            <div class="titles">
+              <div class="eyebrow">Live · Coach dashboard</div>
+              <h2 class="card-title">Manage availability and prices</h2>
+              <p class="card-sub">Drag across cells to block, add classes, or set custom rates. Preview below updates as you go.</p>
+            </div>
+            <div class="bk-fee-toggle" role="group" aria-label="Default service fee handling">
+              <div class="bk-fee-toggle-head">
+                <span class="bk-fee-toggle-label">Default fee</span>
+                <span class="bk-fee-toggle-rate">5% + $0.50</span>
+              </div>
+              <div class="bk-fee-toggle-row" role="radiogroup" aria-label="Who pays the service fee by default">
+                <button type="button" class="bk-fee-chip is-active" role="radio" aria-checked="true" data-fee-mode="external">Parent pays</button>
+                <button type="button" class="bk-fee-chip" role="radio" aria-checked="false" data-fee-mode="internal">Coach absorbs</button>
+              </div>
+              <div class="bk-fee-toggle-note" id="bk-fee-note">Parent sees sticker + fee. You receive sticker.</div>
+            </div>
           </div>
-          <div class="card-head-actions">
-            <button class="btn btn-ghost btn-sm" id="bk-discard" disabled>Discard</button>
-            <button class="btn btn-primary btn-sm" id="bk-save" disabled><span id="bk-save-label">Saved</span></button>
+          <div class="bk-card-head-row bk-card-head-row-bottom">
+            <button type="button" class="bk-defavail-toggle" id="bk-defavail-toggle" aria-expanded="false" aria-controls="bk-defavail-panel">
+              <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+                <path d="M3 6 L8 11 L13 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span class="bk-defavail-toggle-label">Default weekly availability</span>
+              <span class="bk-defavail-toggle-summary" id="bk-defavail-summary">Mon-Fri 4-9pm · Sat 9am-2pm · Sun closed</span>
+            </button>
+            <div class="card-head-actions">
+              <button class="btn btn-ghost btn-sm" id="bk-discard" disabled>Discard</button>
+              <button class="btn btn-primary btn-sm" id="bk-save" disabled><span id="bk-save-label">Saved</span></button>
+            </div>
           </div>
         </header>
         <div class="card-body">
@@ -9852,6 +9980,32 @@ Coach</textarea>
   renderCalendar();
 })();
 
+/* ---------- Default fee toggle (coach-dash card head) ---------- */
+(function () {
+  const chips = document.querySelectorAll('#coach-dash .bk-fee-chip');
+  if (!chips.length) return;
+  const note = document.getElementById('bk-fee-note');
+  const NOTES = {
+    external: 'Parent sees sticker + fee. You receive sticker.',
+    internal: 'You eat the fee. Parent sees a clean sticker. Your payout drops by the fee.'
+  };
+  function setMode(mode) {
+    if (mode !== 'external' && mode !== 'internal') return;
+    window.state = window.state || {};
+    window.state.feeMode = mode;
+    chips.forEach(function (c) {
+      const active = c.dataset.feeMode === mode;
+      c.classList.toggle('is-active', active);
+      c.setAttribute('aria-checked', active ? 'true' : 'false');
+    });
+    if (note) note.textContent = NOTES[mode];
+    if (typeof window.rerenderBkCal === 'function') window.rerenderBkCal();
+  }
+  chips.forEach(function (c) {
+    c.addEventListener('click', function () { setMode(c.dataset.feeMode); });
+  });
+  setMode((window.state && window.state.feeMode) || 'external');
+})();
 
 </script>
 <!-- ===== Tweaks panel (coach + sport swap) ===== -->
