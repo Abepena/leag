@@ -2995,6 +2995,53 @@
     }
   }
 
+  /* ---------- Master "What they see" header above booker-frame ---------- */
+  .cb-preview-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 14px 18px;
+    margin: 24px 0 0;
+    border: 1px solid var(--line);
+    border-bottom: 0;
+    border-radius: var(--radius) var(--radius) 0 0;
+    background: var(--bg-2);
+  }
+  .cb-preview-eyebrow-key {
+    color: var(--demo-accent);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .cb-preview-eyebrow-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--ink);
+  }
+  .cb-preview-sub {
+    margin: 0;
+    color: var(--quiet);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+  .cb-preview-sub code {
+    font-family: var(--font-mono);
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 1px 5px;
+    color: var(--ink);
+  }
+  .cb-preview-header + .booker-frame {
+    border-radius: 0 0 var(--radius) var(--radius);
+    margin-top: -1px;
+  }
+
 
   /* ===================================== */
   /* ===== Splice-in preview component styles ===== */
@@ -7287,6 +7334,12 @@
         </div>
       </article>
 
+      <header class="cb-preview-header">
+        <span class="cb-preview-eyebrow-key">Preview</span>
+        <h3 class="cb-preview-eyebrow-title">What they see</h3>
+        <p class="cb-preview-sub">This is the public booking page parents land on at <code data-coach-url-template="coach.{slug}.leag.app/book">coach.chris.leag.app/book</code>.</p>
+      </header>
+
       <section id="coach-booking" class="booker-frame" aria-labelledby="coach-booking-title">
         <span class="corner-pill beta"><svg width="10" height="10"><use href="#i-spark"/></svg> Beta · Under your account</span>
         <h2 id="coach-booking-title" class="cb-sr-only">Coach <span data-coach-name>Chris Morales</span> booking page</h2>
@@ -7347,10 +7400,6 @@
 
         <!-- ============ Offerings (right) ============ -->
         <div class="cb-offerings-wrap">
-        <header class="cb-offerings-eyebrow">
-          <span class="cb-offerings-eyebrow-key">Preview</span>
-          <h3 class="cb-offerings-eyebrow-title">What they see</h3>
-        </header>
         <section class="cb-offerings" aria-labelledby="cb-offerings-title">
           <div class="cb-tabs" role="tablist" aria-label="Offerings">
             <button type="button" class="cb-tab" role="tab" id="cb-tab-group" aria-selected="true" aria-controls="cb-panel-group" data-tab="group">
