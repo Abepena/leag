@@ -1628,6 +1628,30 @@
     border-color: var(--demo-accent); color: var(--demo-accent);
   }
 
+  /* Hourly rate meta + toolbar half-hour readout */
+  #coach-dash .bk-rate-amt-suffix {
+    color: var(--quiet); font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: 0.02em;
+    margin-left: 4px;
+  }
+  #coach-dash .bk-rate-half-meta {
+    color: var(--quiet);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    margin-left: 6px;
+  }
+  #coach-dash .bk-rate-form-half {
+    margin: 0;
+    color: var(--quiet);
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+  }
+  #coach-dash .bk-rate-form-half [data-rate-half] {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
   /* ============ COMMS ============ */
   .compose-prev {
     background: var(--surface-2);
@@ -7524,10 +7548,10 @@
               </div>
               <div class="bk-rates-base">
                 <label class="bk-rates-base-label">
-                  <span>Base rate / 30 min</span>
+                  <span>Base rate / hour</span>
                   <span class="bk-rates-base-input">
                     <span class="bk-edit-prefix">$</span>
-                    <input type="number" id="bk-rate-base" value="40" min="0" step="5">
+                    <input type="number" id="bk-rate-base" value="80" min="0" step="5">
                   </span>
                 </label>
                 <button type="button" class="btn btn-secondary btn-sm" id="bk-rate-add"><svg width="12" height="12"><use href="#i-plus"/></svg> Add rule</button>
@@ -7574,7 +7598,8 @@
                 </div>
               </form>
               <form class="bk-toolbar-form bk-rate-form" data-form="rate" hidden>
-                <label class="bk-edit-field bk-edit-num"><span>Rate / 30 min</span><span class="bk-edit-prefix">$</span><input name="rate" type="number" value="40" min="0" step="5"></label>
+                <label class="bk-edit-field bk-edit-num"><span>Rate / hour</span><span class="bk-edit-prefix">$</span><input name="rate" type="number" value="80" min="0" step="5"></label>
+                <p class="bk-rate-form-half" id="bk-rate-form-half">Half hour: <span data-rate-half>$40</span></p>
                 <label class="bk-edit-field"><span>Save as</span>
                   <select name="scope">
                     <option value="cells">Just these cells</option>
@@ -9704,6 +9729,8 @@ Coach</textarea>
   }
 
   /* ---------- Rate rules ---------- */
+  function roundTo5(n) { return Math.round(n / 5) * 5; }
+
   function renderRateRules() {
     const list = $('#bk-rate-list');
     const empty = $('#bk-rates-empty');
@@ -9729,6 +9756,7 @@ Coach</textarea>
         <span class="bk-rate-amt">
           <span class="bk-edit-prefix">$</span>
           <input type="number" data-field="rate" value="${r.rate}" min="0" step="5" aria-label="Rate">
+          <span class="bk-rate-amt-suffix">/ hour <span class="bk-rate-half-meta">($${roundTo5(r.rate / 2)} / 30 min)</span></span>
         </span>
         <button type="button" class="bk-rate-remove" data-rule-remove aria-label="Remove rule">×</button>
       </li>
@@ -9776,7 +9804,19 @@ Coach</textarea>
     let val = e.target.value;
     if (field === "rate") val = parseInt(val, 10);
     window.__coach.rateRules[idx][field] = val;
+    if (field === "rate") renderRateRules();
     markDirty(); notify();
+  });
+
+  // Live half-hour meta update inside rate-list rate inputs
+  $('#bk-rate-list').addEventListener("input", e => {
+    if (!e.target.matches('input[data-field="rate"]')) return;
+    const row = e.target.closest('.bk-rate-row');
+    if (!row) return;
+    const meta = row.querySelector('.bk-rate-half-meta');
+    if (!meta) return;
+    const v = parseFloat(e.target.value) || 0;
+    meta.textContent = '($' + roundTo5(v / 2) + ' / 30 min)';
   });
 
   /* ---------- Save / discard (full impl in Task 8) ---------- */
@@ -10134,6 +10174,34 @@ Coach</textarea>
     c.addEventListener('click', function () { setMode(c.dataset.feeMode); });
   });
   setMode((window.state && window.state.feeMode) || 'external');
+})();
+
+/* ---------- Toolbar rate-form: live half-hour readout ---------- */
+(function () {
+  // Wire half-hour readout updates inside any instantiated bk-rate-form
+  document.addEventListener('input', function (e) {
+    if (!e.target.matches || !e.target.matches('.bk-rate-form input[name="rate"]')) return;
+    const form = e.target.closest('form');
+    if (!form) return;
+    const half = form.querySelector('[data-rate-half]');
+    if (!half) return;
+    const v = parseFloat(e.target.value) || 0;
+    half.textContent = '$' + (Math.round((v / 2) / 5) * 5);
+  });
+})();
+
+/* ---------- Privates panel tier-pill auto-derive (half-hour from hourly) ---------- */
+(function () {
+  const base = document.getElementById('bk-rate-base');
+  const tierVal = document.querySelector('.cb-priv-tier-val');
+  if (!base || !tierVal) return;
+  function refresh() {
+    const hourly = parseFloat(base.value) || 0;
+    const half = Math.round((hourly / 2) / 5) * 5;
+    tierVal.textContent = '$' + half;
+  }
+  base.addEventListener('input', refresh);
+  refresh();
 })();
 
 /* ---------- Default weekly availability: collapsible toggle + summary ---------- */
