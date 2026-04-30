@@ -9191,8 +9191,71 @@ Coach</textarea>
     }
   });
 
-  // Step buttons
-  document.getElementById("cb-to-checkout").addEventListener("click", () => showPane("checkout"));
+  // Step buttons + booker validation
+  // TODO(production): these validators are demo-grade. Before wiring to a real booking
+  // endpoint, replace with libphonenumber-js for phone (E.164), the WHATWG email
+  // constraint API + server-side MX check for email, and a stricter IG-handle regex.
+  // See plan §"TODO when wired to a real backend" for the full checklist.
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  function digitsOnly(s) { return (s || "").replace(/\D+/g, ""); }
+  function setFieldError(inputId, errId, hasError) {
+    const input = document.getElementById(inputId);
+    const err = document.getElementById(errId);
+    if (!input || !err) return;
+    if (hasError) {
+      input.setAttribute("aria-invalid", "true");
+      err.hidden = false;
+    } else {
+      input.removeAttribute("aria-invalid");
+      err.hidden = true;
+    }
+  }
+  function validateBookerForm() {
+    const fn = document.getElementById("cb-fn").value.trim();
+    const ln = document.getElementById("cb-ln").value.trim();
+    const email = document.getElementById("cb-email").value.trim();
+    const phone = document.getElementById("cb-phone").value.trim();
+    const emailValid = EMAIL_RE.test(email);
+    const phoneValid = digitsOnly(phone).length >= 10;
+    const hasContact = emailValid || phoneValid;
+    const errors = {
+      fn: !fn,
+      ln: !ln,
+      email: !hasContact || (email && !emailValid),
+      phone: !hasContact || (phone && !phoneValid),
+    };
+    setFieldError("cb-fn", "cb-fn-err", errors.fn);
+    setFieldError("cb-ln", "cb-ln-err", errors.ln);
+    setFieldError("cb-email", "cb-email-err", errors.email);
+    setFieldError("cb-phone", "cb-phone-err", errors.phone);
+    const ok = !errors.fn && !errors.ln && hasContact && (!email || emailValid) && (!phone || phoneValid);
+    return { ok, errors, firstInvalid:
+      errors.fn ? "cb-fn" :
+      errors.ln ? "cb-ln" :
+      errors.email ? "cb-email" :
+      errors.phone ? "cb-phone" : null
+    };
+  }
+  // Live re-validation: clear errors as the user types valid input
+  ["cb-fn","cb-ln","cb-email","cb-phone"].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener("input", () => {
+      if (el.getAttribute("aria-invalid") === "true") validateBookerForm();
+    });
+  });
+  document.getElementById("cb-to-checkout").addEventListener("click", () => {
+    const result = validateBookerForm();
+    if (!result.ok) {
+      if (result.firstInvalid) {
+        const el = document.getElementById(result.firstInvalid);
+        if (el && el.focus) el.focus();
+      }
+      toast("Add your name and a way to reach you.");
+      return;
+    }
+    showPane("checkout");
+  });
   document.getElementById("cb-back-to-player").addEventListener("click", () => showPane("player"));
 
   // Pay
