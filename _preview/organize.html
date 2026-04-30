@@ -1528,6 +1528,106 @@
     letter-spacing: 0.04em;
   }
 
+  /* Default weekly availability collapsible panel */
+  #coach-dash .bk-defavail {
+    border-bottom: 1px solid var(--line);
+    padding: 14px 18px 18px;
+    background: var(--bg-2);
+  }
+  #coach-dash .bk-defavail[hidden] { display: none; }
+  #coach-dash .bk-defavail-head { margin-bottom: 12px; }
+  #coach-dash .bk-defavail-title {
+    margin: 0 0 4px;
+    font-family: var(--font-sans); font-size: 13px; font-weight: 700;
+    color: var(--ink); text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  #coach-dash .bk-defavail-sub {
+    margin: 0; color: var(--quiet);
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em;
+  }
+  #coach-dash .bk-defavail-grid {
+    display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px;
+    margin-bottom: 14px;
+  }
+  #coach-dash .bk-defavail-row {
+    display: flex; flex-direction: column; gap: 4px;
+    padding: 8px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--surface);
+  }
+  #coach-dash .bk-defavail-row-closed { opacity: 0.7; }
+  #coach-dash .bk-defavail-dow {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted);
+  }
+  #coach-dash .bk-defavail-time {
+    display: flex; flex-direction: column; gap: 2px;
+    font-family: var(--font-mono); font-size: 9px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--quiet);
+  }
+  #coach-dash .bk-defavail-time input {
+    background: var(--bg-2); border: 1px solid var(--line);
+    border-radius: 3px; padding: 4px 6px;
+    color: var(--ink); font-family: var(--font-mono); font-size: 11px;
+    color-scheme: dark;
+  }
+  #coach-dash .bk-defavail-time input:disabled { opacity: 0.5; }
+  #coach-dash .bk-defavail-closed {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-family: var(--font-mono); font-size: 10px;
+    color: var(--muted); cursor: pointer;
+  }
+
+  /* Bands sub-section */
+  #coach-dash .bk-defavail-bands {
+    border-top: 1px dashed var(--line);
+    padding-top: 12px;
+  }
+  #coach-dash .bk-defavail-bands-head {
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--muted); margin-bottom: 8px;
+    letter-spacing: 0.04em;
+  }
+  #coach-dash .bk-defavail-band-list {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  #coach-dash .bk-defavail-band-list:empty + .bk-defavail-band-empty { display: block; }
+  #coach-dash .bk-defavail-band-empty {
+    margin: 0; color: var(--quiet);
+    font-family: var(--font-mono); font-size: 11px;
+  }
+
+  /* Band row template (added dynamically) */
+  #coach-dash .bk-defavail-band {
+    display: flex; gap: 8px; align-items: center;
+    padding: 6px 8px;
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    background: var(--surface);
+    font-family: var(--font-mono); font-size: 11px;
+  }
+  #coach-dash .bk-defavail-band select,
+  #coach-dash .bk-defavail-band input {
+    background: var(--bg-2); border: 1px solid var(--line);
+    border-radius: 3px; padding: 4px 6px;
+    color: var(--ink); font-family: var(--font-mono); font-size: 11px;
+    color-scheme: dark;
+  }
+  #coach-dash .bk-defavail-band-remove {
+    margin-left: auto; width: 24px; height: 24px;
+    border: 1px solid var(--line);
+    border-radius: 4px; background: transparent; color: var(--quiet);
+    cursor: pointer;
+  }
+  #coach-dash .bk-defavail-band-remove:hover {
+    border-color: var(--demo-accent); color: var(--demo-accent);
+  }
+
   /* ============ COMMS ============ */
   .compose-prev {
     background: var(--surface-2);
@@ -7386,6 +7486,35 @@
           </div>
         </header>
         <div class="card-body">
+          <section class="bk-defavail" id="bk-defavail-panel" hidden aria-labelledby="bk-defavail-title">
+            <header class="bk-defavail-head">
+              <div>
+                <h3 class="bk-defavail-title" id="bk-defavail-title">Default weekly availability</h3>
+                <p class="bk-defavail-sub">Set when you work each week. The grid pre-fills these as closed/open. Override per week with Block.</p>
+              </div>
+            </header>
+
+            <div class="bk-defavail-grid">
+              <div class="bk-defavail-row" data-day="mon"><span class="bk-defavail-dow">Mon</span><label class="bk-defavail-time"><span>From</span><input type="time" value="16:00"></label><label class="bk-defavail-time"><span>To</span><input type="time" value="21:00"></label><label class="bk-defavail-closed"><input type="checkbox"> Closed</label></div>
+              <div class="bk-defavail-row" data-day="tue"><span class="bk-defavail-dow">Tue</span><label class="bk-defavail-time"><span>From</span><input type="time" value="16:00"></label><label class="bk-defavail-time"><span>To</span><input type="time" value="21:00"></label><label class="bk-defavail-closed"><input type="checkbox"> Closed</label></div>
+              <div class="bk-defavail-row" data-day="wed"><span class="bk-defavail-dow">Wed</span><label class="bk-defavail-time"><span>From</span><input type="time" value="16:00"></label><label class="bk-defavail-time"><span>To</span><input type="time" value="21:00"></label><label class="bk-defavail-closed"><input type="checkbox"> Closed</label></div>
+              <div class="bk-defavail-row" data-day="thu"><span class="bk-defavail-dow">Thu</span><label class="bk-defavail-time"><span>From</span><input type="time" value="16:00"></label><label class="bk-defavail-time"><span>To</span><input type="time" value="21:00"></label><label class="bk-defavail-closed"><input type="checkbox"> Closed</label></div>
+              <div class="bk-defavail-row" data-day="fri"><span class="bk-defavail-dow">Fri</span><label class="bk-defavail-time"><span>From</span><input type="time" value="16:00"></label><label class="bk-defavail-time"><span>To</span><input type="time" value="21:00"></label><label class="bk-defavail-closed"><input type="checkbox"> Closed</label></div>
+              <div class="bk-defavail-row" data-day="sat"><span class="bk-defavail-dow">Sat</span><label class="bk-defavail-time"><span>From</span><input type="time" value="09:00"></label><label class="bk-defavail-time"><span>To</span><input type="time" value="14:00"></label><label class="bk-defavail-closed"><input type="checkbox"> Closed</label></div>
+              <div class="bk-defavail-row bk-defavail-row-closed" data-day="sun"><span class="bk-defavail-dow">Sun</span><label class="bk-defavail-time"><span>From</span><input type="time" value="09:00" disabled></label><label class="bk-defavail-time"><span>To</span><input type="time" value="14:00" disabled></label><label class="bk-defavail-closed"><input type="checkbox" checked> Closed</label></div>
+            </div>
+
+            <div class="bk-defavail-bands">
+              <header class="bk-defavail-bands-head">
+                <span>Recurring unavailable inside open hours (optional)</span>
+                <button type="button" class="btn btn-secondary btn-sm" id="bk-defavail-band-add"><svg width="12" height="12"><use href="#i-plus"/></svg> Add band</button>
+              </header>
+              <ul class="bk-defavail-band-list" id="bk-defavail-band-list" role="list">
+                <!-- empty by default -->
+              </ul>
+              <p class="bk-defavail-band-empty" id="bk-defavail-band-empty">No recurring breaks. Add one for things like a weekly dinner block.</p>
+            </div>
+          </section>
           <!-- Rate rules panel -->
           <section class="bk-rates" aria-labelledby="bk-rates-title">
             <header class="bk-rates-head">
@@ -10005,6 +10134,98 @@ Coach</textarea>
     c.addEventListener('click', function () { setMode(c.dataset.feeMode); });
   });
   setMode((window.state && window.state.feeMode) || 'external');
+})();
+
+/* ---------- Default weekly availability: collapsible toggle + summary ---------- */
+(function () {
+  const trig = document.getElementById('bk-defavail-toggle');
+  const panel = document.getElementById('bk-defavail-panel');
+  const summary = document.getElementById('bk-defavail-summary');
+  if (!trig || !panel) return;
+  trig.addEventListener('click', function () {
+    const open = trig.getAttribute('aria-expanded') === 'true';
+    trig.setAttribute('aria-expanded', open ? 'false' : 'true');
+    panel.hidden = open;
+  });
+  function fmt12(t) {
+    if (!t) return '';
+    const parts = t.split(':').map(Number);
+    const h = parts[0]; const m = parts[1] || 0;
+    const am = h < 12;
+    const h12 = ((h + 11) % 12) + 1;
+    return h12 + (m ? ':' + String(m).padStart(2,'0') : '') + (am ? 'am' : 'pm');
+  }
+  function refreshSummary() {
+    if (!summary) return;
+    const rows = panel.querySelectorAll('.bk-defavail-row');
+    const groups = [];
+    let cur = null;
+    rows.forEach(function (r) {
+      const dow = r.querySelector('.bk-defavail-dow').textContent;
+      const closed = r.querySelector('.bk-defavail-closed input').checked;
+      const fromInput = r.querySelectorAll('.bk-defavail-time input')[0];
+      const toInput = r.querySelectorAll('.bk-defavail-time input')[1];
+      const from = fromInput ? fromInput.value : '';
+      const to = toInput ? toInput.value : '';
+      const sig = closed ? 'closed' : (from + '-' + to);
+      if (cur && cur.sig === sig) cur.days.push(dow);
+      else { cur = { sig: sig, days: [dow] }; groups.push(cur); }
+    });
+    summary.textContent = groups.map(function (g) {
+      const range = g.days.length === 1 ? g.days[0] : g.days[0] + '-' + g.days[g.days.length - 1];
+      if (g.sig === 'closed') return range + ' closed';
+      const tparts = g.sig.split('-');
+      return range + ' ' + fmt12(tparts[0]) + '-' + fmt12(tparts[1]);
+    }).join(' · ');
+  }
+  panel.addEventListener('change', refreshSummary);
+  refreshSummary();
+})();
+
+/* ---------- Default weekly availability: add/remove recurring bands ---------- */
+(function () {
+  const addBtn = document.getElementById('bk-defavail-band-add');
+  if (!addBtn) return;
+  const list = document.getElementById('bk-defavail-band-list');
+  const empty = document.getElementById('bk-defavail-band-empty');
+  function refreshEmpty() {
+    if (!empty) return;
+    empty.style.display = list.children.length ? 'none' : 'block';
+  }
+  addBtn.addEventListener('click', function () {
+    const li = document.createElement('li');
+    li.className = 'bk-defavail-band';
+    li.innerHTML = ''
+      + '<select aria-label="Day"><option>Wed</option><option>Mon</option><option>Tue</option><option>Thu</option><option>Fri</option><option>Sat</option><option>Sun</option></select>'
+      + '<input type="time" value="18:00" aria-label="From">'
+      + '<input type="time" value="19:00" aria-label="To">'
+      + '<input type="text" placeholder="Label (e.g. dinner)" maxlength="40">'
+      + '<button type="button" class="bk-defavail-band-remove" aria-label="Remove band">×</button>';
+    list.appendChild(li);
+    li.querySelector('.bk-defavail-band-remove').addEventListener('click', function () {
+      li.remove();
+      refreshEmpty();
+    });
+    refreshEmpty();
+  });
+  refreshEmpty();
+})();
+
+/* ---------- Default weekly availability: Closed checkbox disables row inputs ---------- */
+(function () {
+  const panel = document.getElementById('bk-defavail-panel');
+  if (!panel) return;
+  panel.querySelectorAll('.bk-defavail-row').forEach(function (row) {
+    const cb = row.querySelector('.bk-defavail-closed input');
+    if (!cb) return;
+    cb.addEventListener('change', function () {
+      const closed = cb.checked;
+      row.classList.toggle('bk-defavail-row-closed', closed);
+      row.querySelectorAll('.bk-defavail-time input').forEach(function (inp) {
+        inp.disabled = closed;
+      });
+    });
+  });
 })();
 
 </script>
