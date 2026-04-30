@@ -1309,6 +1309,7 @@
   #coach-dash .bk-cal-slot {
     position: relative;
     display: flex; align-items: center; justify-content: space-between;
+    gap: 6px;
     padding: 4px 8px;
     min-height: 28px;
     border-radius: 5px;
@@ -1338,9 +1339,16 @@
   #coach-dash .bk-cal-slot-price {
     font-family: var(--font-mono);
     font-size: 9.5px;
-    color: var(--quiet);
+    font-weight: 600;
+    line-height: 1;
+    color: var(--ink);
+    background: color-mix(in srgb, var(--demo-accent) 16%, var(--bg-2));
+    border: 1px solid color-mix(in srgb, var(--demo-accent) 40%, transparent);
+    border-radius: 999px;
+    padding: 2px 7px;
     margin-left: auto;
-    padding-left: 6px;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
   }
 
   #coach-dash .bk-cal-slot[data-state="closed"] {
@@ -2842,6 +2850,38 @@
     font-family: var(--font-mono);
     font-size: 13px;
     font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  #coach-booking .cb-priv-runs {
+    margin: 0; padding: 0; list-style: none;
+    display: flex; flex-direction: column; gap: 2px;
+    font-family: var(--font-mono);
+    font-size: 12px; font-weight: 600;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+  #coach-booking .cb-priv-runs li {
+    display: flex; gap: 8px; align-items: baseline;
+    flex-wrap: wrap;
+  }
+  #coach-booking .cb-priv-run-day {
+    color: var(--quiet);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  #coach-booking .cb-priv-actionbar-total {
+    color: var(--demo-accent);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    margin-top: 4px;
+  }
+  #coach-booking .cb-priv-actionbar-total b {
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 13px;
+    margin-left: 4px;
     font-variant-numeric: tabular-nums;
   }
 
@@ -7844,13 +7884,6 @@
               </div>
             </dl>
 
-            <button type="button" class="cb-share-btn" data-copy="coach.chris.leag.app/book" data-coach-url-template="coach.{slug}.leag.app/book">
-              <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
-                <path d="M11 5 L11 3 L14 3 L14 6 M14 3 L8.5 8.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M13 9.5 V12.5 a1 1 0 0 1 -1 1 H4 a1 1 0 0 1 -1 -1 V4.5 a1 1 0 0 1 1 -1 H7" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              Share booking link
-            </button>
           </div>
         </aside>
 
@@ -7881,8 +7914,8 @@
           <div class="cb-panel cb-panel-priv" id="cb-panel-priv" role="tabpanel" aria-labelledby="cb-tab-priv" hidden>
             <header class="cb-priv-head">
               <div class="cb-priv-tier">
-                <span class="cb-priv-tier-key">30-min private</span>
-                <span class="cb-priv-tier-val">$40</span>
+                <span class="cb-priv-tier-key">Hourly private</span>
+                <span class="cb-priv-tier-val">$80</span>
               </div>
               <div class="cb-priv-weeknav">
                 <button type="button" class="cb-priv-weekstep" disabled aria-label="Previous week">
@@ -7916,7 +7949,8 @@
             <div class="cb-priv-actionbar" id="cb-priv-actionbar" hidden>
               <div class="cb-priv-actionbar-info">
                 <span class="cb-priv-actionbar-key">Booking</span>
-                <span class="cb-priv-actionbar-val" id="cb-priv-selected-label">Tue Apr 28 at 4:30 PM / 30 min / $40</span>
+                <ul class="cb-priv-runs" id="cb-priv-runs" aria-live="polite"></ul>
+                <span class="cb-priv-actionbar-total" id="cb-priv-actionbar-total"></span>
               </div>
               <button type="button" class="cb-btn cb-btn-primary" id="cb-priv-continue">
                 Continue to player info
@@ -8882,6 +8916,30 @@ Coach</textarea>
   }
   let PRIVATE_PRICE = privateHalfPrice();
   const PRIVATE_DURATION = "30 min";
+  function privateHourlyPrice() {
+    return (window.__coach && window.__coach.privateRate) || SPORT_PRESETS[CURRENT_SPORT].privatePrice || 0;
+  }
+  function parseTime12(t) {
+    const m = /^(\d{1,2}):(\d{2})\s*(AM|PM)$/.exec(t || "");
+    if (!m) return 0;
+    let h = parseInt(m[1], 10) % 12;
+    if (m[3] === "PM") h += 12;
+    return h * 60 + parseInt(m[2], 10);
+  }
+  function fmtMins12(mins) {
+    const h24 = Math.floor(mins / 60);
+    const mm = mins % 60;
+    const am = h24 < 12;
+    const h12 = ((h24 + 11) % 12) + 1;
+    return h12 + ":" + String(mm).padStart(2, "0") + " " + (am ? "AM" : "PM");
+  }
+  function fmtDuration(mins) {
+    const h = Math.floor(mins / 60);
+    const m = mins % 60;
+    if (h && m) return h + " hr " + m + " min";
+    if (h) return h + (h === 1 ? " hr" : " hrs");
+    return m + " min";
+  }
   const FEE_PCT = 0.05;
   const FEE_FIXED = 0.50;
 
@@ -9356,7 +9414,7 @@ Coach</textarea>
     const baseInput = document.getElementById("bk-rate-base");
     if (baseInput) baseInput.value = String(p.privatePrice);
     const tierVal = document.querySelector(".cb-priv-tier-val");
-    if (tierVal) tierVal.textContent = "$" + Math.round((p.privatePrice / 2) / 5) * 5;
+    if (tierVal) tierVal.textContent = "$" + p.privatePrice;
     PRIVATE_PRICE = privateHalfPrice();
     document.querySelectorAll("[data-coach-role]").forEach(el => { el.textContent = p.role; });
     document.querySelectorAll("[data-coach-bio]").forEach(el => { el.textContent = p.bio; });
@@ -9370,7 +9428,7 @@ Coach</textarea>
         sel.appendChild(opt);
       });
     });
-    state.selectedSlot = null;
+    state.selectedSlots = [];
     const stripEl = document.getElementById("cb-priv-strip");
     if (stripEl) stripEl.classList.remove("is-shown");
     renderClasses();
@@ -9395,7 +9453,7 @@ Coach</textarea>
   /* ---------- State ---------- */
   const state = {
     tab: "group",
-    selectedSlot: null,    // { dayKey, time, dow, num }
+    selectedSlots: [],     // [{ key, dayKey, dayNum, dayMonth, dow, time, mins }]
     activeOffer: null,     // { kind: 'group'|'private', title, when, where, price, classId? }
     modalStep: "player",   // player | checkout | success | waitlist
     lastFocus: null,
@@ -9481,6 +9539,7 @@ Coach</textarea>
     `).join("");
 
     updateOpenCount();
+    reapplySelectionAfterRender();
   }
 
   function slotHTML(day, time, state) {
@@ -9547,35 +9606,90 @@ Coach</textarea>
     (state.tab === "group" ? $('#cb-tab-group') : $('#cb-tab-priv')).focus();
   });
 
-  /* ---------- Slot select ---------- */
-  root.addEventListener("click", (e) => {
-    const slot = e.target.closest('.cb-slot[data-state="open"]');
-    if (slot) {
-      // toggle off if same
-      if (state.selectedSlot && state.selectedSlot.el === slot) {
-        slot.setAttribute("aria-pressed", "false");
-        state.selectedSlot = null;
-        $('#cb-priv-actionbar').hidden = true;
-        return;
-      }
-      // clear previous
-      $$('.cb-slot[aria-pressed="true"]').forEach(s => s.setAttribute("aria-pressed", "false"));
-      slot.setAttribute("aria-pressed", "true");
-      state.selectedSlot = {
-        el: slot,
+  /* ---------- Slot select (multi) ---------- */
+  function slotKey(dayKey, time) { return dayKey + "|" + time; }
+  function toggleSlot(slot) {
+    const key = slotKey(slot.dataset.dayKey, slot.dataset.time);
+    const idx = state.selectedSlots.findIndex(s => s.key === key);
+    if (idx >= 0) {
+      state.selectedSlots.splice(idx, 1);
+      slot.setAttribute("aria-pressed", "false");
+    } else {
+      state.selectedSlots.push({
+        key: key,
         dayKey: slot.dataset.dayKey,
         dayNum: slot.dataset.dayNum,
         dayMonth: slot.dataset.dayMonth,
         dow: slot.dataset.dayDow,
         time: slot.dataset.time,
-      };
-      const dowFull = { Mon:"Monday",Tue:"Tuesday",Wed:"Wednesday",Thu:"Thursday",Fri:"Friday",Sat:"Saturday",Sun:"Sunday" }[state.selectedSlot.dow];
-      $('#cb-priv-selected-label').textContent =
-        `${state.selectedSlot.dow} ${state.selectedSlot.dayMonth} ${state.selectedSlot.dayNum} at ${state.selectedSlot.time} / 30 min / $${PRIVATE_PRICE}`;
-      const bar = $('#cb-priv-actionbar');
-      bar.hidden = false;
+        mins: parseTime12(slot.dataset.time),
+      });
+      slot.setAttribute("aria-pressed", "true");
     }
+    renderActionbar();
+  }
+  root.addEventListener("click", (e) => {
+    const slot = e.target.closest('.cb-slot[data-state="open"]');
+    if (slot) toggleSlot(slot);
   });
+
+  function buildRuns() {
+    const sorted = state.selectedSlots.slice().sort((a, b) => {
+      if (a.dayKey !== b.dayKey) return a.dayKey < b.dayKey ? -1 : 1;
+      return a.mins - b.mins;
+    });
+    const runs = [];
+    sorted.forEach(s => {
+      const last = runs[runs.length - 1];
+      if (last && last.dayKey === s.dayKey && last.endMins === s.mins) {
+        last.endMins = s.mins + 30;
+        last.count++;
+      } else {
+        runs.push({
+          dayKey: s.dayKey, dow: s.dow, dayMonth: s.dayMonth, dayNum: s.dayNum,
+          startMins: s.mins, endMins: s.mins + 30, count: 1,
+        });
+      }
+    });
+    return runs;
+  }
+  function renderActionbar() {
+    const bar = $('#cb-priv-actionbar');
+    const runsEl = $('#cb-priv-runs');
+    const totalEl = $('#cb-priv-actionbar-total');
+    if (!state.selectedSlots.length) {
+      bar.hidden = true;
+      runsEl.innerHTML = "";
+      totalEl.textContent = "";
+      return;
+    }
+    const runs = buildRuns();
+    runsEl.innerHTML = runs.map(r => {
+      const range = r.count === 1
+        ? fmtMins12(r.startMins)
+        : fmtMins12(r.startMins) + "&ndash;" + fmtMins12(r.endMins);
+      const dur = fmtDuration(r.count * 30);
+      return '<li><span class="cb-priv-run-day">' + r.dow + ' ' + r.dayMonth + ' ' + r.dayNum + '</span><span>' + range + '</span><span class="cb-priv-run-day">(' + dur + ')</span></li>';
+    }).join("");
+    const totalMins = state.selectedSlots.length * 30;
+    const totalPrice = state.selectedSlots.length * PRIVATE_PRICE;
+    totalEl.innerHTML = 'Total <b>' + fmtDuration(totalMins) + ' &middot; $' + totalPrice + '</b>';
+    bar.hidden = false;
+  }
+  function reapplySelectionAfterRender() {
+    const grid = $('#cb-priv-grid');
+    if (!grid) return;
+    const survivors = [];
+    state.selectedSlots.forEach(s => {
+      const el = grid.querySelector('.cb-slot[data-state="open"][data-day-key="' + s.dayKey + '"][data-time="' + s.time.replace(/"/g, '\\"') + '"]');
+      if (el) {
+        el.setAttribute("aria-pressed", "true");
+        survivors.push(s);
+      }
+    });
+    state.selectedSlots = survivors;
+    renderActionbar();
+  }
 
   /* ---------- CTAs: open modal ---------- */
   $('#cb-class-list').addEventListener("click", (e) => {
@@ -9595,14 +9709,24 @@ Coach</textarea>
   });
 
   $('#cb-priv-continue').addEventListener("click", () => {
-    if (!state.selectedSlot) return;
-    const s = state.selectedSlot;
+    if (!state.selectedSlots.length) return;
+    const runs = buildRuns();
+    const totalMins = state.selectedSlots.length * 30;
+    const totalPrice = state.selectedSlots.length * PRIVATE_PRICE;
+    const whenLines = runs.map(r => {
+      const range = r.count === 1
+        ? fmtMins12(r.startMins)
+        : fmtMins12(r.startMins) + "–" + fmtMins12(r.endMins);
+      return r.dow + " " + r.dayMonth + " " + r.dayNum + " " + range;
+    });
     state.activeOffer = {
       kind: "private",
-      title: `Private lesson with Coach ${(window.__leagCoach && window.__leagCoach.first) || "Chris"}`,
-      when: `${s.dow} May ${s.dayNum} at ${s.time}`,
+      title: `Private lesson (${fmtDuration(totalMins)}) with Coach ${(window.__leagCoach && window.__leagCoach.first) || "Chris"}`,
+      when: whenLines.join(" · "),
       where: `Bayside Field 1 (default)`,
-      price: PRIVATE_PRICE,
+      price: totalPrice,
+      slotCount: state.selectedSlots.length,
+      durationMins: totalMins,
     };
     openModal("player");
   });
@@ -10178,7 +10302,7 @@ Coach</textarea>
           const hourly = effectiveHourlyAt(d.key, time);
           if (hourly !== base) {
             const price = slotPrice(d.key, time);
-            priceHTML = `<span class="bk-cal-slot-price">$${price} / 30 min</span>`;
+            priceHTML = `<span class="bk-cal-slot-price">$${price}</span>`;
           }
         }
         return `<div class="bk-cal-slot" data-state="${state}" data-day="${d.key}" data-time="${time}" role="gridcell">` +
@@ -10629,15 +10753,14 @@ Coach</textarea>
   });
 })();
 
-/* ---------- Privates panel tier-pill auto-derive (half-hour from hourly) ---------- */
+/* ---------- Privates panel tier-pill auto-derive (hourly) ---------- */
 (function () {
   const base = document.getElementById('bk-rate-base');
   const tierVal = document.querySelector('.cb-priv-tier-val');
   if (!base || !tierVal) return;
   function refresh() {
     const hourly = parseFloat(base.value) || 0;
-    const half = Math.round((hourly / 2) / 5) * 5;
-    tierVal.textContent = '$' + half;
+    tierVal.textContent = '$' + hourly;
   }
   base.addEventListener('input', refresh);
   refresh();
