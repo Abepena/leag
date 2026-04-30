@@ -8218,7 +8218,7 @@ Coach</textarea>
       const params = new URLSearchParams(window.location.search || "");
       const src = (params.get("utm_source") || "").toLowerCase();
       if (src === "instagram" || src === "ig") fromIG = true;
-      if (params.get("from") === "ig" || params.get("ref") === "ig") fromIG = true;
+      if ((params.get("from") || "").toLowerCase() === "ig" || (params.get("ref") || "").toLowerCase() === "ig") fromIG = true;
     } catch (_) {}
     if (fromIG) {
       const pane = document.getElementById("cb-pane-player");
@@ -8228,7 +8228,7 @@ Coach</textarea>
     }
     return fromIG;
   }
-  const __fromIG = detectInstagramContext();
+  detectInstagramContext();
 
   /* ---------- Sample data canon (sport-driven) ---------- */
   const WEEKDAY_TIMES = ["4:00 PM","4:30 PM","5:00 PM","5:30 PM","6:00 PM","6:30 PM","7:00 PM","7:30 PM"];
