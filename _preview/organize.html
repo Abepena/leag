@@ -2677,6 +2677,18 @@
   }
   .cb-field-error[hidden] { display: none; }
 
+  .cb-contact-note {
+    grid-column: 1 / -1;
+    margin-top: 4px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--line);
+    color: var(--quiet);
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
   .cb-ig-hint {
     display: none;
     align-items: center;
@@ -7335,18 +7347,6 @@
               </div>
             </dl>
 
-            <div class="cb-fee-toggle" role="group" aria-label="Service fee handling">
-              <div class="cb-fee-toggle-head">
-                <span class="cb-fee-toggle-label">Signup checkout fee</span>
-                <span class="cb-fee-toggle-rate">5% + $0.50</span>
-              </div>
-              <div class="cb-fee-toggle-row" role="radiogroup" aria-label="Who pays the service fee">
-                <button type="button" class="cb-fee-chip is-active" role="radio" aria-checked="true" data-fee-mode="external">Parent pays</button>
-                <button type="button" class="cb-fee-chip" role="radio" aria-checked="false" data-fee-mode="internal">Coach absorbs</button>
-              </div>
-              <div class="cb-fee-toggle-note" id="cb-fee-note">Parent sees sticker + fee. You receive sticker.</div>
-            </div>
-
             <button type="button" class="cb-share-btn" data-copy="coach.chris.leag.app/book" data-coach-url-template="coach.{slug}.leag.app/book">
               <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
                 <path d="M11 5 L11 3 L14 3 L14 6 M14 3 L8.5 8.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -8086,14 +8086,15 @@ Coach</textarea>
             <option value="">Select position</option>
           </select>
         </div>
+        <div class="cb-contact-note" role="presentation">Contact (at least one required)</div>
         <div class="cb-field cb-field-wide">
-          <label for="cb-email">Player or parent email <span class="cb-req" aria-hidden="true">*</span></label>
-          <input type="email" id="cb-email" name="contactEmail" autocomplete="email" aria-required="true">
+          <label for="cb-email">Player or parent email</label>
+          <input type="email" id="cb-email" name="contactEmail" autocomplete="email">
           <span class="cb-field-error" id="cb-email-err" role="alert" hidden>Enter a valid email or fill in phone.</span>
         </div>
         <div class="cb-field cb-field-wide">
-          <label for="cb-phone">Player or parent phone <span class="cb-req" aria-hidden="true">*</span></label>
-          <input type="tel" id="cb-phone" name="contactPhone" autocomplete="tel" aria-required="true">
+          <label for="cb-phone">Player or parent phone</label>
+          <input type="tel" id="cb-phone" name="contactPhone" autocomplete="tel">
           <span class="cb-field-error" id="cb-phone-err" role="alert" hidden>Enter a valid phone or fill in email.</span>
         </div>
         <div class="cb-field cb-field-wide">
@@ -8127,17 +8128,6 @@ Coach</textarea>
             <dd id="cb-total-amt">$47.75</dd>
           </div>
         </dl>
-      </div>
-      <div class="cb-payout-card" id="cb-payout-card" hidden>
-        <div class="cb-payout-eyebrow">Coach payout</div>
-        <div class="cb-payout-row">
-          <span>You absorb the fee</span>
-          <b id="cb-payout-fee">- $2.75</b>
-        </div>
-        <div class="cb-payout-row cb-payout-net">
-          <span>Net payout</span>
-          <b id="cb-payout-net">$32.75</b>
-        </div>
       </div>
       <div class="cb-checkout-foot-note">Demo only. Nothing saves, sends, or charges.</div>
       <footer class="cb-modal-foot">
@@ -8205,6 +8195,15 @@ Coach</textarea>
 <div class="cb-toast-stack" id="cb-toast-stack" role="status" aria-live="polite" aria-atomic="true"></div>
 
 <script>
+/* ---------- Shared state (read by coach-booking + coach-dash) ---------- */
+(function () {
+  var s = window.state || {};
+  if (typeof s.feeMode === "undefined") s.feeMode = "external"; // 'external' = parent pays, 'internal' = coach absorbs
+  window.state = s;
+  if (typeof window.rerenderBkCal !== "function") {
+    window.rerenderBkCal = function () {}; // stub; real impl bound by later tasks
+  }
+})();
 
 (function () {
   "use strict";
@@ -9148,44 +9147,15 @@ Coach</textarea>
     document.getElementById("cb-checkout-meta").textContent = `${o.when} / ${o.where}`;
     document.getElementById("cb-line-label").textContent = o.title;
     const fee = +(o.price * FEE_PCT + FEE_FIXED).toFixed(2);
-    const absorb = !!state.feeAbsorbed;
+    const absorb = (window.state && window.state.feeMode === "internal");
     const total = absorb ? o.price : +(o.price + fee).toFixed(2);
-    const payout = absorb ? +(o.price - fee).toFixed(2) : o.price;
     document.getElementById("cb-line-amt").textContent = `$${o.price.toFixed(2)}`;
     const feeRow = document.getElementById("cb-fee-row");
     if (feeRow) feeRow.hidden = absorb;
     document.getElementById("cb-fee-amt").textContent  = `$${fee.toFixed(2)}`;
     document.getElementById("cb-total-amt").textContent = `$${total.toFixed(2)}`;
     document.querySelector(".cb-pay-label").textContent = `Pay $${total.toFixed(2)}`;
-    const payoutCard = document.getElementById("cb-payout-card");
-    if (payoutCard) {
-      payoutCard.hidden = !absorb;
-      const pf = document.getElementById("cb-payout-fee");
-      const pn = document.getElementById("cb-payout-net");
-      if (pf) pf.textContent = `- $${fee.toFixed(2)}`;
-      if (pn) pn.textContent = `$${payout.toFixed(2)}`;
-    }
   }
-
-  /* Service-fee toggle (parent pays vs coach absorbs) */
-  function setFeeMode(mode) {
-    state.feeAbsorbed = mode === "internal";
-    document.querySelectorAll('.cb-fee-chip[data-fee-mode]').forEach(function (c) {
-      var on = c.getAttribute("data-fee-mode") === mode;
-      c.classList.toggle("is-active", on);
-      c.setAttribute("aria-checked", on ? "true" : "false");
-    });
-    var note = document.getElementById("cb-fee-note");
-    if (note) {
-      note.textContent = state.feeAbsorbed
-        ? "You eat the fee. Parent sees a clean sticker. Your payout drops by the fee."
-        : "Parent sees sticker + fee. You receive sticker.";
-    }
-    if (state.activeOffer) renderCheckout();
-  }
-  document.querySelectorAll('.cb-fee-chip[data-fee-mode]').forEach(function (chip) {
-    chip.addEventListener("click", function () { setFeeMode(chip.getAttribute("data-fee-mode")); });
-  });
 
   // Close handlers
   document.addEventListener("click", e => {
