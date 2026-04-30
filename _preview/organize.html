@@ -7997,11 +7997,11 @@ Coach</textarea>
   <div class="cb-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="cb-modal-title" id="cb-modal-dialog" tabindex="-1">
     <header class="cb-modal-head">
       <div class="cb-modal-stepper" id="cb-modal-stepper" aria-hidden="true">
-        <span class="cb-modal-step is-current" data-step="1">1 Player info</span>
+        <span class="cb-modal-step is-current" data-step="1">1 Player / parent info</span>
         <span class="cb-modal-step-sep">/</span>
         <span class="cb-modal-step" data-step="2">2 Checkout</span>
       </div>
-      <h3 id="cb-modal-title" class="cb-modal-title">Player info</h3>
+      <h3 id="cb-modal-title" class="cb-modal-title">Player or parent info</h3>
       <button type="button" class="cb-modal-close" data-close="modal" aria-label="Close">
         <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
           <path d="M4 4 L12 12 M12 4 L4 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
@@ -8012,35 +8012,53 @@ Coach</textarea>
     <!-- Step 1: Player info (booking flow) -->
     <section class="cb-modal-pane" data-pane="player" id="cb-pane-player">
       <div class="cb-modal-context" id="cb-modal-context"></div>
+
+      <div class="cb-ig-hint" id="cb-ig-hint" hidden>
+        <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true">
+          <rect x="1.5" y="1.5" width="13" height="13" rx="3.5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+          <circle cx="8" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.4"/>
+          <circle cx="11.5" cy="4.5" r="0.9" fill="currentColor"/>
+        </svg>
+        <span>Came from Instagram? Drop your handle so the coach can DM if email bounces.</span>
+      </div>
+
       <div class="cb-modal-autofill">
         <button type="button" class="cb-autofill-btn" id="cb-autofill">Use sample data</button>
       </div>
       <form class="cb-form" id="cb-form" novalidate>
         <div class="cb-field">
-          <label for="cb-fn">First name</label>
-          <input type="text" id="cb-fn" name="firstName" autocomplete="given-name">
+          <label for="cb-fn">Player first name <span class="cb-req" aria-hidden="true">*</span></label>
+          <input type="text" id="cb-fn" name="firstName" autocomplete="given-name" required aria-required="true">
+          <span class="cb-field-error" id="cb-fn-err" role="alert" hidden>Required.</span>
         </div>
         <div class="cb-field">
-          <label for="cb-ln">Last name</label>
-          <input type="text" id="cb-ln" name="lastName" autocomplete="family-name">
+          <label for="cb-ln">Player last name <span class="cb-req" aria-hidden="true">*</span></label>
+          <input type="text" id="cb-ln" name="lastName" autocomplete="family-name" required aria-required="true">
+          <span class="cb-field-error" id="cb-ln-err" role="alert" hidden>Required.</span>
         </div>
         <div class="cb-field">
-          <label for="cb-dob">DOB</label>
+          <label for="cb-dob">Player DOB (optional)</label>
           <input type="date" id="cb-dob" name="dob">
         </div>
         <div class="cb-field">
-          <label for="cb-pos">Position</label>
+          <label for="cb-pos">Position (optional)</label>
           <select id="cb-pos" name="position" data-coach-position-select>
             <option value="">Select position</option>
           </select>
         </div>
         <div class="cb-field cb-field-wide">
-          <label for="cb-email">Parent email</label>
-          <input type="email" id="cb-email" name="parentEmail" autocomplete="email">
+          <label for="cb-email">Player or parent email <span class="cb-req" aria-hidden="true">*</span></label>
+          <input type="email" id="cb-email" name="contactEmail" autocomplete="email" aria-required="true">
+          <span class="cb-field-error" id="cb-email-err" role="alert" hidden>Enter a valid email or fill in phone.</span>
         </div>
         <div class="cb-field cb-field-wide">
-          <label for="cb-phone">Parent phone</label>
-          <input type="tel" id="cb-phone" name="parentPhone" autocomplete="tel">
+          <label for="cb-phone">Player or parent phone <span class="cb-req" aria-hidden="true">*</span></label>
+          <input type="tel" id="cb-phone" name="contactPhone" autocomplete="tel" aria-required="true">
+          <span class="cb-field-error" id="cb-phone-err" role="alert" hidden>Enter a valid phone or fill in email.</span>
+        </div>
+        <div class="cb-field cb-field-wide">
+          <label for="cb-ig">Instagram handle (optional)</label>
+          <input type="text" id="cb-ig" name="instagram" autocomplete="off" inputmode="text" placeholder="@yourhandle">
         </div>
       </form>
       <footer class="cb-modal-foot">
@@ -9042,7 +9060,7 @@ Coach</textarea>
     if (name === "player") {
       stepper.hidden = false;
       stepper.querySelectorAll(".cb-modal-step").forEach(s => s.classList.toggle("is-current", s.dataset.step === "1"));
-      titleEl.textContent = "Player info";
+      titleEl.textContent = "Player or parent info";
     } else if (name === "checkout") {
       stepper.hidden = false;
       stepper.querySelectorAll(".cb-modal-step").forEach(s => s.classList.toggle("is-current", s.dataset.step === "2"));
