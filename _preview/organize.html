@@ -10603,7 +10603,14 @@ Coach</textarea>
     if (typeof window.rerenderBkCal === 'function') window.rerenderBkCal();
   }
   chips.forEach(function (c) {
-    c.addEventListener('click', function () { setMode(c.dataset.feeMode); });
+    c.addEventListener('click', function () {
+      const next = c.dataset.feeMode;
+      if (next === window.state.feeMode) return;
+      setMode(next);
+      if (window.__coachDash && typeof window.__coachDash.markDirty === 'function') {
+        window.__coachDash.markDirty();
+      }
+    });
   });
   setMode((window.state && window.state.feeMode) || 'external');
 })();
