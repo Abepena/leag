@@ -1,0 +1,8 @@
+# gstack-council scratch output
+COUNCIL-*.md
+COUNCIL-*.err
+*.err
+
+# Editor / OS junk
+.DS_Store
+node_modules/
