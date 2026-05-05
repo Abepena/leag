@@ -42,7 +42,7 @@
       --paper-ink: #161311;
       --red: #d83a48;
       --blue: #5b8fb7;
-      --demo-primary: #3667B5;
+      --demo-primary: #5B8CD6;
       --demo-accent: #70ECF0;
       --container: 1180px;
       --radius: 8px;
@@ -1025,6 +1025,51 @@
       align-content: start;
     }
 
+    .demo-top-bar {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(16, 25, 24, 0.78);
+      padding: 18px 20px;
+      margin-bottom: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .demo-top-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      align-items: flex-end;
+    }
+    .demo-top-row > .sample-field { flex: 1 1 auto; min-width: 0; }
+    .demo-top-row .demo-field-org { flex: 1 1 280px; max-width: 480px; }
+    .demo-top-row .demo-field-sport { flex: 0 0 auto; }
+    .demo-top-row .demo-field-color { flex: 1 1 320px; min-width: 280px; }
+    .demo-top-row .demo-reset-btn {
+      flex: 0 0 auto;
+      align-self: flex-end;
+      width: auto;
+      padding: 0 16px;
+      min-height: 38px;
+    }
+    @media (max-width: 720px) {
+      .demo-top-row { gap: 14px; }
+      .demo-top-row > .sample-field,
+      .demo-top-row .demo-field-org,
+      .demo-top-row .demo-field-sport,
+      .demo-top-row .demo-field-color { flex: 1 1 100%; min-width: 0; max-width: none; }
+      .demo-top-row .demo-reset-btn { width: 100%; }
+    }
+
+    .step3-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .step3-stack .demo-stage#demo-stage {
+      border-radius: 10px;
+    }
+
     .demo-group {
       display: grid;
       gap: 10px;
@@ -1096,6 +1141,61 @@
 
     .demo-reset-btn {
       width: 100%;
+    }
+
+    .swatch-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .color-swatch {
+      flex: 1 1 auto;
+      min-width: 56px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 6px 6px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--muted);
+      font: inherit;
+      font-size: 11px;
+      cursor: pointer;
+      transition: border-color 180ms ease, background 180ms ease, color 180ms ease, transform 80ms ease;
+    }
+    .color-swatch:hover {
+      border-color: var(--line-strong);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--ink);
+    }
+    .color-swatch.is-active {
+      border-color: var(--sw, var(--green-hi));
+      background: color-mix(in srgb, var(--sw, var(--green-hi)) 12%, transparent);
+      color: var(--ink);
+      box-shadow: 0 0 0 1px color-mix(in srgb, var(--sw, var(--green-hi)) 50%, transparent);
+    }
+    .color-swatch:active { transform: translateY(1px); }
+    .color-swatch:focus-visible {
+      outline: 2px solid var(--sw, var(--green-hi));
+      outline-offset: 2px;
+    }
+    .color-swatch-dot {
+      display: block;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: var(--sw);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4) inset;
+    }
+    .color-swatch-name {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      font-weight: 600;
+      line-height: 1.2;
     }
 
     .demo-choice-row {
@@ -4111,6 +4211,1070 @@
         flex-direction: column;
       }
     }
+
+    /* ============================================================
+       Accordion-embedded preview demos (registrations / teams / publish)
+       Hosts share .acc-demo-host wrapper. Per-demo CSS scoped via
+       parent #registrations / #teams / #publish-demo IDs.
+       ============================================================ */
+    .acc-demo-host { display: block; width: 100%; margin: 0; }
+    .acc-demo-host .demo-stage {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: rgba(16, 25, 24, 0.78);
+      overflow: hidden;
+    }
+    .acc-demo-host .demo-stage-bar {
+      min-height: 48px;
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(8, 16, 15, 0.42);
+    }
+    .acc-demo-host .demo-stage-bar strong {
+      color: var(--ink); font-family: var(--font-sans);
+      font-size: 13px; font-weight: 700; letter-spacing: -0.01em;
+    }
+
+    /* === #registrations =============================================== */
+    #registrations .reg-stage {
+      padding: 0; overflow: hidden;
+      background:
+        radial-gradient(120% 80% at 0% 0%, color-mix(in srgb, var(--demo-primary) 14%, transparent), transparent 55%),
+        var(--surface);
+    }
+    #registrations .reg-stagebar { padding: 12px 18px; border-bottom: 1px solid var(--line); }
+    #registrations .reg-url {
+      margin-left: auto; color: var(--quiet); font-family: var(--font-mono); font-size: 11px;
+    }
+    #registrations .reg-steps {
+      display: flex; align-items: center; gap: 0;
+      margin: 0; padding: 16px 22px 14px; list-style: none;
+      border-bottom: 1px solid var(--line);
+    }
+    #registrations .reg-step {
+      display: flex; align-items: center; gap: 8px;
+      color: var(--quiet); font-family: var(--font-sans); font-size: 12px;
+      flex: 0 0 auto; min-width: 0;
+      transition: color 200ms;
+    }
+    #registrations .reg-steplabel { white-space: nowrap; }
+    #registrations .reg-step.is-active { color: var(--ink); }
+    #registrations .reg-step.is-done { color: var(--green-hi); }
+    #registrations .reg-stepnum {
+      display: inline-grid; place-items: center;
+      width: 24px; height: 24px; border-radius: 999px;
+      border: 1px solid var(--line-strong); background: var(--surface-2);
+      color: var(--quiet); font-family: var(--font-mono); font-size: 11px; font-weight: 600;
+      transition: background 200ms, border-color 200ms, color 200ms, box-shadow 200ms;
+    }
+    #registrations .reg-step.is-active .reg-stepnum {
+      background: var(--demo-primary); border-color: var(--demo-primary); color: #fff;
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--demo-primary) 18%, transparent);
+    }
+    #registrations .reg-step.is-done .reg-stepnum {
+      background: color-mix(in srgb, var(--green-hi) 22%, transparent);
+      border-color: color-mix(in srgb, var(--green-hi) 60%, transparent); color: var(--green-hi);
+    }
+    #registrations .reg-stepline {
+      flex: 1 1 auto; height: 1px; background: var(--line); margin: 0 12px; list-style: none;
+    }
+    #registrations .reg-screen-status {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+    }
+    #registrations .reg-pane { margin: 0; padding: 56px 22px 28px; border: 0; min-width: 0; }
+    #registrations .reg-pane[hidden] { display: none; }
+    #registrations .reg-legend {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-areas: "eyebrow autofill" "title autofill" "sub autofill";
+      gap: 4px 12px; width: 100%; margin: 0 0 18px; padding: 0; color: var(--ink);
+    }
+    #registrations .reg-legend-eyebrow {
+      grid-area: eyebrow;
+      color: var(--demo-primary); font-family: var(--font-mono); font-size: 10px;
+      font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+    }
+    #registrations .reg-legend-title {
+      grid-area: title;
+      color: var(--ink); font-family: var(--font-display); font-style: italic;
+      font-size: clamp(22px, 3vw, 30px); font-weight: 800; letter-spacing: 0.005em; line-height: 1;
+    }
+    #registrations .reg-legend-sub {
+      grid-area: sub;
+      color: var(--muted); font-family: var(--font-sans);
+      font-size: 13px; line-height: 1.5; max-width: 56ch;
+    }
+    #registrations .reg-autofill {
+      grid-area: autofill; align-self: start; margin-top: 4px;
+      padding: 6px 10px; border: 1px solid var(--line-strong); border-radius: 6px;
+      background: var(--surface-2); color: var(--ink);
+      font-family: var(--font-mono); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer;
+      transition: border-color 150ms, color 150ms, background 150ms;
+    }
+    #registrations .reg-autofill:hover { border-color: var(--demo-primary); color: var(--demo-primary); }
+    #registrations .reg-events { display: grid; grid-template-columns: 1fr; gap: 8px; }
+    #registrations .reg-event {
+      position: relative; display: grid; grid-template-columns: 1fr auto;
+      gap: 18px; align-items: center;
+      padding: 14px 16px; border: 1px solid var(--line); border-radius: 8px;
+      background: var(--surface-2); cursor: pointer;
+      transition: border-color 150ms, background 150ms, box-shadow 150ms;
+    }
+    #registrations .reg-event:hover { border-color: var(--line-strong); background: var(--surface-3); }
+    #registrations .reg-event:has(.reg-radio:checked) {
+      border-color: var(--demo-primary);
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--demo-primary) 8%, transparent), transparent 70%),
+        var(--surface-2);
+      box-shadow:
+        inset 0 0 0 1px color-mix(in srgb, var(--demo-primary) 60%, transparent),
+        0 0 0 4px color-mix(in srgb, var(--demo-primary) 12%, transparent);
+    }
+    #registrations .reg-event:focus-within {
+      outline: 2px solid color-mix(in srgb, var(--demo-primary) 70%, transparent); outline-offset: 2px;
+    }
+    #registrations .reg-radio { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+    #registrations .reg-event-body { min-width: 0; }
+    #registrations .reg-event-row {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 6px; flex-wrap: wrap;
+    }
+    #registrations .reg-event-tag {
+      padding: 3px 7px; border-radius: 4px;
+      background: color-mix(in srgb, var(--demo-primary) 16%, transparent);
+      color: var(--ink); font-family: var(--font-mono); font-size: 9.5px;
+      font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    #registrations .reg-event-fee {
+      color: var(--quiet); font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.02em;
+    }
+    #registrations .reg-event-name {
+      color: var(--ink); font-family: var(--font-display); font-style: italic;
+      font-size: 18px; font-weight: 800; letter-spacing: 0.005em; line-height: 1.05;
+    }
+    #registrations .reg-event-meta {
+      margin-top: 4px; color: var(--muted); font-family: var(--font-sans); font-size: 12px;
+      display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+    }
+    #registrations .reg-event-dot { color: var(--quiet); }
+    #registrations .reg-event-price {
+      display: flex; flex-direction: column; align-items: flex-end; gap: 2px; text-align: right;
+    }
+    #registrations .reg-event-sticker {
+      color: var(--ink); font-family: var(--font-display); font-style: italic;
+      font-size: 26px; font-weight: 800; line-height: 1;
+    }
+    #registrations .reg-event:has(.reg-radio:checked) .reg-event-sticker { color: var(--demo-primary); }
+    #registrations .reg-event-period {
+      color: var(--quiet); font-family: var(--font-mono); font-size: 9.5px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    #registrations .reg-form { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px 14px; }
+    #registrations .reg-field { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+    #registrations .reg-col-1 { grid-column: span 2; }
+    #registrations .reg-col-2 { grid-column: span 2; }
+    #registrations .reg-col-3 { grid-column: span 3; }
+    #registrations .reg-field label {
+      color: var(--muted); font-family: var(--font-mono); font-size: 10.5px;
+      font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    #registrations .reg-field input,
+    #registrations .reg-field select {
+      min-height: 40px; padding: 8px 10px;
+      border: 1px solid var(--line-strong); border-radius: 6px;
+      background: var(--bg-2); color: var(--ink);
+      font-family: var(--font-sans); font-size: 14px; letter-spacing: -0.005em;
+      transition: border-color 150ms, box-shadow 150ms, background 150ms;
+    }
+    #registrations .reg-field input:focus,
+    #registrations .reg-field select:focus {
+      outline: none; border-color: var(--demo-primary);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--demo-primary) 22%, transparent);
+    }
+    #registrations .reg-field.is-invalid input,
+    #registrations .reg-field.is-invalid select {
+      border-color: var(--red, #d83a48);
+      background: color-mix(in srgb, var(--red, #d83a48) 8%, var(--bg-2));
+    }
+    #registrations .reg-error {
+      display: none; color: var(--red, #d83a48);
+      font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.02em;
+    }
+    #registrations .reg-field.is-invalid .reg-error { display: block; }
+    #registrations .reg-checkout { display: grid; grid-template-columns: 1.4fr 1fr; gap: 16px; }
+    #registrations .reg-receipt {
+      border: 1px solid var(--line-strong); border-radius: 8px;
+      background: var(--bg-2); padding: 18px 20px;
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--demo-primary) 8%, transparent);
+    }
+    #registrations .reg-receipt-head {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px;
+    }
+    #registrations .reg-receipt-eyebrow {
+      color: var(--demo-primary); font-family: var(--font-mono); font-size: 10px;
+      font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+    }
+    #registrations .reg-receipt-org {
+      color: var(--quiet); font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.04em;
+    }
+    #registrations .reg-receipt-event { margin-bottom: 14px; }
+    #registrations .reg-receipt-eventname {
+      color: var(--ink); font-family: var(--font-display); font-style: italic;
+      font-size: 20px; font-weight: 800; line-height: 1.1;
+    }
+    #registrations .reg-receipt-eventmeta {
+      color: var(--muted); font-family: var(--font-sans); font-size: 12px; margin-top: 4px;
+    }
+    #registrations .reg-receipt-player {
+      margin-top: 10px; padding: 8px 10px;
+      border-left: 2px solid var(--demo-primary);
+      background: color-mix(in srgb, var(--demo-primary) 8%, transparent);
+      color: var(--ink); font-family: var(--font-sans); font-size: 12px;
+    }
+    #registrations .reg-receipt-playerlabel {
+      color: var(--quiet); font-family: var(--font-mono); font-size: 9.5px;
+      text-transform: uppercase; letter-spacing: 0.12em; margin-right: 6px;
+    }
+    #registrations .reg-receipt-rule { border: 0; border-top: 1px dashed var(--line-strong); margin: 14px 0; }
+    #registrations .reg-receipt-lines {
+      display: flex; flex-direction: column; gap: 8px;
+      font-family: var(--font-mono); font-size: 13px;
+    }
+    #registrations .reg-line { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; }
+    #registrations .reg-line-label { color: var(--muted); }
+    #registrations .reg-line-amt { color: var(--ink); font-variant-numeric: tabular-nums; }
+    #registrations .reg-line-fee .reg-line-label { color: var(--quiet); font-size: 11px; }
+    #registrations .reg-receipt-total { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; }
+    #registrations .reg-total-label {
+      color: var(--ink); font-family: var(--font-mono); font-size: 11px;
+      text-transform: uppercase; letter-spacing: 0.16em; font-weight: 600;
+    }
+    #registrations .reg-total-amt {
+      color: var(--ink); font-family: var(--font-display); font-style: italic;
+      font-size: 30px; font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1;
+    }
+    #registrations .reg-receipt-pay { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+    #registrations .reg-receipt-foot {
+      margin: 0; color: var(--quiet); font-family: var(--font-mono);
+      font-size: 10.5px; letter-spacing: 0.02em; text-align: center;
+    }
+    #registrations .reg-trust {
+      align-self: start; border: 1px solid var(--line); border-radius: 8px;
+      background: var(--surface-2); padding: 12px 14px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    #registrations .reg-trust-row { display: flex; flex-direction: column; gap: 2px; }
+    #registrations .reg-trust-key {
+      color: var(--quiet); font-family: var(--font-mono); font-size: 10px;
+      text-transform: uppercase; letter-spacing: 0.14em; font-weight: 600;
+    }
+    #registrations .reg-trust-val { color: var(--ink); font-family: var(--font-sans); font-size: 12px; line-height: 1.4; }
+    #registrations .reg-actions {
+      display: flex; gap: 10px; align-items: center;
+      margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--line);
+    }
+    #registrations .reg-actions-note {
+      flex: 1 1 auto; color: var(--quiet); font-family: var(--font-mono);
+      font-size: 10.5px; letter-spacing: 0.02em;
+    }
+    #registrations .reg-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      min-height: 40px; padding: 0 16px; border-radius: 6px;
+      font-family: var(--font-sans); font-size: 13px; font-weight: 600; letter-spacing: -0.005em;
+      cursor: pointer;
+      transition: background 150ms, color 150ms, border-color 150ms, box-shadow 150ms, transform 60ms;
+      border: 1px solid transparent;
+    }
+    #registrations .reg-btn:active { transform: translateY(1px); }
+    #registrations .reg-btn:focus-visible {
+      outline: 2px solid color-mix(in srgb, var(--demo-primary) 70%, transparent); outline-offset: 2px;
+    }
+    #registrations .reg-btn-primary { background: var(--demo-primary); color: #fff; }
+    #registrations .reg-btn-primary:hover:not(:disabled) {
+      background: color-mix(in srgb, var(--demo-primary) 88%, white);
+    }
+    #registrations .reg-btn-primary:disabled {
+      background: var(--surface-3); color: var(--quiet); cursor: not-allowed;
+    }
+    #registrations .reg-btn-ghost { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+    #registrations .reg-btn-ghost:hover { border-color: var(--demo-primary); color: var(--demo-primary); }
+    #registrations .reg-btn-pay {
+      width: 100%; background: var(--demo-primary); color: #fff;
+      font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase; min-height: 48px;
+      box-shadow: 0 6px 20px -6px color-mix(in srgb, var(--demo-primary) 60%, transparent);
+    }
+    #registrations .reg-btn-pay:hover {
+      background: color-mix(in srgb, var(--demo-primary) 90%, white);
+      box-shadow: 0 10px 26px -6px color-mix(in srgb, var(--demo-primary) 70%, transparent);
+    }
+    #registrations .reg-success { text-align: center; padding: 40px 22px 48px; color: var(--ink); }
+    #registrations .reg-success-mark {
+      display: inline-grid; place-items: center; color: var(--demo-primary); margin-bottom: 14px;
+      filter: drop-shadow(0 0 24px color-mix(in srgb, var(--demo-primary) 50%, transparent));
+    }
+    #registrations .reg-success-title {
+      color: var(--ink); font-family: var(--font-display); font-style: italic;
+      font-size: clamp(26px, 4vw, 38px); font-weight: 800; letter-spacing: 0.005em; line-height: 1;
+    }
+    #registrations .reg-success-sub {
+      margin: 12px auto 20px; max-width: 56ch;
+      color: var(--muted); font-family: var(--font-sans); font-size: 13px; line-height: 1.55;
+    }
+    #registrations .reg-success-sub strong {
+      color: var(--ink); font-family: var(--font-mono); font-weight: 600;
+    }
+    #registrations .reg-success-actions {
+      display: inline-flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+    }
+
+    @media (max-width: 800px) {
+      #registrations .reg-stagebar { padding: 10px 14px; flex-wrap: wrap; }
+      #registrations .reg-url { font-size: 10px; }
+      #registrations .reg-steps { padding: 12px 14px 10px; justify-content: space-between; }
+      #registrations .reg-step { gap: 6px; }
+      #registrations .reg-step .reg-steplabel { display: none; }
+      #registrations .reg-step.is-active .reg-steplabel { display: inline; color: var(--ink); font-weight: 600; }
+      #registrations .reg-stepline { margin: 0 6px; }
+      #registrations .reg-pane { padding: 16px 14px 20px; }
+      #registrations .reg-legend {
+        grid-template-columns: 1fr;
+        grid-template-areas: "eyebrow" "title" "sub" "autofill";
+      }
+      #registrations .reg-autofill { justify-self: start; margin-top: 8px; }
+      #registrations .reg-event { grid-template-columns: 1fr; gap: 10px; padding: 12px 14px; }
+      #registrations .reg-event-price { flex-direction: row; align-items: baseline; gap: 8px; align-self: flex-start; }
+      #registrations .reg-event-sticker { font-size: 22px; }
+      #registrations .reg-form { grid-template-columns: 1fr; }
+      #registrations .reg-col-1, #registrations .reg-col-2, #registrations .reg-col-3 { grid-column: span 1; }
+      #registrations .reg-checkout { grid-template-columns: 1fr; }
+      #registrations .reg-total-amt { font-size: 26px; }
+      #registrations .reg-actions { flex-direction: column-reverse; align-items: stretch; gap: 8px; }
+      #registrations .reg-actions-note { text-align: center; order: 2; }
+      #registrations .reg-btn { justify-content: center; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #registrations * { transition: none !important; }
+    }
+
+    /* === #teams ======================================================= */
+    #teams .teams-stage {
+      padding: 0; overflow: hidden;
+      background:
+        radial-gradient(120% 80% at 0% 0%, color-mix(in srgb, var(--demo-primary) 14%, transparent), transparent 55%),
+        var(--surface);
+    }
+    #teams .teams-stagebar { padding: 12px 18px; border-bottom: 1px solid var(--line); }
+    #teams .teams-url {
+      margin-left: auto; color: var(--quiet); font-family: var(--font-mono); font-size: 11px;
+    }
+    #teams .teams-controls {
+      display: flex; align-items: center; gap: 14px;
+      padding: 12px 18px; border-bottom: 1px solid var(--line);
+      background: rgba(8, 16, 15, 0.32);
+      flex-wrap: wrap;
+    }
+    #teams .teams-controls-left { display: flex; gap: 8px; }
+    #teams .teams-readout {
+      margin-left: auto; display: flex; align-items: center; gap: 8px;
+      color: var(--muted); font-family: var(--font-mono); font-size: 10.5px;
+      letter-spacing: 0.04em; text-transform: uppercase;
+    }
+    #teams .teams-readout-key { color: var(--quiet); }
+    #teams .teams-readout-vals { display: inline-flex; align-items: center; gap: 5px; }
+    #teams .teams-readout-val {
+      color: var(--ink); font-variant-numeric: tabular-nums; font-size: 11px;
+      min-width: 24px; text-align: center; transition: color 220ms;
+    }
+    #teams .teams-readout-slash { color: var(--quiet); }
+    #teams .teams-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      min-height: 34px; padding: 0 12px; border-radius: 6px;
+      font-family: var(--font-sans); font-size: 12px; font-weight: 600; letter-spacing: -0.005em;
+      cursor: pointer; border: 1px solid transparent;
+      transition: background 150ms, color 150ms, border-color 150ms, box-shadow 150ms, transform 60ms;
+    }
+    #teams .teams-btn:active { transform: translateY(1px); }
+    #teams .teams-btn:focus-visible {
+      outline: 2px solid color-mix(in srgb, var(--demo-primary) 70%, transparent); outline-offset: 2px;
+    }
+    #teams .teams-btn-primary { background: var(--demo-primary); color: #fff; }
+    #teams .teams-btn-primary:hover {
+      background: color-mix(in srgb, var(--demo-primary) 88%, white);
+      box-shadow: 0 6px 16px -8px color-mix(in srgb, var(--demo-primary) 70%, transparent);
+    }
+    #teams .teams-btn-ghost {
+      background: transparent; color: var(--ink); border-color: var(--line-strong);
+    }
+    #teams .teams-btn-ghost:hover { border-color: var(--demo-accent); color: var(--demo-accent); }
+    #teams .teams-board {
+      display: grid; gap: 14px;
+      grid-template-columns: minmax(240px, 1fr) 2.2fr;
+      padding: 18px;
+      align-items: start;
+    }
+    #teams .teams-rosters {
+      display: grid; gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    #teams .teams-pool,
+    #teams .teams-card {
+      display: flex; flex-direction: column;
+      border: 1px solid var(--line); border-radius: 8px;
+      background: var(--surface-2);
+      transition: border-color 180ms, background 180ms, box-shadow 180ms;
+    }
+    #teams .teams-pool { min-height: 380px; }
+    #teams .teams-card { min-height: 240px; }
+    #teams .teams-bin-head {
+      display: flex; align-items: center; gap: 8px;
+      padding: 12px 14px 8px;
+    }
+    #teams .teams-bin-title-wrap {
+      display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1 1 auto;
+    }
+    #teams .teams-bin-eyebrow {
+      color: var(--quiet); font-family: var(--font-mono); font-size: 9.5px;
+      text-transform: uppercase; letter-spacing: 0.14em; font-weight: 600;
+    }
+    #teams .teams-bin-title {
+      margin: 0; color: var(--ink);
+      font-family: var(--font-display); font-style: italic;
+      font-size: 18px; font-weight: 800; letter-spacing: 0.005em; line-height: 1.05;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    #teams .teams-rename { cursor: text; outline: none; border-radius: 4px; padding: 0 2px; margin: 0 -2px; }
+    #teams .teams-rename:hover { background: color-mix(in srgb, var(--demo-accent) 10%, transparent); }
+    #teams .teams-rename:focus-visible {
+      background: var(--bg-2);
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--demo-accent) 70%, transparent);
+    }
+    #teams .teams-rename[contenteditable="true"] {
+      background: var(--bg-2); cursor: text; white-space: nowrap; overflow: visible; text-overflow: clip;
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--demo-accent) 80%, transparent);
+    }
+    #teams .teams-count {
+      display: inline-grid; place-items: center; min-width: 26px; height: 22px;
+      padding: 0 7px; border-radius: 999px;
+      border: 1px solid var(--line-strong); background: var(--bg-2);
+      color: var(--ink); font-family: var(--font-mono); font-size: 10.5px; font-weight: 700;
+      font-variant-numeric: tabular-nums; letter-spacing: 0.02em;
+    }
+    #teams .teams-stat {
+      display: flex; align-items: baseline; justify-content: space-between; gap: 8px;
+      padding: 5px 14px 6px;
+      border-bottom: 1px dashed var(--line);
+    }
+    #teams .teams-stat-key {
+      color: var(--quiet); font-family: var(--font-mono); font-size: 9.5px;
+      text-transform: uppercase; letter-spacing: 0.14em; font-weight: 600;
+    }
+    #teams .teams-stat-val {
+      color: var(--ink); font-family: var(--font-mono); font-size: 12px;
+      font-variant-numeric: tabular-nums; transition: color 220ms;
+    }
+    #teams .teams-bin-body {
+      flex: 1 1 auto; padding: 10px 12px 12px;
+      display: flex; flex-wrap: wrap; gap: 6px; align-content: flex-start;
+      border-radius: 0 0 8px 8px;
+      transition: background 160ms, box-shadow 160ms, outline-color 160ms;
+      outline: 2px dashed transparent; outline-offset: -10px;
+    }
+    #teams .teams-pool .teams-bin-body { padding: 12px; }
+    #teams .teams-bin-body.is-over {
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--demo-accent) 12%, transparent), transparent 80%),
+        var(--surface-3);
+      outline-color: color-mix(in srgb, var(--demo-accent) 70%, transparent);
+    }
+    #teams .teams-card.is-target { border-color: color-mix(in srgb, var(--demo-accent) 80%, transparent); }
+    #teams .teams-pool.is-target { border-color: color-mix(in srgb, var(--demo-accent) 80%, transparent); }
+    #teams .teams-card.is-kbtarget,
+    #teams .teams-pool.is-kbtarget {
+      border-color: var(--demo-primary);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--demo-primary) 30%, transparent);
+    }
+    #teams .teams-bin-foot { padding: 0 14px 12px; }
+    #teams .teams-bin-hint {
+      color: var(--quiet); font-family: var(--font-mono); font-size: 9.5px;
+      letter-spacing: 0.06em;
+    }
+    #teams .teams-chip {
+      --chip-tint: var(--demo-primary);
+      position: relative;
+      display: inline-flex; align-items: center; gap: 6px;
+      min-height: 30px; padding: 4px 9px 4px 4px;
+      border: 1px solid var(--line-strong); border-radius: 999px;
+      background: var(--surface-3);
+      color: var(--ink); font-family: var(--font-sans); font-size: 12px;
+      cursor: grab; user-select: none;
+      transition: border-color 140ms, background 140ms, transform 140ms, box-shadow 140ms, opacity 140ms;
+    }
+    #teams .teams-chip:hover {
+      border-color: color-mix(in srgb, var(--demo-accent) 60%, var(--line-strong));
+      background: color-mix(in srgb, var(--demo-accent) 6%, var(--surface-3));
+    }
+    #teams .teams-chip:focus-visible {
+      outline: 2px solid color-mix(in srgb, var(--demo-accent) 80%, transparent); outline-offset: 2px;
+    }
+    #teams .teams-chip.is-dragging { cursor: grabbing; opacity: 0.5; transform: scale(0.96); }
+    #teams .teams-chip.is-selected {
+      border-color: var(--demo-primary);
+      background: color-mix(in srgb, var(--demo-primary) 14%, var(--surface-3));
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--demo-primary) 35%, transparent);
+    }
+    #teams .teams-chip.is-picked {
+      border-color: var(--demo-accent);
+      background: color-mix(in srgb, var(--demo-accent) 14%, var(--surface-3));
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--demo-accent) 60%, transparent);
+    }
+    #teams .teams-chip-jersey {
+      display: inline-grid; place-items: center;
+      width: 22px; height: 22px; border-radius: 999px;
+      background: color-mix(in srgb, var(--chip-tint) 22%, var(--bg-2));
+      color: var(--ink);
+      font-family: var(--font-mono); font-size: 10.5px; font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      border: 1px solid color-mix(in srgb, var(--chip-tint) 40%, var(--line-strong));
+    }
+    #teams .teams-chip-name { font-weight: 500; letter-spacing: -0.005em; white-space: nowrap; }
+    #teams .teams-chip-skill { display: inline-flex; align-items: center; gap: 3px; margin-left: 2px; }
+    #teams .teams-chip-dot { width: 5px; height: 5px; border-radius: 999px; background: var(--faint); }
+    #teams .teams-chip-dot.is-on { background: var(--demo-accent); }
+    #teams .teams-pool .teams-chip-dot.is-on { background: var(--green-hi); }
+    #teams .teams-chip.is-expanded {
+      flex-basis: 100%; flex-wrap: wrap;
+      border-radius: 12px; padding: 10px 12px;
+      background: var(--bg-2); border-color: var(--line-strong);
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--demo-primary) 14%, transparent);
+      align-items: flex-start;
+    }
+    #teams .teams-chip-detail {
+      display: none; width: 100%;
+      margin-top: 8px; padding-top: 8px;
+      border-top: 1px dashed var(--line);
+      flex-wrap: wrap; gap: 10px 14px; align-items: center;
+    }
+    #teams .teams-chip.is-expanded .teams-chip-detail { display: flex; }
+    #teams .teams-chip-detail-row {
+      display: inline-flex; align-items: baseline; gap: 5px;
+      color: var(--muted); font-family: var(--font-mono); font-size: 10.5px;
+      text-transform: uppercase; letter-spacing: 0.1em;
+    }
+    #teams .teams-chip-detail-row strong {
+      color: var(--ink); font-weight: 600;
+      font-variant-numeric: tabular-nums; letter-spacing: 0.02em;
+    }
+    #teams .teams-chip-move {
+      margin-left: auto;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    #teams .teams-chip-move-label {
+      color: var(--quiet); font-family: var(--font-mono); font-size: 9.5px;
+      text-transform: uppercase; letter-spacing: 0.12em;
+    }
+    #teams .teams-chip-move-select {
+      min-height: 26px; padding: 2px 8px;
+      background: var(--surface-3); color: var(--ink);
+      border: 1px solid var(--line-strong); border-radius: 4px;
+      font-family: var(--font-mono); font-size: 10.5px; cursor: pointer;
+    }
+    #teams .teams-chip-move-select:focus {
+      outline: none; border-color: var(--demo-primary);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--demo-primary) 22%, transparent);
+    }
+    #teams .teams-bin-body.is-empty::before {
+      content: attr(data-empty);
+      display: block; width: 100%;
+      padding: 10px 6px;
+      color: var(--quiet); font-family: var(--font-mono); font-size: 10.5px;
+      letter-spacing: 0.06em; text-align: center;
+    }
+    #teams .teams-foot {
+      display: flex; align-items: center; gap: 14px;
+      padding: 12px 18px; border-top: 1px solid var(--line);
+      background: rgba(8, 16, 15, 0.4);
+    }
+    #teams .teams-foot-note,
+    #teams .teams-foot-hint {
+      color: var(--quiet); font-family: var(--font-mono); font-size: 10.5px;
+      letter-spacing: 0.02em;
+    }
+    #teams .teams-foot-hint { margin-left: auto; }
+    #teams .teams-foot-hint kbd {
+      display: inline-grid; place-items: center;
+      min-width: 18px; height: 17px; padding: 0 5px;
+      border: 1px solid var(--line-strong); border-bottom-width: 2px; border-radius: 4px;
+      background: var(--surface-2);
+      color: var(--ink); font-family: var(--font-mono); font-size: 9.5px; font-weight: 600;
+    }
+    #teams .teams-sr-status {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: 0; overflow: hidden;
+      clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+    }
+    @media (max-width: 980px) {
+      #teams .teams-board { grid-template-columns: 1fr; }
+      #teams .teams-pool { min-height: 0; }
+      #teams .teams-pool .teams-bin-body { max-height: 200px; overflow-y: auto; }
+      #teams .teams-rosters { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (max-width: 720px) {
+      #teams .teams-stagebar { padding: 10px 14px; flex-wrap: wrap; }
+      #teams .teams-url { font-size: 10px; }
+      #teams .teams-controls { padding: 10px 14px; flex-wrap: wrap; gap: 8px; }
+      #teams .teams-controls-left { width: 100%; }
+      #teams .teams-controls-left .teams-btn { flex: 1; justify-content: center; }
+      #teams .teams-readout { width: 100%; justify-content: flex-start; }
+      #teams .teams-board { padding: 12px; gap: 12px; }
+      #teams .teams-pool .teams-bin-body { flex-wrap: nowrap; overflow-x: auto; max-height: none; padding-bottom: 12px; scrollbar-width: thin; }
+      #teams .teams-pool .teams-chip { flex: 0 0 auto; }
+      #teams .teams-rosters { grid-template-columns: 1fr; }
+      #teams .teams-card { min-height: 180px; }
+      #teams .teams-foot { flex-direction: column; align-items: flex-start; gap: 6px; }
+      #teams .teams-foot-hint { margin-left: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #teams * { transition: none !important; }
+    }
+
+    /* === #publish-schedule (embedded) ================================ */
+    #publish-schedule .publish-stage {
+      padding: 0; overflow: hidden;
+      background:
+        radial-gradient(120% 80% at 0% 0%, color-mix(in srgb, var(--demo-primary) 14%, transparent), transparent 55%),
+        var(--surface);
+    }
+    #publish-schedule .publish-stagebar {
+      padding: 12px 18px; border-bottom: 1px solid var(--line); flex-wrap: wrap;
+    }
+    #publish-schedule .publish-meta-path {
+      color: var(--quiet); font-family: var(--font-mono); font-size: 11px;
+      border-left: 1px solid var(--line-strong); padding-left: 10px;
+    }
+    #publish-schedule .publish-status {
+      margin-left: auto;
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 10px; border-radius: 999px;
+      border: 1px solid var(--line-strong); background: var(--surface-2);
+      color: var(--muted); font-family: var(--font-mono); font-size: 10.5px;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      transition: color 200ms, background 200ms, border-color 200ms;
+    }
+    #publish-schedule .publish-status-dot {
+      width: 7px; height: 7px; border-radius: 999px;
+      background: var(--quiet);
+      transition: background 200ms, box-shadow 200ms;
+    }
+    #publish-schedule .publish-status[data-state="ready"] {
+      color: var(--demo-accent);
+      border-color: color-mix(in srgb, var(--demo-accent) 60%, transparent);
+      background: color-mix(in srgb, var(--demo-accent) 10%, var(--surface-2));
+    }
+    #publish-schedule .publish-status[data-state="ready"] .publish-status-dot {
+      background: var(--demo-accent); box-shadow: 0 0 8px var(--demo-accent);
+    }
+    #publish-schedule .publish-status[data-state="sending"] {
+      color: var(--demo-accent);
+      border-color: color-mix(in srgb, var(--demo-accent) 60%, transparent);
+      background: color-mix(in srgb, var(--demo-accent) 10%, var(--surface-2));
+    }
+    #publish-schedule .publish-status[data-state="sending"] .publish-status-dot {
+      background: var(--demo-accent); box-shadow: 0 0 12px var(--demo-accent);
+      animation: publish-pulse 1.4s ease-in-out infinite;
+    }
+    #publish-schedule .publish-status[data-state="published"] {
+      color: var(--green-hi);
+      border-color: color-mix(in srgb, var(--green-hi) 50%, transparent);
+      background: color-mix(in srgb, var(--green-hi) 10%, var(--surface-2));
+    }
+    #publish-schedule .publish-status[data-state="published"] .publish-status-dot {
+      background: var(--green-hi); box-shadow: 0 0 12px var(--green-hi);
+    }
+    @keyframes publish-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+    #publish-schedule .publish-controls {
+      display: flex; align-items: center; gap: 14px;
+      padding: 12px 18px; border-bottom: 1px solid var(--line);
+      background: rgba(8, 16, 15, 0.32); flex-wrap: wrap;
+    }
+    #publish-schedule .publish-controls-week { display: inline-flex; align-items: center; gap: 6px; }
+    #publish-schedule .publish-week-indicator {
+      display: flex; flex-direction: column; gap: 2px;
+      padding: 4px 10px; min-width: 130px; text-align: center;
+      border-radius: 6px; border: 1px solid var(--line); background: var(--bg-2);
+    }
+    #publish-schedule .publish-week-indicator strong {
+      color: var(--ink); font-family: var(--font-display); font-style: italic;
+      font-size: 14px; font-weight: 800; letter-spacing: 0.005em; line-height: 1;
+    }
+    #publish-schedule .publish-week-indicator span {
+      color: var(--quiet); font-family: var(--font-mono); font-size: 9.5px;
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    #publish-schedule .publish-controls-summary { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    #publish-schedule .publish-controls-key { color: var(--quiet); font-family: var(--font-mono); font-size: 10.5px; }
+    #publish-schedule .publish-chip[hidden] { display: none; }
+    #publish-schedule .publish-chip {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 3px 9px; border-radius: 999px;
+      border: 1px solid var(--line-strong); background: var(--surface-2);
+      color: var(--muted); font-family: var(--font-mono); font-size: 10.5px;
+      letter-spacing: 0.04em; text-transform: uppercase; font-variant-numeric: tabular-nums;
+    }
+    #publish-schedule .publish-chip-quiet { border-color: var(--line); color: var(--quiet); }
+    #publish-schedule .publish-chip-quiet b,
+    #publish-schedule .publish-chip-quiet span:first-child { color: var(--ink); font-weight: 600; }
+    #publish-schedule .publish-chip-conflict {
+      border-color: color-mix(in srgb, #e6b34a 60%, transparent);
+      background: color-mix(in srgb, #e6b34a 12%, var(--surface-2));
+      color: #e6b34a;
+    }
+    #publish-schedule .publish-chip-conflict .publish-chip-dot {
+      width: 7px; height: 7px; border-radius: 999px;
+      background: #e6b34a; box-shadow: 0 0 8px #e6b34a;
+      animation: publish-pulse 2s ease-in-out infinite;
+    }
+    #publish-schedule .publish-chip-clean {
+      border-color: color-mix(in srgb, var(--demo-accent) 60%, transparent);
+      background: color-mix(in srgb, var(--demo-accent) 12%, var(--surface-2));
+      color: var(--demo-accent);
+    }
+    #publish-schedule .publish-controls-cta { margin-left: auto; display: inline-flex; gap: 6px; }
+    #publish-schedule .publish-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      min-height: 32px; padding: 0 12px; border-radius: 6px;
+      font-family: var(--font-sans); font-size: 12px; font-weight: 600; letter-spacing: -0.005em;
+      cursor: pointer; border: 1px solid transparent;
+      transition: background 150ms, color 150ms, border-color 150ms, box-shadow 150ms, transform 60ms;
+    }
+    #publish-schedule .publish-btn:active:not(:disabled) { transform: translateY(1px); }
+    #publish-schedule .publish-btn:focus-visible {
+      outline: 2px solid color-mix(in srgb, var(--demo-primary) 70%, transparent); outline-offset: 2px;
+    }
+    #publish-schedule .publish-btn-step {
+      width: 32px; padding: 0; justify-content: center;
+      background: transparent; color: var(--ink);
+      border-color: var(--line-strong);
+      font-size: 16px; line-height: 1;
+    }
+    #publish-schedule .publish-btn-step:hover { border-color: var(--demo-accent); color: var(--demo-accent); }
+    #publish-schedule .publish-btn-ghost {
+      background: transparent; color: var(--ink); border-color: var(--line-strong);
+    }
+    #publish-schedule .publish-btn-ghost:hover { border-color: var(--demo-accent); color: var(--demo-accent); }
+    #publish-schedule .publish-btn-primary {
+      background: var(--demo-primary); color: #fff;
+      box-shadow: 0 6px 16px -8px color-mix(in srgb, var(--demo-primary) 70%, transparent);
+    }
+    #publish-schedule .publish-btn-primary:hover:not(:disabled) {
+      background: color-mix(in srgb, var(--demo-primary) 88%, white);
+      box-shadow: 0 10px 24px -8px color-mix(in srgb, var(--demo-primary) 80%, transparent);
+    }
+    #publish-schedule .publish-btn-primary:disabled {
+      background: var(--surface-3); color: var(--quiet); cursor: not-allowed; box-shadow: none;
+    }
+    #publish-schedule .publish-board {
+      display: grid; gap: 14px;
+      grid-template-columns: 1.7fr 1fr;
+      padding: 18px; align-items: start;
+    }
+    #publish-schedule .publish-week,
+    #publish-schedule .publish-feed {
+      display: flex; flex-direction: column;
+      border: 1px solid var(--line); border-radius: 8px;
+      background: var(--surface-2);
+      min-height: 380px;
+    }
+    #publish-schedule .publish-bin-head {
+      display: flex; align-items: center; gap: 8px;
+      padding: 12px 14px 8px;
+    }
+    #publish-schedule .publish-bin-title-wrap {
+      display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1 1 auto;
+    }
+    #publish-schedule .publish-bin-eyebrow {
+      color: var(--quiet); font-family: var(--font-mono); font-size: 9.5px;
+      text-transform: uppercase; letter-spacing: 0.14em; font-weight: 600;
+    }
+    #publish-schedule .publish-bin-title {
+      margin: 0; color: var(--ink);
+      font-family: var(--font-display); font-style: italic;
+      font-size: 18px; font-weight: 800; letter-spacing: 0.005em; line-height: 1.05;
+    }
+    #publish-schedule .publish-bin-hint {
+      color: var(--quiet); font-family: var(--font-mono); font-size: 9.5px;
+      letter-spacing: 0.06em;
+    }
+    #publish-schedule .publish-days {
+      flex: 1 1 auto;
+      display: flex; flex-direction: column; gap: 6px;
+      padding: 4px 12px 12px;
+    }
+    #publish-schedule .publish-day {
+      display: grid; grid-template-columns: 56px 1fr; gap: 10px;
+      padding: 8px 10px;
+      border: 1px solid var(--line); border-radius: 6px;
+      background: var(--bg-2);
+      transition: background 160ms, border-color 160ms;
+    }
+    #publish-schedule .publish-day-when {
+      display: flex; flex-direction: column; align-items: flex-start; gap: 2px;
+      padding-top: 4px;
+      border-right: 1px dashed var(--line); padding-right: 10px;
+    }
+    #publish-schedule .publish-day-dow {
+      color: var(--quiet); font-family: var(--font-mono);
+      font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.12em;
+    }
+    #publish-schedule .publish-day-num {
+      color: var(--ink); font-family: var(--font-display); font-style: italic;
+      font-size: 22px; font-weight: 800; line-height: 1;
+    }
+    #publish-schedule .publish-day-events {
+      display: flex; flex-direction: column; gap: 5px; min-width: 0;
+    }
+    #publish-schedule .publish-day-empty {
+      color: var(--quiet); font-family: var(--font-mono); font-size: 10.5px;
+      letter-spacing: 0.04em; padding: 4px 0;
+    }
+    #publish-schedule .publish-event {
+      display: grid; grid-template-columns: 50px 1fr auto; gap: 8px; align-items: center;
+      padding: 6px 8px;
+      border-radius: 5px;
+      background: var(--surface-3);
+      border-left: 3px solid var(--demo-primary);
+      transition: background 160ms, border-color 160ms;
+    }
+    #publish-schedule .publish-event[data-kind="practice"] {
+      border-left-color: color-mix(in srgb, var(--demo-primary) 50%, var(--quiet));
+    }
+    #publish-schedule .publish-event-time {
+      color: var(--ink); font-family: var(--font-mono); font-size: 10.5px;
+      font-weight: 600; letter-spacing: 0.02em; text-align: center;
+      padding: 3px 5px;
+      background: var(--bg-2); border-radius: 3px; border: 1px solid var(--line);
+      font-variant-numeric: tabular-nums;
+    }
+    #publish-schedule .publish-event-body { min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+    #publish-schedule .publish-event-title {
+      color: var(--ink); font-family: var(--font-sans);
+      font-size: 12px; font-weight: 600; letter-spacing: -0.005em;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    #publish-schedule .publish-event-where {
+      color: var(--quiet); font-family: var(--font-mono); font-size: 9.5px;
+      text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    #publish-schedule .publish-event-tag {
+      display: inline-flex; align-items: center;
+      padding: 2px 7px; border-radius: 3px;
+      background: color-mix(in srgb, var(--demo-primary) 16%, transparent);
+      color: var(--demo-accent);
+      font-family: var(--font-mono); font-size: 9.5px;
+      font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    #publish-schedule .publish-event-tag[data-kind="practice"] {
+      background: var(--surface-2); color: var(--quiet); border: 1px solid var(--line);
+    }
+    #publish-schedule .publish-event.is-conflict {
+      background: color-mix(in srgb, #e6b34a 12%, var(--surface-3));
+      border-left-color: #e6b34a;
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, #e6b34a 40%, transparent);
+      cursor: pointer;
+    }
+    #publish-schedule .publish-event.is-conflict:hover {
+      background: color-mix(in srgb, #e6b34a 18%, var(--surface-3));
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, #e6b34a 60%, transparent);
+    }
+    #publish-schedule .publish-event.is-conflict .publish-event-tag {
+      background: color-mix(in srgb, #e6b34a 22%, transparent);
+      color: #e6b34a;
+    }
+    #publish-schedule .publish-event-conflict-note {
+      grid-column: 1 / -1;
+      margin-top: 4px;
+      padding: 5px 7px;
+      border-radius: 4px;
+      background: color-mix(in srgb, #e6b34a 10%, var(--bg-2));
+      color: #e6b34a;
+      font-family: var(--font-mono); font-size: 9.5px;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      display: flex; gap: 7px; align-items: center;
+    }
+    #publish-schedule .publish-event-conflict-note b { color: var(--ink); font-weight: 600; }
+    #publish-schedule .publish-event-resolve {
+      margin-left: auto;
+      background: var(--bg-2);
+      border: 1px solid color-mix(in srgb, #e6b34a 60%, transparent);
+      color: #e6b34a;
+      padding: 3px 7px; border-radius: 3px;
+      font-family: var(--font-mono); font-size: 9.5px;
+      cursor: pointer; text-transform: uppercase; letter-spacing: 0.1em;
+      transition: background 140ms, color 140ms;
+    }
+    #publish-schedule .publish-event-resolve:hover { background: #e6b34a; color: var(--bg-2); }
+    #publish-schedule .publish-event.is-sending {
+      border-left-color: var(--demo-accent);
+      background: color-mix(in srgb, var(--demo-accent) 10%, var(--surface-3));
+    }
+    #publish-schedule .publish-event.is-published {
+      border-left-color: var(--green-hi);
+      background: color-mix(in srgb, var(--green-hi) 8%, var(--surface-3));
+    }
+    #publish-schedule .publish-event.is-published .publish-event-tag {
+      background: color-mix(in srgb, var(--green-hi) 18%, transparent);
+      color: var(--green-hi);
+    }
+    #publish-schedule .publish-feed-progress {
+      display: block; width: 70px; height: 4px;
+      border-radius: 999px; background: var(--line); overflow: hidden;
+    }
+    #publish-schedule .publish-feed-progress-fill {
+      display: block; height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--demo-primary), var(--demo-accent));
+      border-radius: inherit;
+      transition: width 240ms ease;
+    }
+    #publish-schedule .publish-feed-meta {
+      display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+      padding: 0 14px 10px;
+      border-bottom: 1px dashed var(--line);
+      color: var(--quiet); font-family: var(--font-mono);
+      font-size: 10.5px; letter-spacing: 0.04em; text-transform: uppercase;
+    }
+    #publish-schedule .publish-feed-meta-key { color: var(--quiet); }
+    #publish-schedule .publish-feed-meta-val { color: var(--ink); font-variant-numeric: tabular-nums; }
+    #publish-schedule .publish-feed-meta-val b { color: var(--ink); font-weight: 700; }
+    #publish-schedule .publish-feed-meta-sep { color: var(--quiet); }
+    #publish-schedule .publish-feed-list {
+      flex: 1 1 auto;
+      list-style: none; margin: 0; padding: 10px 12px 12px;
+      display: flex; flex-direction: column; gap: 5px;
+      overflow-y: auto; max-height: 320px; scrollbar-width: thin;
+    }
+    #publish-schedule .publish-feed-empty {
+      color: var(--quiet); font-family: var(--font-mono); font-size: 11px;
+      text-align: center; padding: 32px 12px; line-height: 1.6;
+    }
+    #publish-schedule .publish-feed-empty b { color: var(--ink); font-weight: 700; }
+    #publish-schedule .publish-feed-empty-mark {
+      display: block; font-size: 24px;
+      color: var(--faint); margin-bottom: 8px;
+    }
+    #publish-schedule .publish-feed-row {
+      display: grid; grid-template-columns: auto 1fr auto;
+      gap: 8px; align-items: center;
+      padding: 6px 8px;
+      border-radius: 5px;
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      animation: publish-feed-in 220ms ease-out both;
+    }
+    @keyframes publish-feed-in {
+      from { opacity: 0; transform: translateY(-6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    #publish-schedule .publish-feed-avatar {
+      display: inline-grid; place-items: center;
+      width: 24px; height: 24px; border-radius: 999px;
+      background: color-mix(in srgb, var(--demo-primary) 30%, var(--bg-2));
+      border: 1px solid color-mix(in srgb, var(--demo-primary) 50%, transparent);
+      color: var(--ink);
+      font-family: var(--font-mono); font-size: 9.5px; font-weight: 700;
+    }
+    #publish-schedule .publish-feed-body { min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+    #publish-schedule .publish-feed-name {
+      color: var(--ink); font-family: var(--font-sans); font-size: 11px; font-weight: 600;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    #publish-schedule .publish-feed-msg {
+      color: var(--muted); font-family: var(--font-mono); font-size: 9.5px;
+      letter-spacing: 0.02em;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    #publish-schedule .publish-feed-status {
+      display: inline-flex; align-items: center; gap: 5px;
+      color: var(--green-hi);
+      font-family: var(--font-mono); font-size: 9.5px;
+      text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600;
+    }
+    #publish-schedule .publish-feed-status-dot {
+      width: 6px; height: 6px; border-radius: 999px;
+      background: var(--green-hi);
+      box-shadow: 0 0 6px var(--green-hi);
+    }
+    #publish-schedule .publish-feed-row[data-channel="email"] .publish-feed-avatar {
+      background: color-mix(in srgb, var(--demo-accent) 22%, var(--bg-2));
+      border-color: color-mix(in srgb, var(--demo-accent) 50%, transparent);
+    }
+    #publish-schedule .publish-feed-row[data-channel="push"] .publish-feed-avatar {
+      background: color-mix(in srgb, var(--green-hi) 22%, var(--bg-2));
+      border-color: color-mix(in srgb, var(--green-hi) 50%, transparent);
+    }
+    #publish-schedule .publish-foot {
+      display: flex; align-items: center; gap: 14px;
+      padding: 12px 18px; border-top: 1px solid var(--line);
+      background: rgba(8, 16, 15, 0.4);
+    }
+    #publish-schedule .publish-foot-note,
+    #publish-schedule .publish-foot-hint {
+      color: var(--quiet); font-family: var(--font-mono); font-size: 10.5px;
+      letter-spacing: 0.02em;
+    }
+    #publish-schedule .publish-foot-hint { margin-left: auto; }
+    #publish-schedule .publish-foot-hint kbd {
+      display: inline-grid; place-items: center;
+      min-width: 18px; height: 17px; padding: 0 5px;
+      border: 1px solid var(--line-strong); border-bottom-width: 2px; border-radius: 4px;
+      background: var(--surface-2);
+      color: var(--ink); font-family: var(--font-mono); font-size: 9.5px; font-weight: 600;
+    }
+    #publish-schedule .publish-pill {
+      display: inline-flex; align-items: center;
+      padding: 1px 6px; border-radius: 3px;
+      font-family: var(--font-mono); font-size: 9.5px;
+      text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    #publish-schedule .publish-pill-conflict {
+      background: color-mix(in srgb, #e6b34a 18%, transparent);
+      color: #e6b34a;
+      border: 1px solid color-mix(in srgb, #e6b34a 50%, transparent);
+    }
+    #publish-schedule .publish-sr-status {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: 0; overflow: hidden;
+      clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+    }
+    @media (max-width: 980px) {
+      #publish-schedule .publish-board { grid-template-columns: 1fr; }
+      #publish-schedule .publish-week,
+      #publish-schedule .publish-feed { min-height: 0; }
+      #publish-schedule .publish-feed-list { max-height: 220px; }
+    }
+    @media (max-width: 720px) {
+      #publish-schedule .publish-stagebar { padding: 10px 14px; }
+      #publish-schedule .publish-meta-path { font-size: 10px; padding-left: 8px; }
+      #publish-schedule .publish-status { width: 100%; margin-left: 0; justify-content: center; }
+      #publish-schedule .publish-controls { padding: 10px 14px; gap: 8px; }
+      #publish-schedule .publish-controls-week { width: 100%; }
+      #publish-schedule .publish-week-indicator { flex: 1 1 auto; }
+      #publish-schedule .publish-controls-summary { width: 100%; }
+      #publish-schedule .publish-controls-cta { margin-left: auto; width: 100%; justify-content: stretch; }
+      #publish-schedule .publish-controls-cta .publish-btn { flex: 1; justify-content: center; }
+      #publish-schedule .publish-board { padding: 12px; gap: 10px; }
+      #publish-schedule .publish-day { grid-template-columns: 48px 1fr; padding: 6px 8px; }
+      #publish-schedule .publish-day-num { font-size: 18px; }
+      #publish-schedule .publish-foot { flex-direction: column; align-items: flex-start; gap: 6px; padding: 10px 14px; }
+      #publish-schedule .publish-foot-hint { margin-left: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #publish-schedule * { transition: none !important; animation: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -4205,8 +5369,8 @@
                     <div class="team-caption">12-3 / away / batting</div>
                   </div>
                 </div>
-                <div class="score-number" aria-label="Diamonds 5, Hammerheads 3">
-                  <span>5</span><em>-</em><span>3</span>
+                <div class="score-number" id="hero-score-number" aria-label="Diamonds 5, Hammerheads 3">
+                  <span id="hero-score-diamonds">5</span><em>-</em><span id="hero-score-hammerheads">3</span>
                 </div>
                 <div class="score-side score-side-right">
                   <img class="team-icon" src="brand/hammerheads-icon.png" alt="" aria-hidden="true">
@@ -4217,7 +5381,7 @@
                 </div>
               </div>
               <div class="inning-grid-caption" aria-hidden="true">
-                <span>Box score</span><b>Top of 5</b>
+                <span>Box score</span><b id="hero-inning-label">Top of 5</b>
               </div>
               <div class="linescore" role="table" aria-label="Linescore through the 5th inning">
                 <div class="linescore-row" role="row">
@@ -4228,12 +5392,12 @@
                 <div class="linescore-row" role="row">
                   <span class="linescore-team away" role="rowheader">Diamonds</span>
                   <span class="inning-run">0</span><span class="inning-run">2</span><span class="inning-run">0</span><span class="inning-run">3</span><span class="inning-run">0</span><span class="inning-run"></span><span class="inning-run"></span>
-                  <span class="inning-run total">5</span>
+                  <span class="inning-run total" id="hero-line-diamonds-total">5</span>
                 </div>
                 <div class="linescore-row" role="row">
                   <span class="linescore-team" role="rowheader">Hammerheads</span>
                   <span class="inning-run">1</span><span class="inning-run">0</span><span class="inning-run">1</span><span class="inning-run">1</span><span class="inning-run"></span><span class="inning-run"></span><span class="inning-run"></span>
-                  <span class="inning-run total">3</span>
+                  <span class="inning-run total" id="hero-line-hammerheads-total">3</span>
                 </div>
               </div>
             </div>
@@ -4313,93 +5477,678 @@
           </div>
         </div>
 
-        <div class="demo-layout reveal">
-          <aside class="demo-controls" aria-label="Tenant theme controls">
-            <p class="demo-reset-note">Type a name, pick your colors, switch sports. Page updates live.</p>
-            <div class="sample-field">
-              <label for="demo-org-input">Organization</label>
+        <div class="demo-top-bar reveal" aria-label="Demo controls">
+          <div class="demo-top-row">
+            <div class="sample-field demo-field-org">
+              <label for="demo-org-input">League name</label>
               <input class="sample-input" id="demo-org-input" type="text" maxlength="32" value="Bayside County Sports">
             </div>
-            <div class="demo-group">
-              <div class="demo-label">Sport</div>
+            <div class="sample-field demo-field-sport">
+              <label>Sport</label>
               <div class="demo-choice-row">
                 <button class="demo-chip is-active" type="button" data-demo-sport="softball">Softball</button>
                 <button class="demo-chip" type="button" data-demo-sport="basketball">Basketball</button>
                 <button class="demo-chip" type="button" data-demo-sport="soccer">Soccer</button>
               </div>
             </div>
-            <div class="sample-field">
-              <label for="demo-primary-hex">Primary color</label>
-              <div class="theme-color-row">
-                <input type="color" id="demo-primary-input" value="#3667B5" aria-label="Primary color picker">
-                <input class="sample-input theme-hex-input" id="demo-primary-hex" type="text" maxlength="7" value="#3667B5" pattern="^#[0-9A-Fa-f]{6}$" aria-label="Primary color hex">
+          </div>
+          <div class="demo-top-row">
+            <div class="sample-field demo-field-color">
+              <label>Primary color</label>
+              <div class="swatch-row" id="demo-primary-grid" role="radiogroup" aria-label="Primary color">
+                <button type="button" class="color-swatch is-active" role="radio" aria-checked="true" data-color="#5B8CD6" data-name="Bayside Blue" style="--sw:#5B8CD6"><span class="color-swatch-dot"></span><span class="color-swatch-name">Blue</span></button>
+                <button type="button" class="color-swatch" role="radio" aria-checked="false" data-color="#7DCA96" data-name="Pickup Green" style="--sw:#7DCA96"><span class="color-swatch-dot"></span><span class="color-swatch-name">Green</span></button>
+                <button type="button" class="color-swatch" role="radio" aria-checked="false" data-color="#D83A48" data-name="Marlins Red" style="--sw:#D83A48"><span class="color-swatch-dot"></span><span class="color-swatch-name">Red</span></button>
+                <button type="button" class="color-swatch" role="radio" aria-checked="false" data-color="#C9A24B" data-name="Comets Gold" style="--sw:#C9A24B"><span class="color-swatch-dot"></span><span class="color-swatch-name">Gold</span></button>
+                <button type="button" class="color-swatch" role="radio" aria-checked="false" data-color="#A26DF0" data-name="Stingrays Purple" style="--sw:#A26DF0"><span class="color-swatch-dot"></span><span class="color-swatch-name">Purple</span></button>
               </div>
             </div>
-            <div class="sample-field">
-              <label for="demo-accent-hex">Accent color</label>
-              <div class="theme-color-row">
-                <input type="color" id="demo-accent-input" value="#70ECF0" aria-label="Accent color picker">
-                <input class="sample-input theme-hex-input" id="demo-accent-hex" type="text" maxlength="7" value="#70ECF0" pattern="^#[0-9A-Fa-f]{6}$" aria-label="Accent color hex">
+            <div class="sample-field demo-field-color">
+              <label>Accent color</label>
+              <div class="swatch-row" id="demo-accent-grid" role="radiogroup" aria-label="Accent color">
+                <button type="button" class="color-swatch is-active" role="radio" aria-checked="true" data-color="#70ECF0" data-name="Mint" style="--sw:#70ECF0"><span class="color-swatch-dot"></span><span class="color-swatch-name">Mint</span></button>
+                <button type="button" class="color-swatch" role="radio" aria-checked="false" data-color="#C8F277" data-name="Citrus" style="--sw:#C8F277"><span class="color-swatch-dot"></span><span class="color-swatch-name">Citrus</span></button>
+                <button type="button" class="color-swatch" role="radio" aria-checked="false" data-color="#FFB39A" data-name="Coral" style="--sw:#FFB39A"><span class="color-swatch-dot"></span><span class="color-swatch-name">Coral</span></button>
+                <button type="button" class="color-swatch" role="radio" aria-checked="false" data-color="#F4E08A" data-name="Cream" style="--sw:#F4E08A"><span class="color-swatch-dot"></span><span class="color-swatch-name">Cream</span></button>
+                <button type="button" class="color-swatch" role="radio" aria-checked="false" data-color="#E1C4FF" data-name="Lavender" style="--sw:#E1C4FF"><span class="color-swatch-dot"></span><span class="color-swatch-name">Lavender</span></button>
               </div>
             </div>
             <button class="btn btn-secondary demo-reset-btn" type="button" id="demo-reset" hidden>Reset to defaults</button>
-            <button class="btn btn-primary" type="button" id="demo-generate">Publish schedule</button>
-          </aside>
-
-          <article class="demo-stage" id="demo-stage" aria-label="Live demo preview">
-            <div class="demo-stage-bar">
-              <strong id="demo-org">Bayside County Sports</strong>
-              <span id="demo-url">bayside-county-sports.leag.app/preview</span>
-            </div>
-            <div class="demo-pub">
-              <div class="demo-pub-subbar">
-                <img class="demo-pub-mark" id="demo-team-mark" src="brand/bayside-diamonds-icon.png" alt="" aria-hidden="true">
-                <span class="demo-pub-meta">
-                  <strong id="demo-team-headline">Diamonds</strong>
-                  <span id="demo-pub-season">Softball / 2026 spring</span>
-                </span>
-                <span class="status-tag" id="demo-status-tag">Sample team page</span>
-              </div>
-
-              <div class="demo-pub-hero">
-                <div class="demo-pub-chips" id="demo-chips">
-                  <span class="record-pill star" id="demo-rank-pill">#1</span>
-                  <span class="record-pill streak" id="demo-streak-pill">W4</span>
-                </div>
-                <h3 class="team-display" id="demo-team-display">DIAMONDS</h3>
-                <div class="demo-pub-stat-row">
-                  <div class="demo-pub-record">
-                    <span class="record-cap">Record</span>
-                    <strong id="demo-record">12-3</strong>
-                  </div>
-                  <div class="demo-pub-last5" id="demo-last5-wrap">
-                    <span class="record-cap">Last 5</span>
-                    <span class="last5-row" id="demo-last5"></span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="demo-next-strip">
-                <div>
-                  <span class="demo-next-kicker">Next game</span>
-                  <strong id="demo-next">Diamonds vs Marlins</strong>
-                  <span id="demo-next-meta">Mon 5:30 PM / Field 1</span>
-                </div>
-                <span class="demo-next-cta">Add to calendar</span>
-              </div>
-
-              <div class="demo-pub-tabs" role="tablist">
-                <button type="button" class="active" data-demo-tab="schedule" role="tab" aria-selected="true">Schedule</button>
-                <button type="button" data-demo-tab="roster" role="tab" aria-selected="false">Roster</button>
-                <button type="button" data-demo-tab="stats" role="tab" aria-selected="false">Stats</button>
-              </div>
-
-              <div class="demo-pub-list" id="demo-schedule-list" aria-live="polite">
-                <div class="demo-pub-empty">Click <b>Publish schedule</b> to fill the season.</div>
-              </div>
-            </div>
-          </article>
+          </div>
         </div>
+
+        <article class="ops-card ops-accordion-card reveal">
+                    <div class="ops-head">
+                      <h3>Season workflow</h3>
+                      <span>Demo data only</span>
+                    </div>
+                    <div class="accordion-list">
+                      <section class="accordion-item is-open" id="take-signups" data-panel="registration">
+                        <button class="accordion-trigger" type="button" aria-expanded="true">
+                          <span class="pipeline-step">1</span>
+                          <span>
+                            <h3>Take signups</h3>
+                            <p>One screen for the parent. Itemized checkout. Service fee shown.</p>
+                          </span>
+                          <span class="status-tag" id="signup-status">Step 1 of 3</span>
+                        </button>
+                        <div class="accordion-panel">
+                          <div id="registrations" class="acc-demo-host">
+                            <div class="demo-stage reg-stage" id="reg-stage">
+                              <div class="demo-stage-bar reg-stagebar">
+                                <strong id="reg-stage-org">Bayside County Sports</strong>
+                                <span class="reg-url">bayside.leag.app/register</span>
+                              </div>
+        
+                              <ol class="reg-steps" role="list" aria-label="Registration progress">
+                                <li class="reg-step is-active" data-step="1">
+                                  <span class="reg-stepnum" aria-hidden="true">1</span>
+                                  <span class="reg-steplabel">Pick event</span>
+                                </li>
+                                <li class="reg-stepline" aria-hidden="true"></li>
+                                <li class="reg-step" data-step="2">
+                                  <span class="reg-stepnum" aria-hidden="true">2</span>
+                                  <span class="reg-steplabel">Player info</span>
+                                </li>
+                                <li class="reg-stepline" aria-hidden="true"></li>
+                                <li class="reg-step" data-step="3">
+                                  <span class="reg-stepnum" aria-hidden="true">3</span>
+                                  <span class="reg-steplabel">Checkout</span>
+                                </li>
+                              </ol>
+        
+                              <div class="reg-screen-status" aria-live="polite" aria-atomic="true" id="reg-status">Step 1 of 3, Pick event</div>
+        
+                              <fieldset class="reg-pane is-active" data-pane="1" aria-labelledby="reg-pane1-title">
+                                <legend id="reg-pane1-title" class="reg-legend">
+                                  <span class="reg-legend-eyebrow">Step 1 of 3</span>
+                                  <span class="reg-legend-title">Which event?</span>
+                                  <span class="reg-legend-sub">Three open right now in Bayside.</span>
+                                </legend>
+        
+                                <div class="reg-events" role="radiogroup" aria-labelledby="reg-pane1-title">
+                                  <label class="reg-event" data-event="softball">
+                                    <input type="radio" name="reg-event" value="softball" class="reg-radio">
+                                    <div class="reg-event-body">
+                                      <div class="reg-event-row">
+                                        <span class="reg-event-tag">Softball, 12U</span>
+                                        <span class="reg-event-fee">Service fee 5% + $0.50</span>
+                                      </div>
+                                      <div class="reg-event-name">Diamonds 12U Spring Softball</div>
+                                      <div class="reg-event-meta">
+                                        <span>Full season, 10 weeks</span>
+                                        <span class="reg-event-dot" aria-hidden="true">·</span>
+                                        <span>Apr 6 - Jun 8</span>
+                                        <span class="reg-event-dot" aria-hidden="true">·</span>
+                                        <span>Sat mornings</span>
+                                      </div>
+                                    </div>
+                                    <div class="reg-event-price">
+                                      <span class="reg-event-sticker">$245</span>
+                                      <span class="reg-event-period">season</span>
+                                    </div>
+                                  </label>
+        
+                                  <label class="reg-event" data-event="clinic">
+                                    <input type="radio" name="reg-event" value="clinic" class="reg-radio">
+                                    <div class="reg-event-body">
+                                      <div class="reg-event-row">
+                                        <span class="reg-event-tag">Clinic, all ages</span>
+                                        <span class="reg-event-fee">Service fee 5% + $0.50</span>
+                                      </div>
+                                      <div class="reg-event-name">Diamonds Saturday Skills Clinic</div>
+                                      <div class="reg-event-meta">
+                                        <span>Single session</span>
+                                        <span class="reg-event-dot" aria-hidden="true">·</span>
+                                        <span>Sat Apr 13, 9-11a</span>
+                                        <span class="reg-event-dot" aria-hidden="true">·</span>
+                                        <span>Field 4</span>
+                                      </div>
+                                    </div>
+                                    <div class="reg-event-price">
+                                      <span class="reg-event-sticker">$35</span>
+                                      <span class="reg-event-period">session</span>
+                                    </div>
+                                  </label>
+        
+                                  <label class="reg-event" data-event="pickup">
+                                    <input type="radio" name="reg-event" value="pickup" class="reg-radio">
+                                    <div class="reg-event-body">
+                                      <div class="reg-event-row">
+                                        <span class="reg-event-tag">Pickup, drop-in</span>
+                                        <span class="reg-event-fee">Service fee 8% + $0.50</span>
+                                      </div>
+                                      <div class="reg-event-name">Bayside Spring Pickup League</div>
+                                      <div class="reg-event-meta">
+                                        <span>One week</span>
+                                        <span class="reg-event-dot" aria-hidden="true">·</span>
+                                        <span>Apr 22 - Apr 28</span>
+                                        <span class="reg-event-dot" aria-hidden="true">·</span>
+                                        <span>Pick a night</span>
+                                      </div>
+                                    </div>
+                                    <div class="reg-event-price">
+                                      <span class="reg-event-sticker">$15</span>
+                                      <span class="reg-event-period">week</span>
+                                    </div>
+                                  </label>
+                                </div>
+        
+                                <div class="reg-actions">
+                                  <span class="reg-actions-note">Service fee covers card processing and platform. Always shown before pay.</span>
+                                  <button type="button" class="reg-btn reg-btn-primary" data-go="2" disabled>
+                                    Continue
+                                    <span aria-hidden="true">→</span>
+                                  </button>
+                                </div>
+                              </fieldset>
+        
+                              <fieldset class="reg-pane" data-pane="2" aria-labelledby="reg-pane2-title" hidden>
+                                <legend id="reg-pane2-title" class="reg-legend">
+                                  <span class="reg-legend-eyebrow">Step 2 of 3</span>
+                                  <span class="reg-legend-title">Who's playing?</span>
+                                  <span class="reg-legend-sub">We'll send game updates, scores, and weather alerts to the parent.</span>
+                                  <button type="button" class="reg-autofill" id="reg-autofill">Auto-fill demo data</button>
+                                </legend>
+        
+                                <div class="reg-form">
+                                  <div class="reg-field reg-col-3">
+                                    <label for="reg-fn">First name</label>
+                                    <input id="reg-fn" name="fn" type="text" required autocomplete="given-name" data-required>
+                                    <span class="reg-error" role="alert" data-for="reg-fn"></span>
+                                  </div>
+                                  <div class="reg-field reg-col-3">
+                                    <label for="reg-ln">Last name</label>
+                                    <input id="reg-ln" name="ln" type="text" required autocomplete="family-name" data-required>
+                                    <span class="reg-error" role="alert" data-for="reg-ln"></span>
+                                  </div>
+                                  <div class="reg-field reg-col-2">
+                                    <label for="reg-dob">Date of birth</label>
+                                    <input id="reg-dob" name="dob" type="date" required data-required>
+                                    <span class="reg-error" role="alert" data-for="reg-dob"></span>
+                                  </div>
+                                  <div class="reg-field reg-col-1">
+                                    <label for="reg-jersey">Jersey size</label>
+                                    <select id="reg-jersey" name="jersey" required data-required>
+                                      <option value="">Pick one</option>
+                                      <option value="YS">Youth S</option>
+                                      <option value="YM">Youth M</option>
+                                      <option value="YL">Youth L</option>
+                                      <option value="YXL">Youth XL</option>
+                                      <option value="AS">Adult S</option>
+                                      <option value="AM">Adult M</option>
+                                      <option value="AL">Adult L</option>
+                                    </select>
+                                    <span class="reg-error" role="alert" data-for="reg-jersey"></span>
+                                  </div>
+                                  <div class="reg-field reg-col-3">
+                                    <label for="reg-email">Parent email</label>
+                                    <input id="reg-email" name="email" type="email" required autocomplete="email" data-required>
+                                    <span class="reg-error" role="alert" data-for="reg-email"></span>
+                                  </div>
+                                  <div class="reg-field reg-col-3">
+                                    <label for="reg-phone">Parent phone</label>
+                                    <input id="reg-phone" name="phone" type="tel" required autocomplete="tel" data-required>
+                                    <span class="reg-error" role="alert" data-for="reg-phone"></span>
+                                  </div>
+                                </div>
+        
+                                <div class="reg-actions">
+                                  <button type="button" class="reg-btn reg-btn-ghost" data-go="1">
+                                    <span aria-hidden="true">←</span>
+                                    Back
+                                  </button>
+                                  <button type="button" class="reg-btn reg-btn-primary" data-go="3">
+                                    Review and pay
+                                    <span aria-hidden="true">→</span>
+                                  </button>
+                                </div>
+                              </fieldset>
+        
+                              <fieldset class="reg-pane" data-pane="3" aria-labelledby="reg-pane3-title" hidden>
+                                <legend id="reg-pane3-title" class="reg-legend">
+                                  <span class="reg-legend-eyebrow">Step 3 of 3</span>
+                                  <span class="reg-legend-title">Checkout.</span>
+                                  <span class="reg-legend-sub">Itemized. No surprises at the bottom.</span>
+                                </legend>
+        
+                                <div class="reg-checkout">
+                                  <div class="reg-receipt">
+                                    <div class="reg-receipt-head">
+                                      <span class="reg-receipt-eyebrow">Order summary</span>
+                                      <span class="reg-receipt-org">Bayside County Sports</span>
+                                    </div>
+        
+                                    <div class="reg-receipt-event">
+                                      <div class="reg-receipt-eventname" id="reg-sum-event">Diamonds 12U Spring Softball</div>
+                                      <div class="reg-receipt-eventmeta" id="reg-sum-meta">Full season, 10 weeks · Apr 6 - Jun 8</div>
+                                      <div class="reg-receipt-player">
+                                        <span class="reg-receipt-playerlabel">For</span>
+                                        <span id="reg-sum-player">Avery Pike (DOB 2014-06-12, jersey YL)</span>
+                                      </div>
+                                    </div>
+        
+                                    <hr class="reg-receipt-rule">
+        
+                                    <div class="reg-receipt-lines">
+                                      <div class="reg-line">
+                                        <span class="reg-line-label">Event sticker</span>
+                                        <span class="reg-line-amt" id="reg-line-sticker">$245.00</span>
+                                      </div>
+                                      <div class="reg-line reg-line-fee">
+                                        <span class="reg-line-label" id="reg-line-feelabel">Service fee (5% + $0.50)</span>
+                                        <span class="reg-line-amt" id="reg-line-fee">$12.75</span>
+                                      </div>
+                                    </div>
+        
+                                    <hr class="reg-receipt-rule">
+        
+                                    <div class="reg-receipt-total">
+                                      <span class="reg-total-label">Total</span>
+                                      <span class="reg-total-amt" id="reg-total">$257.75</span>
+                                    </div>
+        
+                                    <div class="reg-receipt-pay">
+                                      <button type="button" class="reg-btn reg-btn-pay" id="reg-pay">
+                                        Pay <span id="reg-pay-amt">$257.75</span>
+                                      </button>
+                                      <p class="reg-receipt-foot">Demo only. Nothing saves, sends, or charges.</p>
+                                    </div>
+                                  </div>
+        
+                                  <div class="reg-trust">
+                                    <div class="reg-trust-row">
+                                      <span class="reg-trust-key">Refund policy</span>
+                                      <span class="reg-trust-val">7 days, no questions</span>
+                                    </div>
+                                    <div class="reg-trust-row">
+                                      <span class="reg-trust-key">Receipt</span>
+                                      <span class="reg-trust-val">Emailed and saved to your account</span>
+                                    </div>
+                                    <div class="reg-trust-row">
+                                      <span class="reg-trust-key">Card processor</span>
+                                      <span class="reg-trust-val">Stripe, PCI-DSS Level 1</span>
+                                    </div>
+                                    <div class="reg-trust-row">
+                                      <span class="reg-trust-key">Service fee</span>
+                                      <span class="reg-trust-val" id="reg-trust-fee">5% + $0.50 per registration</span>
+                                    </div>
+                                  </div>
+                                </div>
+        
+                                <div class="reg-actions">
+                                  <button type="button" class="reg-btn reg-btn-ghost" data-go="2">
+                                    <span aria-hidden="true">←</span>
+                                    Back
+                                  </button>
+                                </div>
+                              </fieldset>
+        
+                              <div class="reg-pane reg-success" data-pane="done" hidden role="status" aria-live="polite">
+                                <div class="reg-success-mark" aria-hidden="true">
+                                  <svg viewBox="0 0 64 64" width="64" height="64">
+                                    <circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="2.5" opacity="0.35"></circle>
+                                    <path d="M18 33 L28 43 L47 22" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                  </svg>
+                                </div>
+                                <div class="reg-success-title">Thanks. You're registered.</div>
+                                <div class="reg-success-sub">
+                                  We sent confirmation to <strong id="reg-success-email">parent@example.com</strong>.
+                                  Field address and parking pass arrive 48 hours before first game.
+                                </div>
+                                <div class="reg-success-actions">
+                                  <button type="button" class="reg-btn reg-btn-primary" id="reg-cal">
+                                    <span aria-hidden="true">+</span>
+                                    Add to calendar
+                                  </button>
+                                  <button type="button" class="reg-btn reg-btn-ghost" id="reg-reset">
+                                    Reset demo
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </section>
+        
+                      <section class="accordion-item" id="build-teams" data-panel="teams">
+                        <button class="accordion-trigger" type="button" aria-expanded="false">
+                          <span class="pipeline-step">2</span>
+                          <span>
+                            <h3>Build teams</h3>
+                            <p>Drag players in. Auto-balance distributes by skill. Rename a team inline.</p>
+                          </span>
+                          <span class="status-tag" id="ops-team-count">12 unassigned</span>
+                        </button>
+                        <div class="accordion-panel">
+                          <div id="teams" class="acc-demo-host">
+                            <div class="demo-stage teams-stage" id="teams-stage">
+                              <div class="demo-stage-bar teams-stagebar">
+                                <strong>Bayside County Sports</strong>
+                                <span class="teams-url">bayside.leag.app/roster</span>
+                              </div>
+        
+                              <div class="teams-controls">
+                                <div class="teams-controls-left">
+                                  <button type="button" class="teams-btn teams-btn-primary" id="teams-balance">
+                                    <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+                                      <path d="M8 2v12M3 6h10M3 11h10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                                    </svg>
+                                    Auto-balance
+                                  </button>
+                                  <button type="button" class="teams-btn teams-btn-ghost" id="teams-reset">Reset</button>
+                                </div>
+                                <div class="teams-readout" aria-live="polite" id="teams-readout">
+                                  <span class="teams-readout-key">12 unassigned</span>
+                                  <span class="teams-readout-sep" aria-hidden="true">·</span>
+                                  <span class="teams-readout-key">avg skill</span>
+                                  <span class="teams-readout-vals">
+                                    <span class="teams-readout-val" data-team="A">—</span>
+                                    <span class="teams-readout-slash" aria-hidden="true">/</span>
+                                    <span class="teams-readout-val" data-team="B">—</span>
+                                    <span class="teams-readout-slash" aria-hidden="true">/</span>
+                                    <span class="teams-readout-val" data-team="C">—</span>
+                                  </span>
+                                </div>
+                              </div>
+        
+                              <div class="teams-board">
+                                <section class="teams-pool" id="teams-pool" role="region" aria-labelledby="teams-pool-title" data-bin="pool">
+                                  <header class="teams-bin-head">
+                                    <div class="teams-bin-title-wrap">
+                                      <span class="teams-bin-eyebrow">Pool</span>
+                                      <h3 class="teams-bin-title" id="teams-pool-title">Unassigned</h3>
+                                    </div>
+                                    <span class="teams-count" data-count-for="pool">12</span>
+                                  </header>
+                                  <div class="teams-bin-body" data-drop="pool" aria-label="Drop here to send a player back to the pool"></div>
+                                  <div class="teams-bin-foot">
+                                    <span class="teams-bin-hint">Drag a player to a team. Or click for details.</span>
+                                  </div>
+                                </section>
+        
+                                <div class="teams-rosters">
+                                  <section class="teams-card" role="region" aria-labelledby="teams-name-A" data-bin="A" style="--card-tint: var(--demo-primary);">
+                                    <header class="teams-bin-head">
+                                      <div class="teams-bin-title-wrap">
+                                        <span class="teams-bin-eyebrow">Team 1</span>
+                                        <h3 class="teams-bin-title teams-rename" id="teams-name-A" data-team="A" tabindex="0" role="textbox" aria-label="Team 1 name, click to rename">Diamonds Black</h3>
+                                      </div>
+                                      <span class="teams-count" data-count-for="A">0</span>
+                                    </header>
+                                    <div class="teams-stat">
+                                      <span class="teams-stat-key">Avg skill</span>
+                                      <span class="teams-stat-val" data-stat-for="A">—</span>
+                                    </div>
+                                    <div class="teams-bin-body" data-drop="A" aria-label="Drop a player onto Diamonds Black"></div>
+                                  </section>
+        
+                                  <section class="teams-card" role="region" aria-labelledby="teams-name-B" data-bin="B" style="--card-tint: var(--demo-primary);">
+                                    <header class="teams-bin-head">
+                                      <div class="teams-bin-title-wrap">
+                                        <span class="teams-bin-eyebrow">Team 2</span>
+                                        <h3 class="teams-bin-title teams-rename" id="teams-name-B" data-team="B" tabindex="0" role="textbox" aria-label="Team 2 name, click to rename">Diamonds White</h3>
+                                      </div>
+                                      <span class="teams-count" data-count-for="B">0</span>
+                                    </header>
+                                    <div class="teams-stat">
+                                      <span class="teams-stat-key">Avg skill</span>
+                                      <span class="teams-stat-val" data-stat-for="B">—</span>
+                                    </div>
+                                    <div class="teams-bin-body" data-drop="B" aria-label="Drop a player onto Diamonds White"></div>
+                                  </section>
+        
+                                  <section class="teams-card" role="region" aria-labelledby="teams-name-C" data-bin="C" style="--card-tint: var(--demo-primary);">
+                                    <header class="teams-bin-head">
+                                      <div class="teams-bin-title-wrap">
+                                        <span class="teams-bin-eyebrow">Team 3</span>
+                                        <h3 class="teams-bin-title teams-rename" id="teams-name-C" data-team="C" tabindex="0" role="textbox" aria-label="Team 3 name, click to rename">Diamonds Gold</h3>
+                                      </div>
+                                      <span class="teams-count" data-count-for="C">0</span>
+                                    </header>
+                                    <div class="teams-stat">
+                                      <span class="teams-stat-key">Avg skill</span>
+                                      <span class="teams-stat-val" data-stat-for="C">—</span>
+                                    </div>
+                                    <div class="teams-bin-body" data-drop="C" aria-label="Drop a player onto Diamonds Gold"></div>
+                                  </section>
+                                </div>
+                              </div>
+        
+                              <div class="teams-foot">
+                                <span class="teams-foot-note">Demo only. Nothing saves, sends, or charges.</span>
+                                <span class="teams-foot-hint" id="teams-kbhint">Tip: <kbd>Space</kbd> picks up · <kbd>← →</kbd> cycles teams · <kbd>Enter</kbd> drops · <kbd>Esc</kbd> cancels</span>
+                              </div>
+        
+                              <p class="teams-sr-status" aria-live="polite" aria-atomic="true" id="teams-sr-status"></p>
+                            </div>
+                          </div>
+                        </div>
+                      </section>
+        
+                      <section class="accordion-item" id="op-publish-step" data-panel="publish">
+                        <button class="accordion-trigger" type="button" aria-expanded="false">
+                          <span class="pipeline-step">3</span>
+                          <span>
+                            <h3>Publish schedule</h3>
+                            <p>Resolve double-bookings, publish the week, watch parent notifications move.</p>
+                          </span>
+                          <span class="status-tag" id="op-publish-status">draft</span>
+                        </button>
+                        <div class="accordion-panel">
+                          <div class="step3-stack">
+                            <article class="demo-stage" id="demo-stage" aria-label="Live demo preview">
+                                        <span id="demo-org" hidden>Bayside County Sports</span>
+                                        <span id="demo-url" hidden>bayside-county-sports.leag.app/preview</span>
+                                        <div class="demo-pub">
+                                          <div class="demo-pub-subbar">
+                                            <img class="demo-pub-mark" id="demo-team-mark" src="brand/bayside-diamonds-icon.png" alt="" aria-hidden="true">
+                                            <span class="demo-pub-meta">
+                                              <strong id="demo-team-headline">Diamonds</strong>
+                                              <span id="demo-pub-season">Softball / 2026 spring</span>
+                                            </span>
+                                            <span class="status-tag" id="demo-status-tag">Sample team page</span>
+                                          </div>
+                            
+                                          <div class="demo-pub-hero">
+                                            <div class="demo-pub-chips" id="demo-chips">
+                                              <span class="record-pill star" id="demo-rank-pill">#1</span>
+                                              <span class="record-pill streak" id="demo-streak-pill">W4</span>
+                                            </div>
+                                            <h3 class="team-display" id="demo-team-display">DIAMONDS</h3>
+                                            <div class="demo-pub-stat-row">
+                                              <div class="demo-pub-record">
+                                                <span class="record-cap">Record</span>
+                                                <strong id="demo-record">12-3</strong>
+                                              </div>
+                                              <div class="demo-pub-last5" id="demo-last5-wrap">
+                                                <span class="record-cap">Last 5</span>
+                                                <span class="last5-row" id="demo-last5"></span>
+                                              </div>
+                                            </div>
+                                          </div>
+                            
+                                          <div class="demo-next-strip">
+                                            <div>
+                                              <span class="demo-next-kicker">Next game</span>
+                                              <strong id="demo-next">Diamonds vs Marlins</strong>
+                                              <span id="demo-next-meta">Mon 5:30 PM / Field 1</span>
+                                            </div>
+                                            <span class="demo-next-cta">Add to calendar</span>
+                                          </div>
+                            
+                                          <div class="demo-pub-tabs" role="tablist">
+                                            <button type="button" class="active" data-demo-tab="schedule" role="tab" aria-selected="true">Schedule</button>
+                                            <button type="button" data-demo-tab="roster" role="tab" aria-selected="false">Roster</button>
+                                            <button type="button" data-demo-tab="stats" role="tab" aria-selected="false">Stats</button>
+                                          </div>
+                            
+                                          <div class="demo-pub-list" id="demo-schedule-list" aria-live="polite">
+                                            <div class="demo-pub-empty">Click <b>Publish schedule</b> to fill the season.</div>
+                                          </div>
+                                        </div>
+                                      </article>
+                                            <div id="publish-schedule" class="acc-demo-host">
+                            <div class="demo-stage publish-stage" id="publish-stage">
+                              <div class="demo-stage-bar publish-stagebar">
+                                <strong>Bayside County Sports</strong>
+                                <span class="publish-meta-path">12U Spring Softball / week of Apr 15</span>
+                                <span class="publish-status" id="publish-status" data-state="draft" aria-live="polite">
+                                  <span class="publish-status-dot" aria-hidden="true"></span>
+                                  <span class="publish-status-label">Draft</span>
+                                </span>
+                              </div>
+        
+                              <div class="publish-controls">
+                                <div class="publish-controls-week">
+                                  <button type="button" class="publish-btn publish-btn-step" id="publish-week-prev" aria-label="Previous week">
+                                    <span aria-hidden="true">‹</span>
+                                  </button>
+                                  <div class="publish-week-indicator">
+                                    <strong id="publish-week-label">Week 3</strong>
+                                    <span id="publish-week-range">Apr 15 — Apr 21</span>
+                                  </div>
+                                  <button type="button" class="publish-btn publish-btn-step" id="publish-week-next" aria-label="Next week">
+                                    <span aria-hidden="true">›</span>
+                                  </button>
+                                </div>
+                                <div class="publish-controls-summary" aria-live="polite">
+                                  <span class="publish-chip publish-chip-conflict" id="publish-chip-conflict" hidden>
+                                    <span class="publish-chip-dot" aria-hidden="true"></span>
+                                    <span id="publish-conflict-count">2</span> conflicts
+                                  </span>
+                                  <span class="publish-chip publish-chip-clean" id="publish-chip-clean" hidden>
+                                    <span class="publish-chip-check" aria-hidden="true">✓</span>
+                                    All clear
+                                  </span>
+                                  <span class="publish-controls-key">·</span>
+                                  <span class="publish-chip publish-chip-quiet">
+                                    <span id="publish-event-count">7</span> events
+                                  </span>
+                                  <span class="publish-controls-key">·</span>
+                                  <span class="publish-chip publish-chip-quiet">
+                                    <span id="publish-parent-count">142</span> parents
+                                  </span>
+                                </div>
+                                <div class="publish-controls-cta">
+                                  <button type="button" class="publish-btn publish-btn-ghost" id="publish-reset">Reset</button>
+                                  <button type="button" class="publish-btn publish-btn-primary" id="publish-go" disabled>
+                                    <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+                                      <path d="M2 8 L7 13 L14 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <span class="publish-btn-label">Publish week</span>
+                                  </button>
+                                </div>
+                              </div>
+        
+                              <div class="publish-board">
+                                <section class="publish-week" role="region" aria-labelledby="publish-week-title">
+                                  <header class="publish-bin-head">
+                                    <div class="publish-bin-title-wrap">
+                                      <span class="publish-bin-eyebrow">Schedule</span>
+                                      <h3 class="publish-bin-title" id="publish-week-title">Week of Apr 15</h3>
+                                    </div>
+                                    <span class="publish-bin-hint" id="publish-bin-hint">Click a conflict to resolve.</span>
+                                  </header>
+                                  <div class="publish-days" id="publish-days" role="list"></div>
+                                </section>
+        
+                                <section class="publish-feed" role="region" aria-labelledby="publish-feed-title">
+                                  <header class="publish-bin-head">
+                                    <div class="publish-bin-title-wrap">
+                                      <span class="publish-bin-eyebrow">Notifications</span>
+                                      <h3 class="publish-bin-title" id="publish-feed-title">Parent feed</h3>
+                                    </div>
+                                    <span class="publish-feed-progress" id="publish-feed-progress" aria-hidden="true">
+                                      <span class="publish-feed-progress-fill" id="publish-feed-progress-fill"></span>
+                                    </span>
+                                  </header>
+                                  <div class="publish-feed-meta" id="publish-feed-meta">
+                                    <span class="publish-feed-meta-key">Sent</span>
+                                    <span class="publish-feed-meta-val"><b id="publish-feed-sent">0</b> / <span id="publish-feed-total">142</span></span>
+                                    <span class="publish-feed-meta-sep" aria-hidden="true">·</span>
+                                    <span class="publish-feed-meta-key">Channel</span>
+                                    <span class="publish-feed-meta-val">SMS + email + push</span>
+                                  </div>
+                                  <ol class="publish-feed-list" id="publish-feed-list" aria-live="polite">
+                                    <li class="publish-feed-empty" id="publish-feed-empty">
+                                      <span class="publish-feed-empty-mark" aria-hidden="true">◌</span>
+                                      Publish to send the week to <b id="publish-feed-empty-count">142</b> parents.
+                                    </li>
+                                  </ol>
+                                </section>
+                              </div>
+        
+                              <div class="publish-foot">
+                                <span class="publish-foot-note">Demo only. Nothing saves, sends, or charges.</span>
+                                <span class="publish-foot-hint">Tip: click a <span class="publish-pill publish-pill-conflict">conflict</span> chip to resolve, then <kbd>Publish week</kbd>.</span>
+                              </div>
+        
+                              <p class="publish-sr-status" aria-live="polite" aria-atomic="true" id="publish-sr-status"></p>
+                            </div>
+                          </div>
+                          </div>
+                        </div>
+                      </section>
+        
+                      <section class="accordion-item" data-panel="run">
+                        <button class="accordion-trigger" type="button" aria-expanded="false">
+                          <span class="pipeline-step">4</span>
+                          <span>
+                            <h3>Run the season</h3>
+                            <p>Record a score and see standings move.</p>
+                          </span>
+                          <span class="status-tag" id="score-status">live</span>
+                        </button>
+                        <div class="accordion-panel">
+                          <div class="mini-demo-grid">
+                            <div class="scoreboard-demo">
+                              <div class="scoreline-grid">
+                                <div class="score-team" id="score-team-fire">
+                                  <b>Diamonds</b>
+                                  <strong id="score-fire">5</strong>
+                                </div>
+                                <div class="score-divider">-</div>
+                                <div class="score-team" id="score-team-panthers">
+                                  <b>Hammerheads</b>
+                                  <strong id="score-panthers">3</strong>
+                                </div>
+                              </div>
+                              <div class="score-meta-line" id="score-meta-line">Top 5 / Field 1 / Diamonds batting</div>
+                              <div class="score-count-grid">
+                                <div><span>Balls</span><strong id="score-balls">0</strong></div>
+                                <div><span>Strikes</span><strong id="score-strikes">0</strong></div>
+                                <div><span>Outs</span><strong id="score-outs">0</strong></div>
+                              </div>
+                              <div class="score-controls-grid">
+                                <div class="score-control-group">
+                                  <b>Score</b>
+                                  <div class="score-button-row">
+                                    <button class="tiny-btn" type="button" data-score-action="fire-up">+ Diamonds</button>
+                                    <button class="tiny-btn" type="button" data-score-action="fire-down">- Diamonds</button>
+                                    <button class="tiny-btn" type="button" data-score-action="panthers-up">+ Hammerheads</button>
+                                    <button class="tiny-btn" type="button" data-score-action="panthers-down">- Hammerheads</button>
+                                  </div>
+                                </div>
+                                <div class="score-control-group">
+                                  <b>Count and inning</b>
+                                  <div class="score-button-row">
+                                    <button class="tiny-btn" type="button" data-score-action="ball">Ball +</button>
+                                    <button class="tiny-btn" type="button" data-score-action="strike">Strike +</button>
+                                    <button class="tiny-btn" type="button" data-score-action="out">Out +</button>
+                                    <button class="tiny-btn" type="button" data-score-action="reset-count">Reset count</button>
+                                    <button class="tiny-btn" type="button" data-score-action="next-half">Next half-inning</button>
+                                    <button class="tiny-btn" type="button" data-score-action="final">Mark final</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="week-list" id="standings-demo"></div>
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+                  </article>
       </div>
     </section>
 
@@ -4516,175 +6265,6 @@
             </article>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section class="section" id="operations" aria-labelledby="operations-title">
-      <div class="container">
-        <div class="section-header reveal">
-          <div>
-            <div class="section-kicker">Operations</div>
-            <h2 id="operations-title">Run the season from one place.</h2>
-          </div>
-          <p>Click each step. Demo data only. Nothing saves, sends, or charges.</p>
-        </div>
-
-        <div class="ops-layout">
-          <article class="ops-card ops-accordion-card reveal">
-            <div class="ops-head">
-              <h3>Season workflow</h3>
-              <span>Demo data only</span>
-            </div>
-            <div class="accordion-list">
-              <section class="accordion-item is-open" id="take-signups" data-panel="registration">
-                <button class="accordion-trigger" type="button" aria-expanded="true">
-                  <span class="pipeline-step">1</span>
-                  <span>
-                    <h3>Take signups</h3>
-                    <p>Collect waiver checks, player data, and fee status.</p>
-                  </span>
-                  <span class="status-tag" id="signup-status">2 of 3 ready</span>
-                </button>
-                <div class="accordion-panel">
-                  <div class="mini-demo-grid">
-                    <div class="check-list" id="signup-checks">
-                      <label><input type="checkbox" checked data-signup-check> Waiver signed <span class="mono">ready</span></label>
-                      <label><input type="checkbox" checked data-signup-check> Player data complete <span class="mono">ready</span></label>
-                      <label><input type="checkbox" data-signup-check> Fee marked paid <span class="mono">$142</span></label>
-                    </div>
-                    <div class="sample-player-card" id="signup-player-card">
-                      <div class="sample-player-head">
-                        <strong>Maya Ramos</strong>
-                        <span class="status-tag" id="signup-player-status">fee pending</span>
-                      </div>
-                      <div class="sample-player-grid">
-                        <div><b>Division</b><span>12U softball</span></div>
-                        <div><b>Guardian</b><span>Confirmed</span></div>
-                        <div><b>Tryout</b><span>Sat 10:00 AM</span></div>
-                        <div><b>Waiver</b><span id="signup-waiver-state">Signed</span></div>
-                        <div><b>Player data</b><span id="signup-data-state">Complete</span></div>
-                        <div><b>Fee</b><span id="signup-fee-state">Pending $142</span></div>
-                      </div>
-                      <div class="sample-player-note" id="signup-player-note">Ready to approve after the fee is marked paid.</div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              <section class="accordion-item" id="build-teams" data-panel="teams">
-                <button class="accordion-trigger" type="button" aria-expanded="false">
-                  <span class="pipeline-step">2</span>
-                  <span>
-                    <h3>Build teams</h3>
-                    <p>Move tryout players into a team or run a random draft.</p>
-                  </span>
-                  <span class="status-tag" id="ops-team-count">0 picked</span>
-                </button>
-                <div class="accordion-panel">
-                  <div class="team-switcher">
-                    <button class="tiny-btn is-active" type="button" data-ops-team="Diamonds">Diamonds</button>
-                    <button class="tiny-btn" type="button" data-ops-team="Hammerheads">Hammerheads</button>
-                    <button class="tiny-btn" type="button" id="ops-random-draft">Random draft</button>
-                  </div>
-                  <div class="builder-grid">
-                    <div>
-                      <div class="demo-label">Player pool</div>
-                      <div class="player-pool" id="ops-player-pool"></div>
-                    </div>
-                    <div>
-                      <div class="demo-label" id="ops-active-team-label">Diamonds</div>
-                      <div class="team-box" id="ops-team-box"></div>
-                    </div>
-                  </div>
-                  <p class="demo-reset-note">Drag a player into a team column or click a player to move them. This does not save a roster.</p>
-                </div>
-              </section>
-
-              <section class="accordion-item" id="publish-schedule" data-panel="publish">
-                <button class="accordion-trigger" type="button" aria-expanded="false">
-                  <span class="pipeline-step">3</span>
-                  <span>
-                    <h3>Publish schedule</h3>
-                    <p>Send a week and watch parent notifications move in real time.</p>
-                  </span>
-                  <span class="status-tag" id="publish-status">draft</span>
-                </button>
-                <div class="accordion-panel">
-                  <div class="mini-demo-grid">
-                    <div class="publish-controls">
-                      <div class="week-indicator">
-                        <strong id="publish-week-label">Current week</strong>
-                        <span id="publish-week-range">This week / demo schedule only</span>
-                      </div>
-                      <button class="btn btn-primary" type="button" id="publish-week">Publish week</button>
-                      <div class="progress-track"><span class="progress-fill" id="publish-progress"></span></div>
-                      <div class="parent-list" id="publish-parent-list"></div>
-                    </div>
-                    <div class="week-list" id="weekly-schedule"></div>
-                  </div>
-                </div>
-              </section>
-
-              <section class="accordion-item" data-panel="run">
-                <button class="accordion-trigger" type="button" aria-expanded="false">
-                  <span class="pipeline-step">4</span>
-                  <span>
-                    <h3>Run the season</h3>
-                    <p>Record a score and see standings move.</p>
-                  </span>
-                  <span class="status-tag" id="score-status">live</span>
-                </button>
-                <div class="accordion-panel">
-                  <div class="mini-demo-grid">
-                    <div class="scoreboard-demo">
-                      <div class="scoreline-grid">
-                        <div class="score-team" id="score-team-fire">
-                          <b>Diamonds</b>
-                          <strong id="score-fire">5</strong>
-                        </div>
-                        <div class="score-divider">-</div>
-                        <div class="score-team" id="score-team-panthers">
-                          <b>Hammerheads</b>
-                          <strong id="score-panthers">3</strong>
-                        </div>
-                      </div>
-                      <div class="score-meta-line" id="score-meta-line">Top 5 / Field 1 / Diamonds batting</div>
-                      <div class="score-count-grid">
-                        <div><span>Balls</span><strong id="score-balls">0</strong></div>
-                        <div><span>Strikes</span><strong id="score-strikes">0</strong></div>
-                        <div><span>Outs</span><strong id="score-outs">0</strong></div>
-                      </div>
-                      <div class="score-controls-grid">
-                        <div class="score-control-group">
-                          <b>Score</b>
-                          <div class="score-button-row">
-                            <button class="tiny-btn" type="button" data-score-action="fire-up">+ Diamonds</button>
-                            <button class="tiny-btn" type="button" data-score-action="fire-down">- Diamonds</button>
-                            <button class="tiny-btn" type="button" data-score-action="panthers-up">+ Hammerheads</button>
-                            <button class="tiny-btn" type="button" data-score-action="panthers-down">- Hammerheads</button>
-                          </div>
-                        </div>
-                        <div class="score-control-group">
-                          <b>Count and inning</b>
-                          <div class="score-button-row">
-                            <button class="tiny-btn" type="button" data-score-action="ball">Ball +</button>
-                            <button class="tiny-btn" type="button" data-score-action="strike">Strike +</button>
-                            <button class="tiny-btn" type="button" data-score-action="out">Out +</button>
-                            <button class="tiny-btn" type="button" data-score-action="reset-count">Reset count</button>
-                            <button class="tiny-btn" type="button" data-score-action="next-half">Next half-inning</button>
-                            <button class="tiny-btn" type="button" data-score-action="final">Mark final</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="week-list" id="standings-demo"></div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </article>
-        </div>
-
       </div>
     </section>
     <section class="section" id="marketplace" aria-labelledby="marketplace-title">
@@ -4900,14 +6480,14 @@
 
     const demoDefaults = {
       org: "Bayside County Sports",
-      primary: "#3667B5",
+      primary: "#5B8CD6",
       accent: "#70ECF0"
     };
 
     const demoState = {
       sport: "softball",
       tab: "schedule",
-      generated: false,
+      generated: true,
       primary: demoDefaults.primary,
       accent: demoDefaults.accent
     };
@@ -5043,11 +6623,7 @@
     };
 
     const demoInputs = {
-      org: document.getElementById("demo-org-input"),
-      primary: document.getElementById("demo-primary-input"),
-      primaryHex: document.getElementById("demo-primary-hex"),
-      accent: document.getElementById("demo-accent-input"),
-      accentHex: document.getElementById("demo-accent-hex")
+      org: document.getElementById("demo-org-input")
     };
 
     const resetBtn = document.getElementById("demo-reset");
@@ -5409,11 +6985,12 @@
       if (!isValidHex(normalized)) return;
       demoState[key] = normalized;
       document.documentElement.style.setProperty(`--demo-${key}`, normalized);
-      const swatch = key === "primary" ? demoInputs.primary : demoInputs.accent;
-      const text = key === "primary" ? demoInputs.primaryHex : demoInputs.accentHex;
-      if (swatch && swatch.value.toLowerCase() !== normalized.toLowerCase()) swatch.value = normalized;
-      if (text && text.value.toUpperCase() !== normalized) text.value = normalized;
       refreshResetVisibility();
+    };
+
+    const applyPalette = (primaryHex, accentHex) => {
+      setThemeColor("primary", primaryHex);
+      setThemeColor("accent", accentHex);
     };
 
     if (demoInputs.org) {
@@ -5423,20 +7000,22 @@
       });
     }
 
-    [["primary", demoInputs.primary], ["accent", demoInputs.accent]].forEach(([key, input]) => {
-      if (input) {
-        input.addEventListener("input", (e) => setThemeColor(key, e.target.value));
-      }
-    });
-
-    [["primary", demoInputs.primaryHex], ["accent", demoInputs.accentHex]].forEach(([key, input]) => {
-      if (input) {
-        input.addEventListener("input", (e) => {
-          const candidate = normalizeHex(e.target.value);
-          if (isValidHex(candidate)) setThemeColor(key, candidate);
+    const wireSwatchRow = (selector, key) => {
+      document.querySelectorAll(selector + " .color-swatch").forEach((sw) => {
+        sw.addEventListener("click", () => {
+          const c = sw.dataset.color;
+          if (!c) return;
+          setThemeColor(key, c);
+          document.querySelectorAll(selector + " .color-swatch").forEach((s) => {
+            const isMe = s === sw;
+            s.classList.toggle("is-active", isMe);
+            s.setAttribute("aria-checked", isMe ? "true" : "false");
+          });
         });
-      }
-    });
+      });
+    };
+    wireSwatchRow("#demo-primary-grid", "primary");
+    wireSwatchRow("#demo-accent-grid", "accent");
 
     document.querySelectorAll("[data-demo-sport]").forEach((button) => {
       button.addEventListener("click", () => {
@@ -5452,11 +7031,21 @@
       });
     });
 
+    const syncSwatchActive = (selector, hex) => {
+      document.querySelectorAll(selector + " .color-swatch").forEach((s) => {
+        const isMe = (s.dataset.color || "").toUpperCase() === hex.toUpperCase();
+        s.classList.toggle("is-active", isMe);
+        s.setAttribute("aria-checked", isMe ? "true" : "false");
+      });
+    };
+
     if (resetBtn) {
       resetBtn.addEventListener("click", () => {
         if (demoInputs.org) demoInputs.org.value = demoDefaults.org;
         setThemeColor("primary", demoDefaults.primary);
         setThemeColor("accent", demoDefaults.accent);
+        syncSwatchActive("#demo-primary-grid", demoDefaults.primary);
+        syncSwatchActive("#demo-accent-grid", demoDefaults.accent);
         updateDemo();
       });
     }
@@ -6415,6 +8004,27 @@
       if (status) {
         status.textContent = scoreState.final ? "final" : "live";
       }
+      const heroDia = document.getElementById("hero-score-diamonds");
+      const heroHam = document.getElementById("hero-score-hammerheads");
+      const heroDiaTotal = document.getElementById("hero-line-diamonds-total");
+      const heroHamTotal = document.getElementById("hero-line-hammerheads-total");
+      const heroInningLabel = document.getElementById("hero-inning-label");
+      const heroScoreNumber = document.getElementById("hero-score-number");
+      if (heroDia) heroDia.textContent = scoreState.fire;
+      if (heroHam) heroHam.textContent = scoreState.panthers;
+      if (heroDiaTotal) heroDiaTotal.textContent = scoreState.fire;
+      if (heroHamTotal) heroHamTotal.textContent = scoreState.panthers;
+      if (heroScoreNumber) {
+        heroScoreNumber.setAttribute(
+          "aria-label",
+          `Diamonds ${scoreState.fire}, Hammerheads ${scoreState.panthers}`
+        );
+      }
+      if (heroInningLabel) {
+        heroInningLabel.textContent = scoreState.final
+          ? `Final / ${scoreState.fire > scoreState.panthers ? "Diamonds win" : "Hammerheads win"}`
+          : `${halfLabel} of ${scoreState.inning}`;
+      }
       if (standings) {
         standings.replaceChildren();
         const rows = panthersWon
@@ -6546,5 +8156,875 @@
       }
     });
   </script>
+
+  <!-- ============================================================
+       Embedded preview demo IIFEs (registrations / teams / publish)
+       Each scoped to its host element ID. Safe to re-run on DOMReady.
+       ============================================================ -->
+  <script>
+  (function () {
+    "use strict";
+    const root = document.getElementById("registrations");
+    if (!root) return;
+
+    const FEE_FORMULAS = {
+      softball: { rate: 0.05, flat: 0.5, label: "5% + $0.50" },
+      clinic:   { rate: 0.05, flat: 0.5, label: "5% + $0.50" },
+      pickup:   { rate: 0.08, flat: 0.5, label: "8% + $0.50" },
+    };
+    const EVENTS = {
+      softball: { name: "Diamonds 12U Spring Softball", meta: "Full season, 10 weeks · Apr 6 - Jun 8", sticker: 245.00 },
+      clinic:   { name: "Diamonds Saturday Skills Clinic", meta: "Single session · Sat Apr 13, 9-11a · Field 4", sticker: 35.00 },
+      pickup:   { name: "Bayside Spring Pickup League", meta: "One week · Apr 22 - Apr 28 · Pick a night", sticker: 15.00 },
+    };
+
+    const state = {
+      step: 1,
+      event: null,
+      player: { fn: "", ln: "", dob: "", jersey: "", email: "", phone: "" },
+    };
+
+    const $ = (sel, scope) => (scope || root).querySelector(sel);
+    const $$ = (sel, scope) => Array.from((scope || root).querySelectorAll(sel));
+
+    const panes  = { 1: $('[data-pane="1"]'), 2: $('[data-pane="2"]'), 3: $('[data-pane="3"]'), done: $('[data-pane="done"]') };
+    const steps  = $$('.reg-step');
+    const status = $('#reg-status');
+    const triggerStatus = document.getElementById("signup-status");
+    const continueBtn = $('[data-go="2"]', panes[1]);
+
+    function setTriggerStatus(label) {
+      if (triggerStatus) triggerStatus.textContent = label;
+    }
+
+    function setStep(target) {
+      if (target === state.step) return;
+      if (target === 3) syncCheckout();
+      if (target === "done") {
+        Object.values(panes).forEach(p => p.hidden = true);
+        panes.done.hidden = false;
+        const emailEl = $('#reg-success-email');
+        if (emailEl) emailEl.textContent = state.player.email || "parent@example.com";
+        status.textContent = "Registration complete";
+        setTriggerStatus("Done");
+        const btn = panes.done.querySelector('button');
+        if (btn) btn.focus();
+        return;
+      }
+      Object.entries(panes).forEach(([k, p]) => {
+        if (k === "done") return;
+        p.hidden = String(k) !== String(target);
+        p.classList.toggle("is-active", String(k) === String(target));
+      });
+      steps.forEach(s => {
+        const n = Number(s.dataset.step);
+        s.classList.toggle("is-active", n === target);
+        s.classList.toggle("is-done", n < target);
+        if (n === target) s.setAttribute("aria-current", "step");
+        else s.removeAttribute("aria-current");
+      });
+      status.textContent = `Step ${target} of 3, ${["", "Pick event", "Player info", "Checkout"][target]}`;
+      setTriggerStatus(`Step ${target} of 3`);
+      state.step = target;
+      const nextBtn = panes[target].querySelector('.reg-btn-primary, .reg-btn-pay');
+      if (nextBtn) setTimeout(() => nextBtn.focus({ preventScroll: true }), 60);
+    }
+
+    $$('.reg-radio', panes[1]).forEach(r => {
+      r.addEventListener("change", e => {
+        state.event = e.target.value;
+        continueBtn.disabled = false;
+      });
+    });
+    $$('.reg-event', panes[1]).forEach(card => {
+      card.addEventListener("click", () => {
+        const radio = card.querySelector(".reg-radio");
+        radio.checked = true;
+        radio.dispatchEvent(new Event("change", { bubbles: true }));
+      });
+    });
+
+    const fields = {
+      fn:     $('#reg-fn'),
+      ln:     $('#reg-ln'),
+      dob:    $('#reg-dob'),
+      jersey: $('#reg-jersey'),
+      email:  $('#reg-email'),
+      phone:  $('#reg-phone'),
+    };
+
+    function setError(input, msg) {
+      const wrap = input.closest('.reg-field');
+      const slot = wrap.querySelector('.reg-error');
+      if (msg) {
+        wrap.classList.add('is-invalid');
+        slot.textContent = msg;
+        input.setAttribute('aria-invalid', 'true');
+      } else {
+        wrap.classList.remove('is-invalid');
+        slot.textContent = "";
+        input.removeAttribute('aria-invalid');
+      }
+    }
+    function validate(input) {
+      const v = (input.value || "").trim();
+      if (!v) { setError(input, "Required."); return false; }
+      if (input.type === "email" && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)) {
+        setError(input, "Use a valid email."); return false;
+      }
+      if (input.id === "reg-phone" && !/^[\d\s().+-]{7,}$/.test(v)) {
+        setError(input, "Use a valid phone."); return false;
+      }
+      setError(input, ""); return true;
+    }
+    Object.values(fields).forEach(f => {
+      f.addEventListener("blur", () => { if (f.value.trim()) validate(f); });
+      f.addEventListener("input", () => {
+        state.player[f.name] = f.value;
+        if (f.closest('.reg-field').classList.contains('is-invalid')) validate(f);
+      });
+    });
+
+    $('#reg-autofill').addEventListener("click", () => {
+      fields.fn.value = "Avery";
+      fields.ln.value = "Pike";
+      fields.dob.value = "2014-06-12";
+      fields.jersey.value = "YL";
+      fields.email.value = "parent@example.com";
+      fields.phone.value = "(555) 123-4567";
+      Object.values(fields).forEach(f => {
+        state.player[f.name] = f.value;
+        setError(f, "");
+      });
+      fields.fn.focus();
+    });
+
+    function money(n) {
+      return "$" + n.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+    function syncCheckout() {
+      const ev = EVENTS[state.event];
+      const fee = FEE_FORMULAS[state.event];
+      if (!ev || !fee) return;
+      const sticker = ev.sticker;
+      const feeAmt = +(sticker * fee.rate + fee.flat).toFixed(2);
+      const total = +(sticker + feeAmt).toFixed(2);
+      $('#reg-sum-event').textContent = ev.name;
+      $('#reg-sum-meta').textContent = ev.meta;
+      const p = state.player;
+      const playerLine = (p.fn || p.ln)
+        ? `${p.fn} ${p.ln}`.trim() + (p.dob ? ` (DOB ${p.dob}` : "") + (p.jersey ? `, jersey ${p.jersey})` : (p.dob ? ")" : ""))
+        : "Avery Pike (DOB 2014-06-12, jersey YL)";
+      $('#reg-sum-player').textContent = playerLine;
+      $('#reg-line-sticker').textContent = money(sticker);
+      $('#reg-line-feelabel').textContent = `Service fee (${fee.label})`;
+      $('#reg-line-fee').textContent = money(feeAmt);
+      $('#reg-total').textContent = money(total);
+      $('#reg-pay-amt').textContent = money(total);
+      $('#reg-trust-fee').textContent = `${fee.label} per registration`;
+    }
+
+    $$('[data-go]').forEach(btn => {
+      btn.addEventListener("click", () => {
+        const target = btn.dataset.go;
+        if (state.step === 1 && target === "2" && !state.event) return;
+        if (state.step === 2 && target === "3") {
+          const valid = Object.values(fields).every(f => validate(f));
+          if (!valid) {
+            const firstBad = root.querySelector('.reg-field.is-invalid input, .reg-field.is-invalid select');
+            if (firstBad) firstBad.focus();
+            return;
+          }
+        }
+        setStep(Number(target));
+      });
+    });
+
+    $('#reg-pay').addEventListener("click", () => setStep("done"));
+
+    $('#reg-cal').addEventListener("click", () => {
+      const btn = $('#reg-cal');
+      const original = btn.innerHTML;
+      btn.innerHTML = '<span aria-hidden="true">✓</span>Added to calendar';
+      btn.disabled = true;
+      setTimeout(() => { btn.innerHTML = original; btn.disabled = false; }, 1800);
+    });
+    $('#reg-reset').addEventListener("click", () => {
+      state.event = null;
+      state.player = { fn: "", ln: "", dob: "", jersey: "", email: "", phone: "" };
+      $$('.reg-radio').forEach(r => r.checked = false);
+      Object.values(fields).forEach(f => { f.value = ""; setError(f, ""); });
+      continueBtn.disabled = true;
+      state.step = 0;
+      setStep(1);
+    });
+  })();
+  </script>
+
+  <script>
+  (function () {
+    "use strict";
+    const root = document.getElementById("teams");
+    if (!root) return;
+
+    const SEED = [
+      { id: "p3",  number: 3,  name: "Bree Walden",   age: 11, skill: 5 },
+      { id: "p7",  number: 7,  name: "Sage Foster",   age: 12, skill: 5 },
+      { id: "p9",  number: 9,  name: "Kinley Brooks", age: 11, skill: 4 },
+      { id: "p11", number: 11, name: "Marlee Quinn",  age: 10, skill: 3 },
+      { id: "p14", number: 14, name: "Reese Tatum",   age: 12, skill: 4 },
+      { id: "p17", number: 17, name: "Wren Halliday", age: 11, skill: 5 },
+      { id: "p21", number: 21, name: "Avery Pike",    age: 10, skill: 2 },
+      { id: "p24", number: 24, name: "Harlow Vance",  age: 12, skill: 3 },
+      { id: "p32", number: 32, name: "Juno Reid",     age: 11, skill: 3 },
+      { id: "p44", number: 44, name: "Sloane Beck",   age: 12, skill: 4 },
+      { id: "p5",  number: 5,  name: "Tatum Cole",    age: 10, skill: 2 },
+      { id: "p19", number: 19, name: "Rory Fennel",   age: 11, skill: 3 },
+    ];
+    const DEFAULT_NAMES = { A: "Diamonds Black", B: "Diamonds White", C: "Diamonds Gold" };
+    const triggerCount = document.getElementById("ops-team-count");
+
+    const state = {
+      players: SEED.map(p => ({ ...p, bin: "pool" })),
+      teamNames: { ...DEFAULT_NAMES },
+      selectedId: null, pickedId: null, kbTarget: null, expandedId: null,
+    };
+    const BINS = ["pool", "A", "B", "C"];
+    const TEAM_ORDER = ["A", "B", "C", "pool"];
+    const $  = sel => root.querySelector(sel);
+    const $$ = sel => Array.from(root.querySelectorAll(sel));
+    const status = $('#teams-sr-status');
+    const announce = (msg) => { status.textContent = ""; setTimeout(() => status.textContent = msg, 30); };
+
+    function bodyForBin(bin) { return root.querySelector(`[data-drop="${bin}"]`); }
+    function cardForBin(bin) {
+      return bin === "pool" ? root.querySelector('.teams-pool') : root.querySelector(`.teams-card[data-bin="${bin}"]`);
+    }
+
+    function chipHTML(p) {
+      const dots = Array.from({length: 5}, (_, i) =>
+        `<span class="teams-chip-dot${i < p.skill ? " is-on" : ""}"></span>`
+      ).join("");
+      return `
+        <span class="teams-chip-jersey" aria-hidden="true">${p.number}</span>
+        <span class="teams-chip-name">${p.name}</span>
+        <span class="teams-chip-skill" aria-label="Skill ${p.skill} of 5">${dots}</span>
+        <span class="teams-chip-detail" hidden>
+          <span class="teams-chip-detail-row">Age <strong>${p.age}</strong></span>
+          <span class="teams-chip-detail-row">Jersey <strong>#${p.number}</strong></span>
+          <span class="teams-chip-detail-row">Skill <strong>${p.skill}/5</strong></span>
+          <span class="teams-chip-move">
+            <span class="teams-chip-move-label">Move to</span>
+            <select class="teams-chip-move-select" data-move-for="${p.id}" aria-label="Move ${p.name} to">
+              <option value="">—</option>
+              <option value="pool">Unassigned</option>
+              <option value="A">${state.teamNames.A}</option>
+              <option value="B">${state.teamNames.B}</option>
+              <option value="C">${state.teamNames.C}</option>
+            </select>
+          </span>
+        </span>
+      `;
+    }
+
+    function makeChipNode(p) {
+      const el = document.createElement("button");
+      el.type = "button";
+      el.className = "teams-chip";
+      el.setAttribute("role", "button");
+      el.setAttribute("draggable", "true");
+      el.setAttribute("data-id", p.id);
+      el.setAttribute("aria-grabbed", "false");
+      el.setAttribute("aria-describedby", "teams-kbhint");
+      el.setAttribute("aria-label", `${p.name}, jersey ${p.number}, skill ${p.skill} of 5. Press space to pick up.`);
+      el.innerHTML = chipHTML(p);
+      return el;
+    }
+
+    function render() {
+      BINS.forEach(bin => {
+        const body = bodyForBin(bin);
+        body.innerHTML = "";
+        const playersHere = state.players.filter(p => p.bin === bin);
+        if (playersHere.length === 0) {
+          body.classList.add("is-empty");
+          body.setAttribute("data-empty", bin === "pool" ? "All players assigned." : "Drop players here.");
+        } else {
+          body.classList.remove("is-empty");
+          body.removeAttribute("data-empty");
+        }
+        playersHere.forEach(p => {
+          const chip = makeChipNode(p);
+          if (p.id === state.selectedId) chip.classList.add("is-selected");
+          if (p.id === state.pickedId)   { chip.classList.add("is-picked"); chip.setAttribute("aria-grabbed", "true"); }
+          if (p.id === state.expandedId) { chip.classList.add("is-expanded"); }
+          body.appendChild(chip);
+        });
+      });
+
+      BINS.forEach(bin => {
+        const c = state.players.filter(p => p.bin === bin).length;
+        const node = root.querySelector(`[data-count-for="${bin}"]`);
+        if (node) node.textContent = c;
+      });
+
+      ["A","B","C"].forEach(t => {
+        const players = state.players.filter(p => p.bin === t);
+        const avg = players.length ? (players.reduce((s,p) => s + p.skill, 0) / players.length) : null;
+        const v = avg == null ? "—" : avg.toFixed(1);
+        const card = root.querySelector(`[data-stat-for="${t}"]`);
+        if (card) card.textContent = v;
+        const ro = root.querySelector(`.teams-readout-val[data-team="${t}"]`);
+        if (ro) ro.textContent = v;
+      });
+
+      const unassigned = state.players.filter(p => p.bin === "pool").length;
+      const ukey = root.querySelector('.teams-readout-key');
+      if (ukey) ukey.textContent = `${unassigned} unassigned`;
+      if (triggerCount) {
+        const picked = state.players.length - unassigned;
+        triggerCount.textContent = picked === 0 ? `${unassigned} unassigned` : `${picked} picked`;
+      }
+
+      ["A","B","C"].forEach(t => {
+        const node = root.querySelector(`.teams-rename[data-team="${t}"]`);
+        if (node && node.getAttribute("contenteditable") !== "true") {
+          node.textContent = state.teamNames[t];
+        }
+        const drop = bodyForBin(t);
+        if (drop) drop.setAttribute("aria-label", `Drop a player onto ${state.teamNames[t]}`);
+      });
+    }
+
+    function moveTo(playerId, targetBin, opts = {}) {
+      const p = state.players.find(x => x.id === playerId);
+      if (!p || !BINS.includes(targetBin) || p.bin === targetBin) return;
+      const fromName = p.bin === "pool" ? "Unassigned" : state.teamNames[p.bin];
+      const toName   = targetBin === "pool" ? "Unassigned" : state.teamNames[targetBin];
+      p.bin = targetBin;
+      render();
+      if (!opts.silent) announce(`${p.name} moved from ${fromName} to ${toName}.`);
+    }
+
+    let dragId = null;
+    root.addEventListener("dragstart", (e) => {
+      const chip = e.target.closest(".teams-chip");
+      if (!chip) return;
+      dragId = chip.dataset.id;
+      chip.classList.add("is-dragging");
+      chip.setAttribute("aria-grabbed", "true");
+      try { e.dataTransfer.setData("text/plain", dragId); } catch (_) {}
+      e.dataTransfer.effectAllowed = "move";
+    });
+    root.addEventListener("dragend", (e) => {
+      const chip = e.target.closest(".teams-chip");
+      if (chip) { chip.classList.remove("is-dragging"); chip.setAttribute("aria-grabbed", "false"); }
+      dragId = null;
+      $$('.teams-bin-body.is-over').forEach(b => b.classList.remove("is-over"));
+      $$('.is-target').forEach(b => b.classList.remove("is-target"));
+    });
+    $$('.teams-bin-body').forEach(body => {
+      body.addEventListener("dragenter", (e) => {
+        if (!dragId) return;
+        e.preventDefault();
+        body.classList.add("is-over");
+        const card = body.closest('.teams-card, .teams-pool');
+        if (card) card.classList.add("is-target");
+      });
+      body.addEventListener("dragover", (e) => {
+        if (!dragId) return;
+        e.preventDefault();
+        e.dataTransfer.dropEffect = "move";
+      });
+      body.addEventListener("dragleave", (e) => {
+        if (e.target !== body) return;
+        body.classList.remove("is-over");
+        const card = body.closest('.teams-card, .teams-pool');
+        if (card) card.classList.remove("is-target");
+      });
+      body.addEventListener("drop", (e) => {
+        e.preventDefault();
+        const id = dragId || e.dataTransfer.getData("text/plain");
+        const target = body.dataset.drop;
+        body.classList.remove("is-over");
+        const card = body.closest('.teams-card, .teams-pool');
+        if (card) card.classList.remove("is-target");
+        if (id && target) moveTo(id, target);
+      });
+    });
+
+    function isTouchLike() {
+      return window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+    }
+
+    root.addEventListener("click", (e) => {
+      const moveSel = e.target.closest('.teams-chip-move-select');
+      if (moveSel) return;
+      const rename = e.target.closest('.teams-rename');
+      if (rename) { startRename(rename); return; }
+      const chip = e.target.closest('.teams-chip');
+      const card = e.target.closest('.teams-card, .teams-pool');
+      if (chip) {
+        if (isTouchLike()) {
+          state.selectedId = state.selectedId === chip.dataset.id ? null : chip.dataset.id;
+          state.expandedId = null;
+          render();
+          return;
+        }
+        state.expandedId = (state.expandedId === chip.dataset.id) ? null : chip.dataset.id;
+        state.selectedId = null;
+        render();
+        return;
+      }
+      if (card && state.selectedId) {
+        const target = card.dataset.bin;
+        if (target) {
+          moveTo(state.selectedId, target);
+          state.selectedId = null;
+          render();
+        }
+        return;
+      }
+      if (!chip && !card && state.expandedId) {
+        state.expandedId = null;
+        render();
+      }
+    });
+
+    root.addEventListener("change", (e) => {
+      const sel = e.target.closest('.teams-chip-move-select');
+      if (!sel) return;
+      const id = sel.dataset.moveFor;
+      const target = sel.value;
+      if (id && target) {
+        moveTo(id, target);
+        state.expandedId = null;
+        render();
+      }
+    });
+
+    function clearKbTarget() {
+      $$('.is-kbtarget').forEach(n => n.classList.remove("is-kbtarget"));
+    }
+    function applyKbTarget() {
+      clearKbTarget();
+      if (!state.kbTarget) return;
+      const card = cardForBin(state.kbTarget);
+      if (card) card.classList.add("is-kbtarget");
+    }
+
+    root.addEventListener("keydown", (e) => {
+      const chip = e.target.closest('.teams-chip');
+      const rename = e.target.closest('.teams-rename');
+      if (rename && rename.getAttribute("contenteditable") === "true") return;
+      if (!chip && !state.pickedId) return;
+      if (e.code === "Space" || e.key === " ") {
+        e.preventDefault();
+        const id = chip ? chip.dataset.id : state.pickedId;
+        if (state.pickedId && state.pickedId === id) {
+          if (state.kbTarget) moveTo(state.pickedId, state.kbTarget);
+          else announce("Cancelled.");
+          state.pickedId = null; state.kbTarget = null;
+          clearKbTarget(); render();
+        } else {
+          state.pickedId = id;
+          const p = state.players.find(x => x.id === id);
+          const cur = p ? p.bin : null;
+          state.kbTarget = ["A","B","C","pool"].find(b => b !== cur) || "A";
+          applyKbTarget(); render();
+          announce(`${p.name} picked up. Use arrow keys to choose target, enter to drop, escape to cancel.`);
+        }
+        return;
+      }
+      if (state.pickedId && (e.key === "ArrowLeft" || e.key === "ArrowRight" || e.key === "ArrowUp" || e.key === "ArrowDown")) {
+        e.preventDefault();
+        const dir = (e.key === "ArrowRight" || e.key === "ArrowDown") ? 1 : -1;
+        const cur = state.players.find(x => x.id === state.pickedId).bin;
+        const eligible = TEAM_ORDER.filter(b => b !== cur);
+        let idx = eligible.indexOf(state.kbTarget);
+        idx = (idx + dir + eligible.length) % eligible.length;
+        state.kbTarget = eligible[idx];
+        applyKbTarget();
+        const tname = state.kbTarget === "pool" ? "Unassigned" : state.teamNames[state.kbTarget];
+        announce(`Target: ${tname}.`);
+        return;
+      }
+      if (state.pickedId && e.key === "Enter") {
+        e.preventDefault();
+        if (state.kbTarget) moveTo(state.pickedId, state.kbTarget);
+        state.pickedId = null; state.kbTarget = null;
+        clearKbTarget(); render();
+        return;
+      }
+      if (state.pickedId && e.key === "Escape") {
+        e.preventDefault();
+        const p = state.players.find(x => x.id === state.pickedId);
+        announce(`${p.name} returned. Cancelled.`);
+        state.pickedId = null; state.kbTarget = null;
+        clearKbTarget(); render();
+        return;
+      }
+    });
+
+    function startRename(node) {
+      const team = node.dataset.team;
+      if (!team) return;
+      const original = state.teamNames[team];
+      node.setAttribute("contenteditable", "true");
+      node.spellcheck = false;
+      node.focus();
+      const range = document.createRange();
+      range.selectNodeContents(node);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      const commit = () => {
+        const v = node.textContent.trim();
+        if (!v) node.textContent = original;
+        else state.teamNames[team] = v;
+        node.removeAttribute("contenteditable");
+        render();
+      };
+      const cancel = () => {
+        node.textContent = original;
+        node.removeAttribute("contenteditable");
+        render();
+      };
+      function onKey(e) {
+        if (e.key === "Enter") { e.preventDefault(); commit(); cleanup(); }
+        else if (e.key === "Escape") { e.preventDefault(); cancel(); cleanup(); }
+      }
+      function onBlur() { commit(); cleanup(); }
+      function cleanup() {
+        node.removeEventListener("keydown", onKey);
+        node.removeEventListener("blur", onBlur);
+      }
+      node.addEventListener("keydown", onKey);
+      node.addEventListener("blur", onBlur);
+    }
+
+    function autoBalance() {
+      const all = [...state.players].sort((a, b) => b.skill - a.skill || a.number - b.number);
+      const teams = { A: [], B: [], C: [] };
+      let order = ["A", "B", "C"];
+      let i = 0;
+      while (all.length) {
+        const t = order[i % 3];
+        teams[t].push(all.shift());
+        i++;
+        if (i % 3 === 0) order.reverse();
+      }
+      Object.entries(teams).forEach(([t, list]) => {
+        list.forEach(p => p.bin = t);
+      });
+      render();
+      const skills = ["A","B","C"].map(t => {
+        const list = state.players.filter(p => p.bin === t);
+        return list.reduce((s,p) => s + p.skill, 0) / list.length;
+      });
+      announce(`Auto-balanced. Average skill: ${skills.map(s => s.toFixed(1)).join(", ")}.`);
+    }
+    $('#teams-balance').addEventListener("click", autoBalance);
+
+    $('#teams-reset').addEventListener("click", () => {
+      state.players.forEach(p => p.bin = "pool");
+      state.teamNames = { ...DEFAULT_NAMES };
+      state.selectedId = null; state.pickedId = null;
+      state.kbTarget = null; state.expandedId = null;
+      clearKbTarget(); render();
+      announce("Reset. All players returned to the pool.");
+    });
+
+    render();
+  })();
+  </script>
+
+  <script>
+  (function () {
+    "use strict";
+    const root = document.getElementById("publish-schedule");
+    if (!root) return;
+
+    const PARENT_TOTAL = 142;
+    const FAMILIES = [
+      "Walden","Foster","Brooks","Quinn","Tatum","Halliday","Pike","Vance","Reid","Beck",
+      "Cole","Fennel","Ortega","Maddox","Singh","Petrov","Okafor","Nakamura","Harlow","Devereaux",
+      "Bailey","Chen","Rivera","Kim","Patel","Brennan","Kowalski","Andersen","Moss","Vega",
+      "Nguyen","Marquez","Bell","Carrington","Diaz","Ellis","Frye","Gallo","Huerta","Ito"
+    ];
+    const FIRST_INITIALS = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","R","S","T","V","W"];
+    const DAY_LABELS = [
+      { dow: "Mon", num: 15 }, { dow: "Tue", num: 16 }, { dow: "Wed", num: 17 },
+      { dow: "Thu", num: 18 }, { dow: "Fri", num: 19 }, { dow: "Sat", num: 20 },
+    ];
+    const SEED_EVENTS = [
+      { id: "e1", day: 0, time: "5:30p", kind: "game",     title: "Diamonds vs Hammerheads", where: "Field 1" },
+      { id: "e2", day: 1, time: "6:45p", kind: "practice", title: "Comets practice",         where: "Field 2", conflict: { with: "e3",  reason: "Field 2 double-booked with Marlins",  resolve: { time: "7:30p" }, pairWith: "e3" } },
+      { id: "e3", day: 1, time: "6:45p", kind: "practice", title: "Marlins practice",        where: "Field 2", conflict: { with: "e2",  reason: "Field 2 double-booked with Comets",   resolve: null,                  pairWith: "e2", isMirror: true } },
+      { id: "e4", day: 2, time: "5:30p", kind: "game",     title: "Stingrays vs Tide",       where: "Field 1" },
+      { id: "e5", day: 3, time: "6:45p", kind: "game",     title: "Comets vs Marlins",       where: "Field 1", conflict: { with: "umpire", reason: "Umpire unassigned", resolve: { umpire: "Marquez, R." } } },
+      { id: "e6", day: 4, time: "6:00p", kind: "practice", title: "Diamonds practice",       where: "Field 3" },
+      { id: "e7", day: 5, time: "9:00a", kind: "game",     title: "Hammerheads vs Tide",     where: "Field 1" },
+    ];
+
+    const state = {
+      events: SEED_EVENTS.map(e => ({ ...e, status: "draft" })),
+      publishStatus: "draft", publishedAt: null, sentCount: 0, feed: [], sendTimer: null,
+    };
+    const triggerStatus = document.getElementById("op-publish-status");
+
+    const $ = sel => root.querySelector(sel);
+    const $$ = sel => Array.from(root.querySelectorAll(sel));
+    const status = $('#publish-sr-status');
+    const announce = (msg) => { status.textContent = ""; setTimeout(() => status.textContent = msg, 30); };
+
+    function eventHTML(ev) {
+      const isConflict = !!ev.conflict;
+      const cls = ["publish-event"];
+      if (isConflict) cls.push("is-conflict");
+      if (ev.status === "sending")   cls.push("is-sending");
+      if (ev.status === "published") cls.push("is-published");
+      const tagLabel = ev.status === "published" ? "Sent" : (isConflict ? "Conflict" : (ev.kind === "game" ? "Game" : "Practice"));
+      return `
+        <div class="${cls.join(" ")}" data-id="${ev.id}" data-kind="${ev.kind}" tabindex="${isConflict ? 0 : -1}" ${isConflict ? 'role="button" aria-label="Conflict on ' + ev.title + '. ' + ev.conflict.reason + '. Click to resolve."' : ""}>
+          <span class="publish-event-time">${ev.time}</span>
+          <div class="publish-event-body">
+            <span class="publish-event-title">${ev.title}</span>
+            <span class="publish-event-where">${ev.where}</span>
+          </div>
+          <span class="publish-event-tag" data-kind="${ev.kind}">${tagLabel}</span>
+          ${isConflict ? `
+            <div class="publish-event-conflict-note">
+              <b>${ev.conflict.reason}</b>
+              <button type="button" class="publish-event-resolve" data-resolve="${ev.id}">Resolve</button>
+            </div>
+          ` : ""}
+        </div>
+      `;
+    }
+    function dayHTML(d, idx) {
+      const ev = state.events.filter(e => e.day === idx);
+      return `
+        <div class="publish-day" role="listitem">
+          <div class="publish-day-when">
+            <span class="publish-day-dow">${d.dow}</span>
+            <span class="publish-day-num">${d.num}</span>
+          </div>
+          <div class="publish-day-events">
+            ${ev.length ? ev.map(eventHTML).join("") : `<div class="publish-day-empty">No events.</div>`}
+          </div>
+        </div>
+      `;
+    }
+
+    function setTriggerStatus(label) {
+      if (triggerStatus) triggerStatus.textContent = label;
+    }
+
+    function render() {
+      $('#publish-days').innerHTML = DAY_LABELS.map((d, i) => dayHTML(d, i)).join("");
+      const conflicts = state.events.filter(e => !!e.conflict && !(e.conflict && e.conflict.isMirror)).length;
+      const cChip = $('#publish-chip-conflict');
+      const cleanChip = $('#publish-chip-clean');
+      if (conflicts > 0) {
+        cChip.hidden = false; cleanChip.hidden = true;
+        $('#publish-conflict-count').textContent = conflicts;
+      } else {
+        cChip.hidden = true;  cleanChip.hidden = false;
+      }
+      $('#publish-event-count').textContent = state.events.length;
+      const goBtn = $('#publish-go');
+      const label = goBtn.querySelector('.publish-btn-label');
+      if (state.publishStatus === "sending") {
+        goBtn.disabled = true; label.textContent = "Sending…";
+      } else if (state.publishStatus === "published") {
+        goBtn.disabled = true; label.textContent = "Published";
+      } else if (conflicts > 0) {
+        goBtn.disabled = true; label.textContent = "Resolve conflicts";
+      } else {
+        goBtn.disabled = false; label.textContent = "Publish week";
+      }
+      const hint = $('#publish-bin-hint');
+      if (conflicts > 0) hint.textContent = "Click a conflict to resolve.";
+      else if (state.publishStatus === "sending") hint.textContent = "Sending notifications…";
+      else if (state.publishStatus === "published") hint.textContent = "Published — parents notified.";
+      else hint.textContent = "Looks clean. Hit Publish week.";
+      setStatusPill(state.publishStatus, conflicts);
+    }
+
+    function setStatusPill(s, conflicts) {
+      const pill = $('#publish-status');
+      const lbl = pill.querySelector('.publish-status-label');
+      let pillState, pillLabel, triggerLabel;
+      if (s === "sending") { pillState = "sending"; pillLabel = "Sending"; triggerLabel = "sending…"; }
+      else if (s === "published") { pillState = "published"; pillLabel = "Published"; triggerLabel = "published"; }
+      else if (conflicts === 0) { pillState = "ready"; pillLabel = "Ready"; triggerLabel = "ready"; }
+      else { pillState = "draft"; pillLabel = "Draft"; triggerLabel = `${conflicts} conflict${conflicts > 1 ? "s" : ""}`; }
+      pill.dataset.state = pillState;
+      lbl.textContent = pillLabel;
+      setTriggerStatus(triggerLabel);
+    }
+
+    function resolveConflict(id) {
+      const ev = state.events.find(e => e.id === id);
+      if (!ev || !ev.conflict) return;
+      let primary = ev;
+      if (ev.conflict.isMirror && ev.conflict.pairWith) {
+        const p = state.events.find(e => e.id === ev.conflict.pairWith);
+        if (p) primary = p;
+      }
+      const fix = primary.conflict && primary.conflict.resolve ? primary.conflict.resolve : {};
+      if (fix.time)   primary.time = fix.time;
+      if (fix.umpire) primary.where = primary.where + " · ump " + fix.umpire;
+      const pairId = primary.conflict && primary.conflict.pairWith;
+      delete primary.conflict;
+      if (pairId) {
+        const partner = state.events.find(e => e.id === pairId);
+        if (partner) delete partner.conflict;
+      }
+      render();
+      announce(`Resolved: ${primary.title}.`);
+    }
+
+    root.addEventListener("click", (e) => {
+      const btn = e.target.closest('.publish-event-resolve');
+      if (btn) { resolveConflict(btn.dataset.resolve); return; }
+      const conflictRow = e.target.closest('.publish-event.is-conflict');
+      if (conflictRow && !e.target.closest('.publish-event-resolve')) {
+        resolveConflict(conflictRow.dataset.id);
+      }
+    });
+
+    root.addEventListener("keydown", (e) => {
+      const row = e.target.closest('.publish-event.is-conflict');
+      if (!row) return;
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        resolveConflict(row.dataset.id);
+      }
+    });
+
+    function generateRecipients() {
+      const channels = ["sms","sms","sms","push","sms","email","push","sms","email","sms"];
+      const out = [];
+      for (let i = 0; i < PARENT_TOTAL; i++) {
+        const fi = FIRST_INITIALS[i % FIRST_INITIALS.length];
+        const ln = FAMILIES[(i * 7) % FAMILIES.length];
+        out.push({ i: i + 1, initials: fi + ln[0], name: `${fi}. ${ln}`, channel: channels[i % channels.length] });
+      }
+      return out;
+    }
+    const CHANNEL_LABEL = {
+      sms:   "SMS · Week schedule sent",
+      push:  "Push · Open in LEAG",
+      email: "Email · Receipt + ICS attached",
+    };
+
+    function startPublish() {
+      if (state.publishStatus === "sending" || state.publishStatus === "published") return;
+      if (state.events.some(e => !!e.conflict)) return;
+      state.publishStatus = "sending";
+      state.events.forEach(e => e.status = "sending");
+      state.feed = []; state.sentCount = 0;
+      $('#publish-feed-list').innerHTML = "";
+      $('#publish-feed-progress-fill').style.width = "0%";
+      $('#publish-feed-sent').textContent = "0";
+      $('#publish-feed-total').textContent = PARENT_TOTAL;
+      render();
+      announce("Publishing the week.");
+      const recipients = generateRecipients();
+      const list = $('#publish-feed-list');
+      const eventIds = state.events.map(e => e.id);
+      let sweepIdx = 0;
+      const sweepTick = () => {
+        if (sweepIdx >= eventIds.length) return;
+        const id = eventIds[sweepIdx++];
+        const ev = state.events.find(x => x.id === id);
+        if (ev) ev.status = "published";
+        render();
+        if (sweepIdx < eventIds.length) setTimeout(sweepTick, 220);
+      };
+      setTimeout(sweepTick, 240);
+      let i = 0;
+      const tickEvery = 80;
+      const burst = 3;
+      state.sendTimer = setInterval(() => {
+        for (let k = 0; k < burst && i < recipients.length; k++) {
+          const r = recipients[i++];
+          const li = document.createElement("li");
+          li.className = "publish-feed-row";
+          li.dataset.channel = r.channel;
+          li.innerHTML = `
+            <span class="publish-feed-avatar">${r.initials}</span>
+            <div class="publish-feed-body">
+              <span class="publish-feed-name">${r.name}</span>
+              <span class="publish-feed-msg">${CHANNEL_LABEL[r.channel]}</span>
+            </div>
+            <span class="publish-feed-status">
+              <span class="publish-feed-status-dot" aria-hidden="true"></span>
+              Sent
+            </span>
+          `;
+          list.insertBefore(li, list.firstChild);
+          while (list.children.length > 60) list.removeChild(list.lastChild);
+          state.sentCount = i;
+        }
+        const pct = Math.round((state.sentCount / PARENT_TOTAL) * 100);
+        $('#publish-feed-progress-fill').style.width = pct + "%";
+        $('#publish-feed-sent').textContent = state.sentCount;
+        if (i >= recipients.length) {
+          clearInterval(state.sendTimer);
+          state.sendTimer = null;
+          state.publishStatus = "published";
+          state.publishedAt = new Date();
+          render();
+          announce(`Published. ${PARENT_TOTAL} parents notified.`);
+        }
+      }, tickEvery);
+    }
+
+    function reset() {
+      if (state.sendTimer) { clearInterval(state.sendTimer); state.sendTimer = null; }
+      state.events = SEED_EVENTS.map(e => ({ ...e, status: "draft" }));
+      state.publishStatus = "draft"; state.publishedAt = null;
+      state.sentCount = 0; state.feed = [];
+      $('#publish-feed-progress-fill').style.width = "0%";
+      $('#publish-feed-sent').textContent = "0";
+      $('#publish-feed-total').textContent = PARENT_TOTAL;
+      $('#publish-feed-empty-count').textContent = PARENT_TOTAL;
+      $('#publish-feed-list').innerHTML = `
+        <li class="publish-feed-empty">
+          <span class="publish-feed-empty-mark" aria-hidden="true">◌</span>
+          Publish to send the week to <b>${PARENT_TOTAL}</b> parents.
+        </li>
+      `;
+      render();
+      announce("Reset.");
+    }
+
+    $('#publish-go').addEventListener("click", startPublish);
+    $('#publish-reset').addEventListener("click", reset);
+
+    const WEEKS = [
+      { n: 2, range: "Apr 8 — Apr 14" },
+      { n: 3, range: "Apr 15 — Apr 21" },
+      { n: 4, range: "Apr 22 — Apr 28" },
+    ];
+    let weekIdx = 1;
+    function setWeek(i) {
+      weekIdx = Math.max(0, Math.min(WEEKS.length - 1, i));
+      $('#publish-week-label').textContent = `Week ${WEEKS[weekIdx].n}`;
+      $('#publish-week-range').textContent = WEEKS[weekIdx].range;
+    }
+    $('#publish-week-prev').addEventListener("click", () => setWeek(weekIdx - 1));
+    $('#publish-week-next').addEventListener("click", () => setWeek(weekIdx + 1));
+
+    $('#publish-feed-total').textContent = PARENT_TOTAL;
+    $('#publish-feed-empty-count').textContent = PARENT_TOTAL;
+    $('#publish-parent-count').textContent = PARENT_TOTAL;
+    render();
+  })();
+  </script>
+
 </body>
 </html>
