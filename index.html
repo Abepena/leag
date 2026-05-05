@@ -7690,6 +7690,9 @@
       button.addEventListener("click", () => {
         demoState.sport = button.dataset.demoSport;
         updateDemo();
+        if (typeof window.renderRunStandings === "function") {
+          window.renderRunStandings(button.dataset.demoSport);
+        }
       });
     });
 
