@@ -1,0 +1,51 @@
+# Requirements
+
+## v1 Requirements
+
+### Step 4 widget swap
+
+- [ ] **STEP4-01**: Step 4 accordion body shows the polished scoreboard widget lifted from `_preview/organize.html` (lines 6658–6840) — score-hero, linescore, scores-recap, scores-controls — instead of the basic scorekeeper.
+- [ ] **STEP4-02**: Step 4 accordion body shows the standings card lifted from `_preview/organize.html` (lines 6860–6886), with the lock-foot stripped, displayed below the scoreboard inside a `.step4-stack` wrapper.
+- [ ] **STEP4-03**: The new scoreboard's state machine + handlers (lines 12450–12749) replace the existing `scoreState`, `renderScoreDemo`, and `applyScoreAction` JS in `index.html`.
+
+### Hero scoreboard binding
+
+- [ ] **HERO-01**: The new scoreboard render function updates hero IDs `hero-score-diamonds`, `hero-score-hammerheads`, `hero-line-diamonds-total`, `hero-line-hammerheads-total`, `hero-inning-label`, and `hero-score-number` (aria-label) on every state change. No regression vs. current behavior.
+
+### Standings dynamics
+
+- [ ] **STAND-01**: Standings table is data-driven via a sport-keyed JS data structure (softball/basketball/soccer/pickleball, mirroring organize.html lines 9300–9450) and a `renderRunStandings(sport)` function (mirroring organize.html lines 9497–9509).
+- [ ] **STAND-02**: On "Mark final" click, the user's team ("ours" — Diamonds for softball, Breakers for basketball, etc.) gets +1 W if winning or +1 L if losing; pct is recomputed and the standings card re-renders with the updated row.
+- [ ] **STAND-03**: Picking a sport in `#playground` (existing `[data-demo-sport]` chips) re-renders the standings card to match — basketball selector swaps to "12U basketball standings" with Breakers as `ours-row`.
+
+### No regressions
+
+- [ ] **NOREG-01**: Steps 1, 2, and 3 of the season-workflow accordion still render and function unchanged (registrations flow, teams roster builder, publish-schedule preview).
+- [ ] **NOREG-02**: No console errors on page load or on any scoreboard/standings interaction. No duplicate IDs in the DOM.
+- [ ] **NOREG-03**: Top-bar controls (org input, sport chips, primary swatches, accent swatches, reset btn) still drive the demo state and theme retint correctly.
+
+## v2 Requirements
+
+(None — out of milestone scope.)
+
+## Out of Scope
+
+- Adapting the scoreboard widget per sport (innings/balls/outs don't fit basketball or soccer). Scoreboard stays softball regardless of which sport is picked. Standings is the only thing that swaps.
+- Animating standings re-sort with a row-reorder transition.
+- Persisting state across page reloads.
+- Any other landing page changes (pricing tweaks, copy changes, hero rework, marketplace section, etc.) — those belong to future GSD milestones.
+
+## Traceability
+
+| Requirement | Phase |
+|---|---|
+| STEP4-01 | (assigned by roadmap) |
+| STEP4-02 | (assigned by roadmap) |
+| STEP4-03 | (assigned by roadmap) |
+| HERO-01  | (assigned by roadmap) |
+| STAND-01 | (assigned by roadmap) |
+| STAND-02 | (assigned by roadmap) |
+| STAND-03 | (assigned by roadmap) |
+| NOREG-01 | (assigned by roadmap) |
+| NOREG-02 | (assigned by roadmap) |
+| NOREG-03 | (assigned by roadmap) |
