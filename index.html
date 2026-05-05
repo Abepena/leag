@@ -9261,12 +9261,36 @@
         + '</tr>';
     }
 
+    let currentSport = "softball";
+
     function render(sport) {
+      currentSport = sport;
       const data = standings[sport] || standings.softball;
       tbody.innerHTML = data.rows
         .map(function (r) { return rowFor(r, r.name === data.ours, data.swatch); })
         .join("");
     }
+
+    function applyFinalToStandings(homeTotal, awayTotal) {
+      // Diamonds = home in scoreboard. The user's team in standings = data.ours.
+      // For sports other than softball the scoreboard doesn't run (it's softball-only),
+      // but we still treat home-total as the user's-team total for symmetry.
+      const data = standings[currentSport] || standings.softball;
+      const oursRow = data.rows.find(function (r) { return r.name === data.ours; });
+      if (!oursRow) return;
+      if (homeTotal > awayTotal) {
+        oursRow.w += 1;
+      } else {
+        oursRow.l += 1;
+      }
+      const games = oursRow.w + oursRow.l;
+      const pct = games > 0 ? (oursRow.w / games) : 0;
+      // Format like ".875" — no leading zero, three decimals.
+      oursRow.pct = pct.toFixed(3).replace(/^0/, "");
+      render(currentSport);
+    }
+
+    window.applyFinalToStandings = applyFinalToStandings;
 
     window.renderRunStandings = render;
     // Boot — initial render uses softball (matches scoreboard above: Diamonds vs Hammerheads).
