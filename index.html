@@ -6101,49 +6101,208 @@
                           <span class="status-tag" id="score-status">live</span>
                         </button>
                         <div class="accordion-panel">
-                          <div class="mini-demo-grid">
-                            <div class="scoreboard-demo">
-                              <div class="scoreline-grid">
-                                <div class="score-team" id="score-team-fire">
-                                  <b>Diamonds</b>
-                                  <strong id="score-fire">5</strong>
+                          <div class="step4-stack">
+                            <div id="run-scoreboard" class="acc-demo-host">
+                              <div class="demo-stage scores-stage" id="scores-stage">
+                                <div class="demo-stage-bar scores-stagebar">
+                                  <strong data-org-name>Bayside County Sports</strong>
+                                  <span class="scores-url">bayside.leag.app/scores</span>
                                 </div>
-                                <div class="score-divider">-</div>
-                                <div class="score-team" id="score-team-panthers">
-                                  <b>Hammerheads</b>
-                                  <strong id="score-panthers">3</strong>
-                                </div>
-                              </div>
-                              <div class="score-meta-line" id="score-meta-line">Top 5 / Field 1 / Diamonds batting</div>
-                              <div class="score-count-grid">
-                                <div><span>Balls</span><strong id="score-balls">0</strong></div>
-                                <div><span>Strikes</span><strong id="score-strikes">0</strong></div>
-                                <div><span>Outs</span><strong id="score-outs">0</strong></div>
-                              </div>
-                              <div class="score-controls-grid">
-                                <div class="score-control-group">
-                                  <b>Score</b>
-                                  <div class="score-button-row">
-                                    <button class="tiny-btn" type="button" data-score-action="fire-up">+ Diamonds</button>
-                                    <button class="tiny-btn" type="button" data-score-action="fire-down">- Diamonds</button>
-                                    <button class="tiny-btn" type="button" data-score-action="panthers-up">+ Hammerheads</button>
-                                    <button class="tiny-btn" type="button" data-score-action="panthers-down">- Hammerheads</button>
+
+                                <div class="scores-board">
+                                  <div class="ticker" aria-label="Nearby Bayside games">
+                                    <div class="ticker-label">LIVE</div>
+                                    <div class="ticker-viewport">
+                                      <div class="ticker-track" id="scores-ticker">
+                                        <span>FINAL COMETS 8 <em>-</em> 6 MARLINS</span>
+                                        <span class="ticker-pipe" aria-hidden="true">|</span>
+                                        <span><strong>Diamonds</strong> <span data-ticker-score>5 <em>-</em> 3</span> Hammerheads <span data-ticker-state>T5</span></span>
+                                        <span class="ticker-pipe" aria-hidden="true">|</span>
+                                        <span>NEXT MON 5:30 FIELD 1</span>
+                                        <span class="ticker-pipe" aria-hidden="true">|</span>
+                                        <span>TRYOUTS 12U OPEN</span>
+                                        <span class="ticker-pipe" aria-hidden="true">|</span>
+                                        <span>FINAL COMETS 8 <em>-</em> 6 MARLINS</span>
+                                        <span class="ticker-pipe" aria-hidden="true">|</span>
+                                        <span><strong>Diamonds</strong> <span data-ticker-score>5 <em>-</em> 3</span> Hammerheads <span data-ticker-state>T5</span></span>
+                                        <span class="ticker-pipe" aria-hidden="true">|</span>
+                                        <span>NEXT MON 5:30 FIELD 1</span>
+                                        <span class="ticker-pipe" aria-hidden="true">|</span>
+                                        <span>TRYOUTS 12U OPEN</span>
+                                      </div>
+                                    </div>
                                   </div>
-                                </div>
-                                <div class="score-control-group">
-                                  <b>Count and inning</b>
-                                  <div class="score-button-row">
-                                    <button class="tiny-btn" type="button" data-score-action="ball">Ball +</button>
-                                    <button class="tiny-btn" type="button" data-score-action="strike">Strike +</button>
-                                    <button class="tiny-btn" type="button" data-score-action="out">Out +</button>
-                                    <button class="tiny-btn" type="button" data-score-action="reset-count">Reset count</button>
-                                    <button class="tiny-btn" type="button" data-score-action="next-half">Next half-inning</button>
-                                    <button class="tiny-btn" type="button" data-score-action="final">Mark final</button>
+
+                                  <div class="score-hero">
+                                    <div class="score-meta">
+                                      <span class="live-pill" id="scores-pill">LIVE NOW</span>
+                                      <div class="score-meta-detail">
+                                        <span id="scores-where">Field 1 / Top 5</span>
+                                        <svg class="diamond" id="scores-diamond" viewBox="0 0 44 44" aria-label="Runners on 1st and 3rd, no outs in 2nd" role="img">
+                                          <polygon points="22,5 39,22 22,39 5,22" fill="none" stroke="rgba(244,245,244,0.32)" stroke-width="1.2"/>
+                                          <rect x="18" y="1" width="8" height="8" rx="1.4" fill="none" stroke="rgba(244,245,244,0.55)" stroke-width="1.2"/>
+                                          <rect x="35" y="18" width="8" height="8" rx="1.4" fill="var(--demo-accent)"/>
+                                          <rect x="18" y="35" width="8" height="8" rx="1.4" fill="rgba(244,245,244,0.18)" stroke="rgba(244,245,244,0.55)" stroke-width="1"/>
+                                          <rect x="1" y="18" width="8" height="8" rx="1.4" fill="var(--demo-accent)"/>
+                                        </svg>
+                                      </div>
+                                    </div>
+
+                                    <div class="score-row">
+                                      <div class="score-side">
+                                        <span class="team-icon is-neutral" aria-hidden="true">H</span>
+                                        <div>
+                                          <div class="team-name batting" id="scores-team-away">Hammerheads</div>
+                                          <div class="team-caption" id="scores-cap-away">10-5 / away / batting</div>
+                                        </div>
+                                      </div>
+                                      <div class="score-number" aria-label="Diamonds 5, Hammerheads 3" id="scores-number">
+                                        <span id="scores-num-away">3</span><em>-</em><span id="scores-num-home">5</span>
+                                      </div>
+                                      <div class="score-side score-side-right">
+                                        <span class="team-icon" aria-hidden="true">D</span>
+                                        <div>
+                                          <div class="team-name right" id="scores-team-home">Diamonds</div>
+                                          <div class="team-caption" id="scores-cap-home">12-3 / home</div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="inning-grid-caption" aria-hidden="true">
+                                      <span>Box score</span><b id="scores-half-label">Top of 5</b>
+                                    </div>
+
+                                    <div class="linescore" role="table" aria-label="Linescore through the 5th inning" id="scores-linescore">
+                                      <div class="linescore-row" role="row">
+                                        <span class="linescore-team" role="rowheader"></span>
+                                        <span class="inning-num" data-inning-head="1" role="columnheader">1</span>
+                                        <span class="inning-num" data-inning-head="2">2</span>
+                                        <span class="inning-num" data-inning-head="3">3</span>
+                                        <span class="inning-num" data-inning-head="4">4</span>
+                                        <span class="inning-num inning-active" data-inning-head="5">T5</span>
+                                        <span class="inning-num" data-inning-head="6">6</span>
+                                        <span class="inning-num" data-inning-head="7">7</span>
+                                        <span class="inning-num total">R</span>
+                                      </div>
+                                      <div class="linescore-row" role="row" data-line="away">
+                                        <span class="linescore-team away" role="rowheader" id="scores-line-away-name">Hammerheads</span>
+                                        <span class="inning-run" data-cell="away-1">1</span>
+                                        <span class="inning-run" data-cell="away-2">0</span>
+                                        <span class="inning-run" data-cell="away-3">1</span>
+                                        <span class="inning-run" data-cell="away-4">1</span>
+                                        <span class="inning-run active" data-cell="away-5">0</span>
+                                        <span class="inning-run" data-cell="away-6"></span>
+                                        <span class="inning-run" data-cell="away-7"></span>
+                                        <span class="inning-run total" data-total="away">3</span>
+                                      </div>
+                                      <div class="linescore-row" role="row" data-line="home">
+                                        <span class="linescore-team" role="rowheader" id="scores-line-home-name">Diamonds</span>
+                                        <span class="inning-run" data-cell="home-1">0</span>
+                                        <span class="inning-run" data-cell="home-2">2</span>
+                                        <span class="inning-run" data-cell="home-3">0</span>
+                                        <span class="inning-run" data-cell="home-4">3</span>
+                                        <span class="inning-run" data-cell="home-5"></span>
+                                        <span class="inning-run" data-cell="home-6"></span>
+                                        <span class="inning-run" data-cell="home-7"></span>
+                                        <span class="inning-run total" data-total="home">5</span>
+                                      </div>
+                                    </div>
                                   </div>
+
+                                  <div class="scores-recap" id="scores-recap" hidden role="status" aria-live="polite">
+                                    <div class="scores-recap-rule" aria-hidden="true"></div>
+                                    <div class="scores-recap-body">
+                                      <div class="scores-recap-eyebrow">Final</div>
+                                      <div class="scores-recap-headline" id="scores-recap-headline">Diamonds win 5 - 3</div>
+                                      <div class="scores-recap-meta" id="scores-recap-meta">7 innings / Field 1 / Bayside County</div>
+                                    </div>
+                                    <div class="scores-recap-records">
+                                      <div class="scores-recap-rec">
+                                        <span class="scores-recap-team" id="scores-recap-home">Diamonds</span>
+                                        <span class="scores-recap-result" id="scores-recap-home-res">W (13-3)</span>
+                                      </div>
+                                      <div class="scores-recap-rec">
+                                        <span class="scores-recap-team" id="scores-recap-away">Hammerheads</span>
+                                        <span class="scores-recap-result is-loss" id="scores-recap-away-res">L (10-6)</span>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <div class="scores-controls" id="scores-controls">
+                                    <div class="scores-controls-team scores-controls-team--away" data-side="away">
+                                      <span class="scores-controls-eyebrow">Away</span>
+                                      <span class="scores-controls-name" id="scores-ctl-away-name">Hammerheads</span>
+                                      <div class="scores-controls-pills">
+                                        <button type="button" class="scores-pill scores-pill--minus" data-action="dec" data-side="away" aria-label="Subtract 1 from Hammerheads">-1</button>
+                                        <button type="button" class="scores-pill scores-pill--plus" data-action="inc" data-side="away" aria-label="Add 1 to Hammerheads">+1</button>
+                                      </div>
+                                    </div>
+
+                                    <div class="scores-controls-state">
+                                      <div class="scores-count-readout" aria-label="Count">
+                                        <div><span>Balls</span><strong id="scores-balls">0</strong></div>
+                                        <div><span>Strikes</span><strong id="scores-strikes">0</strong></div>
+                                        <div><span>Outs</span><strong id="scores-outs">0</strong></div>
+                                      </div>
+                                      <div class="scores-count-actions" role="group" aria-label="Count actions">
+                                        <button type="button" class="scores-btn scores-btn--ghost" data-count-action="ball">Ball +</button>
+                                        <button type="button" class="scores-btn scores-btn--ghost" data-count-action="strike">Strike +</button>
+                                        <button type="button" class="scores-btn scores-btn--ghost" data-count-action="out">Out +</button>
+                                        <button type="button" class="scores-btn scores-btn--ghost" data-count-action="out-minus">Out -</button>
+                                        <button type="button" class="scores-btn scores-btn--ghost scores-count-actions-full" data-count-action="reset-count">Reset count</button>
+                                      </div>
+                                      <div class="scores-controls-state-row">
+                                        <button type="button" class="scores-btn scores-btn--ghost scores-btn--step" id="scores-prev" aria-label="Previous half-inning" title="Previous half-inning">‹</button>
+                                        <button type="button" class="scores-btn scores-btn--primary" id="scores-next">
+                                          <span class="scores-btn-label">Next half-inning</span>
+                                          <span class="scores-btn-meta" id="scores-next-meta">Currently Top 5</span>
+                                        </button>
+                                      </div>
+                                      <div class="scores-controls-state-row">
+                                        <button type="button" class="scores-btn scores-btn--final" id="scores-final" disabled>End game</button>
+                                        <button type="button" class="scores-btn scores-btn--ghost" id="scores-reset">Reset</button>
+                                      </div>
+                                    </div>
+
+                                    <div class="scores-controls-team scores-controls-team--home" data-side="home">
+                                      <span class="scores-controls-eyebrow">Home</span>
+                                      <span class="scores-controls-name" id="scores-ctl-home-name">Diamonds</span>
+                                      <div class="scores-controls-pills">
+                                        <button type="button" class="scores-pill scores-pill--minus" data-action="dec" data-side="home" aria-label="Subtract 1 from Diamonds">-1</button>
+                                        <button type="button" class="scores-pill scores-pill--plus" data-action="inc" data-side="home" aria-label="Add 1 to Diamonds">+1</button>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <div class="scores-foot">
+                                    <span class="scores-foot-note">Demo only. Nothing saves, sends, or charges. Real scoring is one tap on a real phone.</span>
+                                  </div>
+
+                                  <p class="scores-sr-status" aria-live="polite" aria-atomic="true" id="scores-sr-status"></p>
                                 </div>
                               </div>
                             </div>
-                            <div class="week-list" id="standings-demo"></div>
+                            <article class="card" id="run-standings">
+                              <header class="card-head">
+                                <div class="titles">
+                                  <div class="eyebrow">Demo · Standings</div>
+                                  <h2 class="card-title" data-stoken="standings_title">12U basketball standings</h2>
+                                </div>
+                              </header>
+                              <div class="card-body tight">
+                                <table class="table mini-table" style="width:100%">
+                                  <thead>
+                                    <tr>
+                                      <th>Team</th>
+                                      <th class="num" style="text-align:right">W</th>
+                                      <th class="num" style="text-align:right">L</th>
+                                      <th class="num" style="text-align:right">Pct</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody data-render="run-standings"></tbody>
+                                </table>
+                              </div>
+                            </article>
                           </div>
                         </div>
                       </section>
