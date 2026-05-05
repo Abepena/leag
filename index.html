@@ -8602,165 +8602,6 @@
       });
     }
 
-    const scoreState = {
-      fire: 5,
-      panthers: 3,
-      balls: 0,
-      strikes: 0,
-      outs: 0,
-      inning: 5,
-      half: "top",
-      final: false
-    };
-
-    const resetCount = () => {
-      scoreState.balls = 0;
-      scoreState.strikes = 0;
-    };
-
-    const advanceHalfInning = () => {
-      resetCount();
-      scoreState.outs = 0;
-      if (scoreState.half === "top") {
-        scoreState.half = "bottom";
-      } else {
-        scoreState.half = "top";
-        scoreState.inning += 1;
-      }
-    };
-
-    const renderScoreDemo = () => {
-      const fireScore = document.getElementById("score-fire");
-      const panthersScore = document.getElementById("score-panthers");
-      const fireTeam = document.getElementById("score-team-fire");
-      const panthersTeam = document.getElementById("score-team-panthers");
-      const meta = document.getElementById("score-meta-line");
-      const balls = document.getElementById("score-balls");
-      const strikes = document.getElementById("score-strikes");
-      const outs = document.getElementById("score-outs");
-      const status = document.getElementById("score-status");
-      const standings = document.getElementById("standings-demo");
-      const halfLabel = scoreState.half === "top" ? "Top" : "Bottom";
-      const battingTeam = scoreState.half === "top" ? "Diamonds" : "Hammerheads";
-      const panthersWon = scoreState.final && scoreState.panthers > scoreState.fire;
-
-      if (fireScore) {
-        fireScore.textContent = scoreState.fire;
-      }
-      if (panthersScore) {
-        panthersScore.textContent = scoreState.panthers;
-      }
-      if (fireTeam) {
-        fireTeam.classList.toggle("is-batting", scoreState.half === "top" && !scoreState.final);
-      }
-      if (panthersTeam) {
-        panthersTeam.classList.toggle("is-batting", scoreState.half === "bottom" && !scoreState.final);
-      }
-      if (meta) {
-        meta.textContent = scoreState.final
-          ? `Final / ${scoreState.fire > scoreState.panthers ? "Diamonds" : "Hammerheads"} win`
-          : `${halfLabel} ${scoreState.inning} / Field 1 / ${battingTeam} batting`;
-      }
-      if (balls) {
-        balls.textContent = scoreState.balls;
-      }
-      if (strikes) {
-        strikes.textContent = scoreState.strikes;
-      }
-      if (outs) {
-        outs.textContent = scoreState.outs;
-      }
-      if (status) {
-        status.textContent = scoreState.final ? "final" : "live";
-      }
-      const heroDia = document.getElementById("hero-score-diamonds");
-      const heroHam = document.getElementById("hero-score-hammerheads");
-      const heroDiaTotal = document.getElementById("hero-line-diamonds-total");
-      const heroHamTotal = document.getElementById("hero-line-hammerheads-total");
-      const heroInningLabel = document.getElementById("hero-inning-label");
-      const heroScoreNumber = document.getElementById("hero-score-number");
-      if (heroDia) heroDia.textContent = scoreState.fire;
-      if (heroHam) heroHam.textContent = scoreState.panthers;
-      if (heroDiaTotal) heroDiaTotal.textContent = scoreState.fire;
-      if (heroHamTotal) heroHamTotal.textContent = scoreState.panthers;
-      if (heroScoreNumber) {
-        heroScoreNumber.setAttribute(
-          "aria-label",
-          `Diamonds ${scoreState.fire}, Hammerheads ${scoreState.panthers}`
-        );
-      }
-      if (heroInningLabel) {
-        heroInningLabel.textContent = scoreState.final
-          ? `Final / ${scoreState.fire > scoreState.panthers ? "Diamonds win" : "Hammerheads win"}`
-          : `${halfLabel} of ${scoreState.inning}`;
-      }
-      if (standings) {
-        standings.replaceChildren();
-        const rows = panthersWon
-          ? [
-            { team: "Diamonds", record: "12-4 / .750" },
-            { team: "Hammerheads", record: "11-5 / .688", moveUp: true },
-            { team: "Comets", record: "10-5 / .667" }
-          ]
-          : [
-            { team: "Diamonds", record: scoreState.final ? "13-3 / .813" : "12-3 / .800" },
-            { team: "Comets", record: "10-5 / .667" },
-            { team: "Hammerheads", record: scoreState.final ? "10-6 / .625" : "10-5 / .667" }
-          ];
-
-        rows.forEach((rowData, index) => {
-          const row = makeEl("div", rowData.moveUp ? "week-card standings-row move-up" : "week-card standings-row");
-          row.append(
-            makeEl("strong", "", `${index + 1}. ${rowData.team}`),
-            makeEl("b", "mono", rowData.record)
-          );
-          standings.append(row);
-        });
-      }
-    };
-
-    const applyScoreAction = (action) => {
-      scoreState.final = false;
-      if (action === "fire-up") {
-        scoreState.fire += 1;
-      } else if (action === "fire-down") {
-        scoreState.fire = Math.max(0, scoreState.fire - 1);
-      } else if (action === "panthers-up") {
-        scoreState.panthers += 1;
-      } else if (action === "panthers-down") {
-        scoreState.panthers = Math.max(0, scoreState.panthers - 1);
-      } else if (action === "ball") {
-        scoreState.balls = scoreState.balls >= 3 ? 0 : scoreState.balls + 1;
-      } else if (action === "strike") {
-        if (scoreState.strikes >= 2) {
-          scoreState.outs += 1;
-          resetCount();
-        } else {
-          scoreState.strikes += 1;
-        }
-      } else if (action === "out") {
-        scoreState.outs += 1;
-        resetCount();
-      } else if (action === "reset-count") {
-        resetCount();
-      } else if (action === "next-half") {
-        advanceHalfInning();
-      } else if (action === "final") {
-        scoreState.final = true;
-      }
-
-      if (scoreState.outs >= 3 && !scoreState.final) {
-        advanceHalfInning();
-      }
-      renderScoreDemo();
-    };
-
-    document.querySelectorAll("[data-score-action]").forEach((button) => {
-      button.addEventListener("click", () => {
-        applyScoreAction(button.dataset.scoreAction);
-      });
-    });
-
     updateDemo();
     renderSurfaceSchedule();
     renderPlayerResults();
@@ -8771,7 +8612,9 @@
     updateSignupDemo();
     renderCurrentWeekLabel();
     renderWeeklySchedule();
-    renderScoreDemo();
+    // run-scoreboard IIFE self-inits at parse time. Re-call here as a safety net
+    // (guarded because the IIFE script tag follows this main script in document order).
+    if (typeof window.renderRunScoreboard === "function") renderRunScoreboard();
 
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!prefersReduced && "IntersectionObserver" in window) {
@@ -8830,6 +8673,521 @@
        Embedded preview demo IIFEs (registrations / teams / publish)
        Each scoped to its host element ID. Safe to re-run on DOMReady.
        ============================================================ -->
+  <script>
+  /* === run-scoreboard component script (lifted from _preview/organize.html) === */
+  (function () {
+    "use strict";
+    const root = document.getElementById("run-scoreboard");
+    if (!root) return;
+
+    const HOME = "home"; // Diamonds bats in the bottom
+    const AWAY = "away"; // Hammerheads bats in the top
+    const TOTAL_INNINGS = 7;
+
+    const TEAMS = {
+      home: { name: "Diamonds", record: "12-3", side: "home" },
+      away: { name: "Hammerheads", record: "10-5", side: "away" }
+    };
+
+    // Empty starting state used by Reset.
+    const INITIAL = {
+      inning: 1,
+      half: "top", // "top" -> away bats, "bottom" -> home bats
+      final: false,
+      balls: 0, strikes: 0, outs: 0,
+      bases: { first: false, second: false, third: false },
+      away: { total: 0, runs: [null, null, null, null, null, null, null] },
+      home: { total: 0, runs: [null, null, null, null, null, null, null] }
+    };
+
+    // Page-load state: mid-game so demo lands on something interesting.
+    const LOAD_STATE = {
+      inning: 5,
+      half: "top",
+      final: false,
+      balls: 0, strikes: 0, outs: 0,
+      bases: { first: true, second: false, third: true },
+      away: { total: 3, runs: [1, 0, 1, 1, 0, null, null] },
+      home: { total: 5, runs: [0, 2, 0, 3, null, null, null] }
+    };
+
+    function clone(s) {
+      return {
+        inning: s.inning, half: s.half, final: s.final,
+        balls: s.balls || 0, strikes: s.strikes || 0, outs: s.outs || 0,
+        bases: { first: !!s.bases.first, second: !!s.bases.second, third: !!s.bases.third },
+        away: { total: s.away.total, runs: s.away.runs.slice() },
+        home: { total: s.home.total, runs: s.home.runs.slice() }
+      };
+    }
+
+    const state = clone(LOAD_STATE);
+
+    function clearBases() {
+      state.bases.first = false;
+      state.bases.second = false;
+      state.bases.third = false;
+    }
+    function renderBases() {
+      if (!elDiamond) return;
+      const rects = elDiamond.querySelectorAll('rect');
+      // rects order in markup: 2nd (top), 1st (right), home (bottom), 3rd (left)
+      const order = ["second", "first", null, "third"];
+      rects.forEach((r, i) => {
+        const key = order[i];
+        if (!key) return;
+        if (state.bases[key]) {
+          r.setAttribute("fill", "var(--demo-accent)");
+          r.setAttribute("stroke-width", "0");
+        } else {
+          r.setAttribute("fill", "none");
+          r.setAttribute("stroke", "rgba(244,245,244,0.55)");
+          r.setAttribute("stroke-width", "1.2");
+        }
+      });
+    }
+
+    // --- DOM refs ---
+    const $  = (sel) => root.querySelector(sel);
+    const $$ = (sel) => Array.from(root.querySelectorAll(sel));
+    const srStatus = $('#scores-sr-status');
+    function announce(msg) {
+      if (!srStatus) return;
+      srStatus.textContent = "";
+      setTimeout(() => srStatus.textContent = msg, 30);
+    }
+
+    const elPill      = $('#scores-pill');
+    const elWhere     = $('#scores-where');
+    const elDiamond   = $('#scores-diamond');
+    const elTeamAway  = $('#scores-team-away');
+    const elTeamHome  = $('#scores-team-home');
+    const elCapAway   = $('#scores-cap-away');
+    const elCapHome   = $('#scores-cap-home');
+    const elNumAway   = $('#scores-num-away');
+    const elNumHome   = $('#scores-num-home');
+    const elHalfLabel = $('#scores-half-label');
+    const elNextBtn   = $('#scores-next');
+    const elNextMeta  = $('#scores-next-meta');
+    const elFinalBtn  = $('#scores-final');
+    const elResetBtn  = $('#scores-reset');
+    const elPrevBtn   = $('#scores-prev');
+    const elControls  = $('#scores-controls');
+    const elRecap     = $('#scores-recap');
+
+    function battingSide() {
+      return state.half === "top" ? AWAY : HOME;
+    }
+
+    function halfLabelText() {
+      const word = state.half === "top" ? "Top" : "Bottom";
+      return `${word} of ${state.inning}`;
+    }
+
+    function ordinal(n) {
+      const s = ["th", "st", "nd", "rd"], v = n % 100;
+      return n + (s[(v - 20) % 10] || s[v] || s[0]);
+    }
+
+    // --- Render ---
+    function render(opts) {
+      opts = opts || {};
+      const bat = battingSide();
+
+      // Team names (in case theme picker changes them later)
+      if (elTeamAway) elTeamAway.textContent = TEAMS.away.name;
+      if (elTeamHome) elTeamHome.textContent = TEAMS.home.name;
+      const lineAwayName = $('#scores-line-away-name');
+      const lineHomeName = $('#scores-line-home-name');
+      const ctlAwayName  = $('#scores-ctl-away-name');
+      const ctlHomeName  = $('#scores-ctl-home-name');
+      if (lineAwayName) lineAwayName.textContent = TEAMS.away.name;
+      if (lineHomeName) lineHomeName.textContent = TEAMS.home.name;
+      if (ctlAwayName)  ctlAwayName.textContent  = TEAMS.away.name;
+      if (ctlHomeName)  ctlHomeName.textContent  = TEAMS.home.name;
+
+      // Batting indicator
+      if (elTeamAway) elTeamAway.classList.toggle("batting", !state.final && bat === AWAY);
+      if (elTeamHome) elTeamHome.classList.toggle("batting", !state.final && bat === HOME);
+      if (elCapAway) elCapAway.textContent = `${TEAMS.away.record} / away${!state.final && bat === AWAY ? " / batting" : ""}`;
+      if (elCapHome) elCapHome.textContent = `${TEAMS.home.record} / home${!state.final && bat === HOME ? " / batting" : ""}`;
+
+      // Score numbers
+      setNum(elNumAway, state.away.total, opts.bumpedSide === AWAY);
+      setNum(elNumHome, state.home.total, opts.bumpedSide === HOME);
+      const numEl = $('#scores-number');
+      if (numEl) numEl.setAttribute('aria-label',
+        `${TEAMS.away.name} ${state.away.total}, ${TEAMS.home.name} ${state.home.total}`);
+
+      // Live pill / where / half label
+      if (state.final) {
+        if (elPill)      { elPill.textContent = "FINAL"; elPill.classList.add("is-final"); }
+        if (elWhere)     elWhere.textContent = "Field 1 / 7 innings";
+        if (elHalfLabel) elHalfLabel.textContent = "Final";
+        if (elDiamond)   elDiamond.style.opacity = "0.35";
+      } else {
+        if (elPill)      { elPill.textContent = "LIVE NOW"; elPill.classList.remove("is-final"); }
+        if (elWhere)     elWhere.textContent = `Field 1 / ${halfLabelText()}`;
+        if (elHalfLabel) elHalfLabel.textContent = halfLabelText();
+        if (elDiamond)   elDiamond.style.opacity = "1";
+      }
+
+      // Linescore cells
+      ["away", "home"].forEach(side => {
+        for (let i = 0; i < TOTAL_INNINGS; i++) {
+          const cell = root.querySelector(`[data-cell="${side}-${i+1}"]`);
+          if (!cell) continue;
+          const v = state[side].runs[i];
+          cell.textContent = (v == null) ? "" : String(v);
+        }
+        const tot = root.querySelector(`[data-total="${side}"]`);
+        if (tot) tot.textContent = String(state[side].total);
+      });
+
+      // Active inning column
+      $$('.inning-num[data-inning-head]').forEach(h => {
+        const n = Number(h.dataset.inningHead);
+        const isActive = !state.final && n === state.inning;
+        h.classList.toggle("inning-active", isActive);
+        if (isActive) {
+          h.textContent = `${state.half === "top" ? "T" : "B"}${n}`;
+        } else {
+          h.textContent = String(n);
+        }
+      });
+
+      // Active cell highlight (current half-inning, batting team)
+      $$('.inning-run').forEach(c => c.classList.remove("active"));
+      if (!state.final) {
+        const sel = `[data-cell="${bat}-${state.inning}"]`;
+        const cell = root.querySelector(sel);
+        if (cell) cell.classList.add("active");
+      }
+
+      // Controls
+      if (elControls) elControls.classList.toggle("is-final", state.final);
+      if (state.final) {
+        if (elNextBtn) {
+          elNextBtn.disabled = true;
+          const lbl = elNextBtn.querySelector('.scores-btn-label');
+          if (lbl) lbl.textContent = "Game over";
+        }
+        if (elNextMeta)  elNextMeta.textContent = "Reset to play again";
+        if (elFinalBtn)  elFinalBtn.disabled = true;
+      } else {
+        if (elNextBtn) {
+          elNextBtn.disabled = false;
+          const nextLabel = nextHalfPreview();
+          const lbl = elNextBtn.querySelector('.scores-btn-label');
+          if (lbl) lbl.textContent = nextLabel.action;
+        }
+        if (elNextMeta)  elNextMeta.textContent = `Currently ${halfLabelText()}`;
+        // Final enabled only after bottom of 7
+        if (elFinalBtn)  elFinalBtn.disabled = !(state.inning === TOTAL_INNINGS && state.half === "bottom");
+      }
+      // Prev half: enabled if a prior half exists, or if we can step out of final
+      if (elPrevBtn) {
+        const atStart = !state.final && state.inning === 1 && state.half === "top";
+        elPrevBtn.disabled = atStart;
+        elPrevBtn.title = atStart ? "Already at top of 1st" : "Previous half-inning";
+      }
+
+      // +/- bounds: both buttons disabled when not the batting team's half
+      ["away", "home"].forEach(side => {
+        const minus = root.querySelector(`.scores-pill--minus[data-side="${side}"]`);
+        const plus  = root.querySelector(`.scores-pill--plus[data-side="${side}"]`);
+        if (!minus || !plus) return;
+        const offHalf = side !== bat;
+        minus.disabled = state.final || offHalf || state[side].total <= 0;
+        plus.disabled  = state.final || offHalf;
+        const offTitle = `${TEAMS[side].name} doesn't bat in this half`;
+        minus.title = state.final ? "" : (offHalf ? offTitle : "Subtract 1");
+        plus.title  = state.final ? "" : (offHalf ? offTitle : "Add 1");
+      });
+
+      renderBases();
+
+      // Recap
+      if (elRecap) {
+        if (state.final) {
+          elRecap.hidden = false;
+          const homeWon = state.home.total > state.away.total;
+          const winner = homeWon ? TEAMS.home : TEAMS.away;
+          const recapHeadline = $('#scores-recap-headline');
+          const recapMeta     = $('#scores-recap-meta');
+          const recapHome     = $('#scores-recap-home');
+          const recapAway     = $('#scores-recap-away');
+          const hRes          = $('#scores-recap-home-res');
+          const aRes          = $('#scores-recap-away-res');
+          if (recapHeadline) recapHeadline.innerHTML =
+            `<b>${winner.name}</b> win ${state.home.total > state.away.total ? state.home.total : state.away.total} - ${state.home.total > state.away.total ? state.away.total : state.home.total}`;
+          if (recapMeta) recapMeta.textContent = "7 innings / Field 1 / Bayside County";
+          if (recapHome) recapHome.textContent = TEAMS.home.name;
+          if (recapAway) recapAway.textContent = TEAMS.away.name;
+          if (hRes) {
+            hRes.textContent = homeWon ? `W (${bumpRecord(TEAMS.home.record, true)})` : `L (${bumpRecord(TEAMS.home.record, false)})`;
+            hRes.classList.toggle("is-loss", !homeWon);
+          }
+          if (aRes) {
+            aRes.textContent = !homeWon ? `W (${bumpRecord(TEAMS.away.record, true)})` : `L (${bumpRecord(TEAMS.away.record, false)})`;
+            aRes.classList.toggle("is-loss", homeWon);
+          }
+        } else {
+          elRecap.hidden = true;
+        }
+      }
+
+      // Update ticker live segment (the one with [data-ticker-score] / [data-ticker-state])
+      $$('[data-ticker-score]').forEach(n => {
+        n.innerHTML = `${state.away.total} <em>-</em> ${state.home.total}`;
+      });
+      $$('[data-ticker-state]').forEach(n => {
+        if (state.final) n.textContent = "FINAL";
+        else n.textContent = `${state.half === "top" ? "T" : "B"}${state.inning}`;
+      });
+
+      // --- Hero scoreboard binding (Diamonds = home in widget, away in hero markup) ---
+      // Widget: Diamonds=home, Hammerheads=away. Hero IDs map by team name.
+      const heroDia      = document.getElementById("hero-score-diamonds");
+      const heroHam      = document.getElementById("hero-score-hammerheads");
+      const heroDiaTotal = document.getElementById("hero-line-diamonds-total");
+      const heroHamTotal = document.getElementById("hero-line-hammerheads-total");
+      const heroInning   = document.getElementById("hero-inning-label");
+      const heroAria     = document.getElementById("hero-score-number");
+      const chip         = document.getElementById("score-status");
+
+      if (heroDia)      heroDia.textContent      = state.home.total; // Diamonds is home
+      if (heroHam)      heroHam.textContent      = state.away.total; // Hammerheads is away
+      if (heroDiaTotal) heroDiaTotal.textContent = state.home.total;
+      if (heroHamTotal) heroHamTotal.textContent = state.away.total;
+      if (heroAria)     heroAria.setAttribute("aria-label", `Diamonds ${state.home.total}, Hammerheads ${state.away.total}`);
+
+      if (state.final) {
+        const dWin = state.home.total > state.away.total;   // Diamonds wins if home wins
+        const tied = state.home.total === state.away.total;
+        const finalLabel = tied ? "Final / tied" : (dWin ? "Final / Diamonds win" : "Final / Hammerheads win");
+        const chipLabel  = tied ? "Final · tied" : (dWin ? "Final · Diamonds win" : "Final · Hammerheads win");
+        if (heroInning) heroInning.textContent = finalLabel;
+        if (chip)       chip.textContent       = chipLabel;
+      } else {
+        const halfWord = state.half === "top" ? "Top" : "Bottom";
+        if (heroInning) heroInning.textContent = `${halfWord} of ${state.inning}`;
+        if (chip)       chip.textContent       = `Live · ${halfWord} ${state.inning}`;
+      }
+    }
+
+    function setNum(el, val, bump) {
+      if (!el) return;
+      el.textContent = String(val);
+      if (bump) {
+        el.classList.remove("is-bumped");
+        // force reflow to restart animation
+        void el.offsetWidth;
+        el.classList.add("is-bumped");
+      }
+    }
+
+    function nextHalfPreview() {
+      if (state.half === "top") {
+        return { action: `Go to bottom of ${state.inning}`, after: { inning: state.inning, half: "bottom" } };
+      }
+      if (state.inning < TOTAL_INNINGS) {
+        return { action: `Go to top of ${state.inning + 1}`, after: { inning: state.inning + 1, half: "top" } };
+      }
+      return { action: "End game", after: { final: true } };
+    }
+
+    function bumpRecord(rec, won) {
+      const m = String(rec).match(/^(\d+)-(\d+)$/);
+      if (!m) return rec;
+      let w = +m[1], l = +m[2];
+      if (won) w += 1; else l += 1;
+      return `${w}-${l}`;
+    }
+
+    // --- Actions ---
+    function add(side, delta) {
+      if (state.final) return;
+      if (delta > 0 && side !== battingSide()) return; // no-op: only batting team scores
+      const cur = state[side].runs[state.inning - 1];
+      const start = (cur == null) ? 0 : cur;
+      let next = start + delta;
+      if (next < 0) next = 0;
+      state[side].runs[state.inning - 1] = next;
+      state[side].total = state[side].runs.reduce((s, n) => s + (n || 0), 0);
+
+      // Bump cell animation
+      const cell = root.querySelector(`[data-cell="${side}-${state.inning}"]`);
+      if (cell) {
+        cell.classList.remove("is-bumped");
+        void cell.offsetWidth;
+        cell.classList.add("is-bumped");
+      }
+      render({ bumpedSide: side });
+      announce(`${TEAMS.away.name} ${state.away.total}, ${TEAMS.home.name} ${state.home.total}, ${state.half} of the ${ordinal(state.inning)}.`);
+    }
+
+    function nextHalf() {
+      if (state.final) return;
+      // Ensure current cell has a number (treat null as 0)
+      const bat = battingSide();
+      if (state[bat].runs[state.inning - 1] == null) {
+        state[bat].runs[state.inning - 1] = 0;
+      }
+      if (state.half === "top") {
+        state.half = "bottom";
+      } else if (state.inning < TOTAL_INNINGS) {
+        state.inning += 1;
+        state.half = "top";
+      } else {
+        // Was bottom of 7, advance to final
+        state.final = true;
+      }
+      // Half changed -- bases cleared
+      clearBases();
+      // Pre-fill new half-inning's cell with 0 so the active cell shows the working count
+      if (!state.final) {
+        const newBat = battingSide();
+        if (state[newBat].runs[state.inning - 1] == null) {
+          state[newBat].runs[state.inning - 1] = 0;
+        }
+      }
+      render();
+      announce(state.final
+        ? "Game ended."
+        : `${halfLabelText()}. ${TEAMS[battingSide()].name} batting.`);
+    }
+
+    function endGame() {
+      if (state.final) return;
+      if (!(state.inning === TOTAL_INNINGS && state.half === "bottom")) return;
+      state.final = true;
+      render();
+      const winner = state.home.total > state.away.total ? TEAMS.home : TEAMS.away;
+      announce(`Final. ${winner.name} win ${Math.max(state.home.total, state.away.total)} to ${Math.min(state.home.total, state.away.total)}.`);
+    }
+
+    function prevHalf() {
+      if (state.final) {
+        // Step out of final back into bottom of last inning.
+        state.final = false;
+        state.inning = TOTAL_INNINGS;
+        state.half = "bottom";
+      } else if (state.half === "bottom") {
+        state.half = "top";
+      } else if (state.inning > 1) {
+        state.inning -= 1;
+        state.half = "bottom";
+      } else {
+        return; // top of 1, nowhere to go
+      }
+      state.balls = 0; state.strikes = 0; state.outs = 0;
+      clearBases();
+      render();
+      renderCount();
+      announce(`Back to ${halfLabelText()}. ${TEAMS[battingSide()].name} batting.`);
+    }
+
+    function reset() {
+      Object.assign(state, clone(INITIAL));
+      render();
+      announce("Reset. Top of the 1st, Hammerheads batting.");
+    }
+
+    // --- Count actions (baseball rules) ---
+    function renderCount() {
+      const b = root.querySelector('#scores-balls');
+      const s = root.querySelector('#scores-strikes');
+      const o = root.querySelector('#scores-outs');
+      if (b) b.textContent = state.balls;
+      if (s) s.textContent = state.strikes;
+      if (o) o.textContent = state.outs;
+    }
+    function resetCount(silent) {
+      state.balls = 0; state.strikes = 0;
+      renderCount();
+      if (!silent) announce("Count reset to 0-0.");
+    }
+    function ball() {
+      if (state.final) return;
+      state.balls += 1;
+      if (state.balls >= 4) {
+        state.balls = 0; state.strikes = 0;
+        announce("Ball four. Walk. Count reset.");
+      } else {
+        announce(`${state.balls}-${state.strikes} count.`);
+      }
+      renderCount();
+    }
+    function strike() {
+      if (state.final) return;
+      state.strikes += 1;
+      if (state.strikes >= 3) {
+        state.balls = 0; state.strikes = 0;
+        addOut(true);
+      } else {
+        announce(`${state.balls}-${state.strikes} count.`);
+        renderCount();
+      }
+    }
+    function addOut(fromStrikeout) {
+      if (state.final) return;
+      state.outs += 1;
+      if (state.outs >= 3) {
+        state.outs = 0; state.balls = 0; state.strikes = 0;
+        renderCount();
+        nextHalf();
+      } else {
+        renderCount();
+        announce(fromStrikeout
+          ? `Strikeout. ${state.outs} out${state.outs === 1 ? "" : "s"}.`
+          : `Out. ${state.outs} out${state.outs === 1 ? "" : "s"}.`);
+      }
+    }
+    function decOut() {
+      if (state.final) return;
+      if (state.outs <= 0) return;
+      state.outs -= 1;
+      state.balls = 0; state.strikes = 0;
+      renderCount();
+      announce(`Out removed. ${state.outs} out${state.outs === 1 ? "" : "s"}.`);
+    }
+
+    // --- Wire up (scoped to root) ---
+    root.addEventListener("click", (e) => {
+      const pill = e.target.closest('.scores-pill');
+      if (pill && root.contains(pill)) {
+        const side = pill.dataset.side;
+        const action = pill.dataset.action;
+        if (action === "inc") add(side, +1);
+        else if (action === "dec") add(side, -1);
+        return;
+      }
+      const cbtn = e.target.closest('[data-count-action]');
+      if (cbtn && root.contains(cbtn)) {
+        const a = cbtn.getAttribute('data-count-action');
+        if (a === "ball") ball();
+        else if (a === "strike") strike();
+        else if (a === "out") addOut(false);
+        else if (a === "out-minus") decOut();
+        else if (a === "reset-count") resetCount(false);
+        return;
+      }
+    });
+    if (elNextBtn)  elNextBtn.addEventListener("click", function () { nextHalf(); resetCount(true); state.outs = 0; renderCount(); });
+    if (elPrevBtn)  elPrevBtn.addEventListener("click", prevHalf);
+    if (elFinalBtn) elFinalBtn.addEventListener("click", endGame);
+    if (elResetBtn) elResetBtn.addEventListener("click", function () { reset(); resetCount(true); state.outs = 0; renderCount(); });
+
+    // Public entry for boot from main script.
+    function renderRunScoreboard() { render(); renderCount(); }
+    window.renderRunScoreboard = renderRunScoreboard;
+
+    // Init
+    renderRunScoreboard();
+  })();
+  </script>
+
   <script>
   (function () {
     "use strict";
