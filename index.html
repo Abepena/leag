@@ -5283,9 +5283,16 @@
        JS bindings come in plan 02.
        ============================================================ */
     .step4-stack {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
       gap: 18px;
+      align-items: start;
+    }
+    @media (min-width: 1024px) {
+      .step4-stack {
+        grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+        gap: 20px;
+      }
     }
     @media (max-width: 720px) {
       .step4-stack { gap: 14px; }
