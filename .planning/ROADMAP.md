@@ -28,8 +28,8 @@
 
 **Plans:** 3 plans
 - [x] 01-lift-the-widget-01-PLAN.md — Lift step-4 HTML and append scoped CSS for `#run-scoreboard` + `#run-standings`
-- [ ] 01-lift-the-widget-02-PLAN.md — Port scoreboard state machine + delete old scorekeeper JS + rebind hero IDs
-- [ ] 01-lift-the-widget-03-PLAN.md — Port sport-keyed standings data + renderRunStandings + boot softball
+- [x] 01-lift-the-widget-02-PLAN.md — Port scoreboard state machine + delete old scorekeeper JS + rebind hero IDs
+- [x] 01-lift-the-widget-03-PLAN.md — Port sport-keyed standings data + renderRunStandings + boot softball
 
 **UI hint:** yes
 

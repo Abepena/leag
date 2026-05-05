@@ -14,7 +14,7 @@
 
 ### Standings dynamics
 
-- [ ] **STAND-01**: Standings table is data-driven via a sport-keyed JS data structure (softball/basketball/soccer/pickleball, mirroring organize.html lines 9300–9450) and a `renderRunStandings(sport)` function (mirroring organize.html lines 9497–9509).
+- [x] **STAND-01**: Standings table is data-driven via a sport-keyed JS data structure (softball/basketball/soccer/pickleball, mirroring organize.html lines 9300–9450) and a `renderRunStandings(sport)` function (mirroring organize.html lines 9497–9509).
 - [ ] **STAND-02**: On "Mark final" click, the user's team ("ours" — Diamonds for softball, Breakers for basketball, etc.) gets +1 W if winning or +1 L if losing; pct is recomputed and the standings card re-renders with the updated row.
 - [ ] **STAND-03**: Picking a sport in `#playground` (existing `[data-demo-sport]` chips) re-renders the standings card to match — basketball selector swaps to "12U basketball standings" with Breakers as `ours-row`.
 

@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-last_updated: "2026-05-05T19:30:11.070Z"
+status: planning
+last_updated: "2026-05-05T19:53:51.573Z"
 progress:
   total_phases: 2
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 3
-  completed_plans: 1
+  completed_plans: 3
 ---
 
 # State
@@ -22,9 +22,9 @@ progress:
 ## Current Position
 
 Phase: 01 (lift-the-widget) — EXECUTING
-Plan: 2 of 3 (Plan 01 complete)
-**Phase:** 1 of 2 — Lift the widget
-**Status:** Executing Phase 01 (Plan 01 ✅, Plan 02 next)
+Plan: Not started
+**Phase:** 2 of 2 (wire the dynamics)
+**Status:** Ready to plan
 **Next action:** Execute `01-lift-the-widget-02-PLAN.md` (port scoreboard JS state machine + hero rebind)
 
 ## Accumulated Context
