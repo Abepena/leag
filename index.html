@@ -8882,8 +8882,8 @@
           if (lbl) lbl.textContent = nextLabel.action;
         }
         if (elNextMeta)  elNextMeta.textContent = `Currently ${halfLabelText()}`;
-        // Final enabled only after bottom of 7
-        if (elFinalBtn)  elFinalBtn.disabled = !(state.inning === TOTAL_INNINGS && state.half === "bottom");
+        // Final enabled from any non-final state (demo UX — relaxed in Phase 2 Plan 01)
+        if (elFinalBtn)  elFinalBtn.disabled = state.final;
       }
       // Prev half: enabled if a prior half exists, or if we can step out of final
       if (elPrevBtn) {
@@ -9060,7 +9060,6 @@
 
     function endGame() {
       if (state.final) return;
-      if (!(state.inning === TOTAL_INNINGS && state.half === "bottom")) return;
       state.final = true;
       render();
       const winner = state.home.total > state.away.total ? TEAMS.home : TEAMS.away;
