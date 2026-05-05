@@ -9062,6 +9062,9 @@
       if (state.final) return;
       state.final = true;
       render();
+      if (typeof window.applyFinalToStandings === "function") {
+        window.applyFinalToStandings(state.home.total, state.away.total);
+      }
       const winner = state.home.total > state.away.total ? TEAMS.home : TEAMS.away;
       announce(`Final. ${winner.name} win ${Math.max(state.home.total, state.away.total)} to ${Math.min(state.home.total, state.away.total)}.`);
     }
