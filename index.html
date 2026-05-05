@@ -6797,7 +6797,7 @@
                               <header class="card-head">
                                 <div class="titles">
                                   <div class="eyebrow">Demo · Standings</div>
-                                  <h2 class="card-title" data-stoken="standings_title">12U basketball standings</h2>
+                                  <h2 class="card-title" data-stoken="standings_title" data-render="run-standings-title">12U softball standings</h2>
                                 </div>
                               </header>
                               <div class="card-body tight">
@@ -9205,6 +9205,14 @@
     // Target the only tbody under #run-standings (uses the data-render hook from Plan 01 markup).
     const tbody = root.querySelector("tbody[data-render]");
     if (!tbody) return;
+    const titleEl = root.querySelector('[data-render="run-standings-title"]');
+
+    const titleBySport = {
+      softball: "12U softball standings",
+      basketball: "12U basketball standings",
+      soccer: "12U soccer standings",
+      pickleball: "12U pickleball standings",
+    };
 
     // Sport-keyed standings data. Softball includes Hammerheads to agree with the
     // scoreboard above (Diamonds vs Hammerheads). Opponent rows use .opp swatch class;
@@ -9276,6 +9284,9 @@
       tbody.innerHTML = data.rows
         .map(function (r) { return rowFor(r, r.name === data.ours, data.swatch); })
         .join("");
+      if (titleEl) {
+        titleEl.textContent = titleBySport[sport] || titleBySport.softball;
+      }
     }
 
     function applyFinalToStandings(homeTotal, awayTotal) {
