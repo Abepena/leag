@@ -39,13 +39,13 @@
 
 | Requirement | Phase |
 |---|---|
-| STEP4-01 | (assigned by roadmap) |
-| STEP4-02 | (assigned by roadmap) |
-| STEP4-03 | (assigned by roadmap) |
-| HERO-01  | (assigned by roadmap) |
-| STAND-01 | (assigned by roadmap) |
-| STAND-02 | (assigned by roadmap) |
-| STAND-03 | (assigned by roadmap) |
-| NOREG-01 | (assigned by roadmap) |
-| NOREG-02 | (assigned by roadmap) |
-| NOREG-03 | (assigned by roadmap) |
+| STEP4-01 | Phase 1 |
+| STEP4-02 | Phase 1 |
+| STEP4-03 | Phase 1 |
+| HERO-01  | Phase 1 |
+| STAND-01 | Phase 1 |
+| STAND-02 | Phase 2 |
+| STAND-03 | Phase 2 |
+| NOREG-01 | Phase 2 |
+| NOREG-02 | Phase 2 |
+| NOREG-03 | Phase 2 |
