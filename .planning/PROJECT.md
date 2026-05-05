@@ -4,74 +4,98 @@
 
 Marketing landing page for **leag.app** — multi-tenant SaaS for youth-sports orgs. Single static HTML deployed via GitHub Pages. Brand surface that converts coaches and clubs to platform signups.
 
-Active scope of this GSD milestone: **swap the Step 4 of "Try a sample season" accordion to use the polished scoreboard + standings widgets from `_preview/organize.html` overview tab, replacing the current basic scorekeeper.**
+## Current State
+
+**Shipped: v1.0 — Step 4 Scoreboard + Standings Swap (2026-05-05)**
+
+Step 4 of the "Try a sample season" accordion now hosts a polished, fully-interactive scoreboard widget + dynamic standings card lifted from `_preview/organize.html`. Hero scoreboard mirrors live state. Standings respond to game outcomes (W/L bump on End game) and to playground sport-chip selection (softball/basketball/soccer/pickleball). Two-column layout on desktop ≥1024px, single column on mobile. Zero console errors, zero duplicate IDs.
 
 ## Core Value
 
-Step 4 ("Run the season") is the demo's payoff — visitors who reach it should feel the product. The current scorekeeper looks crude vs. the polished widgets in `_preview/organize.html`. Lifting those widgets in raises perceived product quality without changing the surrounding flow.
-
-Hero scoreboard binding (already wired) must keep working. Standings must respond to "Mark final" by bumping W or L for the user's team.
+Step 4 ("Run the season") is the demo's payoff — visitors who reach it should feel the product. v1.0 raised the perceived product quality of that moment by lifting in production-grade widgets without changing surrounding flow.
 
 ## Context
 
 - **Tech**: Single static `index.html` (~9000 lines, all CSS + JS inline), `pricing.html`, plus `brand/` assets. No build step. Deployed via GitHub Pages (`.github/workflows/static.yml`) on push to `main`.
-- **Reference source**: `_preview/organize.html` is a separate full-app dashboard mockup. Has a richer scoreboard widget at lines 6658–6840 + a sport-keyed standings table at 6860–6886. Drop-in candidates.
-- **Existing demo embeds**: index.html has 3 embedded demos already (registrations, teams, publish-schedule) inside the same accordion. Step 4 is the last one to upgrade.
-- **Hero scoreboard IDs**: `hero-score-diamonds`, `hero-score-hammerheads`, `hero-line-diamonds-total`, `hero-line-hammerheads-total`, `hero-inning-label`, `hero-score-number` — all live, all written by current `renderScoreDemo`. Must stay wired by the new state machine.
-- **Sport selector**: Top-bar in `#playground` lets user pick softball/basketball/soccer. Standings should switch to match.
+- **Reference source**: `_preview/organize.html` (full-app dashboard mockup) — source of the lifted scoreboard + standings widgets.
+- **Existing demo embeds**: index.html now has 4 fully embedded demos in the playground accordion: registrations, teams, publish-schedule, run-the-season (Step 4).
+- **Hero scoreboard IDs**: `hero-score-diamonds`, `hero-score-hammerheads`, `hero-line-diamonds-total`, `hero-line-hammerheads-total`, `hero-inning-label`, `hero-score-number` — written by the new state-machine render fn on every state change.
+- **Sport selector**: Top-bar in `#playground` lets user pick softball/basketball/soccer; standings card swaps via `window.renderRunStandings(sport)`.
+- **Cross-IIFE bridge**: `window.applyFinalToStandings(homeTotal, awayTotal)` exposed by standings IIFE; called by scoreboard endGame fn so W/L bump fires on every Final transition.
 
 ## Requirements
 
 ### Validated
 
-(None yet — ship to validate)
+- ✓ **STEP4-01**: Scoreboard widget HTML lifted into Step 4 — v1.0
+- ✓ **STEP4-02**: Standings card HTML lifted (lock-foot stripped, .step4-stack wrapper) — v1.0
+- ✓ **STEP4-03**: State machine + handlers replace legacy scoreState/renderScoreDemo/applyScoreAction — v1.0
+- ✓ **HERO-01**: Render fn updates 6 hero IDs every state change — v1.0
+- ✓ **STAND-01**: Sport-keyed data + `renderRunStandings(sport)`, softball boot — v1.0
+- ✓ **STAND-02**: On-final W/L bump + pct recompute + re-render — v1.0
+- ✓ **STAND-03**: Sport chips drive standings re-render — v1.0
+- ✓ **NOREG-01**: Steps 1-3 of accordion unchanged — v1.0
+- ✓ **NOREG-02**: Zero console errors, zero duplicate IDs — v1.0
+- ✓ **NOREG-03**: Top-bar controls + theme retint intact — v1.0
 
 ### Active
 
-- [ ] Replace step 4 body HTML with scoreboard widget lifted from `_preview/organize.html` (lines 6658–6840) + standings card lifted from same (lines 6860–6886, lock-foot stripped)
-- [ ] Port scoreboard JS state machine from `_preview/organize.html` (lines 12450–12749) into index.html, replacing existing `scoreState` / `renderScoreDemo` / `applyScoreAction`
-- [ ] Hero scoreboard IDs stay wired — new render function updates `hero-score-diamonds`, `hero-score-hammerheads`, `hero-line-diamonds-total`, `hero-line-hammerheads-total`, `hero-inning-label`, `hero-score-number` on every state change
-- [ ] Standings table is data-driven and renders from a sport-keyed JS data structure (softball/basketball/soccer/pickleball), via `renderRunStandings(sport)` reading `demoState.sport`
-- [ ] On "Mark final" — Diamonds (or sport's "ours" team) gets +1 W if winning, +1 L if losing; pct recomputes; standings re-renders with updated row
-- [ ] Sport selector in `#playground` triggers standings re-render via existing `[data-demo-sport]` click handler — picking basketball swaps standings to "12U basketball" with Breakers as `ours-row`
-- [ ] No console errors, no duplicate IDs, no broken hero scoreboard sync
-- [ ] All other demos (steps 1, 2, 3) still work unchanged after the swap
+(None — awaiting next milestone scope.)
 
 ### Out of Scope
 
-- Adapting the scoreboard widget per sport (innings/balls don't fit basketball/soccer) — scoreboard stays softball regardless of sport pick. Only standings swaps.
+- Adapting the scoreboard widget per sport (innings/balls don't fit basketball/soccer) — scoreboard stays softball regardless of sport pick. Only standings swaps. *Reasoning still valid.*
 - Animating standings re-sort with row reorder transition.
 - Persisting state across page reloads.
-- Any other landing page changes (pricing tweaks, copy, hero, marketplace section, etc.).
+- Other landing page changes (pricing tweaks, copy, hero, marketplace section, etc.) — defer to future milestones.
 
 ## Key Decisions
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Use single GSD project, "just the step 4 swap" scope | User chose smallest GSD ceremony for focused change | — Pending |
-| Coarse granularity (1–2 phases) | Single-file change, no architectural carving needed | — Pending |
-| Skip research | We already have full source for the widgets to lift | — Pending |
-| Inherit (Opus) for all agents | Per user CLAUDE.md, Max plan = sunk cost, no downshift | — Pending |
-| Strip lock-foot from standings card | Keep demo clean, drop the upsell pitch from the workflow | — Pending |
-| Tie standings to playground sport selector | More cohesive — sport pick reflects everywhere it can | — Pending |
-| Bump W/L on "Mark final" | Standings visibly responds to game outcome, matches existing renderScoreDemo behavior | — Pending |
+| Single GSD project, "just the step 4 swap" scope | Smallest ceremony for focused change | ✓ Good — milestone shipped clean in 2 phases |
+| Coarse granularity (2 phases) | Single-file change | ✓ Good — Phase 1 lift, Phase 2 wire |
+| Skip research | Source widgets already in `_preview/organize.html` | ✓ Good — no information loss |
+| Inherit Opus for all agents | Per user CLAUDE.md, Max plan = sunk cost | ✓ Good — quality consistent |
+| Strip lock-foot from standings card | Keep demo clean, drop upsell from workflow | ✓ Good — cleaner demo flow |
+| Tie standings to playground sport selector | Cohesive — sport pick reflects everywhere | ✓ Good — sport switch feels alive |
+| Bump W/L on "Mark final" | Standings visibly responds to outcome | ✓ Good — End game now has visible payoff |
+| Cross-IIFE bridge via window.applyFinalToStandings | Avoid sharing scope; mirror existing window.renderRunStandings pattern | ✓ Good — clean contract |
+| Relax bottom-of-7 endGame guard for demo UX | Casual users won't reach 7th inning; payoff was unobservable | ✓ Good — trade-off accepted; revisit if scoreboard surfaces in real-game context |
+| 2-column step 4 layout on desktop ≥1024px | Standings card was leaving whitespace on desktop | ✓ Good — better visual density |
+| skip_discuss workflow gate ON | Single-file polish doesn't need batch grey-area Q&A | ✓ Good — no workflow friction |
+
+## Constraints
+
+- **Single static HTML deployment**: No build step, no JS framework, no CSS preprocessor. All CSS + JS inline in `index.html`. Constrains plan structure (everything is one file).
+- **GitHub Pages deploy on `main` push**: No staging surface; landing changes go straight to production. Verify locally via `python3 -m http.server` or equivalent before commit.
+- **Hero scoreboard contract**: 6 hero IDs MUST stay wired. Any future scoreboard work must preserve this binding.
+- **No competitor naming in copy**: Per user memory — TeamSnap / GameChanger / etc. forbidden.
+- **No raw mailto:**, all email anchors use `class="copy-email" data-email="contact@leag.app"` pattern with click delegate copying to clipboard.
 
 ## Evolution
 
-This document evolves at phase transitions and milestone boundaries.
-
-**After each phase transition** (via `/gsd:transition`):
+After each phase transition (`/gsd:transition`):
 1. Requirements invalidated? → Move to Out of Scope with reason
 2. Requirements validated? → Move to Validated with phase reference
 3. New requirements emerged? → Add to Active
 4. Decisions to log? → Add to Key Decisions
 5. "What This Is" still accurate? → Update if drifted
 
-**After each milestone** (via `/gsd:complete-milestone`):
+After each milestone (`/gsd:complete-milestone`):
 1. Full review of all sections
 2. Core Value check — still the right priority?
 3. Audit Out of Scope — reasons still valid?
 4. Update Context with current state
 
+## Next Milestone Goals
+
+TBD via `/gsd:new-milestone`. Candidates surfaced from launch-week polish work + carried-forward Phase 1 plan-02 SUMMARY notes:
+- Standings W/L bump should also fire on natural game-end (currently requires explicit End game click)
+- Scoreboard reset semantics — Reset returns to seed state but standings W/L bump persists; might want a "reset everything" button
+- Pricing.html polish (untouched in v1.0)
+- Marketplace section refinement (untouched in v1.0)
+- Mobile sticky controls UX — current sticky position works but could be polished
+
 ---
-*Last updated: 2026-05-05 after initialization*
+*Last updated: 2026-05-05 after v1.0 milestone*
