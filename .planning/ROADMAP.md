@@ -53,7 +53,7 @@
 
 **Plans:** 3 plans
 - [x] 02-wire-the-dynamics-01-PLAN.md - Relax endGame guard + on-final W/L bump bridge (STAND-02)
-- [ ] 02-wire-the-dynamics-02-PLAN.md - Wire [data-demo-sport] click to renderRunStandings (STAND-03)
+- [x] 02-wire-the-dynamics-02-PLAN.md - Wire [data-demo-sport] click to renderRunStandings (STAND-03)
 - [ ] 02-wire-the-dynamics-03-PLAN.md - Regression sweep: steps 1-3 intact, console clean, top-bar + theme retint (NOREG-01/02/03)
 
 **UI hint:** yes
