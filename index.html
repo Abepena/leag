@@ -3391,6 +3391,7 @@
 
     .accordion-list {
       display: grid;
+      grid-template-columns: minmax(0, 1fr);
     }
 
     .accordion-item {
@@ -5399,7 +5400,7 @@
     #run-scoreboard .inning-grid-caption b { color: var(--ink); font-weight: 700; }
     #run-scoreboard .linescore { display: flex; flex-direction: column; gap: 4px; }
     #run-scoreboard .linescore-row {
-      display: grid; grid-template-columns: minmax(96px, 0.85fr) repeat(7, 1fr) 32px;
+      display: grid; grid-template-columns: minmax(72px, 0.85fr) repeat(7, minmax(0, 1fr)) minmax(32px, 0.5fr);
       gap: 4px; align-items: center;
     }
     #run-scoreboard .linescore-team {
@@ -5491,7 +5492,7 @@
 
     #run-scoreboard .scores-controls {
       display: grid;
-      grid-template-columns: 1fr minmax(220px, auto) 1fr;
+      grid-template-columns: minmax(0, 1fr) minmax(220px, auto) minmax(0, 1fr);
       gap: 14px;
       padding: 14px 22px;
       border-top: 1px solid var(--line);
