@@ -51,7 +51,10 @@
 4. Page loads with zero console errors. Interacting with new scoreboard and sport selector produces zero console errors. No duplicate IDs anywhere in the DOM.
 5. Top-bar controls (org input, sport chips, primary swatches, accent swatches, reset btn) still drive demo state and theme retint correctly. New scoreboard re-tints with `--demo-primary` / `--demo-accent` swaps.
 
-**Plans:** TBD (created during /gsd:plan-phase 2)
+**Plans:** 3 plans
+- [ ] 02-wire-the-dynamics-01-PLAN.md - Relax endGame guard + on-final W/L bump bridge (STAND-02)
+- [ ] 02-wire-the-dynamics-02-PLAN.md - Wire [data-demo-sport] click to renderRunStandings (STAND-03)
+- [ ] 02-wire-the-dynamics-03-PLAN.md - Regression sweep: steps 1-3 intact, console clean, top-bar + theme retint (NOREG-01/02/03)
 
 **UI hint:** yes
 
