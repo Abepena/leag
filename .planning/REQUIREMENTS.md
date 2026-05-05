@@ -6,11 +6,11 @@
 
 - [x] **STEP4-01**: Step 4 accordion body shows the polished scoreboard widget lifted from `_preview/organize.html` (lines 6658–6840) — score-hero, linescore, scores-recap, scores-controls — instead of the basic scorekeeper.
 - [x] **STEP4-02**: Step 4 accordion body shows the standings card lifted from `_preview/organize.html` (lines 6860–6886), with the lock-foot stripped, displayed below the scoreboard inside a `.step4-stack` wrapper.
-- [ ] **STEP4-03**: The new scoreboard's state machine + handlers (lines 12450–12749) replace the existing `scoreState`, `renderScoreDemo`, and `applyScoreAction` JS in `index.html`.
+- [x] **STEP4-03**: The new scoreboard's state machine + handlers (lines 12450–12749) replace the existing `scoreState`, `renderScoreDemo`, and `applyScoreAction` JS in `index.html`.
 
 ### Hero scoreboard binding
 
-- [ ] **HERO-01**: The new scoreboard render function updates hero IDs `hero-score-diamonds`, `hero-score-hammerheads`, `hero-line-diamonds-total`, `hero-line-hammerheads-total`, `hero-inning-label`, and `hero-score-number` (aria-label) on every state change. No regression vs. current behavior.
+- [x] **HERO-01**: The new scoreboard render function updates hero IDs `hero-score-diamonds`, `hero-score-hammerheads`, `hero-line-diamonds-total`, `hero-line-hammerheads-total`, `hero-inning-label`, and `hero-score-number` (aria-label) on every state change. No regression vs. current behavior.
 
 ### Standings dynamics
 
