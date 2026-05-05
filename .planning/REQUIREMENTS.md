@@ -20,9 +20,9 @@
 
 ### No regressions
 
-- [ ] **NOREG-01**: Steps 1, 2, and 3 of the season-workflow accordion still render and function unchanged (registrations flow, teams roster builder, publish-schedule preview).
-- [ ] **NOREG-02**: No console errors on page load or on any scoreboard/standings interaction. No duplicate IDs in the DOM.
-- [ ] **NOREG-03**: Top-bar controls (org input, sport chips, primary swatches, accent swatches, reset btn) still drive the demo state and theme retint correctly.
+- [x] **NOREG-01**: Steps 1, 2, and 3 of the season-workflow accordion still render and function unchanged (registrations flow, teams roster builder, publish-schedule preview).
+- [x] **NOREG-02**: No console errors on page load or on any scoreboard/standings interaction. No duplicate IDs in the DOM.
+- [x] **NOREG-03**: Top-bar controls (org input, sport chips, primary swatches, accent swatches, reset btn) still drive the demo state and theme retint correctly.
 
 ## v2 Requirements
 
