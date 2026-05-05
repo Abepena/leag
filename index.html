@@ -9189,6 +9189,93 @@
   </script>
 
   <script>
+  // #run-standings — sport-keyed standings render (ported from _preview/organize.html lines 9300-9509).
+  // Phase 1 scope: render softball on initial load, expose window.renderRunStandings(sport).
+  // Out of scope (Phase 2): sport-change listener (STAND-03), on-final W/L bump (STAND-02).
+  (function () {
+    "use strict";
+    const root = document.getElementById("run-standings");
+    if (!root) return;
+    // Target the only tbody under #run-standings (uses the data-render hook from Plan 01 markup).
+    const tbody = root.querySelector("tbody[data-render]");
+    if (!tbody) return;
+
+    // Sport-keyed standings data. Softball includes Hammerheads to agree with the
+    // scoreboard above (Diamonds vs Hammerheads). Opponent rows use .opp swatch class;
+    // the ours-row uses the sport-keyed swatch class (softball/basketball/soccer/pickleball).
+    const standings = {
+      softball: {
+        ours: "Diamonds",
+        swatch: "softball",
+        rows: [
+          { name: "Hammerheads", w: 7, l: 1, pct: ".875" },
+          { name: "Diamonds",    w: 6, l: 2, pct: ".750" },
+          { name: "Marlins",     w: 5, l: 3, pct: ".625" },
+          { name: "Tide",        w: 4, l: 4, pct: ".500" },
+          { name: "Stingrays",   w: 2, l: 6, pct: ".250" },
+        ],
+      },
+      basketball: {
+        ours: "Breakers",
+        swatch: "basketball",
+        rows: [
+          { name: "Hammerheads", w: 7, l: 1, pct: ".875" },
+          { name: "Breakers",    w: 6, l: 2, pct: ".750" },
+          { name: "Marlins",     w: 5, l: 3, pct: ".625" },
+          { name: "Tide",        w: 4, l: 4, pct: ".500" },
+          { name: "Stingrays",   w: 2, l: 6, pct: ".250" },
+        ],
+      },
+      soccer: {
+        ours: "Nets",
+        swatch: "soccer",
+        rows: [
+          { name: "Hammerheads", w: 7, l: 1, pct: ".875" },
+          { name: "Nets",        w: 6, l: 2, pct: ".750" },
+          { name: "Marlins",     w: 5, l: 3, pct: ".625" },
+          { name: "Tide",        w: 4, l: 4, pct: ".500" },
+          { name: "Stingrays",   w: 2, l: 6, pct: ".250" },
+        ],
+      },
+      pickleball: {
+        ours: "Sliders",
+        swatch: "pickleball",
+        rows: [
+          { name: "Smashers", w: 7, l: 1, pct: ".875" },
+          { name: "Sliders",  w: 6, l: 2, pct: ".750" },
+          { name: "Dinkers",  w: 5, l: 3, pct: ".625" },
+          { name: "Volleys",  w: 4, l: 4, pct: ".500" },
+          { name: "Returns",  w: 2, l: 6, pct: ".250" },
+        ],
+      },
+    };
+
+    function rowFor(r, isOurs, oursSwatch) {
+      const swatchCls = isOurs ? oursSwatch : "opp";
+      const rowCls = isOurs ? ' class="ours-row"' : "";
+      const nameMarkup = isOurs ? '<span class="ours">' + r.name + '</span>' : r.name;
+      return '<tr' + rowCls + '>'
+        + '<td><span class="team-chip"><span class="team-swatch ' + swatchCls + '"></span> ' + nameMarkup + '</span></td>'
+        + '<td class="num" style="text-align:right">' + r.w + '</td>'
+        + '<td class="num" style="text-align:right">' + r.l + '</td>'
+        + '<td class="num" style="text-align:right">' + r.pct + '</td>'
+        + '</tr>';
+    }
+
+    function render(sport) {
+      const data = standings[sport] || standings.softball;
+      tbody.innerHTML = data.rows
+        .map(function (r) { return rowFor(r, r.name === data.ours, data.swatch); })
+        .join("");
+    }
+
+    window.renderRunStandings = render;
+    // Boot — initial render uses softball (matches scoreboard above: Diamonds vs Hammerheads).
+    renderRunStandings("softball");
+  })();
+  </script>
+
+  <script>
   (function () {
     "use strict";
     const root = document.getElementById("registrations");
