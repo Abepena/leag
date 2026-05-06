@@ -6,3 +6,4 @@ COUNCIL-*.err
 # Editor / OS junk
 .DS_Store
 node_modules/
+.claude/
